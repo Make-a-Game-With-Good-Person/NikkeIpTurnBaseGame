@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using UnityEngine.UIElements;
 
 //메모
 //1. 무조건 0, 0, 0이 기점
@@ -77,6 +81,8 @@ public class TileManager : MonoBehaviour
                 map.Add(pos, new Tile(pos, tileSize, 0));
             }
         }
+
+        map[new Vector2Int(1,0)].height = 1;
     }
 
     private void InitHeight()

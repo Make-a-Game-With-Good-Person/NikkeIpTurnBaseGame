@@ -56,6 +56,8 @@ public class UI_Controller : MonoBehaviour
             PageMySquad.SetActive(false);
             PageInventory.SetActive(false);
             PageRecruit.SetActive(false);
+            BtnProfile.SetActive(false);
+            BtnOptions.SetActive(false);
             PageCharater.SetActive(true);
         }
     }
@@ -68,6 +70,8 @@ public class UI_Controller : MonoBehaviour
             PageCharater.SetActive(false);
             PageInventory.SetActive(false);
             PageRecruit.SetActive(false);
+            BtnProfile.SetActive(false);
+            BtnOptions.SetActive(false);
             PageMySquad.SetActive(true);
         }
     }
@@ -80,6 +84,8 @@ public class UI_Controller : MonoBehaviour
             PageCharater.SetActive(false);
             PageMySquad.SetActive(false);
             PageRecruit.SetActive(false);
+            BtnProfile.SetActive(false);
+            BtnOptions.SetActive(false);
             PageInventory.SetActive(true);
         }
     }
@@ -92,6 +98,8 @@ public class UI_Controller : MonoBehaviour
             PageCharater.SetActive(false);
             PageMySquad.SetActive(false);
             PageInventory.SetActive(false);
+            BtnProfile.SetActive(false);
+            BtnOptions.SetActive(false);
             PageRecruit.SetActive(true);
         }
     }
@@ -103,6 +111,8 @@ public class UI_Controller : MonoBehaviour
             PageMySquad.SetActive(false);
             PageInventory.SetActive(false);
             PageRecruit.SetActive(false);
+            BtnProfile.SetActive(true);
+            BtnOptions.SetActive(true);
             UIMiddle.SetActive(true);
         }
     }
