@@ -7,7 +7,7 @@ public class Cover : MonoBehaviour, IDamage
     [SerializeField] Transform destroyVFX;
     bool isComplete;
     int index;
-    int hp;
+    float hp;
     int maxHp;
     int def;
     int dmg;
@@ -27,7 +27,7 @@ public class Cover : MonoBehaviour, IDamage
         //Init();
     }
 
-    public void TakeDamage(int dmg)
+    public void TakeDamage(float dmg)
     {
         if (isComplete) return;
 

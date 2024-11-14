@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class Unit : Stat , IDamage
 {
+    [SerializeField] Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,4 +17,12 @@ public class Unit : MonoBehaviour
     {
         
     }
+
+    public void TakeDamage(float dmg)
+    {
+        this[EStatType.HP] -= dmg;
+        if (this[EStatType.HP] <= 0f) Destroy(this);
+    }
+    #region Anim Events
+    #endregion
 }
