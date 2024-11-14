@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 유닛 선택 하는 상태
-/// UnitSelectState
-/// <para>요구사항 1. 플레이어가 보유한 유닛들을 보여주는 UI 활성화</para>
+/// 예상 피해량등을 보여주는 상태
+/// <para>요구사항 1. 카메라를 숄더뷰로 변경</para>
+/// <para>요구사항 2. 범위 공격이어서 공격 가능 대상이 여러명일 경우에는 옆 버튼을 눌러서 예상 피해량을 각각 보여줌</para>
+/// <para>요구사항 3. 뒤로가기 버튼으로 AbilityTargetBattleState로 복귀</para>
+/// <para>요구사항 4. 확인 버튼으로 PerformAbilityBattleState로 진행</para>
+/// <para>요구사항 5. 단일 대상 공격일 경우 옆 버튼으로 공격할 유닛 변경 가능</para>
+/// <para>요구사항 6. 공격 애니메이션과 상대의 피격 애니메이션 재생</para>
 /// </summary>
-public class UnitPlaceBattleState : BattleState
+public class ConfirmAbilityTargetBattleState : BattleState
 {
     #region Properties
     #region Private
@@ -30,12 +34,10 @@ public class UnitPlaceBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.AddListener(OnGameStartButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.RemoveListener(OnGameStartButton);
     }
     #endregion
     #region Public
@@ -52,21 +54,12 @@ public class UnitPlaceBattleState : BattleState
     #endregion
 
     #region EventHandlers
-    public void OnGameStartButton()
-    {
-        owner.stateMachine.ChangeState<UnitSelectBattleState>();
-    }
     #endregion
 
     #region Coroutines
-    private IEnumerator ProcessingState() 
+    private IEnumerator ProcessingState()
     {
         yield return null;
-        //UI띄움 등등
-        
-
-        //테스트용 임시 코드
-        OnGameStartButton();
     }
     #endregion
 

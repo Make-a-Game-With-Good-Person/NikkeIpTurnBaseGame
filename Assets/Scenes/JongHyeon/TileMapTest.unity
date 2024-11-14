@@ -223,8 +223,8 @@ Transform:
   m_GameObject: {fileID: 386915137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 10, y: 0, z: 10}
+  m_LocalScale: {x: 2, y: 1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -270,6 +270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 584188847}
+  - component: {fileID: 584188848}
   m_Layer: 0
   m_Name: BattleManager
   m_TagString: Untagged
@@ -294,6 +295,20 @@ Transform:
   - {fileID: 1782659389}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &584188848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584188846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50f1761135ee5f34db367e9b112b57eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateMachine: {fileID: 0}
+  tileManager: {fileID: 1782659390}
 --- !u!1 &804313069
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +439,7 @@ GameObject:
   - component: {fileID: 1029294865}
   - component: {fileID: 1029294864}
   - component: {fileID: 1029294863}
+  - component: {fileID: 1029294867}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -519,6 +535,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1029294867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029294862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e7fc72035d78a4488bd5bd37ae96fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stat:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!1 &1782659388
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,8 +605,8 @@ MonoBehaviour:
   endPos: {x: 0, y: 0}
   moveLimit: 1
   tileSize: {x: 2, y: 1, z: 2}
-  rows: 5
-  cols: 5
+  rows: 10
+  cols: 10
 --- !u!1 &1833078550
 GameObject:
   m_ObjectHideFlags: 0

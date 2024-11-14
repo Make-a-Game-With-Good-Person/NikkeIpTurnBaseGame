@@ -81,8 +81,6 @@ public class TileManager : MonoBehaviour
                 map.Add(pos, new Tile(pos, tileSize, 0));
             }
         }
-
-        map[new Vector2Int(1,0)].height = 1;
     }
 
     private void InitHeight()

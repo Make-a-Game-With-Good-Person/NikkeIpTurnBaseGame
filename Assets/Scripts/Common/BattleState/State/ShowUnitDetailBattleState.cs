@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 유닛 선택 하는 상태
-/// UnitSelectState
-/// <para>요구사항 1. 플레이어가 보유한 유닛들을 보여주는 UI 활성화</para>
+/// 플레이어가 선택한 유닛의 정보를 보여주는 상태
+/// <para>요구사항 1. 유닛의 버프, 디버프 들을 눌렀을때 어떤 효과인지 확인 가능</para>
+/// <para>요구사항 2. 빈곳을 눌렀을 때 UnitSelectBattleState로 복귀</para>
 /// </summary>
-public class UnitPlaceBattleState : BattleState
+public class ShowUnitDetailBattleState : BattleState
 {
     #region Properties
     #region Private
@@ -30,12 +30,10 @@ public class UnitPlaceBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.AddListener(OnGameStartButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.RemoveListener(OnGameStartButton);
     }
     #endregion
     #region Public
@@ -52,21 +50,12 @@ public class UnitPlaceBattleState : BattleState
     #endregion
 
     #region EventHandlers
-    public void OnGameStartButton()
-    {
-        owner.stateMachine.ChangeState<UnitSelectBattleState>();
-    }
     #endregion
 
     #region Coroutines
-    private IEnumerator ProcessingState() 
+    private IEnumerator ProcessingState()
     {
         yield return null;
-        //UI띄움 등등
-        
-
-        //테스트용 임시 코드
-        OnGameStartButton();
     }
     #endregion
 

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 유닛 선택 하는 상태
-/// UnitSelectState
-/// <para>요구사항 1. 플레이어가 보유한 유닛들을 보여주는 UI 활성화</para>
+/// 실제로 이동하는 상태
+/// <para>요구사항 1. 유닛들의 애니메이션 활성화</para>
+/// <para>요구사항 2. 지나가면서 지뢰등이 활성화 되면 처리</para>
+/// <para>요구사항 3. 경계 구역 같은데 지나가면 맞는것 처리</para>
+/// <para>요구사항 4. 끝났을때 SelectUnitBattleState 복귀</para>
 /// </summary>
-public class UnitPlaceBattleState : BattleState
+public class MoveSequenceState : BattleState
 {
     #region Properties
     #region Private
@@ -30,12 +32,10 @@ public class UnitPlaceBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.AddListener(OnGameStartButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.RemoveListener(OnGameStartButton);
     }
     #endregion
     #region Public
@@ -52,21 +52,12 @@ public class UnitPlaceBattleState : BattleState
     #endregion
 
     #region EventHandlers
-    public void OnGameStartButton()
-    {
-        owner.stateMachine.ChangeState<UnitSelectBattleState>();
-    }
     #endregion
 
     #region Coroutines
-    private IEnumerator ProcessingState() 
+    private IEnumerator ProcessingState()
     {
         yield return null;
-        //UI띄움 등등
-        
-
-        //테스트용 임시 코드
-        OnGameStartButton();
     }
     #endregion
 

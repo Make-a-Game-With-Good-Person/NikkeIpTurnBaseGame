@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 유닛 선택 하는 상태
-/// UnitSelectState
-/// <para>요구사항 1. 플레이어가 보유한 유닛들을 보여주는 UI 활성화</para>
+/// 선택한 어빌리티를 이제 진짜로 실행함
+/// <para>요구사항 1. 시행하고 나서 GameEnd 체크(몹들이 전부 죽었는지 아군이 전부 죽었는지 등)</para>
+/// <para>요구사항 2. 아직 아군 유닛을 전부 다 진행하지 않았으면 UnitSelectBattleState로 복귀</para>
+/// <para>요구사항 3. 아군 유닛을 전부 진행했을 때는 owner의 변수를 변경할 것</para>
+/// <para>요구사항 4. 이번 유닛의 Ability 버튼을 비활성화할 것</para>
 /// </summary>
-public class UnitPlaceBattleState : BattleState
+public class PerformAbilityBattleState : BattleState
 {
     #region Properties
     #region Private
@@ -30,12 +32,10 @@ public class UnitPlaceBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.AddListener(OnGameStartButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        //owner.UnitSelectUIController.GameStartButton.onClick.RemoveListener(OnGameStartButton);
     }
     #endregion
     #region Public
@@ -52,21 +52,12 @@ public class UnitPlaceBattleState : BattleState
     #endregion
 
     #region EventHandlers
-    public void OnGameStartButton()
-    {
-        owner.stateMachine.ChangeState<UnitSelectBattleState>();
-    }
     #endregion
 
     #region Coroutines
-    private IEnumerator ProcessingState() 
+    private IEnumerator ProcessingState()
     {
         yield return null;
-        //UI띄움 등등
-        
-
-        //테스트용 임시 코드
-        OnGameStartButton();
     }
     #endregion
 

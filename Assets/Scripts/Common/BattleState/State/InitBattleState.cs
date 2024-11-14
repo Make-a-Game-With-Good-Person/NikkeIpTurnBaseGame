@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 필요한 사항들을 로딩하는 상태, 초기화도 여기서 하면 순서대로 할 수 있을듯?
+/// </summary>
 public class InitBattleState : BattleState
 {
     #region Properties

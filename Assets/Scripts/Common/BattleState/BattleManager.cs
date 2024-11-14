@@ -11,6 +11,7 @@ public class BattleManager : MonoBehaviour
     #endregion
     #region Public
     [HideInInspector] public StateMachine stateMachine;
+    public TileManager tileManager;
     #endregion
     #region Events
     #endregion
