@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class ShoulderViewState : ICameraState
 {
-    public void UpdateState(CameraController CC)
+    public void UpdateState(CameraStateController CC)
     {
         if (CC.playerPhase)
         {

@@ -1,4 +1,4 @@
 public interface ICameraState
 {
-    void UpdateState(CameraController camera);
+    void UpdateState(CameraStateController camera);
 }

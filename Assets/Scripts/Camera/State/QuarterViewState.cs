@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class QuarterViewState : ICameraState
 {
-    public void UpdateState(CameraController CC)
+    public void UpdateState(CameraStateController CC)
     {
         Vector3 targetPosition = CC.target.position + CC.quarterViewoffset;
         CC.transform.position = Vector3.Lerp(CC.transform.position, targetPosition, Time.deltaTime * CC.transitionSpeed);
