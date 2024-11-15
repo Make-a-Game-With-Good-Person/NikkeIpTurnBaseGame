@@ -529,7 +529,7 @@ Transform:
   m_GameObject: {fileID: 1029294862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalPosition: {x: 1, y: 1, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -601,9 +601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c500aef50bbf75c4c900b6d73aabbf8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startpos: {x: 0, y: 0}
-  endPos: {x: 0, y: 0}
-  moveLimit: 1
+  startpos: {x: 2, y: 2}
+  endPos: {x: 2, y: 4}
+  moveLimit: 2
+  fordebugPath: []
   tileSize: {x: 2, y: 1, z: 2}
   rows: 10
   cols: 10

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UIElements;
@@ -18,6 +19,8 @@ public class TileManager : MonoBehaviour
     public Vector2Int startpos = new Vector2Int(0,0);
     public Vector2Int endPos = new Vector2Int(0,0);
     public int moveLimit = 1;
+    public int heightLimit = 1;
+    public List<Vector2Int> fordebugPath = new List<Vector2Int>();
     #endregion
 
     #region Properties
@@ -108,6 +111,10 @@ public class TileManager : MonoBehaviour
         }
     }
     
+    public void ShowTiles(HashSet<Vector2Int> tiles)
+    {
+        //여기에 저 타일들로 이동 가능 영역 보여주기
+    }
 
     /// <summary>
     /// 이동력 안으로 갈수 있는 타일들을 수집
@@ -115,7 +122,7 @@ public class TileManager : MonoBehaviour
     /// </summary>
     /// <param name="start">start tile</param>
     /// <param name="moveLimit">distance from start tile</param>
-    public void SearchTile(Vector2Int start, int moveLimit)
+    public HashSet<Vector2Int> SearchTile(Vector2Int start, int moveLimit, int heightLimit)
     {
         movable.Clear();
         if (!map.ContainsKey(start))
@@ -144,11 +151,8 @@ public class TileManager : MonoBehaviour
                     if (cost > moveLimit)
                         continue;
 
-                    //need calculate height here
-                    /*
-                     * if(Math.Abs(map[node].height - map[temp].height) > unit.heightmoveLimit)
-                     * continue;
-                    */
+                    if(Math.Abs(map[node].height - map[temp].height) > heightLimit)
+                        continue;
 
                     //already in the hashset
                     if (movable.Contains(temp))
@@ -175,8 +179,9 @@ public class TileManager : MonoBehaviour
         //for debug
         foreach(Vector2Int node in movable)
         {
-            Debug.Log($"node : {node} prev : {map[node].prev}");
+            Debug.Log($"node : {node} prev : {map[node].prev} cost : {map[node].distance} center : {map[node].center}");
         }
+        return movable;
     }
     /// <summary>
     /// SearchTile 함수에 기반한 길찾기
@@ -189,7 +194,7 @@ public class TileManager : MonoBehaviour
     {
         path = new List<Vector2Int>();
 
-        SearchTile(start, moveLimit);
+        SearchTile(start, moveLimit, heightLimit);
 
         if (!movable.Contains(end))
             return false;
@@ -201,7 +206,11 @@ public class TileManager : MonoBehaviour
             temp = map[temp].prev;
         }
 
+        path.Add(start);
         path.Reverse();
+
+        fordebugPath.Clear();
+        fordebugPath = path.ToList();
 
         //ForDebug
         for (int i = 0; i < path.Count; i++)
@@ -245,7 +254,22 @@ public class TileManager : MonoBehaviour
 
         foreach (Tile node in map.Values)
         {
-            Gizmos.DrawWireCube(node.center, new Vector3(tileSize.x, 0.1f, tileSize.z));
+            if (movable.Contains(node.coordinate))
+            {
+                Gizmos.color = Color.green;
+            }
+            else
+            {
+                Gizmos.color = Color.white;
+            }
+            Gizmos.DrawWireCube(node.center, new Vector3(tileSize.x * 0.9f, 0.1f, tileSize.z * 0.9f));
+            
+        }
+
+        for(int i = 1; i < fordebugPath.Count; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(map[fordebugPath[i - 1]].center, map[fordebugPath[i]].center);
         }
     }
 #endif

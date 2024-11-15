@@ -30,10 +30,12 @@ public class ShowUnitDetailBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
+        //owner.unitdetailUIController.cancelEvent.AddListener(OnCancelButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
+        //owner.unitdetailUIController.cancelEvent.RemoveListener(OnCancelButton);
     }
     #endregion
     #region Public
@@ -50,12 +52,19 @@ public class ShowUnitDetailBattleState : BattleState
     #endregion
 
     #region EventHandlers
+    //요구사항 2 구현
+    private void OnCancelButton()
+    {
+        owner.stateMachine.ChangeState<UnitSelectBattleState>();
+    }
     #endregion
 
     #region Coroutines
     private IEnumerator ProcessingState()
     {
         yield return null;
+        //요구사항 1 구현
+        //owner.unitdetailUIController.Display(선택한 유닛);
     }
     #endregion
 
