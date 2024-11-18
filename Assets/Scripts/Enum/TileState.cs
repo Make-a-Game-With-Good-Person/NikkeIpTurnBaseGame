@@ -5,5 +5,6 @@ using System;
 public enum TileState
 {
     Walkable = 1,
-    Selectable = 2
+    Selectable = 2,
+    Placeable = 4
 }

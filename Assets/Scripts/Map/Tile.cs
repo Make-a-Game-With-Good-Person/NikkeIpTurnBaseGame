@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Tile
 {
@@ -90,6 +90,7 @@ public class Tile
     #endregion
     #endregion
     #region Events
+    public UnityEvent<Unit> enterTileEvent = new UnityEvent<Unit>();
     #endregion
     #endregion
 
@@ -120,6 +121,10 @@ public class Tile
     #region Protected
     #endregion
     #region Public
+    public override string ToString()
+    {
+        return string.Format("Coordinate : {0}, Height : {1}", this.coordinate.ToString(), this.height.ToString());
+    }
     #endregion
     #endregion
 

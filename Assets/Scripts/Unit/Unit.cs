@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Unit : Stat , IDamage
 {
+    [HideInInspector] public Tile tile;
     [SerializeField] Animator animator;
 
     // Start is called before the first frame update

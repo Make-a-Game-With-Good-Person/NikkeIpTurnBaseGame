@@ -12,6 +12,7 @@ public class BattleManager : MonoBehaviour
     #region Public
     [HideInInspector] public StateMachine stateMachine;
     public TileManager tileManager;
+    public UnitPlacementUIController unitPlacementUIController;
     #endregion
     #region Events
     #endregion

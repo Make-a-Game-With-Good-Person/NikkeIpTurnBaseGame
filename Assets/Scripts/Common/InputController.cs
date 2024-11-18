@@ -22,6 +22,12 @@ public class InputController : MonoBehaviour
 
     #region Methods
     #region Private
+    private Vector3 GetWorldPositionFromMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(ray, out RaycastHit hit);
+        return hit.point;
+    }
     #endregion
     #region Protected
     #endregion
@@ -36,5 +42,15 @@ public class InputController : MonoBehaviour
     #endregion
 
     #region MonoBehaviour
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            touchEvent?.Invoke(GetWorldPositionFromMouse());
+        }
+    }
+    #endregion
+
+    #region ForTest
     #endregion
 }
