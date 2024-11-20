@@ -111,7 +111,7 @@ public class Tile
         worldPos = new Vector3(size.x * this.coordinate.x, size.y * this.height, size.z * this.coordinate.y);
         center = worldPos + new Vector3(this.size.x / 2, 0, this.size.z / 2);
 
-        tileState = TileState.Walkable | TileState.Selectable;
+        tileState = TileState.Walkable | TileState.Selectable | TileState.Placeable;
     }
     #endregion
 

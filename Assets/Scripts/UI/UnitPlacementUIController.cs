@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UnitPlacementUIController : MonoBehaviour
@@ -9,10 +10,11 @@ public class UnitPlacementUIController : MonoBehaviour
     #region Protected
     #endregion
     #region public
+    public GameObject UnitPlaceUI;
     public Button confirmButton;
-    public Button cancelButton;
     #endregion
     #region Events
+    public UnityEvent<GameObject, Vector3> setUnitEvent = new UnityEvent<GameObject, Vector3>();
     #endregion
     #endregion
 
@@ -25,15 +27,31 @@ public class UnitPlacementUIController : MonoBehaviour
     #region Protected
     #endregion
     #region Public
+    public void Display()
+    {
+        UnitPlaceUI.SetActive(true);
+    }
+    public void Hide()
+    {
+        UnitPlaceUI.SetActive(false);
+    }
     #endregion
     #endregion
 
     #region EventHandlers
+    public void OnDragImageEnd(GameObject unit, Vector3 worldPos)
+    {
+        setUnitEvent?.Invoke(unit, worldPos);
+    }
     #endregion
 
     #region Coroutines
     #endregion
 
     #region MonoBehaviour
+    private void Start()
+    {
+        Hide();
+    }
     #endregion
 }
