@@ -7,6 +7,7 @@ using UnityEngine;
 /// Place Unit on the map
 /// <para>요구사항 1. 플레이어가 보유한 유닛들을 보여주는 UI 활성화</para>
 /// <para>요구사항 2. 유닛을 드래그 해서 맵에 배치</para>
+/// <para>요구사항 3 . 배치된 플레이어블 캐릭터가 없으면 게임을 시작할 수 없도록 제한</para>
 /// </summary>
 public class UnitPlaceBattleState : BattleState
 {
