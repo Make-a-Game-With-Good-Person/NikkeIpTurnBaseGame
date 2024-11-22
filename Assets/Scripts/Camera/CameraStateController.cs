@@ -20,13 +20,22 @@ public class CameraStateController : MonoBehaviour
     public Vector3 shoulderViewrotationOffset = new Vector3(0, 0, 0);  // 각도 offset (Pitch, Yaw, Roll)
 
     public float transitionSpeed = 2f;
+    public float dragSpeed = 15f;
     public float rotationSpeed = 4f;
+
+    public bool isDragging;
+
+    public LayerMask layerMask;
 
     // 상태 객체 캐싱, 시점을 추가할 시 여기에 State로 선언하고 아래에서 new로 생성한 뒤 Switch함수를 추가해 쓰면 됨, 
     // 실질적인 카메라 시점 변환 구현은 아래 State들로 따로 추가하면 된다. 
     ICameraState quarterViewState;
     ICameraState shoulderViewState;
+    ICameraState mapViewState;
     ICameraState currentState;
+
+    //BattleManager owner;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +43,7 @@ public class CameraStateController : MonoBehaviour
         // 상태 객체를 한번만 생성해두고 재사용
         quarterViewState = new QuarterViewState();
         shoulderViewState = new ShoulderViewState();
+        mapViewState = new MapViewState();
         currentState = quarterViewState; // 초기 상태 설정
     }
 
@@ -42,26 +52,29 @@ public class CameraStateController : MonoBehaviour
     {
         currentState?.UpdateState(this);
 
-        if (Input.GetKeyDown(KeyCode.F1))
+        // 이 아래 코드들 다 삭제 예정
+        //if(owner.curState == BATTLESTATE.UNITSELECT)
+        // 맵 둘러보기 상태 전환
+        if (Input.GetMouseButtonDown(0)) // 마우스 클릭(터치) 이벤트
         {
-            SetLookTarget(lookTarget); // 임시, 사용할 땐 터치한 대상을 이 함수의 매개변수로 넣고 
-            SwitchToShoulderView(targetShoulder); // 요거를 부르면 된다.
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (((1 << hit.collider.gameObject.layer) & layerMask) != 0)
+                {
+                    isDragging = false;
+                    SetCamTarget(hit.collider.transform);
+                    //owner.selectedTarget = this.target;
+                    SwitchToQuaterView();
+                }
+                else
+                {
+                    SwitchToMapView();
+                }
+            }
         }
-        if (Input.GetKeyDown(KeyCode.F2))
-        {
-            ReturnToQuarterView();
-        }
-    }
-
-
-    public void SetCamTarget(Transform _target)
-    {
-        this.target = _target;
-    }
-
-    void SetLookTarget(Transform _target)
-    {
-        this.lookTarget = _target;
     }
 
     /*public void SetLockOnTarget(Transform _lockOnTarget)
@@ -94,6 +107,16 @@ public class CameraStateController : MonoBehaviour
 
     }*/
 
+    public void SetCamTarget(Transform _target)
+    {
+        this.target = _target;
+    }
+
+    void SetLookTarget(Transform _target)
+    {
+        this.lookTarget = _target;
+    }
+
     public void SwitchToShoulderView(Transform shoulder)
     {
         this.transform.parent = shoulder;
@@ -101,10 +124,17 @@ public class CameraStateController : MonoBehaviour
         currentState = shoulderViewState;
     }
 
-    public void ReturnToQuarterView()
+    public void SwitchToMapView()
+    {
+        this.transform.parent = null;
+        currentState = mapViewState;
+    }
+
+    public void SwitchToQuaterView()
     {
         this.transform.parent = null;
         currentState = quarterViewState;
     }
 
+    
 }
