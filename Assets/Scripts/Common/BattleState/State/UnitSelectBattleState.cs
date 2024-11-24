@@ -45,10 +45,12 @@ public class UnitSelectBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
+        owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
+        owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
     }
     #endregion
     #region Public
@@ -57,11 +59,13 @@ public class UnitSelectBattleState : BattleState
         base.Enter();
         // 여기서 owner.curControlUnit을 하나는 결정 해놔야함
         owner.curState = BATTLESTATE.UNITSELLECT;
+        owner.abilityMenuUIController.Display();
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
         base.Exit();
+        owner.abilityMenuUIController.Hide();
     }
     #endregion
     #endregion
@@ -156,7 +160,7 @@ public class UnitSelectBattleState : BattleState
     //요구사항 7번 구현
     private void OnMoveButton()
     {
-        //owner.stateMachine.ChangeState<MoveTargetBattleState>();
+        owner.stateMachine.ChangeState<MoveTargetBattleState>();
     }
     #endregion
 

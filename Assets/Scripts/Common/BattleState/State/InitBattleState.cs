@@ -53,11 +53,14 @@ public class InitBattleState : BattleState
     #region Coroutines
     private IEnumerator Initializing() 
     {
+        owner.tileIndicator.gameObject.SetActive(false);
         yield return null;
         //맵로딩
         //유닛 로딩
+        //Units.Add(적유닛);
         //연출
         //카메라 무브 등등
+        
         owner.stateMachine.ChangeState<UnitPlaceBattleState>();
     }
     #endregion

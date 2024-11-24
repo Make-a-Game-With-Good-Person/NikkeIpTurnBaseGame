@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
     #region public
     #endregion
     #region Events
+    public UnityEvent<Vector3> mouseOverEvent = new UnityEvent<Vector3>();
     public UnityEvent<Vector3> touchEvent = new UnityEvent<Vector3>();
     #endregion
     #endregion
@@ -22,10 +23,10 @@ public class InputController : MonoBehaviour
 
     #region Methods
     #region Private
-    private Vector3 GetWorldPositionFromMouse()
+    private Vector3 GetWorldPositionFromMouse(LayerMask layerMask)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit hit);
+        Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layerMask);
         return hit.point;
     }
     #endregion
@@ -44,9 +45,11 @@ public class InputController : MonoBehaviour
     #region MonoBehaviour
     private void Update()
     {
+        //임시로 레이어는 4번 레이어
+        mouseOverEvent?.Invoke(GetWorldPositionFromMouse(1 << 4));
         if (Input.GetMouseButtonDown(0))
         {
-            touchEvent?.Invoke(GetWorldPositionFromMouse());
+            touchEvent?.Invoke(GetWorldPositionFromMouse(1 << 4));
         }
     }
     #endregion

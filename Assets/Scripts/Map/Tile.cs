@@ -83,7 +83,7 @@ public class Tile
     /// 타일 위에 있는 물체
     /// GameObject on the this Tile
     /// </summary>
-    public GameObject content = null;
+    public Unit content = null;
     #region ForPathFinding
     [HideInInspector]public int distance = 0;
     [HideInInspector]public Vector2Int prev;
@@ -112,6 +112,33 @@ public class Tile
         center = worldPos + new Vector3(this.size.x / 2, 0, this.size.z / 2);
 
         tileState = TileState.Walkable | TileState.Selectable | TileState.Placeable;
+    }
+
+    public bool Place(Unit content)
+    {
+        if(this.content != null)
+        {
+            return false;
+        }
+
+        this.content = content;
+        enterTileEvent?.Invoke(this.content);
+        return true;
+    }
+    public bool UnPlace(Unit unit)
+    {
+        if(content == unit)
+        {
+            content = null;
+            return true;
+        }
+
+        return false;
+    }
+
+    public void PassTile(Unit passUnit)
+    {
+        enterTileEvent?.Invoke(passUnit);
     }
     #endregion
 

@@ -1,14 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-public abstract class BattleState : State
+public class AbilityMenuUIController : MonoBehaviour
 {
     #region Properties
     #region Private
     #endregion
     #region Protected
-    protected BattleManager owner;
+    #endregion
+    #region public
+    public GameObject AbilityMenuUI;
+    public Button abilityButton;
+    public Button moveButton;
     #endregion
     #region Events
     #endregion
@@ -23,6 +29,14 @@ public abstract class BattleState : State
     #region Protected
     #endregion
     #region Public
+    public void Display()
+    {
+        AbilityMenuUI.SetActive(true);
+    }
+    public void Hide()
+    {
+        AbilityMenuUI.SetActive(false);
+    }
     #endregion
     #endregion
 
@@ -33,9 +47,9 @@ public abstract class BattleState : State
     #endregion
 
     #region MonoBehaviour
-    protected virtual void Awake()
+    private void Start()
     {
-        owner = GetComponent<BattleManager>();
+        Hide();
     }
     #endregion
 }

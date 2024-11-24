@@ -201,7 +201,7 @@ public class TileManager : MonoBehaviour
     }
 
     /// <summary>
-    /// SearchTile 함수에 기반한 길찾기
+    /// SearchTile 함수에 기반한 길찾기, 디버그 용으로 쓰고 삭제할 예정
     /// </summary>
     /// <param name="start">시작지점</param>
     /// <param name="end">끝지점</param>

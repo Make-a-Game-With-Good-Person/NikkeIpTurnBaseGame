@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class UnitMovement : MonoBehaviour
     #endregion
     #region Protected
     protected Unit unit;
+    protected HashSet<Vector2Int> range = new HashSet<Vector2Int>();
     #endregion
     #region public
     #endregion
@@ -51,7 +53,7 @@ public class UnitMovement : MonoBehaviour
     #region Public
     public virtual HashSet<Vector2Int> GetTilesInRange(TileManager map)
     {
-        HashSet<Vector2Int> range = map.SearchTile(unit.tile.coordinate, ExpandSearch);
+        range = map.SearchTile(unit.tile.coordinate, ExpandSearch);
         Filter(range, map);
         return range;
     }
@@ -62,6 +64,62 @@ public class UnitMovement : MonoBehaviour
     #endregion
 
     #region Coroutines
+    public virtual IEnumerator Traverse(Vector2Int end ,TileManager map)
+    {
+        if(range.Count < 0)
+        {
+            GetTilesInRange(map);
+        }
+        yield return null;
+
+        //일단 무조건 대각선이 아니라 직각으로 이동
+        if(!range.Contains(end))
+        {
+            yield break;
+        }
+         
+        List<Vector2Int> path = new List<Vector2Int>();
+        Vector2Int tile = end;
+        while (tile != map.map[tile].prev){
+            path.Insert(0, tile);
+            tile = map.map[tile].prev;
+        }
+        //start 지점 추가
+        path.Insert(0, tile);
+
+        for(int i = 1; i < path.Count; i++)
+        {
+            int height = Math.Clamp(map.map[path[i - 1]].height - map.map[path[i]].height, -1, 1);
+
+            switch (height) 
+            {
+                case -1:
+                    yield return StartCoroutine(Climbing(map.map[path[i]].center));
+                    break;
+                case 0:
+                    yield return StartCoroutine(Running(map.map[path[i]].center));
+                    break;
+                case 1:
+                    yield return StartCoroutine(Jumping(map.map[path[i]].center));
+                    break;
+            }
+        }
+    }
+
+    protected IEnumerator Running(Vector3 to)
+    {
+        yield return null;
+    }
+
+    protected IEnumerator Jumping(Vector3 to)
+    {
+        yield return null;
+    }
+
+    protected IEnumerator Climbing(Vector3 to)
+    {
+        yield return null;
+    }
     #endregion
 
     #region MonoBehaviour
