@@ -18,5 +18,6 @@ public class UnitCamSetting : MonoBehaviour
     {
         unitSelectCamEvent?.Invoke();
     }
+
     #endregion
 }

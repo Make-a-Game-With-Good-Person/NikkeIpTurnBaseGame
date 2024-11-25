@@ -34,7 +34,7 @@ public class CameraStateController : MonoBehaviour
     ICameraState mapViewState;
     ICameraState currentState;
 
-    //BattleManager owner;
+    BattleManager owner;
     
 
     // Start is called before the first frame update
@@ -44,12 +44,14 @@ public class CameraStateController : MonoBehaviour
         quarterViewState = new QuarterViewState();
         shoulderViewState = new ShoulderViewState();
         mapViewState = new MapViewState();
+        owner = FindObjectOfType<BattleManager>();
         currentState = quarterViewState; // 초기 상태 설정
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (owner.curState == BATTLESTATE.NONE || owner.curState == BATTLESTATE.INIT) return;
         currentState?.UpdateState(this);
 
         // 이 아래 코드들 다 삭제 예정

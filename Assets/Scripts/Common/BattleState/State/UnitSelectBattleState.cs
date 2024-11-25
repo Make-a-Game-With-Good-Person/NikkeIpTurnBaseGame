@@ -46,6 +46,7 @@ public class UnitSelectBattleState : BattleState
     {
         base.AddListeners();
         owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
+        owner.abilityMenuUIController.abilityButton.onClick.AddListener(OnAbilityButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -56,6 +57,7 @@ public class UnitSelectBattleState : BattleState
     {
         base.RemoveListeners();
         owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
+        owner.abilityMenuUIController.abilityButton.onClick.RemoveListener(OnAbilityButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -69,7 +71,10 @@ public class UnitSelectBattleState : BattleState
         base.Enter();
         // 여기서 owner.curControlUnit을 하나는 결정 해놔야함
         owner.curState = BATTLESTATE.UNITSELLECT;
+        Debug.Log("유닛 셀렉트 배틀");
+        SelectFirstTarget();
         owner.abilityMenuUIController.Display();
+
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
@@ -81,11 +86,29 @@ public class UnitSelectBattleState : BattleState
     #endregion
 
     #region EventHandlers
-    //요구사항 1번 구현
-    private void OnDrag()
+    //이 상태에 들어왔을 때 현재 유닛을 담고 있는 리스트 중 가장 먼저 들어간 플레이어블 캐릭터를 첫 제어 타겟으로 결정
+    private void SelectFirstTarget()
     {
-        //맵 둘러보게함
-        // 현재는 카메라 상태 컨트롤러가 이 기능을 실행할 수 있도록 짜놓음. 추후 의존성 관련으로 더 나은 코드가 있다면 그걸로 수정 예정
+        if(owner.curControlUnit != null)
+        {
+            owner.cameraStateController.SetCamTarget(owner.curControlUnit.transform);
+        }
+        else
+        {
+            foreach (Unit unit in owner.Units)
+            {
+                Debug.Log(unit.gameObject.name);
+                if (unit.gameObject.CompareTag("Player"))
+                {
+                    owner.curControlUnit = unit;
+                    owner.cameraStateController.SetCamTarget(unit.transform);
+                    break;
+                }
+            }
+        }
+
+        
+
     }
     // 요구사항 3번, 4번 구현
     private void OnSelectUnit()
@@ -109,11 +132,12 @@ public class UnitSelectBattleState : BattleState
                 owner.cameraStateController.SwitchToQuaterView(hit.collider.transform);
 
                 Unit hitUnit = hit.collider.transform.GetComponent<Unit>();
+                owner.selectedTarget = hitUnit;
+
                 // 이 아래로 분류, 태그로 한다고 치면?
                 if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    owner.selectedTarget = hitUnit;
-                    //owner.stateMachine.ChangeState<ShowUnitDetailBattleState>();
+                    owner.stateMachine.ChangeState<ShowUnitDetailBattleState>();
                 }
                 else if (hit.collider.gameObject.CompareTag("Player"))
                 {
@@ -165,7 +189,7 @@ public class UnitSelectBattleState : BattleState
     //요구사항 6번 구현
     private void OnAbilityButton()
     {
-        //owner.stateMachine.ChangeState<AbilityTargetBattleState>();
+        owner.stateMachine.ChangeState<AbilityTargetBattleState>();
     }
     //요구사항 7번 구현
     private void OnMoveButton()
@@ -186,6 +210,12 @@ public class UnitSelectBattleState : BattleState
         {
             //요구사항 2번 여기에 구현
             //요구사항 5번 여기에 구현
+            // 유닛을 클릭하면 카메라 이벤트를 실행해 선택했다고 처리하기 때문에 여기선 필요한 UI들을 켜주면 될거 같음
+            if (Input.GetMouseButtonDown(0))
+            {
+                //OnSelectUnit();
+            }
+
         }
         else
         {

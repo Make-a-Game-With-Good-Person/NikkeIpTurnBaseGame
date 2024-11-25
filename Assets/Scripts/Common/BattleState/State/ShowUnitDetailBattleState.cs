@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
 /// <summary>
 /// 플레이어가 선택한 유닛의 정보를 보여주는 상태
@@ -31,12 +32,12 @@ public class ShowUnitDetailBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
-        //owner.unitdetailUIController.cancelEvent.AddListener(OnCancelButton);
+        owner.unitdetailUIController.cancelEvent.AddListener(OnCancelButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        //owner.unitdetailUIController.cancelEvent.RemoveListener(OnCancelButton);
+        owner.unitdetailUIController.cancelEvent.RemoveListener(OnCancelButton);
     }
     #endregion
     #region Public
@@ -65,7 +66,7 @@ public class ShowUnitDetailBattleState : BattleState
     {
         yield return null;
         //요구사항 1 구현
-        //owner.unitdetailUIController.Display(선택한 유닛);
+        owner.unitdetailUIController.Display(owner.selectedTarget);
     }
     #endregion
 
