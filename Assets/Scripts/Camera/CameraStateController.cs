@@ -65,9 +65,9 @@ public class CameraStateController : MonoBehaviour
                 if (((1 << hit.collider.gameObject.layer) & layerMask) != 0)
                 {
                     isDragging = false;
-                    SetCamTarget(hit.collider.transform);
+                    //SetCamTarget(hit.collider.transform);
                     //owner.selectedTarget = this.target;
-                    SwitchToQuaterView();
+                    SwitchToQuaterView(hit.collider.transform);
                 }
                 else
                 {
@@ -130,8 +130,9 @@ public class CameraStateController : MonoBehaviour
         currentState = mapViewState;
     }
 
-    public void SwitchToQuaterView()
+    public void SwitchToQuaterView(Transform target)
     {
+        SetCamTarget(target);
         this.transform.parent = null;
         currentState = quarterViewState;
     }

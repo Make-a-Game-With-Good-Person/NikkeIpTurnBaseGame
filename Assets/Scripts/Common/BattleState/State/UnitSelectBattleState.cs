@@ -46,11 +46,21 @@ public class UnitSelectBattleState : BattleState
     {
         base.AddListeners();
         owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
+
+        foreach (Unit unit in owner.Units)
+        {
+            unit.GetComponent<UnitCamSetting>().unitSelectCamEvent.AddListener(OnSelectUnit);
+        }
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
+
+        foreach (Unit unit in owner.Units)
+        {
+            unit.GetComponent<UnitCamSetting>().unitSelectCamEvent.RemoveListener(OnSelectUnit);
+        }
     }
     #endregion
     #region Public
@@ -95,8 +105,8 @@ public class UnitSelectBattleState : BattleState
             {
                 // 이 안에서 다시 분류, 플레이어를 선택하면 아래 코드, 아니면 적을 클릭했을 때 코드를 다시 작성
                 owner.cameraStateController.isDragging = false;
-                owner.cameraStateController.SetCamTarget(hit.collider.transform); // 적을 클릭했을 때도 카메라가 쿼터뷰로 해당 적을 잡을 수 있는데 뒤로가기 버튼을 누르면 다시 curControlUnit을 타겟으로 잡으면 됨
-                owner.cameraStateController.SwitchToQuaterView();
+                //owner.cameraStateController.SetCamTarget(hit.collider.transform); // 적을 클릭했을 때도 카메라가 쿼터뷰로 해당 적을 잡을 수 있는데 뒤로가기 버튼을 누르면 다시 curControlUnit을 타겟으로 잡으면 됨
+                owner.cameraStateController.SwitchToQuaterView(hit.collider.transform);
 
                 Unit hitUnit = hit.collider.transform.GetComponent<Unit>();
                 // 이 아래로 분류, 태그로 한다고 치면?
@@ -186,7 +196,7 @@ public class UnitSelectBattleState : BattleState
     #endregion
 
     #region MonoBehaviour
-    private void Update()
+   /* private void Update()
     {
         if (owner.curState == BATTLESTATE.UNITSELLECT)
         {
@@ -202,6 +212,6 @@ public class UnitSelectBattleState : BattleState
             }
 #endif
         }
-    }
+    }*/
     #endregion
 }
