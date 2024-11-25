@@ -23,7 +23,8 @@ public class BattleManager : MonoBehaviour
 
     public Unit selectedTarget; // 선택한 대상(적 유닛)
     public Unit curControlUnit; // 현재 플레이어가 선택한 아군 유닛
-    public List<Unit> Units = new List<Unit>();
+    public List<Unit> Units = new List<Unit>(); //아군과 적군 유닛 전부를 여기에 저장할 용도
+    public Tile tile;   //현재 선택한 타일을 저장할 용도, SelectTile함수에서 지정할것
 
     public Transform tileIndicator; // 선택한 타일 표시하기 위한 아이콘같은것, 임시로 하나 만들어둠
     #endregion
@@ -52,6 +53,7 @@ public class BattleManager : MonoBehaviour
         if (tile != null) 
         {
             tileIndicator.position = tile.center;
+            this.tile = tile;
         }
     }
     #endregion

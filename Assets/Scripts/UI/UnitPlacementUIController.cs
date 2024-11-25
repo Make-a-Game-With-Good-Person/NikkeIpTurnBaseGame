@@ -14,7 +14,7 @@ public class UnitPlacementUIController : MonoBehaviour
     public Button confirmButton;
     #endregion
     #region Events
-    public UnityEvent<GameObject, Vector3> setUnitEvent = new UnityEvent<GameObject, Vector3>();
+    public UnityEvent<Unit, Vector3> setUnitEvent = new UnityEvent<Unit, Vector3>();
     #endregion
     #endregion
 
@@ -39,7 +39,7 @@ public class UnitPlacementUIController : MonoBehaviour
     #endregion
 
     #region EventHandlers
-    public void OnDragImageEnd(GameObject unit, Vector3 worldPos)
+    public void OnDragImageEnd(Unit unit, Vector3 worldPos)
     {
         setUnitEvent?.Invoke(unit, worldPos);
     }

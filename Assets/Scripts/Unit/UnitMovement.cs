@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
@@ -70,7 +71,8 @@ public class UnitMovement : MonoBehaviour
         {
             GetTilesInRange(map);
         }
-        yield return null;
+
+        unit.tile.UnPlace(unit);
 
         //일단 무조건 대각선이 아니라 직각으로 이동
         if(!range.Contains(end))
@@ -91,6 +93,8 @@ public class UnitMovement : MonoBehaviour
         {
             int height = Math.Clamp(map.map[path[i - 1]].height - map.map[path[i]].height, -1, 1);
 
+            yield return StartCoroutine(Turning(map.map[path[i]].center));
+
             switch (height) 
             {
                 case -1:
@@ -104,21 +108,67 @@ public class UnitMovement : MonoBehaviour
                     break;
             }
         }
+
+        map.map[path[path.Count - 1]].Place(unit);
     }
 
     protected IEnumerator Running(Vector3 to)
     {
-        yield return null;
+        Vector3 dir = to - unit.gameObject.transform.position;
+        float dist = dir.magnitude;
+        float delta = 0;
+        dir.Normalize();
+        //여기에 애니메이션 파라미터 수정
+
+        while (dist > 0)
+        {
+            delta = 1.0f * Time.deltaTime;
+
+            if(delta > dist)
+            {
+                delta = dist;
+            }
+
+            unit.gameObject.transform.Translate(delta * dir);
+            dist -= delta;
+            yield return null;
+        }
     }
 
+    //아래로 점프
     protected IEnumerator Jumping(Vector3 to)
     {
         yield return null;
     }
 
+    //위로 기어 올라감
     protected IEnumerator Climbing(Vector3 to)
     {
         yield return null;
+    }
+
+    protected IEnumerator Turning(Vector3 to)
+    {
+        Vector3 dir = to - unit.transform.position;
+        
+
+        float angle = Vector3.Angle(unit.transform.forward, dir);
+        float right = Vector3.Dot(unit.transform.right, dir) < 0 ? -1f : 1f;
+        float delta = 0;
+
+        while(angle > 0)
+        {
+            delta = 60.0f * Time.deltaTime;
+
+            if(delta > angle)
+            {
+                delta = angle;
+            }
+
+            unit.transform.Rotate(delta * right * Vector3.up);
+            angle -= delta;
+            yield return null;
+        }
     }
     #endregion
 

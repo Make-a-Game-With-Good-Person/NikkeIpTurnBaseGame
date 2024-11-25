@@ -62,15 +62,17 @@ public class UnitPlaceBattleState : BattleState
         owner.stateMachine.ChangeState<UnitSelectBattleState>();
     }
     
-    public void OnUnitPlace(GameObject unit, Vector3 worldPos)
+    public void OnUnitPlace(Unit unit, Vector3 worldPos)
     {
         Tile tile = owner.tileManager.GetTile(worldPos);
 
         //그 타일에 유닛을 놓을수 있는지 검사
         if ((tile.tileState | TileState.Placeable) > 0){
             unit.transform.position = tile.center;
-
             //여기에 owner에 유닛을 등록하는 코드 넣어야함
+            tile.Place(unit);
+            if(!owner.Units.Contains(unit))
+                owner.Units.Add(unit);
         }
     }
     #endregion

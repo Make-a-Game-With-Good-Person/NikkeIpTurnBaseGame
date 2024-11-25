@@ -90,7 +90,7 @@ public class Tile
     #endregion
     #endregion
     #region Events
-    public UnityEvent<Unit> enterTileEvent = new UnityEvent<Unit>();
+    public UnityEvent<Unit> passTileEvent = new UnityEvent<Unit>();
     #endregion
     #endregion
 
@@ -122,13 +122,14 @@ public class Tile
         }
 
         this.content = content;
-        enterTileEvent?.Invoke(this.content);
+        content.tile = this;
         return true;
     }
     public bool UnPlace(Unit unit)
     {
         if(content == unit)
         {
+            content.tile = null;
             content = null;
             return true;
         }
@@ -138,7 +139,7 @@ public class Tile
 
     public void PassTile(Unit passUnit)
     {
-        enterTileEvent?.Invoke(passUnit);
+        passTileEvent?.Invoke(passUnit);
     }
     #endregion
 

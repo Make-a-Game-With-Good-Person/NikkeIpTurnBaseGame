@@ -27,6 +27,12 @@ public class InputController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, layerMask);
+
+        if(hit.collider == null)
+        {
+            return new Vector3(-1, -1, -1);
+        }
+
         return hit.point;
     }
     #endregion

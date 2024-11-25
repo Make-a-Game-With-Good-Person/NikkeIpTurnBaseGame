@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba66b1d23c47575498a484d3ce4d78f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UnitPrefab: {fileID: 2239219367257166617, guid: 591b15fe523443a4387f623b0f8c8644,
+  UnitPrefab: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
     type: 3}
   onDropEvent:
     m_PersistentCalls:

@@ -206,6 +206,9 @@ public class UnitSelectBattleState : BattleState
         //bool playerturn = owner.CheckTurn();
         bool playerturn = true;
 
+        //일단 임시로 선택한 유닛을 Units의 0이라고 침
+        owner.curControlUnit = owner.Units[0];
+
         if (playerturn)
         {
             //요구사항 2번 여기에 구현

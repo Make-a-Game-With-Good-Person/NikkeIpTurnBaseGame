@@ -8,13 +8,13 @@ using UnityEngine.UIElements;
 
 public class DragPortrait : MonoBehaviour
 {
-    private GameObject instanciatedUnit;
-    public GameObject UnitPrefab;
-    public UnityEvent<GameObject, Vector3> onDropEvent;
+    private Unit instanciatedUnit;
+    public Unit UnitPrefab;
+    public UnityEvent<Unit, Vector3> onDropEvent;
 
     public void OnBeginDrag()
     {
-        instanciatedUnit.SetActive(true);
+        instanciatedUnit.gameObject.SetActive(true);
     }
 
     public void OnDrag()

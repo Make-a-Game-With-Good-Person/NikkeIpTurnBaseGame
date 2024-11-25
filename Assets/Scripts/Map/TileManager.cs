@@ -253,15 +253,16 @@ public class TileManager : MonoBehaviour
     //for test
     private void Start()
     {
-        Debug.Log("TileManager.Start() start");
         Initialize();
-        bool temp = false;
-        temp = PathFind(startpos, endPos, out List<Vector2Int> path);
-        if (temp)
-        {
-            Debug.Log("Success");
-        }
-        Debug.Log("TileManager.Start() End");
+
+        //Debug.Log("TileManager.Start() start");
+        //bool temp = false;
+        //temp = PathFind(startpos, endPos, out List<Vector2Int> path);
+        //if (temp)
+        //{
+        //    Debug.Log("Success");
+        //}
+        //Debug.Log("TileManager.Start() End");
     }
 
 #if UNITY_EDITOR
