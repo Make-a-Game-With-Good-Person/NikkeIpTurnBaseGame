@@ -93,6 +93,7 @@ public class UnitSelectBattleState : BattleState
         {
             Debug.Log("커런트 있음");
             owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
+            owner.abilityMenuUIController.Display();
         }
         else
         {
@@ -149,8 +150,9 @@ public class UnitSelectBattleState : BattleState
             }
             else // 클릭한 대상이 유닛이 아닌 맵일 때? UI를 클릭했을 때도 고려 해봐야할듯.. < 그때는 또 LayerMask로 하던가 뭐 어떻게 조절해봄
             {
-                owner.cameraStateController.SwitchToMapView();
+                Debug.Log("맵뷰 ㄱㄱ");
                 owner.abilityMenuUIController.Hide();
+                owner.cameraStateController.SwitchToMapView();
             }
         }
 #elif UNITY_ANDROID

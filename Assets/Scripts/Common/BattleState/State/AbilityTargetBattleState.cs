@@ -9,6 +9,8 @@ using UnityEngine;
 /// <para>요구사항 3. 뒤로가기 버튼을 눌렀을 때 UnitSelectBattleState로 복귀</para>
 /// <para>요구사항 4. 공격 대상이 될만한 유닛이나 물건들을 빨간색으로든 뭐든 표시해줌</para>
 /// <para>요구사항 5. 공격이 단일 대상 공격이면 옆 버튼으로 공격할 유닛 선택 가능</para>
+/// <para>각 스킬 아이콘을 누르면 스킬 별로 사정거리를 타일 색을 바꾸는걸로 표시해서 알려줌</para>
+/// <para>스킬 아이콘을 누르고 확인을 누르면 다음 상태로 이전 >> 다음 상태에선 적을 선택하고 다음 상태로 넘어가면 그때 Confirm으로 간다.</para>
 /// </summary>
 public class AbilityTargetBattleState : BattleState
 {
@@ -32,7 +34,7 @@ public class AbilityTargetBattleState : BattleState
     private void ShowTargetableTiles()
     {
         //Unit selected = owner.units[owner.select];
-        //HashSet<Vector2Int> movableTiles = owner.tileManager.SearchTile(selected.coord, 선택된유닛의 능력의 사거리 , 선택된 유닛의 능력의 사용가능 높이);
+        //HashSet<Vector2Int> movableTiles = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, 선택된유닛의 능력의 사거리 , 선택된 유닛의 능력의 사용가능 높이);
         //owner.tileManager.ShowTiles(movableTiles);
     }
     #endregion
@@ -90,7 +92,11 @@ public class AbilityTargetBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
-        ShowTargetableTiles();
+        //ShowTargetableTiles();
+        // 여기서 curControlUnit의 index를 참조해서 가능한 스킬 아이콘을 활성화 한다.
+        // 할 일 
+        // curControlUnit의 index를 참조해서 각 스킬들의 아이콘 image sprite랑 안에 스펙들을 조정한다.
+
         //확인과 뒤로 버튼 UI 활성화
     }
     #endregion
