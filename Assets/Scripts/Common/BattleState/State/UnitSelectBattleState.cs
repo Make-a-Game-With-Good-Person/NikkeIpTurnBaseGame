@@ -73,7 +73,7 @@ public class UnitSelectBattleState : BattleState
         owner.curState = BATTLESTATE.UNITSELLECT;
         Debug.Log("유닛 셀렉트 배틀");
         SelectFirstTarget();
-        owner.abilityMenuUIController.Display();
+        //owner.abilityMenuUIController.Display();
 
         StartCoroutine(ProcessingState());
     }
@@ -91,7 +91,8 @@ public class UnitSelectBattleState : BattleState
     {
         if(owner.curControlUnit != null)
         {
-            owner.cameraStateController.SetCamTarget(owner.curControlUnit.transform);
+            Debug.Log("커런트 있음");
+            owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
         }
         else
         {
@@ -101,7 +102,7 @@ public class UnitSelectBattleState : BattleState
                 if (unit.gameObject.CompareTag("Player"))
                 {
                     owner.curControlUnit = unit;
-                    owner.cameraStateController.SetCamTarget(unit.transform);
+                    owner.cameraStateController.SwitchToQuaterView(unit.transform);
                     break;
                 }
             }
@@ -118,6 +119,7 @@ public class UnitSelectBattleState : BattleState
         //else 유닛이 적유닛
         //  owner.현재 선택한 유닛 = 선택한 유닛
         //  owner.stateMachine.ChangeState<ShowUnitDetailBattleState>();
+        Debug.Log("온셀렉트유닛");
 #if UNITY_EDITOR
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -142,11 +144,13 @@ public class UnitSelectBattleState : BattleState
                 else if (hit.collider.gameObject.CompareTag("Player"))
                 {
                     owner.curControlUnit = hitUnit; // 이 curControlUnit은 최초에 이 상태에 들어올 때 누구 하나는 결정 되어있어야함
+                    owner.abilityMenuUIController.Display();
                 }
             }
             else // 클릭한 대상이 유닛이 아닌 맵일 때? UI를 클릭했을 때도 고려 해봐야할듯.. < 그때는 또 LayerMask로 하던가 뭐 어떻게 조절해봄
             {
                 owner.cameraStateController.SwitchToMapView();
+                owner.abilityMenuUIController.Hide();
             }
         }
 #elif UNITY_ANDROID
@@ -214,10 +218,7 @@ public class UnitSelectBattleState : BattleState
             //요구사항 2번 여기에 구현
             //요구사항 5번 여기에 구현
             // 유닛을 클릭하면 카메라 이벤트를 실행해 선택했다고 처리하기 때문에 여기선 필요한 UI들을 켜주면 될거 같음
-            if (Input.GetMouseButtonDown(0))
-            {
-                //OnSelectUnit();
-            }
+            
 
         }
         else

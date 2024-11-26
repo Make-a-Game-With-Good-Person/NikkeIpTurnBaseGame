@@ -16,6 +16,7 @@ public class UnitCamSetting : MonoBehaviour
     #region Mouse Events
     private void OnMouseDown()
     {
+        Debug.Log(this.gameObject.name + "Å¬¸®!");
         unitSelectCamEvent?.Invoke();
     }
 

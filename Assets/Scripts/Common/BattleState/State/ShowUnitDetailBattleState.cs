@@ -32,23 +32,25 @@ public class ShowUnitDetailBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
-        owner.unitdetailUIController.cancelEvent.AddListener(OnCancelButton);
+        owner.unitdetailUIController.cancelButton.onClick.AddListener(OnCancelButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        owner.unitdetailUIController.cancelEvent.RemoveListener(OnCancelButton);
+        owner.unitdetailUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
     }
     #endregion
     #region Public
     public override void Enter()
     {
         base.Enter();
+        owner.curState = BATTLESTATE.SHOWUNITDETAIL;
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
         base.Exit();
+        owner.unitdetailUIController.Hide();
     }
     #endregion
     #endregion
@@ -66,7 +68,7 @@ public class ShowUnitDetailBattleState : BattleState
     {
         yield return null;
         //요구사항 1 구현
-        owner.unitdetailUIController.Display(owner.selectedTarget);
+        owner.unitdetailUIController.Display(owner.selectedTarget); // 이 Display에서 버프,디버프 등의 정보를 갱신해서 UI에 적용해야함
     }
     #endregion
 

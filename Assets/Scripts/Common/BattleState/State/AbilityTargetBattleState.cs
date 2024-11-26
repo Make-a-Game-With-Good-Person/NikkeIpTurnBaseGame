@@ -40,21 +40,26 @@ public class AbilityTargetBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
+        owner.abilityTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
+        owner.abilityTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
     }
     #endregion
     #region Public
     public override void Enter()
     {
         base.Enter();
+        owner.curState = BATTLESTATE.ABILITYTARGET;
+        owner.abilityTargetUIController.Display();
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
         base.Exit();
+        owner.abilityTargetUIController.Hide();
     }
     #endregion
     #endregion
@@ -70,7 +75,7 @@ public class AbilityTargetBattleState : BattleState
     private void OnCancelButton()
     {
         //확인과 뒤로 버튼 UI 비활성화
-        //owner.stateMachine.ChangeState<UnitSelectBattleState>();
+        owner.stateMachine.ChangeState<UnitSelectBattleState>();
     }
     //요구사항 5
     private void OnChangeTargetCommand()

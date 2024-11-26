@@ -18,7 +18,6 @@ public class UnitDetailUIController : MonoBehaviour
     public Button cancelButton;
     #endregion
     #region Events
-    public UnityEvent cancelEvent = new UnityEvent();
     #endregion
     #endregion
 
@@ -27,10 +26,6 @@ public class UnitDetailUIController : MonoBehaviour
 
     #region Methods
     #region Private
-    void OnCancle()
-    {
-        cancelEvent?.Invoke();
-    }
     #endregion
     #region Protected
     #endregion
@@ -59,7 +54,6 @@ public class UnitDetailUIController : MonoBehaviour
     #region MonoBehaviour
     private void Start()
     {
-        cancelButton.onClick.AddListener(OnCancle);
         Hide();
     }
     #endregion

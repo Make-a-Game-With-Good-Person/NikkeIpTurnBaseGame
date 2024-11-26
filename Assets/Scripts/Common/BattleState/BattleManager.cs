@@ -16,6 +16,7 @@ public class BattleManager : MonoBehaviour
     public UnitPlacementUIController unitPlacementUIController;
     public AbilityMenuUIController abilityMenuUIController;
     public UnitDetailUIController unitdetailUIController;
+    public AbilityTargetUIController abilityTargetUIController;
     public InputController inputController;
     public CameraStateController cameraStateController; // 임시로 public으로 함
 
