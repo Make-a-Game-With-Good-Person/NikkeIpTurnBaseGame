@@ -93,18 +93,18 @@ public class UnitMovement : MonoBehaviour
         {
             int height = Math.Clamp(map.map[path[i - 1]].height - map.map[path[i]].height, -1, 1);
 
-            yield return StartCoroutine(Turning(map.map[path[i]].center));
+            yield return StartCoroutine(Turning(map.map[path[i]]));
 
             switch (height) 
             {
                 case -1:
-                    yield return StartCoroutine(Climbing(map.map[path[i]].center));
+                    yield return StartCoroutine(Climbing(map.map[path[i]]));
                     break;
                 case 0:
-                    yield return StartCoroutine(Running(map.map[path[i]].center));
+                    yield return StartCoroutine(Running(map.map[path[i]]));
                     break;
                 case 1:
-                    yield return StartCoroutine(Jumping(map.map[path[i]].center));
+                    yield return StartCoroutine(Jumping(map.map[path[i]]));
                     break;
             }
         }
@@ -112,13 +112,17 @@ public class UnitMovement : MonoBehaviour
         map.map[path[path.Count - 1]].Place(unit);
     }
 
-    protected IEnumerator Running(Vector3 to)
+    protected IEnumerator Running(Tile to)
     {
-        Vector3 dir = to - unit.gameObject.transform.position;
+        Vector3 dir = to.center - unit.gameObject.transform.position;
         float dist = dir.magnitude;
         float delta = 0;
         dir.Normalize();
         //여기에 애니메이션 파라미터 수정
+
+
+        //일단 한칸한칸이니까
+
 
         while (dist > 0)
         {
@@ -129,27 +133,28 @@ public class UnitMovement : MonoBehaviour
                 delta = dist;
             }
 
-            unit.gameObject.transform.Translate(delta * dir);
+            unit.gameObject.transform.Translate(delta * dir, Space.World);
             dist -= delta;
             yield return null;
         }
+        yield return null;
     }
 
     //아래로 점프
-    protected IEnumerator Jumping(Vector3 to)
+    protected IEnumerator Jumping(Tile to)
     {
         yield return null;
     }
 
     //위로 기어 올라감
-    protected IEnumerator Climbing(Vector3 to)
+    protected IEnumerator Climbing(Tile to)
     {
         yield return null;
     }
 
-    protected IEnumerator Turning(Vector3 to)
+    protected IEnumerator Turning(Tile to)
     {
-        Vector3 dir = to - unit.transform.position;
+        Vector3 dir = to.center - unit.transform.position;
         
 
         float angle = Vector3.Angle(unit.transform.forward, dir);
@@ -165,7 +170,7 @@ public class UnitMovement : MonoBehaviour
                 delta = angle;
             }
 
-            unit.transform.Rotate(delta * right * Vector3.up);
+            unit.transform.Rotate(delta * right * Vector3.up, Space.World);
             angle -= delta;
             yield return null;
         }

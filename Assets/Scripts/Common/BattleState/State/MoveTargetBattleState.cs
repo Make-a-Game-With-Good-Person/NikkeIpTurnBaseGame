@@ -67,6 +67,12 @@ public class MoveTargetBattleState : BattleState
 
         if (range.Contains(owner.tileManager.GetTile(pos).coordinate))
         {
+            //더블클릭하면
+            if (owner.tile == owner.tileManager.GetTile(pos))
+            {
+                owner.stateMachine.ChangeState<MoveSequenceState>();
+                return;
+            }
             owner.SelectTile(pos);
         }
     }

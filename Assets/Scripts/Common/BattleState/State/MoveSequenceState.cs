@@ -57,7 +57,13 @@ public class MoveSequenceState : BattleState
     #region Coroutines
     private IEnumerator ProcessingState()
     {
-        yield return null;
+        UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
+
+        yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
+
+        //owner.curControlUnit.movable = false;
+
+        owner.stateMachine.ChangeState<UnitSelectBattleState>();
     }
     #endregion
 
