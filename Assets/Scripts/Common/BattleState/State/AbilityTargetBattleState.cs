@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 
 /// <summary>
-/// 능력의 목표를 선택하는 상태
+/// 스킬의 스펙을 확인하고 스킬을 선택하는 상태
 /// <para>요구사항 1. 공격가능한 타일 표시</para>
 /// <para>요구사항 2. 공격 대상이 있을 때 선택 버튼을 누르면 ConfirmAbilityTargetBattleState로 진행</para>
 /// <para>요구사항 3. 뒤로가기 버튼을 눌렀을 때 UnitSelectBattleState로 복귀</para>
@@ -16,6 +19,7 @@ public class AbilityTargetBattleState : BattleState
 {
     #region Properties
     #region Private
+    HashSet<Vector2Int> movableTiles;
     #endregion
     #region Protected
     #endregion
@@ -31,11 +35,15 @@ public class AbilityTargetBattleState : BattleState
     #region Methods
     #region Private
     //요구사항 1
-    private void ShowTargetableTiles()
+    private void ShowTargetableTiles() // 스킬 아이콘 버튼을 클릭하면 호출할 함수
     {
-        //Unit selected = owner.units[owner.select];
-        //HashSet<Vector2Int> movableTiles = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, 선택된유닛의 능력의 사거리 , 선택된 유닛의 능력의 사용가능 높이);
-        //owner.tileManager.ShowTiles(movableTiles);
+        UnitSkill selectedSkill = EventSystem.current.currentSelectedGameObject.GetComponent<UnitSkill>(); // 바로 직전에 클릭한 버튼을 불러옴
+        owner.curSelectedSkill = selectedSkill;
+        movableTiles = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
+        { return from.distance + 1 <= selectedSkill.skillRange && Math.Abs(from.height - to.height) <= selectedSkill.skillHeight; }
+        );
+
+        owner.tileManager.ShowTiles(movableTiles);
     }
     #endregion
     #region Protected
@@ -43,11 +51,25 @@ public class AbilityTargetBattleState : BattleState
     {
         base.AddListeners();
         owner.abilityTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
+
+        int index = owner.curControlUnit.index % 10;
+
+        for(int i = 0; i < owner.abilityTargetUIController.skillButtonList[index].buttonList.Count; i++)
+        {
+            owner.abilityTargetUIController.skillButtonList[index].buttonList[i].onClick.AddListener(ShowTargetableTiles);
+        }
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         owner.abilityTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
+
+        int index = owner.curControlUnit.index % 10;
+
+        for (int i = 0; i < owner.abilityTargetUIController.skillButtonList[index].buttonList.Count; i++)
+        {
+            owner.abilityTargetUIController.skillButtonList[index].buttonList[i].onClick.RemoveListener(ShowTargetableTiles);
+        }
     }
     #endregion
     #region Public
@@ -56,11 +78,13 @@ public class AbilityTargetBattleState : BattleState
         base.Enter();
         owner.curState = BATTLESTATE.ABILITYTARGET;
         owner.abilityTargetUIController.Display();
+        owner.abilityTargetUIController.UISetting(owner.curControlUnit);
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
         base.Exit();
+        owner.abilityTargetUIController.ResetSkillUI(owner.curControlUnit);
         owner.abilityTargetUIController.Hide();
     }
     #endregion
@@ -71,7 +95,7 @@ public class AbilityTargetBattleState : BattleState
     private void OnConfirmButton()
     {
         //owner.abilitytargets = 선택된유닛.선택된능력.능력범위계산() 범위내 대상 반환
-        //owner.stateMachine.ChangeState<ConfirmAbilityBattleState>();
+        owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
     }
     //요구사항 3
     private void OnCancelButton()

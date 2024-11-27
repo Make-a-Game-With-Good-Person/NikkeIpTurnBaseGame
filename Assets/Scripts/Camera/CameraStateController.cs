@@ -57,7 +57,7 @@ public class CameraStateController : MonoBehaviour
         // 이 아래 코드들 다 삭제 예정
         //if(owner.curState == BATTLESTATE.UNITSELECT)
         // 맵 둘러보기 상태 전환
-        /*if (Input.GetMouseButtonDown(0)) // 마우스 클릭(터치) 이벤트
+        if (Input.GetMouseButtonDown(0)) // 마우스 클릭(터치) 이벤트
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -66,17 +66,17 @@ public class CameraStateController : MonoBehaviour
             {
                 if (((1 << hit.collider.gameObject.layer) & layerMask) != 0)
                 {
-                    isDragging = false;
+                    /*isDragging = false;
                     //SetCamTarget(hit.collider.transform);
                     //owner.selectedTarget = this.target;
-                    SwitchToQuaterView(hit.collider.transform);
+                    SwitchToQuaterView(hit.collider.transform);*/
                 }
                 else
                 {
                     SwitchToMapView();
                 }
             }
-        }*/
+        }
     }
 
     /*public void SetLockOnTarget(Transform _lockOnTarget)

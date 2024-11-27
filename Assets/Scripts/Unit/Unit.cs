@@ -6,6 +6,8 @@ public class Unit : Stat , IDamage
 {
     [HideInInspector] public Tile tile;
     [SerializeField] Animator animator;
+    public List<UnitSkill> unitSkills;
+    public int index;
 
     // Start is called before the first frame update
     void Start()
