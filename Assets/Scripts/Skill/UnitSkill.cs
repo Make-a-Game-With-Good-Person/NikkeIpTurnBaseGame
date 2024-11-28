@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 /// <summary>
 /// 각 유닛 스킬들의 베이스가 될 클래스.
@@ -18,6 +19,8 @@ public class UnitSkill : MonoBehaviour, IAction
     public int skillLevel;
     public int skillCost;
     public Unit owner;
+
+    public UnityEvent changeStateWhenActEnd;
 
    
     public virtual void Action() { }

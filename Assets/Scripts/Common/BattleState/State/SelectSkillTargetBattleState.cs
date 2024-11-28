@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +16,7 @@ public class SelectSkillTargetBattleState : BattleState
 {
     #region Properties
     #region Private
-    
+    Vector2Int targetPos = new Vector2Int();
     #endregion
     #region Protected
     #endregion
@@ -31,18 +32,56 @@ public class SelectSkillTargetBattleState : BattleState
     #region Methods
     #region Private
     //요구사항 1
-    
+    void SetAbilityTarget()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (((1 << hit.collider.gameObject.layer) & owner.abilityTargetMask) != 0) // 클릭한 대상이 공격 가능한 대상일 때
+            {
+                targetPos.x = (int)hit.collider.gameObject.transform.position.x;
+                targetPos.y = (int)hit.collider.gameObject.transform.position.z;
+
+                if (owner.selectedSkillRangeTile.Contains(targetPos))
+                {
+                    owner.selectedTarget = hit.collider.gameObject.GetComponent<Unit>();
+                    owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
+                }
+            }
+        }
+    }
+
     #endregion
     #region Protected
     protected override void AddListeners()
     {
         base.AddListeners();
-        
+        // 씬에 존재하는 적들에게 클릭 했을 시 위치를 판별해 owner의 selectedSkillRangeTile 안에 그 위치가 포함 되는지 확인 후 포함 한다면 타겟팅 설정하는 함수를 addListener한다.
+        owner.selectSkillTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
+        foreach (Unit unit in owner.Units)
+        {
+            if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+            {
+                unit.GetComponent<AbilityTargetting>().abilityTargetAct.AddListener(SetAbilityTarget);
+            }
+        }
+
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
-        
+        // 여기선 리무브
+        owner.selectSkillTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
+        foreach (Unit unit in owner.Units)
+        {
+            if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+            {
+                unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
+            }
+        }
+
     }
     #endregion
     #region Public
@@ -50,13 +89,16 @@ public class SelectSkillTargetBattleState : BattleState
     {
         base.Enter();
         owner.curState = BATTLESTATE.SELECTSKILLTARGET;
-        
+        // 내가 이전에 선택한 스킬의 범위를 보여줘야함
+        // 스킬 범위 안에 적이 있는걸 판별해 적이 있다면 적도 반짝이게? 바꿔줘야함..
+        // 그리고 UI도 켜야함, 뒤로가는 버튼은 보여줘야하니깐
+        // 버튼 뿐만 아니라 텍스트로 대상을 선택하세요 이런것도 보여줘야함
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
         base.Exit();
-        
+
     }
     #endregion
     #endregion

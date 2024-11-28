@@ -8,6 +8,7 @@ public class Unit : Stat , IDamage
     [SerializeField] Animator animator;
     public List<UnitSkill> unitSkills;
     public int index;
+    public Transform shoulder;
 
     // Start is called before the first frame update
     void Start()

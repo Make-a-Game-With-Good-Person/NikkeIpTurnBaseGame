@@ -19,6 +19,7 @@ public class BattleManager : MonoBehaviour
     public AbilityTargetUIController abilityTargetUIController;
     public InputController inputController;
     public CameraStateController cameraStateController; // 임시로 public으로 함
+    public SelectSkillTargetUIController selectSkillTargetUIController;
 
     public BATTLESTATE curState = BATTLESTATE.NONE; // 각 battleState를 알기 위해 만든 enum타입 변수
 
@@ -28,7 +29,10 @@ public class BattleManager : MonoBehaviour
     public Tile tile;   //현재 선택한 타일을 저장할 용도, SelectTile함수에서 지정할것
     public UnitSkill curSelectedSkill;
 
+    public HashSet<Vector2Int> selectedSkillRangeTile;
+
     public Transform tileIndicator; // 선택한 타일 표시하기 위한 아이콘같은것, 임시로 하나 만들어둠
+    public LayerMask abilityTargetMask; // 공격 대상을 특정하는 레이어 마스크
     #endregion
     #region Events
     #endregion

@@ -89,11 +89,13 @@ public class UnitSelectBattleState : BattleState
     //이 상태에 들어왔을 때 현재 유닛을 담고 있는 리스트 중 가장 먼저 들어간 플레이어블 캐릭터를 첫 제어 타겟으로 결정
     private void SelectFirstTarget()
     {
-        if(owner.curControlUnit != null)
+        owner.abilityMenuUIController.Display();
+
+        if (owner.curControlUnit != null)
         {
             Debug.Log("커런트 있음");
             owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
-            owner.abilityMenuUIController.Display();
+            //owner.abilityMenuUIController.Display();
         }
         else
         {
@@ -104,6 +106,7 @@ public class UnitSelectBattleState : BattleState
                 {
                     owner.curControlUnit = unit;
                     owner.cameraStateController.SwitchToQuaterView(unit.transform);
+
                     break;
                 }
             }

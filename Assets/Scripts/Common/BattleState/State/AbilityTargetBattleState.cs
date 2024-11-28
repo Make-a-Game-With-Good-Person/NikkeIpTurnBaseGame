@@ -19,7 +19,6 @@ public class AbilityTargetBattleState : BattleState
 {
     #region Properties
     #region Private
-    HashSet<Vector2Int> movableTiles;
     #endregion
     #region Protected
     #endregion
@@ -39,11 +38,11 @@ public class AbilityTargetBattleState : BattleState
     {
         UnitSkill selectedSkill = EventSystem.current.currentSelectedGameObject.GetComponent<UnitSkill>(); // 바로 직전에 클릭한 버튼을 불러옴
         owner.curSelectedSkill = selectedSkill;
-        movableTiles = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
+        owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
         { return from.distance + 1 <= selectedSkill.skillRange && Math.Abs(from.height - to.height) <= selectedSkill.skillHeight; }
         );
 
-        owner.tileManager.ShowTiles(movableTiles);
+        owner.tileManager.ShowTiles(owner.selectedSkillRangeTile);
     }
     #endregion
     #region Protected

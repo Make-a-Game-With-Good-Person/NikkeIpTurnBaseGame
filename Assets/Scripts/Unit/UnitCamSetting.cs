@@ -5,18 +5,12 @@ using UnityEngine.Events;
 
 public class UnitCamSetting : MonoBehaviour
 {
-    protected Unit unit;
     public UnityEvent unitSelectCamEvent;
-
-    private void Start()
-    {
-        unit = GetComponent<Unit>();
-    }
 
     #region Mouse Events
     private void OnMouseDown()
     {
-        Debug.Log(this.gameObject.name + "클리!");
+        Debug.Log(this.gameObject.name + "클릭!");
         unitSelectCamEvent?.Invoke();
     }
 

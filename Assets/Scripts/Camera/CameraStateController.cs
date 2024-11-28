@@ -119,8 +119,9 @@ public class CameraStateController : MonoBehaviour
         this.lookTarget = _target;
     }
 
-    public void SwitchToShoulderView(Transform shoulder)
+    public void SwitchToShoulderView(Transform shoulder, Transform _target)
     {
+        SetLookTarget(_target);
         this.transform.parent = shoulder;
         this.transform.localPosition= Vector3.zero;
         currentState = shoulderViewState;
