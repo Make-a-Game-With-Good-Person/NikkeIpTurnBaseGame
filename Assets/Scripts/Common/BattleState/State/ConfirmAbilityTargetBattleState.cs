@@ -44,17 +44,22 @@ public class ConfirmAbilityTargetBattleState : BattleState
     {
         base.AddListeners();
         owner.curSelectedSkill.changeStateWhenActEnd.AddListener(ChangeState);
+        owner.confirmAbilityTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
+        owner.confirmAbilityTargetUIController.confirmButton.onClick.AddListener(OnConfirmButton);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         owner.curSelectedSkill.changeStateWhenActEnd.RemoveListener(ChangeState);
+        owner.confirmAbilityTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
+        owner.confirmAbilityTargetUIController.confirmButton.onClick.RemoveListener(OnConfirmButton);
     }
     #endregion
     #region Public
     public override void Enter()
     {
         base.Enter();
+        owner.confirmAbilityTargetUIController.Display();
         owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
         
         StartCoroutine(ProcessingState());

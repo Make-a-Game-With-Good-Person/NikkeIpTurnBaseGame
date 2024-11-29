@@ -13,9 +13,11 @@ public class AbilityTargetUIController : MonoBehaviour
         public List<Button> buttonList;
     }
 
+
     public GameObject abilityTargetUI;
     public Button confirmButton;
     public Button cancelButton;
+    public List<GameObject> charList = new List<GameObject>();
     public List<AbilityButtonList> skillButtonList = new List<AbilityButtonList>();
     List<GameObject> skillList;
 
@@ -32,7 +34,7 @@ public class AbilityTargetUIController : MonoBehaviour
     {
         int idx = unit.index % 10;
 
-        skillList[idx].SetActive(true);
+        charList[idx].SetActive(true);
         for(int i = 0; i < unit.unitSkills.Count; i++)
         {
             skillButtonList[idx].buttonList[i].GetComponent<Button>().interactable = true;
@@ -43,7 +45,7 @@ public class AbilityTargetUIController : MonoBehaviour
     {
         int idx = unit.index % 10;
 
-        skillList[idx].SetActive(false);
+        charList[idx].SetActive(false);
         for (int i = 0; i < unit.unitSkills.Count; i++)
         {
             skillButtonList[idx].buttonList[i].GetComponent<Button>().interactable = false;

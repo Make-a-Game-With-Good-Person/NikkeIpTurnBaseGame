@@ -23,6 +23,9 @@ public class UnitSkill : MonoBehaviour, IAction
     public UnityEvent changeStateWhenActEnd;
 
    
-    public virtual void Action() { }
+    public virtual void Action() {
+        Debug.Log("스킬 실행!");
+        changeStateWhenActEnd?.Invoke();
+    }
 
 }

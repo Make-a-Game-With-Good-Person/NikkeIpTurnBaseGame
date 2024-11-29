@@ -41,11 +41,13 @@ public class SelectSkillTargetBattleState : BattleState
         {
             if (((1 << hit.collider.gameObject.layer) & owner.abilityTargetMask) != 0) // 클릭한 대상이 공격 가능한 대상일 때
             {
+                Debug.Log("스킬 타겟 지정 <<");
                 targetPos.x = (int)hit.collider.gameObject.transform.position.x;
                 targetPos.y = (int)hit.collider.gameObject.transform.position.z;
 
                 if (owner.selectedSkillRangeTile.Contains(targetPos))
                 {
+                    Debug.Log("스킬 타격 가능 <<");
                     owner.selectedTarget = hit.collider.gameObject.GetComponent<Unit>();
                     owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
                 }
@@ -89,6 +91,7 @@ public class SelectSkillTargetBattleState : BattleState
     {
         base.Enter();
         owner.curState = BATTLESTATE.SELECTSKILLTARGET;
+        owner.selectSkillTargetUIController.Display();
         // 내가 이전에 선택한 스킬의 범위를 보여줘야함
         // 스킬 범위 안에 적이 있는걸 판별해 적이 있다면 적도 반짝이게? 바꿔줘야함..
         // 그리고 UI도 켜야함, 뒤로가는 버튼은 보여줘야하니깐
@@ -98,7 +101,7 @@ public class SelectSkillTargetBattleState : BattleState
     public override void Exit()
     {
         base.Exit();
-
+        owner.selectSkillTargetUIController.Hide();
     }
     #endregion
     #endregion

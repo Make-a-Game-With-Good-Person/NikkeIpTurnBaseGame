@@ -20,6 +20,7 @@ public class BattleManager : MonoBehaviour
     public InputController inputController;
     public CameraStateController cameraStateController; // 임시로 public으로 함
     public SelectSkillTargetUIController selectSkillTargetUIController;
+    public ConfirmAbilityTargetUIController confirmAbilityTargetUIController;
 
     public BATTLESTATE curState = BATTLESTATE.NONE; // 각 battleState를 알기 위해 만든 enum타입 변수
 

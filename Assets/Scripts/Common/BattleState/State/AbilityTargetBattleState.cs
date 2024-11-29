@@ -50,6 +50,7 @@ public class AbilityTargetBattleState : BattleState
     {
         base.AddListeners();
         owner.abilityTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
+        owner.abilityTargetUIController.confirmButton.onClick.AddListener(OnConfirmButton);
 
         int index = owner.curControlUnit.index % 10;
 
@@ -62,6 +63,7 @@ public class AbilityTargetBattleState : BattleState
     {
         base.RemoveListeners();
         owner.abilityTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
+        owner.abilityTargetUIController.confirmButton.onClick.RemoveListener(OnConfirmButton);
 
         int index = owner.curControlUnit.index % 10;
 
