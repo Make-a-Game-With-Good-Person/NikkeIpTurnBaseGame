@@ -113,24 +113,74 @@ public class Tile
 
         tileState = TileState.Walkable | TileState.Selectable | TileState.Placeable;
     }
+    #endregion
+
+    #region Methods
+    #region Private
+    /// <summary>
+    /// https://stackoverflow.com/questions/3746274/line-intersection-with-aabb-rectangle
+    /// 코헨 서덜랜드 클리핑 알고리즘 변형
+    /// </summary>
+    /// <param name="a1">직선 1의 한점</param>
+    /// <param name="a2">직선 1의 다른 한점</param>
+    /// <param name="b1">직선 2의 한점</param>
+    /// <param name="b2">직선 2의 다른 한점</param>
+    /// <param name="intersection">직선1과 2의 만나는 점</param>
+    /// <returns></returns>
+    private bool Intersects(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2, out Vector2 intersection)
+    {
+        intersection = Vector2.zero;
+
+        Vector2 b = a2 - a1;
+        Vector2 d = b2 - b1;
+        float bDotDPerp = Vector2.Dot(b, d);
+
+        // if b dot d == 0, it means the lines are parallel so have infinite intersection points
+        if (bDotDPerp == 0)
+            return false;
+
+        Vector2 c = b1 - a1;
+        float t = Vector2.Dot(c, d) / bDotDPerp;
+        if (t < 0 || t > 1)
+            return false;
+
+        float u = Vector2.Dot(c, b) / bDotDPerp;
+        if (u < 0 || u > 1)
+            return false;
+
+        intersection = a1 + t * b;
+
+        return true;
+    }
+    #endregion
+    #region Protected
+    #endregion
+    #region Public
+    public override string ToString()
+    {
+        return string.Format("Coordinate : {0}, Height : {1}", this.coordinate.ToString(), this.height.ToString());
+    }
 
     public bool Place(Unit content)
     {
-        if(this.content != null)
+        if (this.content != null)
         {
             return false;
         }
 
         this.content = content;
         content.tile = this;
+        tileState = tileState | TileState.Placed;
         return true;
     }
     public bool UnPlace(Unit unit)
     {
-        if(content == unit)
+        if (content == unit)
         {
             content.tile = null;
             content = null;
+            tileState = tileState ^ TileState.Placed;
+
             return true;
         }
 
@@ -141,17 +191,26 @@ public class Tile
     {
         passTileEvent?.Invoke(passUnit);
     }
-    #endregion
 
-    #region Methods
-    #region Private
-    #endregion
-    #region Protected
-    #endregion
-    #region Public
-    public override string ToString()
+    //a1, a2는 직선의 점 2개
+    public bool CollisionDetect(Vector2 a1, Vector2 a2)
     {
-        return string.Format("Coordinate : {0}, Height : {1}", this.coordinate.ToString(), this.height.ToString());
+        Vector2[] b = {
+            new Vector2(worldPos.x, worldPos.z),
+            new Vector2(worldPos.x + size.x, worldPos.z),
+            new Vector2(worldPos.x, worldPos.z + size.z),
+            new Vector2(worldPos.x + size.x, worldPos.z + size.z)
+        };
+
+        for(int i = 0; i < 4; i++)
+        {
+            if(Intersects(a1, a2, b[i], b[(i + 1) %4], out Vector2 intersection))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     #endregion
     #endregion

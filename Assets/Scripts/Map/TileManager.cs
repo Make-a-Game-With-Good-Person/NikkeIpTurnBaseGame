@@ -94,6 +94,8 @@ public class TileManager : MonoBehaviour
     {
         //여기서 높이작업
     }
+
+
     #endregion
     #region Protected
     #endregion

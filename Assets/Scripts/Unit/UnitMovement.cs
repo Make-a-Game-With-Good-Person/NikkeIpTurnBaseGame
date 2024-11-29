@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
@@ -89,24 +91,89 @@ public class UnitMovement : MonoBehaviour
         //start 지점 추가
         path.Insert(0, tile);
 
+        //대각선 계산을 위한 리스트
+        List<Vector2Int> temp = new List<Vector2Int>();
+        temp.Add(tile);
+
         for(int i = 1; i < path.Count; i++)
         {
             int height = Math.Clamp(map.map[path[i - 1]].height - map.map[path[i]].height, -1, 1);
 
-            yield return StartCoroutine(Turning(map.map[path[i]]));
-
             switch (height) 
             {
                 case -1:
-                    yield return StartCoroutine(Climbing(map.map[path[i]]));
+                    {
+                        if(temp.Count > 1)
+                        {
+                            yield return StartCoroutine(Turning(map.map[temp.Last()]));
+                            yield return StartCoroutine(Running(map.map[temp.Last()]));
+                        }
+
+                        yield return StartCoroutine(Turning(map.map[path[i]]));
+                        yield return StartCoroutine(Climbing(map.map[path[i]]));
+                        temp.Clear();
+                        temp.Add(path[i]);
+                    }
                     break;
                 case 0:
-                    yield return StartCoroutine(Running(map.map[path[i]]));
+                    {
+                        //대각선 판정
+                        Vector2Int min = new Vector2Int(Math.Min(temp[0].x, path[i].x), Math.Min(temp[0].y, path[i].y));
+                        Vector2Int max = new Vector2Int(Math.Max(temp[0].x, path[i].x), Math.Max(temp[0].y, path[i].y));
+
+                        bool isdiagonal = true;
+                        for (int x = min.x; x <= max.x && isdiagonal; x++)
+                        {
+                            for(int y = min.y; y <= max.y && isdiagonal; y++)
+                            {
+                                Vector2Int coord = new Vector2Int(x, y);
+
+                                //갈수 있는 타일이 아님
+                                if (!range.Contains(coord))
+                                {
+                                    isdiagonal = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (isdiagonal)
+                        {
+                            temp.Add(path[i]);
+                        }
+                        else
+                        {
+                            if (temp.Count > 1)
+                            {
+                                yield return StartCoroutine(Turning(map.map[temp.Last()]));
+                                yield return StartCoroutine(Running(map.map[temp.Last()]));
+                            }
+                            temp.Clear();
+                            temp.Add(path[i]);
+                        }
+                    }
                     break;
                 case 1:
-                    yield return StartCoroutine(Jumping(map.map[path[i]]));
+                    {
+                        if (temp.Count > 1)
+                        {
+                            yield return StartCoroutine(Turning(map.map[temp.Last()]));
+                            yield return StartCoroutine(Running(map.map[temp.Last()]));
+                        }
+                        yield return StartCoroutine(Turning(map.map[path[i]]));
+                        yield return StartCoroutine(Jumping(map.map[path[i]]));
+                        temp.Clear();
+                        temp.Add(path[i]);
+                    }
                     break;
             }
+        }
+
+        //height == 0이 계속되고 전부 대각선 판정이 나서 추가만 하면서 움직이지는 않았을 경우
+        if (temp.Count > 1)
+        {
+            yield return StartCoroutine(Turning(map.map[temp.Last()]));
+            yield return StartCoroutine(Running(map.map[temp.Last()]));
         }
 
         map.map[path[path.Count - 1]].Place(unit);
