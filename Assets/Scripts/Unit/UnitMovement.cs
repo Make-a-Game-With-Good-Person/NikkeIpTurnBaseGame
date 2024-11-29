@@ -36,7 +36,9 @@ public class UnitMovement : MonoBehaviour
     /// <returns></returns>
     protected virtual bool ExpandSearch(Tile from, Tile to)
     {
-        return (from.distance + to.cost <= unit[EStatType.Move]) && (Math.Abs(from.height - to.height) <= unit[EStatType.Jump]);
+        return (from.distance + to.cost <= unit[EStatType.Move]) && 
+            (Math.Abs(from.height - to.height) <= unit[EStatType.Jump]) && 
+            ((to.tileState & TileState.Walkable) > 0);
     }
 
     protected virtual void Filter(HashSet<Vector2Int> range, TileManager map)
@@ -128,8 +130,8 @@ public class UnitMovement : MonoBehaviour
                             {
                                 Vector2Int coord = new Vector2Int(x, y);
 
-                                //갈수 있는 타일이 아님
-                                if (!range.Contains(coord))
+                                //갈수 있는 타일이 아님, 시작지점은 range에 포함이 안되어있으므로 예외처리
+                                if (!range.Contains(coord) && coord != path[0])
                                 {
                                     isdiagonal = false;
                                     break;
@@ -137,18 +139,22 @@ public class UnitMovement : MonoBehaviour
                             }
                         }
 
+                        //Debug.Log($"UnitMovement.Traverse() isdiagonal = {isdiagonal}, temp.Count = {temp.Count}, next coord = {path[i]}");
+
                         if (isdiagonal)
                         {
                             temp.Add(path[i]);
                         }
                         else
                         {
+                            Vector2Int last = temp.Last();
                             if (temp.Count > 1)
                             {
-                                yield return StartCoroutine(Turning(map.map[temp.Last()]));
-                                yield return StartCoroutine(Running(map.map[temp.Last()]));
+                                yield return StartCoroutine(Turning(map.map[last]));
+                                yield return StartCoroutine(Running(map.map[last]));
                             }
                             temp.Clear();
+                            temp.Add(last);
                             temp.Add(path[i]);
                         }
                     }
@@ -168,6 +174,8 @@ public class UnitMovement : MonoBehaviour
                     break;
             }
         }
+
+        //Debug.Log($"UnitMovement.Traverse() temp.Count = {temp.Count}, next coord = {temp.Last()}");
 
         //height == 0이 계속되고 전부 대각선 판정이 나서 추가만 하면서 움직이지는 않았을 경우
         if (temp.Count > 1)

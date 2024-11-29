@@ -191,6 +191,14 @@ public class Tile
     {
         passTileEvent?.Invoke(passUnit);
     }
+    
+    /// <summary>
+    /// 아직 제대로 안만들었다. 디버깅 용도로 Walkable을 빼는 용도
+    /// </summary>
+    public void SetObstacle()
+    {
+        tileState = tileState ^ TileState.Walkable;
+    }
 
     //a1, a2는 직선의 점 2개
     public bool CollisionDetect(Vector2 a1, Vector2 a2)

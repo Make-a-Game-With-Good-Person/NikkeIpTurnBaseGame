@@ -60,13 +60,12 @@ public class TileManager : MonoBehaviour
         //디버깅용
         _map.Clear();
 
-
-
         InitGrid();
         InitHeight();
 
         didInit = true;
 
+        map[new Vector2Int(5, 5)].SetObstacle();
 
         /*
         //debug
@@ -94,8 +93,6 @@ public class TileManager : MonoBehaviour
     {
         //여기서 높이작업
     }
-
-
     #endregion
     #region Protected
     #endregion
