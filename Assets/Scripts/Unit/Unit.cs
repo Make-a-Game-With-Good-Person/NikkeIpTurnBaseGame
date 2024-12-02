@@ -9,11 +9,24 @@ public class Unit : Stat , IDamage
     public List<UnitSkill> unitSkills;
     public int index;
     public Transform shoulder;
+    bool _isTurned;
+
+    public bool isTurned
+    {
+        get
+        {
+            return _isTurned;
+        }
+        set
+        {
+            _isTurned = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _isTurned = true;
     }
 
     // Update is called once per frame

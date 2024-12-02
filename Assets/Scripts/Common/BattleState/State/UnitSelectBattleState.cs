@@ -89,30 +89,30 @@ public class UnitSelectBattleState : BattleState
     //이 상태에 들어왔을 때 현재 유닛을 담고 있는 리스트 중 가장 먼저 들어간 플레이어블 캐릭터를 첫 제어 타겟으로 결정
     private void SelectFirstTarget()
     {
-        owner.abilityMenuUIController.Display();
-
         if (owner.curControlUnit != null)
         {
-            Debug.Log("커런트 있음");
             owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
-            //owner.abilityMenuUIController.Display();
+            owner.abilityMenuUIController.Display();
         }
         else
         {
             foreach (Unit unit in owner.Units)
             {
                 Debug.Log(unit.gameObject.name);
-                if (unit.gameObject.CompareTag("Player"))
+                if (unit.gameObject.CompareTag("Player") && unit.isTurned)
                 {
                     owner.curControlUnit = unit;
                     owner.cameraStateController.SwitchToQuaterView(unit.transform);
-
+                    owner.abilityMenuUIController.Display();
                     break;
                 }
             }
         }
 
-        
+        if(owner.curControlUnit == null)
+        {
+            // 이때는 적 턴이니깐 ProcessingState 여기서 처리할 수 있도록 조치를 취해야한다.
+        }
 
     }
     // 요구사항 3번, 4번 구현
@@ -149,6 +149,7 @@ public class UnitSelectBattleState : BattleState
                 {
                     owner.curControlUnit = hitUnit; // 이 curControlUnit은 최초에 이 상태에 들어올 때 누구 하나는 결정 되어있어야함
                     owner.abilityMenuUIController.Display();
+                    owner.abilityMenuUIController.ActivateButtons(hitUnit.isTurned);
                 }
             }
             else // 클릭한 대상이 유닛이 아닌 맵일 때? UI를 클릭했을 때도 고려 해봐야할듯.. < 그때는 또 LayerMask로 하던가 뭐 어떻게 조절해봄

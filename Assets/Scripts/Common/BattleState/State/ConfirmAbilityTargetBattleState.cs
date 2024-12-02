@@ -31,6 +31,7 @@ public class ConfirmAbilityTargetBattleState : BattleState
     #region Private
     void OnCancelButton()
     {
+        owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
         owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
     }
 
@@ -67,6 +68,7 @@ public class ConfirmAbilityTargetBattleState : BattleState
     public override void Exit()
     {
         base.Exit();
+        owner.confirmAbilityTargetUIController.Hide();
     }
 
     public void ChangeState()

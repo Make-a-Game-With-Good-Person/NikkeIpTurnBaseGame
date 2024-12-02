@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 /// <summary>
@@ -13,6 +14,7 @@ public class PerformAbilityBattleState : BattleState
 {
     #region Properties
     #region Private
+    
     #endregion
     #region Protected
     #endregion
@@ -42,6 +44,7 @@ public class PerformAbilityBattleState : BattleState
     public override void Enter()
     {
         base.Enter();
+        owner.curState = BATTLESTATE.PERFORMABILITY;
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
@@ -58,6 +61,35 @@ public class PerformAbilityBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
+        owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
+
+        // 여기서 필드 위에 적들이 모두 죽었는지 체크 후 죽었다면 스테이지를 종료하면 됨
+
+        owner.curControlUnit.isTurned = false;
+        owner.curControlUnit = null;
+
+        
+        foreach(Unit unit in owner.Units)
+        {
+            if (unit.gameObject.layer == 7 && unit.isTurned)
+            {
+                owner.curControlUnit = unit;
+            }
+        }
+
+        if(owner.curControlUnit == null)
+        {
+            // 적의 턴으로 넘긴다고 생각해야함.
+            // 처리할 변수를 만든 뒤 Selected나 어디로 넘겨야함
+            Debug.Log("모든 아군이 턴을 다 소모했습니다.");
+        }
+        else
+        {
+            owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
+        }
+
+        owner.stateMachine.ChangeState<UnitSelectBattleState>();
+        
     }
     #endregion
 

@@ -42,8 +42,12 @@ public class SelectSkillTargetBattleState : BattleState
             if (((1 << hit.collider.gameObject.layer) & owner.abilityTargetMask) != 0) // 클릭한 대상이 공격 가능한 대상일 때
             {
                 Debug.Log("스킬 타겟 지정 <<");
-                targetPos.x = (int)hit.collider.gameObject.transform.position.x;
-                targetPos.y = (int)hit.collider.gameObject.transform.position.z;
+                //Vector2Int coord = new Vector2Int(Mathf.FloorToInt(worldpos.x / tileSize.x), Mathf.FloorToInt(worldpos.z / tileSize.z));
+                /*targetPos.x = Mathf.FloorToInt(hit.collider.gameObject.transform.position.x);
+                targetPos.y = Mathf.FloorToInt(hit.collider.gameObject.transform.position.z);*/
+                targetPos = owner.tileManager.GetTile(hit.collider.gameObject.transform.position).coordinate;
+
+                //Debug.Log(targetPos.x + ", " + targetPos.y);
 
                 if (owner.selectedSkillRangeTile.Contains(targetPos))
                 {

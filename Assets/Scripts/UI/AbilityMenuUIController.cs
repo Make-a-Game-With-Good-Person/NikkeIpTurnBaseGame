@@ -37,6 +37,12 @@ public class AbilityMenuUIController : MonoBehaviour
     {
         AbilityMenuUI.SetActive(false);
     }
+
+    public void ActivateButtons(bool isTurned)
+    {
+        abilityButton.interactable = isTurned;
+        moveButton.interactable = isTurned;
+    }
     #endregion
     #endregion
 
