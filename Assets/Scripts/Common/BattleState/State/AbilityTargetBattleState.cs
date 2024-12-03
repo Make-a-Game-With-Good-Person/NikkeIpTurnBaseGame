@@ -64,8 +64,8 @@ public class AbilityTargetBattleState : BattleState
         base.RemoveListeners();
         owner.abilityTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
         owner.abilityTargetUIController.confirmButton.onClick.RemoveListener(OnConfirmButton);
-
-        int index = owner.curControlUnit.index % 10;
+        int index = 0;
+        if (owner.curControlUnit != null) index = owner.curControlUnit.index % 10;
 
         for (int i = 0; i < owner.abilityTargetUIController.skillButtonList[index].buttonList.Count; i++)
         {

@@ -61,9 +61,36 @@ public class MoveSequenceState : BattleState
 
         yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
 
-        //owner.curControlUnit.movable = false;
+        owner.curControlUnit.movable = false;
 
-        owner.stateMachine.ChangeState<UnitSelectBattleState>();
+        if (owner.curControlUnit.attackable)
+        {
+            owner.stateMachine.ChangeState<UnitSelectBattleState>();
+        }
+        else
+        {
+            owner.curControlUnit = null;
+
+            foreach (Unit unit in owner.Units)
+            {
+                if (unit.gameObject.layer == 7 && (unit.attackable || unit.movable))
+                {
+                    owner.curControlUnit = unit;
+                }
+            }
+
+            if (owner.curControlUnit == null)
+            {
+                // 적의 턴으로 넘긴다고 생각해야함.
+                // 처리할 변수를 만든 뒤 Selected나 어디로 넘겨야함
+                Debug.Log("모든 아군이 턴을 다 소모했습니다.");
+
+
+            }
+
+            owner.stateMachine.ChangeState<UnitSelectBattleState>();
+        }
+        
     }
     #endregion
 

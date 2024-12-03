@@ -65,30 +65,36 @@ public class PerformAbilityBattleState : BattleState
 
         // 여기서 필드 위에 적들이 모두 죽었는지 체크 후 죽었다면 스테이지를 종료하면 됨
 
-        owner.curControlUnit.isTurned = false;
-        owner.curControlUnit = null;
+        owner.curControlUnit.attackable = false; // 공격은 끝났음
 
-        
-        foreach(Unit unit in owner.Units)
+        if (owner.curControlUnit.movable) // 아직 최근에 컨트롤한 유닛이 이동 가능하다면
         {
-            if (unit.gameObject.layer == 7 && unit.isTurned)
+            owner.stateMachine.ChangeState<UnitSelectBattleState>(); // 바로 상태 넘기기
+        }
+        else // 만약 공격,이동을 모두 다 했다면
+        {
+            owner.curControlUnit = null;
+
+            foreach (Unit unit in owner.Units)
             {
-                owner.curControlUnit = unit;
+                if (unit.gameObject.layer == 7 && (unit.attackable || unit.movable))
+                {
+                    owner.curControlUnit = unit;
+                }
             }
-        }
 
-        if(owner.curControlUnit == null)
-        {
-            // 적의 턴으로 넘긴다고 생각해야함.
-            // 처리할 변수를 만든 뒤 Selected나 어디로 넘겨야함
-            Debug.Log("모든 아군이 턴을 다 소모했습니다.");
-        }
-        else
-        {
-            owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
-        }
+            if (owner.curControlUnit == null)
+            {
+                // 적의 턴으로 넘긴다고 생각해야함.
+                // 처리할 변수를 만든 뒤 Selected나 어디로 넘겨야함
+                Debug.Log("모든 아군이 턴을 다 소모했습니다.");
 
-        owner.stateMachine.ChangeState<UnitSelectBattleState>();
+
+            }
+
+            owner.stateMachine.ChangeState<UnitSelectBattleState>();
+        }
+        
         
     }
     #endregion

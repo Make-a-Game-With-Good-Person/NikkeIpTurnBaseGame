@@ -9,24 +9,37 @@ public class Unit : Stat , IDamage
     public List<UnitSkill> unitSkills;
     public int index;
     public Transform shoulder;
-    bool _isTurned;
+    bool _attackable;
+    bool _movable;
 
-    public bool isTurned
+    public bool attackable
     {
         get
         {
-            return _isTurned;
+            return _attackable;
         }
         set
         {
-            _isTurned = value;
+            _attackable = value;
+        }
+    }
+
+    public bool movable
+    {
+        get
+        {
+            return _movable;
+        }
+        set
+        {
+            _movable = value;
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _isTurned = true;
+        ResetAble();
     }
 
     // Update is called once per frame
@@ -39,6 +52,12 @@ public class Unit : Stat , IDamage
     {
         this[EStatType.HP] -= dmg;
         if (this[EStatType.HP] <= 0f) Destroy(this);
+    }
+
+    public void ResetAble()
+    {
+        _attackable = true;
+        _movable = true;
     }
     #region Anim Events
     #endregion

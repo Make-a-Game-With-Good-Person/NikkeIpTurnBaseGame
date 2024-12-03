@@ -37,11 +37,15 @@ public class AbilityMenuUIController : MonoBehaviour
     {
         AbilityMenuUI.SetActive(false);
     }
-
-    public void ActivateButtons(bool isTurned)
+    /// <summary>
+    /// 플레이어에게 남아있는 턴 여부에 따라 버튼의 상호작용을 토글하는 함수
+    /// </summary>
+    /// <param name="attackable"> 유닛의 이번 턴 공격 가능 여부</param>
+    /// <param name="movable"> 유닛의 이번 턴 이동 가능 여부</param>
+    public void ActivateButtons(bool attackable, bool movable)
     {
-        abilityButton.interactable = isTurned;
-        moveButton.interactable = isTurned;
+        abilityButton.interactable = attackable;
+        moveButton.interactable = movable;
     }
     #endregion
     #endregion
