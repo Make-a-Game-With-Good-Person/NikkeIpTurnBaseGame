@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class UnitPlacementUIController : MonoBehaviour
 {
+    //12-03
+    //dragPortraits를 딕셔너리로 바꾸던가 어쩌던가 효율적인 방법이 있긴 할건데 일단 이렇게 짜둠
+
     #region Properties
     #region Private
     #endregion
@@ -15,6 +18,7 @@ public class UnitPlacementUIController : MonoBehaviour
     #endregion
     #region Events
     public UnityEvent<Unit, Vector3> setUnitEvent = new UnityEvent<Unit, Vector3>();
+    public UnityEvent<Unit> failToPlaceEvent = new UnityEvent<Unit>();
     #endregion
     #endregion
 
@@ -35,6 +39,7 @@ public class UnitPlacementUIController : MonoBehaviour
     {
         UnitPlaceUI.SetActive(false);
     }
+
     #endregion
     #endregion
 
@@ -42,6 +47,10 @@ public class UnitPlacementUIController : MonoBehaviour
     public void OnDragImageEnd(Unit unit, Vector3 worldPos)
     {
         setUnitEvent?.Invoke(unit, worldPos);
+    }
+    public void OnFailToPlace(Unit unit)
+    {
+        failToPlaceEvent.Invoke(unit);
     }
     #endregion
 

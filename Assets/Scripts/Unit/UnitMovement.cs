@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 public class UnitMovement : MonoBehaviour
@@ -108,11 +106,11 @@ public class UnitMovement : MonoBehaviour
                         if(temp.Count > 1)
                         {
                             yield return StartCoroutine(Turning(map.map[temp.Last()]));
-                            yield return StartCoroutine(Running(map.map[temp.Last()]));
+                            yield return StartCoroutine(Running(map.map[temp.Last()], map));
                         }
 
                         yield return StartCoroutine(Turning(map.map[path[i]]));
-                        yield return StartCoroutine(Climbing(map.map[path[i]]));
+                        yield return StartCoroutine(Climbing(map.map[path[i]], map));
                         temp.Clear();
                         temp.Add(path[i]);
                     }
@@ -151,7 +149,7 @@ public class UnitMovement : MonoBehaviour
                             if (temp.Count > 1)
                             {
                                 yield return StartCoroutine(Turning(map.map[last]));
-                                yield return StartCoroutine(Running(map.map[last]));
+                                yield return StartCoroutine(Running(map.map[last], map));
                             }
                             temp.Clear();
                             temp.Add(last);
@@ -164,10 +162,10 @@ public class UnitMovement : MonoBehaviour
                         if (temp.Count > 1)
                         {
                             yield return StartCoroutine(Turning(map.map[temp.Last()]));
-                            yield return StartCoroutine(Running(map.map[temp.Last()]));
+                            yield return StartCoroutine(Running(map.map[temp.Last()], map));
                         }
                         yield return StartCoroutine(Turning(map.map[path[i]]));
-                        yield return StartCoroutine(Jumping(map.map[path[i]]));
+                        yield return StartCoroutine(Jumping(map.map[path[i - 1]], map.map[path[i]], map));
                         temp.Clear();
                         temp.Add(path[i]);
                     }
@@ -181,13 +179,13 @@ public class UnitMovement : MonoBehaviour
         if (temp.Count > 1)
         {
             yield return StartCoroutine(Turning(map.map[temp.Last()]));
-            yield return StartCoroutine(Running(map.map[temp.Last()]));
+            yield return StartCoroutine(Running(map.map[temp.Last()], map));
         }
 
         map.map[path[path.Count - 1]].Place(unit);
     }
 
-    protected IEnumerator Running(Tile to)
+    protected IEnumerator Running(Tile to, TileManager map)
     {
         Vector3 dir = to.center - unit.gameObject.transform.position;
         float dist = dir.magnitude;
@@ -197,10 +195,18 @@ public class UnitMovement : MonoBehaviour
 
 
         //일단 한칸한칸이니까
-
+        HashSet<Tile> passedTile = new HashSet<Tile>();
 
         while (dist > 0)
         {
+            Tile tile = map.GetTile(unit.transform.position);
+
+            if (!passedTile.Contains(tile)) 
+            {
+                tile.PassTile(unit);
+                passedTile.Add(tile);
+            }
+
             delta = 1.0f * Time.deltaTime;
 
             if(delta > dist)
@@ -210,19 +216,48 @@ public class UnitMovement : MonoBehaviour
 
             unit.gameObject.transform.Translate(delta * dir, Space.World);
             dist -= delta;
+
             yield return null;
         }
-        yield return null;
+        passedTile.Clear();
     }
 
     //아래로 점프
-    protected IEnumerator Jumping(Tile to)
+    protected IEnumerator Jumping(Tile from, Tile to, TileManager map)
     {
+        //수평 이동용
+        Vector3 dir = to.center - unit.gameObject.transform.position;
+        float dist = dir.magnitude;
+        float delta = 0;
+        dir.Normalize();
+
+        //수직 이동용
+        //Vector3
+
+        while (dist > 0)
+        {
+            //수평 이동
+            delta = 1.0f * Time.deltaTime;
+
+            if (delta > dist)
+            {
+                delta = dist;
+            }
+
+            unit.gameObject.transform.Translate(delta * dir, Space.World);
+            dist -= delta;
+
+            //수직 이동
+
+            yield return null;
+        }
+
+
         yield return null;
     }
 
     //위로 기어 올라감
-    protected IEnumerator Climbing(Tile to)
+    protected IEnumerator Climbing(Tile to, TileManager map)
     {
         yield return null;
     }
@@ -259,4 +294,3 @@ public class UnitMovement : MonoBehaviour
     }
     #endregion
 }
-

@@ -10,7 +10,8 @@ public class DragPortrait : MonoBehaviour
 {
     private Unit instanciatedUnit;
     public Unit UnitPrefab;
-    public UnityEvent<Unit, Vector3> onDropEvent;
+    public UnityEvent<DragPortrait> DragStartEvent = new UnityEvent<DragPortrait>();
+    public UnityEvent<Unit, Vector3> onDropEvent = new UnityEvent<Unit, Vector3>();
 
     public void OnBeginDrag()
     {
@@ -29,6 +30,12 @@ public class DragPortrait : MonoBehaviour
     {
         Debug.Log(instanciatedUnit.transform.position);
         onDropEvent?.Invoke(instanciatedUnit, instanciatedUnit.transform.position);
+    }
+
+    public void OnFailToPlace(Unit unit)
+    {
+        if(instanciatedUnit == unit)
+            instanciatedUnit.gameObject.SetActive(false);
     }
 
     private void Awake()

@@ -65,8 +65,6 @@ public class TileManager : MonoBehaviour
 
         didInit = true;
 
-        map[new Vector2Int(5, 5)].SetObstacle();
-
         /*
         //debug
         foreach(Tile node in _map.Values)
@@ -92,6 +90,24 @@ public class TileManager : MonoBehaviour
     private void InitHeight()
     {
         //여기서 높이작업
+        foreach(Tile tile in map.Values)
+        {
+            //임시로 레이어는 water
+            Collider[] colliders = Physics.OverlapSphere(tile.center, tileSize.y * 0.9f, 1 << 4);
+
+            foreach(Collider collider in colliders)
+            {
+                ObstacleSize obstacleSize = collider.gameObject.GetComponentInParent<ObstacleSize>();
+                if (obstacleSize != null) 
+                {
+                    tile.height = obstacleSize.size.y;
+                    if (!obstacleSize.canBePlaced)
+                    {
+                        tile.SetObstacle();
+                    }
+                }
+            }
+        }
     }
     #endregion
     #region Protected
@@ -278,9 +294,13 @@ public class TileManager : MonoBehaviour
             {
                 Gizmos.color = Color.green;
             }
-            else
+            else if((node.tileState & TileState.Walkable) > 0)
             {
                 Gizmos.color = Color.white;
+            }
+            else
+            {
+                Gizmos.color = Color.red;
             }
             Gizmos.DrawWireCube(node.center, new Vector3(tileSize.x * 0.9f, 0.1f, tileSize.z * 0.9f));
             

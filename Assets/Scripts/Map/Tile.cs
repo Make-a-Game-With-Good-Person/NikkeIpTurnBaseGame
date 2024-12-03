@@ -83,13 +83,19 @@ public class Tile
     /// 타일 위에 있는 물체
     /// GameObject on the this Tile
     /// </summary>
-    public Unit content = null;
+    public Unit content
+    {
+        get; protected set;
+    }
     #region ForPathFinding
     [HideInInspector]public int distance = 0;
     [HideInInspector]public Vector2Int prev;
     #endregion
     #endregion
     #region Events
+    /// <summary>
+    /// 이벤트 발생은 PassTile()함수를 이용하고 이건 이벤트 등록과 제거에만 활용할것
+    /// </summary>
     public UnityEvent<Unit> passTileEvent = new UnityEvent<Unit>();
     #endregion
     #endregion
@@ -197,7 +203,7 @@ public class Tile
     /// </summary>
     public void SetObstacle()
     {
-        tileState = tileState ^ TileState.Walkable;
+        tileState = tileState ^ TileState.Placeable ^ TileState.Walkable;
     }
 
     //a1, a2는 직선의 점 2개
