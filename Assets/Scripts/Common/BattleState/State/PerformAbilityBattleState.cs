@@ -66,6 +66,7 @@ public class PerformAbilityBattleState : BattleState
         // 여기서 필드 위에 적들이 모두 죽었는지 체크 후 죽었다면 스테이지를 종료하면 됨
 
         owner.curControlUnit.attackable = false; // 공격은 끝났음
+        owner.curControlUnit.attack_Re = false; // 임시도 닫아버림
 
         if (owner.curControlUnit.movable) // 아직 최근에 컨트롤한 유닛이 이동 가능하다면
         {

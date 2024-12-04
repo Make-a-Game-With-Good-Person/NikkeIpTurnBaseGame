@@ -62,6 +62,7 @@ public class MoveSequenceState : BattleState
         yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
 
         owner.curControlUnit.movable = false;
+        owner.curControlUnit.move_Re = false; // 임시도 닫아버림
 
         if (owner.curControlUnit.attackable)
         {

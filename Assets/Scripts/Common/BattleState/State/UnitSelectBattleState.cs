@@ -47,6 +47,8 @@ public class UnitSelectBattleState : BattleState
         base.AddListeners();
         owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.AddListener(OnAbilityButton);
+        owner.abilityMenuUIController.turnEndButton.onClick.AddListener(OnTurnEndButton);
+        owner.abilityMenuUIController.turnReButton.onClick.AddListener(OnTurnReAgainButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -58,6 +60,8 @@ public class UnitSelectBattleState : BattleState
         base.RemoveListeners();
         owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.RemoveListener(OnAbilityButton);
+        owner.abilityMenuUIController.turnEndButton.onClick.RemoveListener(OnTurnEndButton);
+        owner.abilityMenuUIController.turnReButton.onClick.RemoveListener(OnTurnReAgainButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -89,6 +93,8 @@ public class UnitSelectBattleState : BattleState
     //이 상태에 들어왔을 때 현재 유닛을 담고 있는 리스트 중 가장 먼저 들어간 플레이어블 캐릭터를 첫 제어 타겟으로 결정
     private void SelectFirstTarget()
     {
+        owner.abilityMenuUIController.Hide();
+
         if (owner.curControlUnit != null)
         {
             owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
@@ -211,6 +217,23 @@ public class UnitSelectBattleState : BattleState
     private void OnMoveButton()
     {
         owner.stateMachine.ChangeState<MoveTargetBattleState>();
+    }
+
+    void OnTurnEndButton()
+    {
+        owner.curControlUnit.attackable = false;
+        owner.curControlUnit.movable = false;
+        owner.curControlUnit = null;
+
+        SelectFirstTarget();
+    }
+
+    void OnTurnReAgainButton()
+    {
+        owner.curControlUnit.attackable = owner.curControlUnit.attack_Re;
+        owner.curControlUnit.movable = owner.curControlUnit.move_Re;
+
+        SelectFirstTarget();
     }
     #endregion
 

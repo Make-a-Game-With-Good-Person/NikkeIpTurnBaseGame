@@ -84,7 +84,7 @@ public class SelectSkillTargetBattleState : BattleState
         {
             if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
             {
-                unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
+                if(unit != null) unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
             }
         }
 

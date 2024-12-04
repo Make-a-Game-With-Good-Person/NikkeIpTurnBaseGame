@@ -15,6 +15,8 @@ public class AbilityMenuUIController : MonoBehaviour
     public GameObject AbilityMenuUI;
     public Button abilityButton;
     public Button moveButton;
+    public Button turnEndButton;
+    public Button turnReButton;
     #endregion
     #region Events
     #endregion
@@ -37,6 +39,7 @@ public class AbilityMenuUIController : MonoBehaviour
     {
         AbilityMenuUI.SetActive(false);
     }
+    
     /// <summary>
     /// 플레이어에게 남아있는 턴 여부에 따라 버튼의 상호작용을 토글하는 함수
     /// </summary>
