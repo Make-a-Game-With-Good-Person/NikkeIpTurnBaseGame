@@ -15,6 +15,8 @@ public class DragPortrait : MonoBehaviour
 
     public void OnBeginDrag()
     {
+        //와! 널체크! if문 안써도 된다! 왜된거지!
+        instanciatedUnit.tile?.UnPlace(instanciatedUnit);
         instanciatedUnit.gameObject.SetActive(true);
     }
 

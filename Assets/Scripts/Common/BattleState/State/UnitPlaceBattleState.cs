@@ -15,7 +15,9 @@ public class UnitPlaceBattleState : BattleState
 {
     /*  12-03
      *  1. 현재 유닛을 놓고 다른데에 같은 유닛을 놓으면 첫 타일에서 unplace()를 실행을 안해서 여전히 거기에 있다고 판정하는 버그 있음
+     *      - 12-04 해결
      *  2. 놓을수 없는 타일에도 놓여지는 버그 있음
+     *      - 12-03 해결
      */
     #region Properties
     #region Private

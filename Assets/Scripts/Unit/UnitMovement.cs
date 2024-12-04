@@ -137,7 +137,7 @@ public class UnitMovement : MonoBehaviour
                             }
                         }
 
-                        //Debug.Log($"UnitMovement.Traverse() isdiagonal = {isdiagonal}, temp.Count = {temp.Count}, next coord = {path[i]}");
+                        Debug.Log($"UnitMovement.Traverse() isdiagonal = {isdiagonal}, temp.Count = {temp.Count}, next coord = {path[i]}");
 
                         if (isdiagonal)
                         {
