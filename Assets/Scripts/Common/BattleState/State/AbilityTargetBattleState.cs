@@ -4,6 +4,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using System.Linq;
 
 /// <summary>
 /// 스킬의 스펙을 확인하고 스킬을 선택하는 상태
@@ -19,6 +20,7 @@ public class AbilityTargetBattleState : BattleState
 {
     #region Properties
     #region Private
+    Vector2Int targetPos;
     #endregion
     #region Protected
     #endregion
@@ -41,7 +43,35 @@ public class AbilityTargetBattleState : BattleState
         owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
         { return from.distance + 1 <= selectedSkill.skillRange && Math.Abs(from.height - to.height) <= selectedSkill.skillHeight; }
         );
+        // selectedSkillRangeTile << hash set 
+        // 이 해쉬셋을 키로 tile value를 dictionary에서 찾아 해당 타일에 있는 오브젝트 중 적들만 찾음.
+        // 그 적들에게 레이를 다 쏴서
+        // 레이에 히트한게 내가 찾고자한 적이면 타격 가능, 아니라면 불가능하다고 판단해 해쉬셋에서 인덱스 삭제
 
+        HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();
+        RaycastHit hit;
+
+        foreach (Unit unit in owner.Units)
+        {
+            targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
+            if (!temp.Contains(targetPos)) continue;
+            if(unit.gameObject.layer == 8)
+            {
+                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
+                dir.Normalize();
+                if (Physics.Raycast(owner.curControlUnit.rayPointer.position, dir, out hit, Mathf.Infinity))
+                {
+                    if(hit.transform.gameObject != unit.gameObject)
+                    {
+                        Debug.Log("맞은게 유닛이 아님");
+                        temp.Remove(targetPos);
+                        continue;
+                    }
+                }
+            }
+        }
+
+        owner.selectedSkillRangeTile = temp;
         owner.tileManager.ShowTiles(owner.selectedSkillRangeTile);
     }
     #endregion
@@ -125,6 +155,30 @@ public class AbilityTargetBattleState : BattleState
         //확인과 뒤로 버튼 UI 활성화
     }
     #endregion
+    void OnDrawGizmos()
+    {
+        if (owner != null && owner.Units != null)
+        {
+            foreach (Unit unit in owner.Units)
+            {
+                if (unit.gameObject.layer == 8)
+                {
+                    Vector3 start = owner.curControlUnit.rayPointer.position;
+                    Vector3 end = unit.rayEnter.transform.position;
+
+                    // 레이 방향 계산
+                    Vector3 dir = end - start;
+                    dir.Normalize();
+
+                    // Gizmos 색상 설정
+                    Gizmos.color = Color.red;
+
+                    // 레이 라인 그리기
+                    Gizmos.DrawLine(start, start + dir * 100f);
+                }
+            }
+        }
+    }
 
     #region MonoBehaviour
     #endregion

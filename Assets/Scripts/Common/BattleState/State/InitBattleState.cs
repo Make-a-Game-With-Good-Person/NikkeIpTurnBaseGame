@@ -58,6 +58,14 @@ public class InitBattleState : BattleState
         //맵로딩
         //유닛 로딩
         //Units.Add(적유닛);
+        /*foreach (Unit unit in owner.Units)
+        {
+            if(unit != null)
+            {
+                Tile tile = owner.tileManager.GetTile(unit.transform.position);
+                tile.Place(unit);
+            }
+        }*/
         //연출
         //카메라 무브 등등
         

@@ -9,6 +9,8 @@ public class Unit : Stat , IDamage
     public List<UnitSkill> unitSkills;
     public int index;
     public Transform shoulder;
+    public Transform rayPointer; // 레이 발사 지점
+    public Transform rayEnter; // 레이가 들어오는 지점
     bool _attackable; // 공격 가능 여부
     bool _movable; // 이동 가능 여부
 
