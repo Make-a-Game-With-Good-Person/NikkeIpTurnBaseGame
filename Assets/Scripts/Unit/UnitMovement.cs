@@ -275,6 +275,7 @@ public class UnitMovement : MonoBehaviour
                                 calIndex = i;
                                 yield return StartCoroutine(Turning(map.map[path[calIndex]]));
                                 yield return StartCoroutine(Running(map.map[path[calIndex]], map));
+                                break;
                             }
 
                             List<Vector2Int> tiles = GetExpandedLine(path[calIndex], path[i],map);
