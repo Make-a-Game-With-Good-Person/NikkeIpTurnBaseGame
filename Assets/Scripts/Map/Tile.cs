@@ -87,6 +87,11 @@ public class Tile
     {
         get; protected set;
     }
+
+    /// <summary>
+    /// EDirection enum을 사용할것
+    /// </summary>
+    public Cover[] covers = new Cover[4];
     #region ForPathFinding
     [HideInInspector]public int distance = 0;
     [HideInInspector]public Vector2Int prev;

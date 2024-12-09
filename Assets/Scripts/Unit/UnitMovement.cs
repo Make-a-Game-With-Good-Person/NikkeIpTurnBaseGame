@@ -24,6 +24,59 @@ public class UnitMovement : MonoBehaviour
 
     #region Methods
     #region Private
+    //브레젠험 알고리즘을 이용한 지나가는 타일 검출
+    private List<Vector2Int> GetExpandedLine(Vector2Int start, Vector2Int end, TileManager map)
+    {
+        List<Vector2Int> tiles = new List<Vector2Int>();
+
+        //왼쪽아래 꼭짓점
+        tiles.AddRange(GetBresenhamLine(start, end, map));
+        //왼쪽 위 꼭짓점
+        tiles.AddRange(GetBresenhamLine(start + Vector2Int.right, end + Vector2Int.right, map));
+        //오른쪽 위 꼭짓점
+        tiles.AddRange(GetBresenhamLine(start + Vector2Int.one, end + Vector2Int.one, map));
+        //오른쪽 아래 꼭짓점
+        tiles.AddRange(GetBresenhamLine(start + Vector2Int.up, end + Vector2Int.up, map));
+
+        //중복 제거
+        return tiles.Distinct().ToList();
+    }
+
+    //브레젠험 알고리즘
+    //인터넷에서 가지고 옴
+    private List<Vector2Int> GetBresenhamLine(Vector2Int start, Vector2Int end, TileManager map)
+    {
+        List<Vector2Int> line = new List<Vector2Int>();
+
+        int x = start.x;
+        int y = start.y;
+        int dx = Math.Abs(end.x - start.x);
+        int dy = Math.Abs(end.y - start.y);
+        int sx = (start.x < end.x) ? 1 : -1;
+        int sy = (start.y < end.y) ? 1 : -1;
+        int err = dx - dy;
+
+        while (true)
+        {
+            //끝부분이면 추가하지말고 아웃 -> 어차피 다른 네 꼭짓점을 전부 하기때문에 튀어나갈수 있음
+            if (x == end.x && y == end.y) break;
+            line.Add(new Vector2Int(x, y));
+
+            int e2 = 2 * err;
+            if (e2 > -dy)
+            {
+                err -= dy;
+                x += sx;
+            }
+            if (e2 < dx)
+            {
+                err += dx;
+                y += sy;
+            }
+        }
+
+        return line;
+    }
     #endregion
     #region Protected
     /// <summary>
@@ -79,6 +132,7 @@ public class UnitMovement : MonoBehaviour
         //일단 무조건 대각선이 아니라 직각으로 이동
         if(!range.Contains(end))
         {
+            Debug.LogError("UnitMovement.Traverse(), can`t find path, wrong destination");
             yield break;
         }
          
@@ -91,11 +145,15 @@ public class UnitMovement : MonoBehaviour
         //start 지점 추가
         path.Insert(0, tile);
 
+
+        #region 순차접근 길찾기 방식
+        /*
         //대각선 계산을 위한 리스트
         List<Vector2Int> temp = new List<Vector2Int>();
+        //start 지점 추가
         temp.Add(tile);
 
-        for(int i = 1; i < path.Count; i++)
+        for (int i = 1; i < path.Count; i++)
         {
             int height = Math.Clamp(map.map[path[i - 1]].height - map.map[path[i]].height, -1, 1);
 
@@ -181,6 +239,82 @@ public class UnitMovement : MonoBehaviour
             yield return StartCoroutine(Turning(map.map[temp.Last()]));
             yield return StartCoroutine(Running(map.map[temp.Last()], map));
         }
+        */
+        #endregion
+
+        #region 역순접근 길찾기 방식
+        //위의 순차 방식이 아닌 역순 처리 방식으로 처리
+        //지금까지 계산된 path의 인덱스
+        int calIndex = 0;
+        while (calIndex != path.Count - 1)
+        {
+            for (int i = path.Count - 1; i > calIndex; i--)
+            {
+                Debug.Log($"UnitMovement.Traverse() reversePathFinding path[calIndex] = {path[calIndex]}, path[i] = {path[i]}");
+
+                int height = Math.Clamp(map.map[path[calIndex]].height - map.map[path[i]].height, -1, 1);
+                switch (height)
+                {
+                    case -1:
+                        {
+                            //i가 calIndex의 + 1인덱스, 즉 마지막
+                            if(i == calIndex + 1)
+                            {
+                                calIndex = i;
+                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                yield return StartCoroutine(Climbing(map.map[path[calIndex - 1]], map.map[path[calIndex]], map));
+                            }
+                        }
+                        break;
+                    case 0:
+                        {
+                            //i가 calIndex의 + 1인덱스, 즉 마지막
+                            //코드는 같지만 여러 함수들을 거치지 않아도 되는 예외상황이므로 계산을 최소화 하려는 의도
+                            if (i == calIndex + 1)
+                            {
+                                calIndex = i;
+                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                yield return StartCoroutine(Jumping(map.map[path[calIndex - 1]], map.map[path[calIndex]], map));
+                            }
+
+                            List<Vector2Int> tiles = GetExpandedLine(path[calIndex], path[i],map);
+
+                            bool check = true;
+                            foreach(Vector2Int node in tiles)
+                            {
+                                //높이가 같지 않거나 갈 수 없는 위치라면
+                                if (map.map[node].height != map.map[path[calIndex]].height || (!range.Contains(node) && node != path[0]))
+                                {
+                                    check = false;
+                                    break;
+                                }
+                            }
+
+                            //갈수 있는 경우
+                            if (check)
+                            {
+                                calIndex = i;
+                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                yield return StartCoroutine(Running(map.map[path[calIndex]], map));
+                            }
+                        }
+                        break;
+                    case 1:
+                        {
+                            //i가 calIndex의 + 1인덱스, 즉 마지막
+                            if (i == calIndex + 1)
+                            {
+                                calIndex = i;
+                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                yield return StartCoroutine(Jumping(map.map[path[calIndex - 1]], map.map[path[calIndex]], map));
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        #endregion
 
         map.map[path[path.Count - 1]].Place(unit);
     }
@@ -257,7 +391,7 @@ public class UnitMovement : MonoBehaviour
     }
 
     //위로 기어 올라감
-    protected IEnumerator Climbing(Tile to, TileManager map)
+    protected IEnumerator Climbing(Tile from ,Tile to, TileManager map)
     {
         yield return null;
     }
