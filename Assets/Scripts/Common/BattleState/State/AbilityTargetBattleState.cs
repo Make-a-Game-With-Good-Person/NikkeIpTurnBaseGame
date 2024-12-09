@@ -38,10 +38,10 @@ public class AbilityTargetBattleState : BattleState
     //요구사항 1
     private void ShowTargetableTiles() // 스킬 아이콘 버튼을 클릭하면 호출할 함수
     {
-        UnitSkill selectedSkill = EventSystem.current.currentSelectedGameObject.GetComponent<UnitSkill>(); // 바로 직전에 클릭한 버튼을 불러옴
-        owner.curSelectedSkill = selectedSkill;
+        owner.skillIdx = EventSystem.current.currentSelectedGameObject.GetComponent<UnitSkillButton>().skillIndexNumber; // 바로 직전에 클릭한 버튼을 불러옴
+        owner.curSelectedSkill = owner.unitSkillManager.skillList[owner.skillIdx];
         owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
-        { return from.distance + 1 <= selectedSkill.skillRange && Math.Abs(from.height - to.height) <= selectedSkill.skillHeight; }
+        { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
         );
         // selectedSkillRangeTile << hash set 
         // 이 해쉬셋을 키로 tile value를 dictionary에서 찾아 해당 타일에 있는 오브젝트 중 적들만 찾음.

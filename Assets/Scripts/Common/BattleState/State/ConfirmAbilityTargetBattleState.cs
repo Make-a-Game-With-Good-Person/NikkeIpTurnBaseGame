@@ -38,6 +38,7 @@ public class ConfirmAbilityTargetBattleState : BattleState
     void OnConfirmButton()
     {
         owner.curSelectedSkill.Action(); // 공격 모션 판정 등등... 다 실행할 함수를 호출.
+        owner.confirmAbilityTargetUIController.Hide();
     }
     #endregion
     #region Protected

@@ -22,10 +22,15 @@ public class UnitSkill : MonoBehaviour, IAction
 
     public UnityEvent changeStateWhenActEnd;
 
-   
+    protected BattleManager battleManager;
+
+    private void Start()
+    {
+        battleManager = FindObjectOfType<BattleManager>();
+    }
+
     public virtual void Action() {
         Debug.Log("스킬 실행!");
-        changeStateWhenActEnd?.Invoke();
     }
 
 }
