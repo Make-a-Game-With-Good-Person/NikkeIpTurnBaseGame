@@ -951,15 +951,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 299772758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
+  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 0}
   skillName: 
   skillDamage: 0
   skillVFX: {fileID: 0}
-  skillRange: 12
-  skillHeight: 1
+  skillRange: 10
+  skillHeight: 2
   skillLevel: 0
   skillCost: 0
   owner: {fileID: 0}
@@ -3598,15 +3598,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1165625932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
+  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 0}
   skillName: 
   skillDamage: 0
   skillVFX: {fileID: 0}
-  skillRange: 12
-  skillHeight: 1
+  skillRange: 10
+  skillHeight: 2
   skillLevel: 0
   skillCost: 0
   owner: {fileID: 0}
@@ -4998,15 +4998,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466516982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
+  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillIcon: {fileID: 0}
   skillName: 
   skillDamage: 0
   skillVFX: {fileID: 0}
-  skillRange: 12
-  skillHeight: 1
+  skillRange: 10
+  skillHeight: 2
   skillLevel: 0
   skillCost: 0
   owner: {fileID: 0}
@@ -7460,10 +7460,14 @@ MonoBehaviour:
   quarterViewoffset: {x: 4, y: 10, z: -7}
   quarterViewrotationOffset: {x: 45, y: -30, z: 0}
   shoulderViewrotationOffset: {x: 0, y: 0, z: 0}
+  skillViewOffset: 8
+  currentHeight: 0
+  offset: {x: 0, y: 0, z: 0}
   transitionSpeed: 5
   dragSpeed: 8
   rotationSpeed: 10
   isDragging: 0
+  skillCamDir: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 384

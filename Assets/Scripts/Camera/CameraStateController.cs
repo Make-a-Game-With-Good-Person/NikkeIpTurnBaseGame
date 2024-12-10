@@ -19,11 +19,16 @@ public class CameraStateController : MonoBehaviour
     //public Vector3 shoulderViewOffset = new Vector3(1, 1, 5);
     public Vector3 shoulderViewrotationOffset = new Vector3(0, 0, 0);  // 각도 offset (Pitch, Yaw, Roll)
 
+    public float skillViewOffset = 10f;
+    public float currentHeight; // 현재 카메라 높이
+    public Vector3 offset; // 초기 거리 계산용
+
     public float transitionSpeed = 2f;
     public float dragSpeed = 15f;
     public float rotationSpeed = 4f;
 
     public bool isDragging;
+    public int skillCamDir = 0;
 
     public LayerMask layerMask;
 
@@ -32,6 +37,7 @@ public class CameraStateController : MonoBehaviour
     ICameraState quarterViewState;
     ICameraState shoulderViewState;
     ICameraState mapViewState;
+    ICameraState skillViewState;
     ICameraState currentState;
 
     BattleManager owner;
@@ -44,6 +50,7 @@ public class CameraStateController : MonoBehaviour
         quarterViewState = new QuarterViewState();
         shoulderViewState = new ShoulderViewState();
         mapViewState = new MapViewState();
+        skillViewState = new SkillViewState();
         owner = FindObjectOfType<BattleManager>();
         currentState = quarterViewState; // 초기 상태 설정
     }
@@ -138,6 +145,19 @@ public class CameraStateController : MonoBehaviour
         SetCamTarget(target);
         this.transform.parent = null;
         currentState = quarterViewState;
+    }
+
+    public void SwitchToSkillView(Transform target)
+    {
+        SetCamTarget(target);
+        this.transform.parent = null;
+        // 초기 카메라 위치와 타겟 간 거리 계산
+        offset = transform.position - target.position;
+        currentHeight = skillViewOffset; // 초기 높이
+
+        skillCamDir = Random.Range(1, 3);
+
+        currentState = skillViewState;
     }
 
     
