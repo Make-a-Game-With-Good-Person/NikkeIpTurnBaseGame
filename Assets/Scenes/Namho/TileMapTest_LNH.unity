@@ -5346,7 +5346,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -7467,7 +7467,7 @@ MonoBehaviour:
   dragSpeed: 8
   rotationSpeed: 10
   isDragging: 0
-  skillCamDir: 0
+  camStart: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 384
@@ -7479,14 +7479,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091874469}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36964372, y: -0.23911755, z: 0.09904574, w: 0.8923992}
-  m_LocalPosition: {x: 21.9, y: 17.2, z: -10}
+  m_LocalRotation: {x: -0.3696439, y: 0.23911773, z: -0.09904578, w: -0.8923991}
+  m_LocalPosition: {x: 10.999924, y: 9.999891, z: -5.999889}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1496425518}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &1409018336117693389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7589,6 +7589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8998960696501312082, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

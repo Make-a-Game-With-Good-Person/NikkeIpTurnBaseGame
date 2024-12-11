@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraStateController : MonoBehaviour
 {
@@ -19,16 +20,15 @@ public class CameraStateController : MonoBehaviour
     //public Vector3 shoulderViewOffset = new Vector3(1, 1, 5);
     public Vector3 shoulderViewrotationOffset = new Vector3(0, 0, 0);  // 각도 offset (Pitch, Yaw, Roll)
 
-    public float skillViewOffset = 10f;
-    public float currentHeight; // 현재 카메라 높이
-    public Vector3 offset; // 초기 거리 계산용
+    public Vector3 skillViewZoomInOffset = new Vector3(0, 3, 5);
 
     public float transitionSpeed = 2f;
     public float dragSpeed = 15f;
     public float rotationSpeed = 4f;
 
     public bool isDragging;
-    public int skillCamDir = 0;
+    public bool camStart = false;
+    public int skillCam = 0;
 
     public LayerMask layerMask;
 
@@ -37,11 +37,13 @@ public class CameraStateController : MonoBehaviour
     ICameraState quarterViewState;
     ICameraState shoulderViewState;
     ICameraState mapViewState;
-    ICameraState skillViewState;
+    ICameraState skillView_Rotate_State;
+    ICameraState skillView_SideToSide_State;
+    ICameraState skillView_ZoomIn_State;
     ICameraState currentState;
 
     BattleManager owner;
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +52,11 @@ public class CameraStateController : MonoBehaviour
         quarterViewState = new QuarterViewState();
         shoulderViewState = new ShoulderViewState();
         mapViewState = new MapViewState();
-        skillViewState = new SkillViewState();
+
+        skillView_Rotate_State = new SkillViewRotationState();
+        skillView_SideToSide_State = new SkillViewSideToSideState();
+        skillView_ZoomIn_State = new SkillViewZoomInState();
+
         owner = FindObjectOfType<BattleManager>();
         currentState = quarterViewState; // 초기 상태 설정
     }
@@ -128,20 +134,23 @@ public class CameraStateController : MonoBehaviour
 
     public void SwitchToShoulderView(Transform shoulder, Transform _target)
     {
+        SetCamForDefault();
         SetLookTarget(_target);
         this.transform.parent = shoulder;
-        this.transform.localPosition= Vector3.zero;
+        this.transform.localPosition = Vector3.zero;
         currentState = shoulderViewState;
     }
 
     public void SwitchToMapView()
     {
+        SetCamForDefault();
         this.transform.parent = null;
         currentState = mapViewState;
     }
 
     public void SwitchToQuaterView(Transform target)
     {
+        SetCamForDefault();
         SetCamTarget(target);
         this.transform.parent = null;
         currentState = quarterViewState;
@@ -150,15 +159,51 @@ public class CameraStateController : MonoBehaviour
     public void SwitchToSkillView(Transform target)
     {
         SetCamTarget(target);
+        SetCamOnlyPlayer();
+
         this.transform.parent = null;
-        // 초기 카메라 위치와 타겟 간 거리 계산
-        offset = transform.position - target.position;
-        currentHeight = skillViewOffset; // 초기 높이
 
-        skillCamDir = Random.Range(1, 3);
+        skillCam = Random.Range(1, 4);
 
-        currentState = skillViewState;
+        switch (skillCam)
+        {
+            case 1:
+                currentState = skillView_Rotate_State;
+                break;
+            case 2:
+                currentState = skillView_SideToSide_State;
+                break;
+            case 3:
+                Quaternion targetRotation = Quaternion.Euler(0, target.eulerAngles.y, 0);
+                transform.position = target.position + targetRotation * skillViewZoomInOffset;
+                currentState = skillView_ZoomIn_State;
+                break;
+            default:
+                break;
+        }
+
+        //currentState = skillView_Rotate_State;
+
+        //currentState = skillView_SideToSide_State;
+
+        /*Quaternion targetRotation = Quaternion.Euler(0, target.eulerAngles.y, 0);
+        transform.position = target.position + targetRotation * skillViewZoomInOffset;
+        currentState = skillView_ZoomIn_State;*/
     }
 
-    
+    void SetCamOnlyPlayer()
+    {
+        Camera.main.cullingMask = LayerMask.GetMask("Player"); // 플레이어만 찍기
+        Camera.main.clearFlags = CameraClearFlags.SolidColor;
+        Camera.main.backgroundColor = Color.black;
+        camStart = true;
+    }
+
+    void SetCamForDefault()
+    {
+        Camera.main.cullingMask = ~0; // 다 찍기
+        Camera.main.clearFlags = CameraClearFlags.Skybox;
+        camStart = false;
+    }
+
 }

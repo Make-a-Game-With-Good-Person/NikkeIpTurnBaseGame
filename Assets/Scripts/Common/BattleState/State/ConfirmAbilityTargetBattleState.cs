@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
 /// 예상 피해량등을 보여주는 상태
@@ -37,8 +38,7 @@ public class ConfirmAbilityTargetBattleState : BattleState
 
     void OnConfirmButton()
     {
-        owner.curSelectedSkill.Action(); // 공격 모션 판정 등등... 다 실행할 함수를 호출.
-        owner.confirmAbilityTargetUIController.Hide();
+        StartCoroutine(ProcessState());
     }
     #endregion
     #region Protected
@@ -64,7 +64,6 @@ public class ConfirmAbilityTargetBattleState : BattleState
         owner.confirmAbilityTargetUIController.Display();
         owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
         
-        StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
@@ -83,9 +82,21 @@ public class ConfirmAbilityTargetBattleState : BattleState
     #endregion
 
     #region Coroutines
-    private IEnumerator ProcessingState()
+    private IEnumerator ProcessState()
     {
         yield return null;
+
+        Vector3 targetPos = new Vector3(owner.selectedTarget.transform.position.x, owner.curControlUnit.transform.position.y, owner.selectedTarget.transform.position.z);
+        Vector3 dir = (targetPos - owner.curControlUnit.transform.position).normalized;
+
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        owner.curControlUnit.transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
+
+        yield return null;
+
+        owner.curSelectedSkill.Action(); // 공격 모션 판정 등등... 다 실행할 함수를 호출.
+        owner.confirmAbilityTargetUIController.Hide();
+
     }
     #endregion
 
