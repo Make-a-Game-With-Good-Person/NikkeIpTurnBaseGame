@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CoverDirFinder : MonoBehaviour
 {
-    public GameObject Player;
-    public GameObject Enemy;
+    public GameObject Player; // curControlUnit
+    public GameObject Enemy; // selectedTarget
 
-    public List<GameObject> Covers;
+    public List<GameObject> Covers; // 각 타일별로 저장할 앞뒤좌우 엄폐물들
     Vector3 wallToP;
     float minDot = float.MaxValue;
-    float minDistance = float.MaxValue;
 
     GameObject minDisCover;
+
+    // 4방향 벡터를 배열에 저장
+    Vector3[] directions = new Vector3[] { 
+        Vector3.forward, 
+        Vector3.back, 
+        Vector3.right, 
+        Vector3.left };
 
     // Start is called before the first frame update
     void Start()
@@ -24,13 +31,12 @@ public class CoverDirFinder : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            CoverFind();
+            FindCover();
         }
     }
-    void CoverFind()
+    /*void CoverFind()
     {
         minDot = float.MaxValue;
-        minDistance = float.MaxValue;
 
         Vector3 PToEDir = Enemy.transform.position - Player.transform.position;
         PToEDir.y = 0;
@@ -40,33 +46,51 @@ public class CoverDirFinder : MonoBehaviour
 
         for (int i = 0; i < Covers.Count; i++)
         {
-            Vector3 coverPos = Covers[i].transform.position;
-            Vector3 playerPos = Player.transform.position;
+            // 이건 내적값만 비교
+            wallToP = Covers[i].transform.forward;
+            wallToP.Normalize();
 
-            coverPos.y = 0;
-            playerPos.y = 0;
+            float dot = Vector3.Dot(PToEDir, wallToP);
 
-            float distance = Vector3.Distance(playerPos, coverPos);
-
-            // 거리 기준으로 우선 선택
-            if (minDistance > distance)
+            if (minDot > dot)
             {
-                wallToP = Covers[i].transform.forward;
-                wallToP.Normalize();
-
-                float dot = Vector3.Dot(PToEDir, wallToP);
-
-                if (minDot > dot)
-                {
-                    minDot = dot;
-                    minDistance = distance;
-                    minDisCover = Covers[i];
-                }
+                minDot = dot;
+                minDisCover = Covers[i];
             }
-            Debug.Log(Covers[i].gameObject.name + " , " + minDot + ", " + distance);
+            Debug.Log(Covers[i].gameObject.name + " , " + dot);
+            
 
         }
         // minDisCover가 공격해야할 엄폐물, 이게 null이면 그냥 적을 직접 타격한다는 느낌
+        Debug.Log(minDisCover.name);
+    }
+*/
+
+    /// <summary>
+    /// 이 함수를 통해 적을 바라보며 공격할 때 마주보고 있는 엄폐물을 찾을 수 있음
+    /// 주의할건 Covers의 인덱스 순서는 forward, back, right, left인데 이 순서는 월드상 방향을 기준으로 함
+    /// 따라서 적보다 월드상으로 앞에 있는게 forward고 뒤에 있는게 back임, transform 기준이 아니기때문에 적이 바라보는 방향과는 다름
+    /// 타일이 Cover를 리스트던 뭐든 자료구조로 저장할 때 이 인덱스 순서를 지켜서 저장해야 사용하는데 문제가 없을 것
+    /// </summary>
+    void FindCover()
+    {
+        minDot = float.MaxValue;
+
+        Vector3 PToEDir = (Enemy.transform.position - Player.transform.position).normalized;
+
+        for (int i = 0; i < directions.Length; i++)
+        {
+            float dot = Vector3.Dot(PToEDir, directions[i]);
+
+            if (dot < minDot)
+            {
+                minDot = dot;
+                minDisCover = Covers[i];
+            }
+
+            Debug.Log(i + ", " + dot);
+
+        }
         Debug.Log(minDisCover.name);
     }
 }
