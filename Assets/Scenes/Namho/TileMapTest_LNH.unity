@@ -3092,7 +3092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &909365002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7460,14 +7460,13 @@ MonoBehaviour:
   quarterViewoffset: {x: 4, y: 10, z: -7}
   quarterViewrotationOffset: {x: 45, y: -30, z: 0}
   shoulderViewrotationOffset: {x: 0, y: 0, z: 0}
-  skillViewOffset: 8
-  currentHeight: 0
-  offset: {x: 0, y: 0, z: 0}
+  skillViewZoomInOffset: {x: 0, y: 3, z: 5}
   transitionSpeed: 5
   dragSpeed: 8
   rotationSpeed: 10
   isDragging: 0
   camStart: 0
+  skillCam: 0
   layerMask:
     serializedVersion: 2
     m_Bits: 384
