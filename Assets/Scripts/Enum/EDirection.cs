@@ -1,8 +1,8 @@
 
 public enum EDirection
 {
-    Up,
-    Down,
-    Left,
-    Right
+    Front,
+    Back,
+    Right,
+    Left
 }
