@@ -21,6 +21,8 @@ public class AbilityTargetBattleState : BattleState
     #region Properties
     #region Private
     Vector2Int targetPos;
+    LayerMask completeLayerMask;
+    int MAX_COUNT = 2;
     #endregion
     #region Protected
     #endregion
@@ -35,6 +37,31 @@ public class AbilityTargetBattleState : BattleState
 
     #region Methods
     #region Private
+
+    bool RayRecursive(Vector3 origin, Vector3 dir, int count, Unit target)
+    {
+        if (count > MAX_COUNT)
+            return false; // 최대 깊이에 도달했으므로 실패 처리
+
+        if (Physics.Raycast(origin, dir, out RaycastHit hit, Mathf.Infinity))
+        {
+            if (hit.transform.gameObject == target.gameObject)
+            {
+                // 타겟 유닛을 맞췄다면 성공
+                return true;
+            }
+
+            if (hit.transform.gameObject.layer == completeLayerMask)
+            {
+                // 완전 엄폐물을 맞았을 때, 새로운 출발점으로 재귀 호출
+                Vector3 newOrigin = hit.point + dir * 1f; // 약간 앞쪽으로 이동
+                return RayRecursive(newOrigin, dir, count + 1, target);
+            }
+        }
+
+        // 타겟을 맞추지 못한 경우
+        return false;
+    }
     //요구사항 1
     private void ShowTargetableTiles() // 스킬 아이콘 버튼을 클릭하면 호출할 함수
     {
@@ -51,7 +78,7 @@ public class AbilityTargetBattleState : BattleState
         HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();
         RaycastHit hit;
 
-        foreach (Unit unit in owner.Units)
+        /*foreach (Unit unit in owner.Units)
         {
             targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
             if (!temp.Contains(targetPos)) continue;
@@ -67,6 +94,28 @@ public class AbilityTargetBattleState : BattleState
                         temp.Remove(targetPos);
                         continue;
                     }
+                }
+            }
+        }*/
+
+        foreach (Unit unit in owner.Units)
+        {
+            targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
+            if (!temp.Contains(targetPos)) continue;
+
+            if (unit.gameObject.layer == 8)
+            {
+                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
+                dir.Normalize();
+
+                if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
+                {
+                    Debug.Log("타겟 유닛을 성공적으로 맞춤");
+                }
+                else
+                {
+                    Debug.Log("타겟팅 실패, 리스트에서 제거");
+                    temp.Remove(targetPos);
                 }
             }
         }
@@ -110,6 +159,7 @@ public class AbilityTargetBattleState : BattleState
         owner.curState = BATTLESTATE.ABILITYTARGET;
         owner.abilityTargetUIController.Display();
         owner.abilityTargetUIController.UISetting(owner.curControlUnit);
+        completeLayerMask = 10;
         StartCoroutine(ProcessingState());
     }
     public override void Exit()

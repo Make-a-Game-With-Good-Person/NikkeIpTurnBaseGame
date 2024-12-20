@@ -243,7 +243,7 @@ public class UnitSelectBattleState : BattleState
         yield return null;
         //요구사항 10번 구현
         //bool playerturn = owner.CheckTurn();
-        bool playerturn = true;
+        /*bool playerturn = true;
 
         if (playerturn)
         {
@@ -257,7 +257,7 @@ public class UnitSelectBattleState : BattleState
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
             //ChangeState를 여기서 호출
-        }
+        }*/
     }
     #endregion
 
