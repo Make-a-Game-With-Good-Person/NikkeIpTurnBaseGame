@@ -40,6 +40,8 @@ public class TileManager : MonoBehaviour
     public Vector3 tileSize = new Vector3(2,1,2);
     public int rows = 1;
     public int cols = 1;
+
+    public LayerMask tileObjectMask;
     public Dictionary<Vector2Int, Tile> map
     {
         get { return _map; }
@@ -62,7 +64,7 @@ public class TileManager : MonoBehaviour
 
         InitGrid();
         InitHeight();
-
+        InitCover();
         didInit = true;
 
         /*
@@ -92,18 +94,72 @@ public class TileManager : MonoBehaviour
         //여기서 높이작업
         foreach(Tile tile in map.Values)
         {
-            //임시로 레이어는 water
-            Collider[] colliders = Physics.OverlapSphere(tile.center, tileSize.y * 0.9f, 1 << 4);
+            //100 높이에서 아래로 레이 쏨, 100 높이니까 길이도 100
+            RaycastHit[] hits = Physics.RaycastAll(tile.center + (Vector3.up * 100), Vector3.down, 100.0f, tileObjectMask);
 
-            foreach(Collider collider in colliders)
+            foreach(RaycastHit hit in hits)
             {
-                ObstacleSize obstacleSize = collider.gameObject.GetComponentInParent<ObstacleSize>();
-                if (obstacleSize != null) 
+                TileObject tileObject = hit.collider.GetComponentInParent<TileObject>();
+                if (tileObject != null) 
                 {
-                    tile.height = obstacleSize.size.y;
-                    if (!obstacleSize.canBePlaced)
+                    tile.height = (int)(hit.point.y / tileSize.y);
+                    if (!tileObject.isWalkable)
                     {
                         tile.SetObstacle();
+                    }
+                }
+            }
+        }
+    }
+    private void InitCover()
+    {
+        foreach(Tile tile in map.Values)
+        {
+            //앞, 뒤, 우, 좌 순서로
+            Vector3[] rayStart = new Vector3[4];
+            rayStart[(int)EDirection.Front] = tile.worldPos + new Vector3(tileSize.x * 0.5f, tileSize.y * 2, tileSize.z);
+            rayStart[(int)EDirection.Back] = tile.worldPos + new Vector3(tileSize.x * 0.5f, tileSize.y * 2, 0);
+            rayStart[(int)EDirection.Right] = tile.worldPos + new Vector3(tileSize.x, tileSize.y * 2, tileSize.z * 0.5f);
+            rayStart[(int)EDirection.Left] = tile.worldPos + new Vector3(0, tileSize.y * 2, tileSize.z * 0.5f);
+
+            for(int i = 0; i < 4; i++)
+            {
+                //물체 면의 뒷면에도 레이가 맞을수 있게 하는 옵션
+                Physics.queriesHitBackfaces = true;
+                Physics.Raycast(rayStart[i], Vector3.down, out RaycastHit hit, tileSize.y * 1.9f, tileObjectMask);
+                Physics.queriesHitBackfaces = false;
+
+                Cover cover = null;
+                //아무 물질도 검출 안되었으면 그냥 continue 해서 hit.distance가 0이라 그대로 진행되는것 방지
+                //커버가 검출이 안되면 그냥 지형지물
+                if(hit.collider != null)
+                {
+                    cover = hit.collider.GetComponentInChildren<Cover>();
+                }
+                else
+                {
+                    continue;
+                }
+
+                //완전히 가려지기위한 높이가 tileSize.y의 2배 라고 정함
+                //벽을 완전히 덮을정도로 있음 -> fullCover, 0이라고 하면 좀 그렇고 약간의 여유를 둠
+                if (hit.distance < 0.1f * tileSize.y)
+                {
+                    tile.fullCovers[i] = true;
+
+                    if (cover != null)
+                    {
+                        tile.covers[i] = cover;
+                    }
+                }
+                //HalfCover, 0.5f * (tileSize.y * 2) = 1.0f * tileSize.y 이지만 약간의 여유를 둠 
+                else if( hit.distance > 0.95f * tileSize.y)
+                {
+                    tile.halfCovers[i] = true;
+
+                    if (cover != null)
+                    {
+                        tile.covers[i] = cover;
                     }
                 }
             }

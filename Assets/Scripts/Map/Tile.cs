@@ -92,6 +92,9 @@ public class Tile
     /// EDirection enum을 사용할것
     /// </summary>
     public Cover[] covers = new Cover[4];
+    public bool[] fullCovers = new bool[4] { false, false, false, false };
+    public bool[] halfCovers = new bool[4] { false, false, false, false };
+    public bool[] ladders = new bool[4] { false, false, false, false};
     #region ForPathFinding
     [HideInInspector]public int distance = 0;
     [HideInInspector]public Vector2Int prev;
