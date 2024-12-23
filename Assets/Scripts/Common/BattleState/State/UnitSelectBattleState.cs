@@ -151,7 +151,7 @@ public class UnitSelectBattleState : BattleState
                 owner.cameraStateController.SwitchToQuaterView(hit.collider.transform);
 
                 Unit hitUnit = hit.collider.transform.GetComponent<Unit>();
-                owner.selectedTarget = hitUnit;
+                owner.selectedTarget = hitUnit.gameObject;
 
                 // 이 아래로 분류, 태그로 한다고 치면?
                 if (hit.collider.gameObject.CompareTag("Enemy"))

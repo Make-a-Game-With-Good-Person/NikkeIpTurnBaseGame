@@ -68,7 +68,7 @@ public class ShowUnitDetailBattleState : BattleState
     {
         yield return null;
         //요구사항 1 구현
-        owner.unitdetailUIController.Display(owner.selectedTarget); // 이 Display에서 버프,디버프 등의 정보를 갱신해서 UI에 적용해야함
+        owner.unitdetailUIController.Display(owner.selectedTarget.GetComponent<Unit>()); // 이 Display에서 버프,디버프 등의 정보를 갱신해서 UI에 적용해야함
     }
     #endregion
 

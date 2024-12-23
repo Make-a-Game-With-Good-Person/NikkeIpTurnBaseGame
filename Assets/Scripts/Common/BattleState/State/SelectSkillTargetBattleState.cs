@@ -17,6 +17,7 @@ public class SelectSkillTargetBattleState : BattleState
     #region Properties
     #region Private
     Vector2Int targetPos = new Vector2Int();
+    CoverDirFinder CDF;
     #endregion
     #region Protected
     #endregion
@@ -52,7 +53,16 @@ public class SelectSkillTargetBattleState : BattleState
                 if (owner.selectedSkillRangeTile.Contains(targetPos))
                 {
                     Debug.Log("스킬 타격 가능 <<");
-                    owner.selectedTarget = hit.collider.gameObject.GetComponent<Unit>();
+                    Unit selectedUnit = owner.selectedTarget.GetComponent<Unit>();
+                    owner.selectedTarget = hit.collider.gameObject;
+                    CDF.SetFinder(owner.curControlUnit.gameObject, owner.selectedTarget, selectedUnit.tile.covers);
+
+                    GameObject nearestCover = CDF.FindCover();
+                    if (nearestCover != null)
+                    {
+                        owner.selectedTarget = nearestCover;
+                    }
+
                     owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
                 }
             }
@@ -146,5 +156,10 @@ public class SelectSkillTargetBattleState : BattleState
     #endregion
 
     #region MonoBehaviour
+    protected override void Start()
+    {
+        base.Start();
+        CDF = new CoverDirFinder();
+    }
     #endregion
 }

@@ -3,37 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CoverDirFinder : MonoBehaviour
+public class CoverDirFinder
 {
     public GameObject Player; // curControlUnit
     public GameObject Enemy; // selectedTarget
 
-    public List<GameObject> Covers; // 각 타일별로 저장할 앞뒤좌우 엄폐물들
+    //public List<Cover> Covers; // 각 타일별로 저장할 앞뒤좌우 엄폐물들
+    public Cover[] Covers = new Cover[4];
     Vector3 wallToP;
     float minDot = float.MaxValue;
 
-    GameObject minDisCover;
+    Cover minDisCover;
 
     // 4방향 벡터를 배열에 저장
-    Vector3[] directions = new Vector3[] { 
-        Vector3.forward, 
-        Vector3.back, 
-        Vector3.right, 
+    Vector3[] directions = new Vector3[] {
+        Vector3.forward,
+        Vector3.back,
+        Vector3.right,
         Vector3.left };
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //CoverFind();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            FindCover();
-        }
-    }
     /*void CoverFind()
     {
         minDot = float.MaxValue;
@@ -72,7 +60,15 @@ public class CoverDirFinder : MonoBehaviour
     /// 따라서 적보다 월드상으로 앞에 있는게 forward고 뒤에 있는게 back임, transform 기준이 아니기때문에 적이 바라보는 방향과는 다름
     /// 타일이 Cover를 리스트던 뭐든 자료구조로 저장할 때 이 인덱스 순서를 지켜서 저장해야 사용하는데 문제가 없을 것
     /// </summary>
-    void FindCover()
+
+    public void SetFinder(GameObject player, GameObject enemy, Cover[] covers)
+    {
+        this.Player = player;
+        this.Enemy = enemy;
+        this.Covers = covers;
+    }
+
+    public GameObject FindCover()
     {
         minDot = float.MaxValue;
 
@@ -92,5 +88,7 @@ public class CoverDirFinder : MonoBehaviour
 
         }
         Debug.Log(minDisCover.name);
+
+        return minDisCover.gameObject;
     }
 }
