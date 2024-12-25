@@ -20,6 +20,7 @@ public class AbilityTargetBattleState : BattleState
 {
     #region Properties
     #region Private
+    TargetFinder TF;
     Vector2Int targetPos;
     LayerMask completeLayerMask;
     int MAX_COUNT = 2;
@@ -98,7 +99,7 @@ public class AbilityTargetBattleState : BattleState
             }
         }*/
 
-        foreach (Unit unit in owner.Units)
+        /*foreach (Unit unit in owner.Units)
         {
             targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
             if (!temp.Contains(targetPos)) continue;
@@ -118,13 +119,23 @@ public class AbilityTargetBattleState : BattleState
                     temp.Remove(targetPos);
                 }
             }
-        }
+        }*/
 
+        TF.FindTarget(temp);
         owner.selectedSkillRangeTile = temp;
         owner.tileManager.ShowTiles(owner.selectedSkillRangeTile);
     }
     #endregion
     #region Protected
+
+    protected override void Start()
+    {
+        base.Start();
+        if(TF == null)
+        {
+            TF = new TargetFinder();
+        }
+    }
     protected override void AddListeners()
     {
         base.AddListeners();
