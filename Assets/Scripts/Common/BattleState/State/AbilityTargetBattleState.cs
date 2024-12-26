@@ -133,7 +133,7 @@ public class AbilityTargetBattleState : BattleState
         base.Start();
         if(TF == null)
         {
-            TF = new TargetFinder();
+            TF = new TargetFinder(owner);
         }
     }
     protected override void AddListeners()

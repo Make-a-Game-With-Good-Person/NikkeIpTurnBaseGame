@@ -53,8 +53,8 @@ public class SelectSkillTargetBattleState : BattleState
                 if (owner.selectedSkillRangeTile.Contains(targetPos))
                 {
                     Debug.Log("스킬 타격 가능 <<");
-                    Unit selectedUnit = owner.selectedTarget.GetComponent<Unit>();
                     owner.selectedTarget = hit.collider.gameObject;
+                    Unit selectedUnit = owner.selectedTarget.GetComponent<Unit>();
                     CDF.SetFinder(owner.curControlUnit.gameObject, owner.selectedTarget, selectedUnit.tile.covers);
 
                     GameObject nearestCover = CDF.FindCover();
@@ -104,6 +104,12 @@ public class SelectSkillTargetBattleState : BattleState
     public override void Enter()
     {
         base.Enter();
+
+        if (CDF == null)
+        {
+            CDF = new CoverDirFinder();
+        }
+
         owner.curState = BATTLESTATE.SELECTSKILLTARGET;
         owner.selectSkillTargetUIController.Display();
         // 내가 이전에 선택한 스킬의 범위를 보여줘야함
@@ -156,10 +162,6 @@ public class SelectSkillTargetBattleState : BattleState
     #endregion
 
     #region MonoBehaviour
-    protected override void Start()
-    {
-        base.Start();
-        CDF = new CoverDirFinder();
-    }
+    
     #endregion
 }

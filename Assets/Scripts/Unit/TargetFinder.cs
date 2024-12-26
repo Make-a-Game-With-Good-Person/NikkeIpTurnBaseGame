@@ -9,6 +9,11 @@ public class TargetFinder
     LayerMask completeLayerMask = 10;
     int MAX_COUNT = 2;
 
+    public TargetFinder(BattleManager owner)
+    {
+        this.owner = owner;
+    }
+
     bool RayRecursive(Vector3 origin, Vector3 dir, int count, Unit target)
     {
         if (count > MAX_COUNT)
