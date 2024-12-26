@@ -263,12 +263,12 @@ public class UnitSelectBattleState : BattleState
         else
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
-            ReturnDecision return = enemy.AI.Run();
+            ReturnDecision return = ownwer.curControlUnit.AI.Run();
             switch(return.type)
             {
-                case ReturnDecision.DecisionType.Action:
+                case ReturnDecision.DecisionType.스킬 타겟 지정:
                     owner.ReturnDecision = return;
-                    owner.stateMachine.ChangeState<AbilityTargetBattleState>();
+                    owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
                     break;
                 case ReturnDecision.DecisionType.Move:
                     owner.ReturnDecision = return;

@@ -39,7 +39,7 @@ public class AbilityTargetBattleState : BattleState
     #region Methods
     #region Private
 
-    bool RayRecursive(Vector3 origin, Vector3 dir, int count, Unit target)
+    /*bool RayRecursive(Vector3 origin, Vector3 dir, int count, Unit target)
     {
         if (count > MAX_COUNT)
             return false; // 최대 깊이에 도달했으므로 실패 처리
@@ -62,7 +62,7 @@ public class AbilityTargetBattleState : BattleState
 
         // 타겟을 맞추지 못한 경우
         return false;
-    }
+    }*/
     //요구사항 1
     private void ShowTargetableTiles() // 스킬 아이콘 버튼을 클릭하면 호출할 함수
     {

@@ -30,6 +30,16 @@ public class ConfirmAbilityTargetBattleState : BattleState
 
     #region Methods
     #region Private
+    void EnemeyAddListeners()
+    {
+        owner.curSelectedSkill.changeStateWhenActEnd.AddListener(ChangeState);
+    }
+
+    void EnemyRemoveListeners()
+    {
+        owner.curSelectedSkill.changeStateWhenActEnd.RemoveListener(ChangeState);
+    }
+
     void OnCancelButton()
     {
         owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
@@ -60,14 +70,25 @@ public class ConfirmAbilityTargetBattleState : BattleState
     #region Public
     public override void Enter()
     {
-        base.Enter();
-        owner.confirmAbilityTargetUIController.Display();
-        owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
+        if (!owner.enemyTurn)
+        {
+            base.Enter();
+            owner.confirmAbilityTargetUIController.Display();
+            owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
+        }
+        else
+        {
+            EnemeyAddListeners();
+        }
         
     }
     public override void Exit()
     {
-        base.Exit();
+        if (!owner.enemyTurn) base.Exit();
+        else
+        {
+            EnemyRemoveListeners();
+        }
         owner.confirmAbilityTargetUIController.Hide();
     }
 
