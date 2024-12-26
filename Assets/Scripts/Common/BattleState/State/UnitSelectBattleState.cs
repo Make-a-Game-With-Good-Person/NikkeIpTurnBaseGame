@@ -26,6 +26,7 @@ public class UnitSelectBattleState : BattleState
      */
     #region Properties
     #region Private
+    private Coroutine processing;
     #endregion
     #region Protected
     #endregion
@@ -72,17 +73,24 @@ public class UnitSelectBattleState : BattleState
     #region Public
     public override void Enter()
     {
+        //if(owner.enemyturn)
         base.Enter();
         // 여기서 owner.curControlUnit을 하나는 결정 해놔야함
         owner.curState = BATTLESTATE.UNITSELLECT;
         Debug.Log("유닛 셀렉트 배틀");
+        //if(!owner.enemyturn)
         SelectFirstTarget();
         //owner.abilityMenuUIController.Display();
 
-        StartCoroutine(ProcessingState());
+        if(processing != null)
+        {
+            StopCoroutine(processing);
+        }
+        processing = StartCoroutine(ProcessingState());
     }
     public override void Exit()
     {
+        //if(owner.enemyturn)
         base.Exit();
         owner.abilityMenuUIController.Hide();
     }
@@ -241,11 +249,10 @@ public class UnitSelectBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
-        //요구사항 10번 구현
-        //bool playerturn = owner.CheckTurn();
-        /*bool playerturn = true;
+        //
 
-        if (playerturn)
+        //요구사항 10번 구현
+        /*if (!owner.enemyturn)
         {
             //요구사항 2번 여기에 구현
             //요구사항 5번 여기에 구현
@@ -256,28 +263,48 @@ public class UnitSelectBattleState : BattleState
         else
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
+            ReturnDecision return = enemy.AI.Run();
+            switch(return.type)
+            {
+                case ReturnDecision.DecisionType.Action:
+                    owner.ReturnDecision = return;
+                    owner.stateMachine.ChangeState<AbilityTargetBattleState>();
+                    break;
+                case ReturnDecision.DecisionType.Move:
+                    owner.ReturnDecision = return;
+                    owner.stateMachine.ChangeState<MoveTargetBattleState>();
+                    break;
+                case ReturnDecision.DecisionType.Pass:
+                    owner.curcontrollunit.movable = false;
+                    owner.curcontrollunit.attackable = false;
+                    owner.CheckTurn();
+                    if(!onwer.enemyturn){
+                        Enter();
+                    }
+                    break;
+            }
             //ChangeState를 여기서 호출
         }*/
     }
     #endregion
 
     #region MonoBehaviour
-   /* private void Update()
-    {
-        if (owner.curState == BATTLESTATE.UNITSELLECT)
-        {
-#if UNITY_EDITOR
-            if (Input.GetMouseButtonDown(0)) // 마우스 클릭(터치) 이벤트
-            {
-                OnSelectUnit();
-            }
-#elif UNITY_ANDROID
-            if (Input.touchCount > 0)
-            {
-                OnSelectUnit();
-            }
-#endif
-        }
-    }*/
+    /* private void Update()
+     {
+         if (owner.curState == BATTLESTATE.UNITSELLECT)
+         {
+ #if UNITY_EDITOR
+             if (Input.GetMouseButtonDown(0)) // 마우스 클릭(터치) 이벤트
+             {
+                 OnSelectUnit();
+             }
+ #elif UNITY_ANDROID
+             if (Input.touchCount > 0)
+             {
+                 OnSelectUnit();
+             }
+ #endif
+         }
+     }*/
     #endregion
 }

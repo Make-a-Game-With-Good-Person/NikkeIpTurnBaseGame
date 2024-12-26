@@ -15,7 +15,7 @@ namespace DecisionTree
             return this;
         }
 
-        public abstract void Execute();
+        public abstract ReturnDecision Execute();
     }
 
     public abstract class Decision : DecisionTreeNode

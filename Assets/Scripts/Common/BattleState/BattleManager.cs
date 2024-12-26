@@ -13,6 +13,7 @@ public class BattleManager : MonoBehaviour
     [HideInInspector] public StateMachine stateMachine;
     public TileManager tileManager;
 
+    #region Controllers
     public UnitPlacementUIController unitPlacementUIController;
     public AbilityMenuUIController abilityMenuUIController;
     public UnitDetailUIController unitdetailUIController;
@@ -21,6 +22,8 @@ public class BattleManager : MonoBehaviour
     public CameraStateController cameraStateController; // 임시로 public으로 함
     public SelectSkillTargetUIController selectSkillTargetUIController;
     public ConfirmAbilityTargetUIController confirmAbilityTargetUIController;
+    #endregion
+
     public UnitSkillManager unitSkillManager;
 
     public BATTLESTATE curState = BATTLESTATE.NONE; // 각 battleState를 알기 위해 만든 enum타입 변수
@@ -28,8 +31,10 @@ public class BattleManager : MonoBehaviour
     public GameObject selectedTarget; // 선택한 대상(적 유닛)
     public Unit curControlUnit; // 현재 플레이어가 선택한 아군 유닛
     public List<Unit> Units = new List<Unit>(); //아군과 적군 유닛 전부를 여기에 저장할 용도
+    public List<Unit> EnemyUnits = new List<Unit>();
     public Tile tile;   //현재 선택한 타일을 저장할 용도, SelectTile함수에서 지정할것
     public UnitSkill curSelectedSkill;
+    public bool enemyTurn = false; //적턴인지 아군턴인지 확인할 용도
 
     public HashSet<Vector2Int> selectedSkillRangeTile;
 
@@ -65,6 +70,11 @@ public class BattleManager : MonoBehaviour
             tileIndicator.position = tile.center;
             this.tile = tile;
         }
+    }
+
+    public void CheckTurn()
+    {
+
     }
     #endregion
     #endregion

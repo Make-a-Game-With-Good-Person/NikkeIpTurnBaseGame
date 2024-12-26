@@ -208,6 +208,10 @@ public class AbilityTargetBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
+        /*if(owner.enemyTurn)
+         * owner.target = owner.returnDecision.target;
+         * owner.stateMachine.ChangeState<ConfirmAbilityBattleState>();
+         */
         //ShowTargetableTiles();
         // 여기서 curControlUnit의 index를 참조해서 가능한 스킬 아이콘을 활성화 한다.
         // 할 일 
