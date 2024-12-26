@@ -87,7 +87,9 @@ public class CoverDirFinder
             Debug.Log(i + ", " + dot);
 
         }
-        Debug.Log(minDisCover.name);
+        if(minDisCover != null) Debug.Log(minDisCover.name);
+
+        if (minDisCover == null) return null;
 
         return minDisCover.gameObject;
     }
