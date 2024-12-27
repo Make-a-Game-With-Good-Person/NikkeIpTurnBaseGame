@@ -6,6 +6,7 @@ public class Unit : Stat , IDamage
 {
     [HideInInspector] public Tile tile;
     [SerializeField] Animator animator;
+    public EUnitState unitState; // 적 유닛이 사용할 enum, 나중에 Enemy클래스를 분리할 일이 있으면 그쪽으로 넘기면 됨
     public List<UnitSkill> unitSkills;
     public int index;
     public Transform shoulder;

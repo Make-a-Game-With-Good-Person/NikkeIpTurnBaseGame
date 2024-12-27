@@ -8,33 +8,51 @@ public class UnitDecisionTree : MonoBehaviour
     private DecisionTreeNode decisionTree;
 
     #region FinalDecision
-    //TurnPassFinalDecision turnPassFinalDecision;
-    //SelectAbilityTargetFinalDecision selectAbilityTargetFinalDecision;
-    //FindBestAttackPositionFinalDecision findBestAttackPositionFinalDecision;
-    //FindBestCoverPositionFinalDecision findBestCoverPositionFinalDecision;
+    TurnPassFinalDecision turnPassFinalDecision;
+    SelectAbilityTargetFinalDecision selectAbilityTargetFinalDecision;
+    FindBestAttackPositionFinalDecision findBestAttackPositionFinalDecision;
+    FindBestCoverPositionFinalDecision findBestCoverPositionFinalDecision;
     #endregion
 
     #region Decision
-    //CheckTurnDecision checkTrunDecision;
-    //CheckAttackTurnDecision checkAttackTurnDecision;
-    //CheckMoveTurnDecision checkMoveTurnDecision;
-    //CheckReachableTargetDecision checkReachableTargetDecision;
-    //CheckChasingStateDecision checkChasingStateDecision;
+    CheckTurnDecision checkTurnDecision;
+    CheckAttackTurnDecision checkAttackTurnDecision;
+    CheckMoveTurnDecision checkMoveTurnDecision;
+    CheckReachableTargetDecision checkReachableTargetDecision;
+    CheckChasingStateDecision checkChasingStateDecision;
+    #endregion
+
+    #region BattleManager, ReturnDecision, TargetFinder
+    BattleManager owner;
+    TargetFinder targetFinder;
+    ReturnDecision returnDecision;
     #endregion
 
     public DecisionTreeNode defaultDecisionTree;
 
     private void Awake()
     {
-        
+        owner = FindObjectOfType<BattleManager>();
+        targetFinder = new TargetFinder(owner);
+        returnDecision = new ReturnDecision();
     }
 
     private void Start()
     {
+        turnPassFinalDecision = new TurnPassFinalDecision(returnDecision, owner);
+        selectAbilityTargetFinalDecision = new SelectAbilityTargetFinalDecision(returnDecision, owner);
+        findBestAttackPositionFinalDecision = new FindBestAttackPositionFinalDecision(returnDecision, owner);
+        findBestCoverPositionFinalDecision = new FindBestCoverPositionFinalDecision(returnDecision, owner);
+
+        checkChasingStateDecision = new CheckChasingStateDecision(owner, findBestAttackPositionFinalDecision, findBestCoverPositionFinalDecision);
+        checkMoveTurnDecision = new CheckMoveTurnDecision(owner, checkChasingStateDecision, turnPassFinalDecision);
+        checkReachableTargetDecision = new CheckReachableTargetDecision(owner, targetFinder,selectAbilityTargetFinalDecision, checkChasingStateDecision);
+        checkAttackTurnDecision = new CheckAttackTurnDecision(owner, checkReachableTargetDecision, checkMoveTurnDecision);
+        checkTurnDecision = new CheckTurnDecision(owner, checkAttackTurnDecision, turnPassFinalDecision);
 
 
-        //defaultDecisionTree = CheckTurnDecision;
-        //SetDecisionTree(defaultDecisionTree);
+        defaultDecisionTree = checkTurnDecision;
+        SetDecisionTree(defaultDecisionTree);
     }
 
     public ReturnDecision Run()

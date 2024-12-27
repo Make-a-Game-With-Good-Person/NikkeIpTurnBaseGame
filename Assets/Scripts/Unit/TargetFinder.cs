@@ -66,4 +66,32 @@ public class TargetFinder
 
         return set;
     }
+    /// <summary>
+    /// 적 유닛이 타겟으로 아군 유닛을 몇명이나 선택할 수 있는지 확인하기 위한 함수
+    /// </summary>
+    /// <param name="set"></param>
+    /// <returns></returns>
+    public int FindTargetCount(HashSet<Vector2Int> set)
+    {
+        int cnt = 0;
+
+        foreach (Unit unit in owner.Units)
+        {
+            targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
+            if (!set.Contains(targetPos)) continue;
+
+            if (unit.gameObject.layer == 7)
+            {
+                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
+                dir.Normalize();
+
+                if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
+                {
+                    cnt++;
+                }
+            }
+        }
+
+        return cnt;
+    }
 }
