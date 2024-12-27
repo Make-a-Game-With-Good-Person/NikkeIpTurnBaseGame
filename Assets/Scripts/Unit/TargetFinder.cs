@@ -6,8 +6,10 @@ public class TargetFinder
 {
     BattleManager owner;
     Vector2Int targetPos;
-    LayerMask completeLayerMask = 10;
+    LayerMask completeLayerMask = (1 << 10) | (1 << 7);
+    LayerMask forEnemyMask = (1 << 10) | (1 << 8);
     int MAX_COUNT = 2;
+    List<Unit> units = new List<Unit>();
 
     public TargetFinder(BattleManager owner)
     {
@@ -27,12 +29,25 @@ public class TargetFinder
                 return true;
             }
 
-            if (hit.transform.gameObject.layer == completeLayerMask)
+            if (owner.enemyTurn)
             {
-                // 완전 엄폐물을 맞았을 때, 새로운 출발점으로 재귀 호출
-                Vector3 newOrigin = hit.point + dir * 1f; // 약간 앞쪽으로 이동
-                return RayRecursive(newOrigin, dir, count + 1, target);
+                if (hit.transform.gameObject.layer == forEnemyMask)
+                {
+                    // 완전 엄폐물을 맞았을 때, 새로운 출발점으로 재귀 호출
+                    Vector3 newOrigin = hit.point + dir * 1f; // 약간 앞쪽으로 이동
+                    return RayRecursive(newOrigin, dir, count + 1, target);
+                }
             }
+            else
+            {
+                if (hit.transform.gameObject.layer == completeLayerMask)
+                {
+                    // 완전 엄폐물을 맞았을 때, 새로운 출발점으로 재귀 호출
+                    Vector3 newOrigin = hit.point + dir * 1f; // 약간 앞쪽으로 이동
+                    return RayRecursive(newOrigin, dir, count + 1, target);
+                }
+            }
+            
         }
 
         // 타겟을 맞추지 못한 경우
@@ -84,14 +99,44 @@ public class TargetFinder
             {
                 Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
                 dir.Normalize();
-
                 if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
                 {
                     cnt++;
+                }
+                else
+                {
+                    Debug.Log("적이 쏜 레이에 플레이어가 안맞음..");
                 }
             }
         }
 
         return cnt;
     }
+
+    public List<Unit> FindTargets(HashSet<Vector2Int> set)
+    {
+        units.Clear();
+        
+        foreach (Unit unit in owner.Units)
+        {
+            Debug.Log(unit.gameObject.name);
+            targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
+            if (!set.Contains(targetPos)) continue;
+
+            if (unit.gameObject.layer == 7)
+            {
+                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
+                dir.Normalize();
+
+                if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
+                {
+                    units.Add(unit);
+                }
+            }
+        }
+
+        return units;
+    }
+
+    
 }

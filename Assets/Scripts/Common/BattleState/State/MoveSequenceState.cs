@@ -64,6 +64,12 @@ public class MoveSequenceState : BattleState
         owner.curControlUnit.movable = false;
         owner.curControlUnit.move_Re = false; // 임시도 닫아버림
 
+        if (owner.enemyTurn)
+        {
+            owner.stateMachine.ChangeState<UnitSelectBattleState>(); // 바로 상태 넘기기
+            yield break;
+        }
+
         if (owner.curControlUnit.attackable)
         {
             owner.stateMachine.ChangeState<UnitSelectBattleState>();
@@ -85,7 +91,7 @@ public class MoveSequenceState : BattleState
                 // 적의 턴으로 넘긴다고 생각해야함.
                 // 처리할 변수를 만든 뒤 Selected나 어디로 넘겨야함
                 Debug.Log("모든 아군이 턴을 다 소모했습니다.");
-
+                owner.enemyTurn = true;
 
             }
 

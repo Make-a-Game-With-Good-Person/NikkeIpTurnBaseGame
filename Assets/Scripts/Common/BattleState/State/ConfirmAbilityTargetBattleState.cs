@@ -79,6 +79,7 @@ public class ConfirmAbilityTargetBattleState : BattleState
         else
         {
             EnemeyAddListeners();
+            StartCoroutine(ProcessState());
         }
         
     }

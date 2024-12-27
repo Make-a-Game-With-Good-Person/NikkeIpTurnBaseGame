@@ -296,6 +296,8 @@ GameObject:
   - component: {fileID: 44027602}
   - component: {fileID: 44027601}
   - component: {fileID: 44027604}
+  - component: {fileID: 44027607}
+  - component: {fileID: 44027606}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -371,7 +373,9 @@ MonoBehaviour:
   - 0
   - 0
   animator: {fileID: 0}
-  unitSkills: []
+  unitState: 0
+  unitSkills:
+  - {fileID: 44027606}
   index: 0
   shoulder: {fileID: 0}
   rayPointer: {fileID: 1887776226}
@@ -416,6 +420,42 @@ MonoBehaviour:
   abilityTargetAct:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &44027606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44027599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
+  skillName: 
+  skillDamage: 1
+  skillVFX: {fileID: 0}
+  skillRange: 10
+  skillHeight: 1
+  skillLevel: 0
+  skillCost: 0
+  owner: {fileID: 0}
+  changeStateWhenActEnd:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &44027607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44027599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed612f05f970c234fa6ffb12dfab2f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &83371137
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,9 +708,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!4 &208153888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8236129583300538703, guid: 591b15fe523443a4387f623b0f8c8644,
@@ -1795,7 +1835,9 @@ MonoBehaviour:
   curControlUnit: {fileID: 0}
   Units:
   - {fileID: 44027603}
+  EnemyUnits: []
   curSelectedSkill: {fileID: 0}
+  enemyTurn: 0
   tileIndicator: {fileID: 1514588219}
   abilityTargetMask:
     serializedVersion: 2
@@ -6247,6 +6289,9 @@ MonoBehaviour:
   tileSize: {x: 2, y: 1, z: 2}
   rows: 10
   cols: 10
+  tileObjectMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1824596077
 GameObject:
   m_ObjectHideFlags: 0

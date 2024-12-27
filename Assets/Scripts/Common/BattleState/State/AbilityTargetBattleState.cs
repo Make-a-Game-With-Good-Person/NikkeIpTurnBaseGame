@@ -220,7 +220,7 @@ public class AbilityTargetBattleState : BattleState
         //확인과 뒤로 버튼 UI 활성화
     }
     #endregion
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
         if (owner != null && owner.Units != null)
         {
@@ -243,7 +243,7 @@ public class AbilityTargetBattleState : BattleState
                 }
             }
         }
-    }
+    }*/
 
     #region MonoBehaviour
     #endregion

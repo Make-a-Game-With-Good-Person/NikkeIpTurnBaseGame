@@ -25,7 +25,7 @@ public class UnitDecisionTree : MonoBehaviour
     #region BattleManager, ReturnDecision, TargetFinder
     BattleManager owner;
     TargetFinder targetFinder;
-    ReturnDecision returnDecision;
+    public ReturnDecision returnDecision;
     #endregion
 
     public DecisionTreeNode defaultDecisionTree;
@@ -40,7 +40,7 @@ public class UnitDecisionTree : MonoBehaviour
     private void Start()
     {
         turnPassFinalDecision = new TurnPassFinalDecision(returnDecision, owner);
-        selectAbilityTargetFinalDecision = new SelectAbilityTargetFinalDecision(returnDecision, owner);
+        selectAbilityTargetFinalDecision = new SelectAbilityTargetFinalDecision(returnDecision, owner, targetFinder);
         findBestAttackPositionFinalDecision = new FindBestAttackPositionFinalDecision(returnDecision, owner);
         findBestCoverPositionFinalDecision = new FindBestCoverPositionFinalDecision(returnDecision, owner);
 

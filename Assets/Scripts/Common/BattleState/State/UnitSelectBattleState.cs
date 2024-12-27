@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -46,6 +47,7 @@ public class UnitSelectBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
+        if (owner.enemyTurn) return;
         owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.AddListener(OnAbilityButton);
         owner.abilityMenuUIController.turnEndButton.onClick.AddListener(OnTurnEndButton);
@@ -59,6 +61,7 @@ public class UnitSelectBattleState : BattleState
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
+        if (owner.enemyTurn) return;
         owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.RemoveListener(OnAbilityButton);
         owner.abilityMenuUIController.turnEndButton.onClick.RemoveListener(OnTurnEndButton);
@@ -66,7 +69,7 @@ public class UnitSelectBattleState : BattleState
 
         foreach (Unit unit in owner.Units)
         {
-            if(unit != null) unit.GetComponent<UnitCamSetting>().unitSelectCamEvent.RemoveListener(OnSelectUnit);
+            if (unit != null) unit.GetComponent<UnitCamSetting>().unitSelectCamEvent.RemoveListener(OnSelectUnit);
         }
     }
     #endregion
@@ -82,7 +85,7 @@ public class UnitSelectBattleState : BattleState
         SelectFirstTarget();
         //owner.abilityMenuUIController.Display();
 
-        if(processing != null)
+        if (processing != null)
         {
             StopCoroutine(processing);
         }
@@ -102,6 +105,22 @@ public class UnitSelectBattleState : BattleState
     private void SelectFirstTarget()
     {
         owner.abilityMenuUIController.Hide();
+        if (owner.enemyTurn)
+        {
+            foreach (Unit unit in owner.Units)
+            {
+                Debug.Log(unit.gameObject.name);
+                if (unit.gameObject.CompareTag("Enemy") && (unit.attackable || unit.movable))
+                {
+                    owner.curControlUnit = unit;
+                    owner.cameraStateController.SwitchToQuaterView(unit.transform);
+                    /*owner.abilityMenuUIController.Display();
+                    owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);*/
+                    break;
+                }
+            }
+        }
+
 
         if (owner.curControlUnit != null)
         {
@@ -125,7 +144,7 @@ public class UnitSelectBattleState : BattleState
             }
         }
 
-        if(owner.curControlUnit == null)
+        if (owner.curControlUnit == null)
         {
             // 이때는 적 턴이니깐 ProcessingState 여기서 처리할 수 있도록 조치를 취해야한다.
         }
@@ -252,39 +271,40 @@ public class UnitSelectBattleState : BattleState
         //
 
         //요구사항 10번 구현
-        /*if (!owner.enemyturn)
+        if (!owner.enemyTurn)
         {
             //요구사항 2번 여기에 구현
             //요구사항 5번 여기에 구현
             // 유닛을 클릭하면 카메라 이벤트를 실행해 선택했다고 처리하기 때문에 여기선 필요한 UI들을 켜주면 될거 같음
-            
+
 
         }
         else
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
-            ReturnDecision return = ownwer.curControlUnit.AI.Run();
-            switch(return.type)
+            ReturnDecision returnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
+            switch (returnDecision.type)
             {
-                case ReturnDecision.DecisionType.스킬 타겟 지정:
-                    owner.ReturnDecision = return;
-                    owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
+                case ReturnDecision.DecisionType.Action:
+                    owner.curControlUnit.GetComponent<UnitDecisionTree>().returnDecision = returnDecision;
+                    owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
                     break;
-                case ReturnDecision.DecisionType.Move:
-                    owner.ReturnDecision = return;
-                    owner.stateMachine.ChangeState<MoveTargetBattleState>();
-                    break;
-                case ReturnDecision.DecisionType.Pass:
-                    owner.curcontrollunit.movable = false;
-                    owner.curcontrollunit.attackable = false;
-                    owner.CheckTurn();
-                    if(!onwer.enemyturn){
-                        Enter();
-                    }
-                    break;
+                    /*case ReturnDecision.DecisionType.Move:
+                        owner.ReturnDecision = return;
+                        owner.stateMachine.ChangeState<MoveTargetBattleState>();
+                        break;
+                    case ReturnDecision.DecisionType.Pass:
+                        owner.curcontrollunit.movable = false;
+                        owner.curcontrollunit.attackable = false;
+                        owner.CheckTurn();
+                        if (!onwer.enemyturn)
+                        {
+                            Enter();
+                        }
+                        break;*/
             }
             //ChangeState를 여기서 호출
-        }*/
+        }
     }
     #endregion
 

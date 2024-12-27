@@ -69,35 +69,54 @@ public class SelectSkillTargetBattleState : BattleState
         }
     }
 
+    void EnemySetTargetPlayer()
+    {
+        Unit selectedUnit = owner.selectedTarget.GetComponent<Unit>();
+        CDF.SetFinder(owner.curControlUnit.gameObject, owner.selectedTarget, selectedUnit.tile.covers);
+
+        GameObject nearestCover = CDF.FindCover();
+        if (nearestCover != null)
+        {
+            owner.selectedTarget = nearestCover;
+        }
+
+        owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
+    }
     #endregion
     #region Protected
     protected override void AddListeners()
     {
         base.AddListeners();
-        // 씬에 존재하는 적들에게 클릭 했을 시 위치를 판별해 owner의 selectedSkillRangeTile 안에 그 위치가 포함 되는지 확인 후 포함 한다면 타겟팅 설정하는 함수를 addListener한다.
-        owner.selectSkillTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
-        foreach (Unit unit in owner.Units)
+        if (!owner.enemyTurn)
         {
-            if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+            // 씬에 존재하는 적들에게 클릭 했을 시 위치를 판별해 owner의 selectedSkillRangeTile 안에 그 위치가 포함 되는지 확인 후 포함 한다면 타겟팅 설정하는 함수를 addListener한다.
+            owner.selectSkillTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
+            foreach (Unit unit in owner.Units)
             {
-                unit.GetComponent<AbilityTargetting>().abilityTargetAct.AddListener(SetAbilityTarget);
+                if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+                {
+                    unit.GetComponent<AbilityTargetting>().abilityTargetAct.AddListener(SetAbilityTarget);
+                }
             }
         }
+        
 
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
         // 여기선 리무브
-        owner.selectSkillTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
-        foreach (Unit unit in owner.Units)
+        if (!owner.enemyTurn)
         {
-            if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+            owner.selectSkillTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
+            foreach (Unit unit in owner.Units)
             {
-                if(unit != null) unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
+                if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+                {
+                    if (unit != null) unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
+                }
             }
         }
-
     }
     #endregion
     #region Public
@@ -111,7 +130,12 @@ public class SelectSkillTargetBattleState : BattleState
         }
 
         owner.curState = BATTLESTATE.SELECTSKILLTARGET;
-        owner.selectSkillTargetUIController.Display();
+
+        if(!owner.enemyTurn) owner.selectSkillTargetUIController.Display();
+        else
+        {
+            owner.selectSkillTargetUIController.Hide();
+        }
         // 내가 이전에 선택한 스킬의 범위를 보여줘야함
         // 스킬 범위 안에 적이 있는걸 판별해 적이 있다면 적도 반짝이게? 바꿔줘야함..
         // 그리고 UI도 켜야함, 뒤로가는 버튼은 보여줘야하니깐
@@ -152,6 +176,10 @@ public class SelectSkillTargetBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
+        if (owner.enemyTurn)
+        {
+            EnemySetTargetPlayer();
+        }
         //ShowTargetableTiles();
         // 여기서 curControlUnit의 index를 참조해서 가능한 스킬 아이콘을 활성화 한다.
         // 할 일 

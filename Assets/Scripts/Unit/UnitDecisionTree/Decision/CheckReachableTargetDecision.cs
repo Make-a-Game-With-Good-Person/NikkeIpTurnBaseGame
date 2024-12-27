@@ -25,14 +25,17 @@ public class CheckReachableTargetDecision : Decision
     {
         owner.curControlUnit.unitState = EUnitState.CHASING;
         if (FindTargetCount())
+        {
+            Debug.Log("트루 노드로 가세요라");
             return _trueNode;
+        }
         else
             return _falseNode;
     }
 
     bool FindTargetCount()
     {
-        owner.curSelectedSkill = owner.unitSkillManager.skillList[0];
+        owner.curSelectedSkill = owner.curControlUnit.unitSkills[0];
         owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) =>
         { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
         );
@@ -41,6 +44,7 @@ public class CheckReachableTargetDecision : Decision
 
         if(targetFinder.FindTargetCount(temp) > 0)
         {
+            Debug.Log("갯수가 많아요");
             return true;
         }
         else
@@ -48,4 +52,5 @@ public class CheckReachableTargetDecision : Decision
             return false;
         }
     }
+
 }
