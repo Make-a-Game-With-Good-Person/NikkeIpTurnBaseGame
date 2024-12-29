@@ -185,7 +185,17 @@ public class TileManager : MonoBehaviour
             return null;
         }
     }
-    
+
+    public int GetDistanceBetweenTiles(Vector2Int first, Vector2Int sec)
+    {
+        if (map.ContainsKey(first) && map.ContainsKey(sec))
+        {
+            return Math.Abs(first.x - sec.x) + Math.Abs(first.y - sec.y);
+        }
+        else return -1;
+    }
+
+
     public void ShowTiles(HashSet<Vector2Int> tiles)
     {
         //여기에 저 타일들로 이동 가능 영역 보여주기

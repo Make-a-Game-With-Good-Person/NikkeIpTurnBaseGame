@@ -15,6 +15,7 @@ public class TurnPassFinalDecision : FinalDecision
 
     public override ReturnDecision Execute()
     {
+        returnDecision.type = ReturnDecision.DecisionType.Pass;
         return returnDecision;
     }
 }
