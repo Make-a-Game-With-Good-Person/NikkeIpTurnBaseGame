@@ -107,18 +107,11 @@ public class UnitSelectBattleState : BattleState
         owner.abilityMenuUIController.Hide();
         if (owner.enemyTurn) // 적 턴일 때
         {
-            SelectEnemyUnit();
+            SelectPlayableUnit("Enemy");
 
-            if(owner.curControlUnit == null)
+            if (owner.curControlUnit == null)
             {
-                owner.enemyTurn = false;
-                foreach (Unit unit in owner.Units)
-                {
-                    if (unit.gameObject.CompareTag("Player"))
-                    {
-                        unit.ResetAble();
-                    }
-                }
+                ResetPlayableUnit(false, "Player");
             }
             else
             {
@@ -131,18 +124,11 @@ public class UnitSelectBattleState : BattleState
         }
         else // 플레이어 턴일 때
         {
-            SelectPlayerUnit();
+            SelectPlayableUnit("Player");
 
             if (owner.curControlUnit == null)
             {
-                owner.enemyTurn = true;
-                foreach (Unit unit in owner.Units)
-                {
-                    if (unit.gameObject.CompareTag("Enemy"))
-                    {
-                        unit.ResetAble();
-                    }
-                }
+                ResetPlayableUnit(true, "Enemy");
             }
             else
             {
@@ -175,13 +161,12 @@ public class UnitSelectBattleState : BattleState
         }
 
     }
-
-    void SelectPlayerUnit()
+    void SelectPlayableUnit(string tag)
     {
         foreach (Unit unit in owner.Units)
         {
             Debug.Log(unit.gameObject.name);
-            if (unit.gameObject.CompareTag("Player") && (unit.attackable || unit.movable))
+            if (unit.gameObject.CompareTag(tag) && (unit.attackable || unit.movable))
             {
                 owner.curControlUnit = unit;
                 owner.cameraStateController.SwitchToQuaterView(unit.transform);
@@ -189,21 +174,18 @@ public class UnitSelectBattleState : BattleState
             }
         }
     }
-
-    void SelectEnemyUnit()
+    
+    void ResetPlayableUnit(bool turn, string tag)
     {
+        owner.enemyTurn = turn;
         foreach (Unit unit in owner.Units)
         {
-            Debug.Log(unit.gameObject.name);
-            if (unit.gameObject.CompareTag("Enemy") && (unit.attackable || unit.movable))
+            if (unit.gameObject.CompareTag(tag))
             {
-                owner.curControlUnit = unit;
-                owner.cameraStateController.SwitchToQuaterView(unit.transform);
-                break;
+                unit.ResetAble();
             }
         }
     }
-
 
     // 요구사항 3번, 4번 구현
     private void OnSelectUnit()
