@@ -105,19 +105,49 @@ public class UnitSelectBattleState : BattleState
     private void SelectFirstTarget()
     {
         owner.abilityMenuUIController.Hide();
-        if (owner.enemyTurn)
+        if (owner.enemyTurn) // 적 턴일 때
         {
-            foreach (Unit unit in owner.Units)
+            SelectEnemyUnit();
+
+            if(owner.curControlUnit == null)
             {
-                Debug.Log(unit.gameObject.name);
-                if (unit.gameObject.CompareTag("Enemy") && (unit.attackable || unit.movable))
+                owner.enemyTurn = false;
+                foreach (Unit unit in owner.Units)
                 {
-                    owner.curControlUnit = unit;
-                    owner.cameraStateController.SwitchToQuaterView(unit.transform);
-                    /*owner.abilityMenuUIController.Display();
-                    owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);*/
-                    break;
+                    if (unit.gameObject.CompareTag("Player"))
+                    {
+                        unit.ResetAble();
+                    }
                 }
+            }
+            else
+            {
+                if (processing != null)
+                {
+                    StopCoroutine(processing);
+                }
+                processing = StartCoroutine(ProcessingState());
+            }
+        }
+        else // 플레이어 턴일 때
+        {
+            SelectPlayerUnit();
+
+            if (owner.curControlUnit == null)
+            {
+                owner.enemyTurn = true;
+                foreach (Unit unit in owner.Units)
+                {
+                    if (unit.gameObject.CompareTag("Enemy"))
+                    {
+                        unit.ResetAble();
+                    }
+                }
+            }
+            else
+            {
+                owner.abilityMenuUIController.Display();
+                owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
             }
         }
 
@@ -125,36 +155,56 @@ public class UnitSelectBattleState : BattleState
         if (owner.curControlUnit != null)
         {
             owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
-            /*owner.abilityMenuUIController.Display();
-            owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);*/
         }
         else
         {
-            foreach (Unit unit in owner.Units)
+            /*foreach (Unit unit in owner.Units)
             {
                 Debug.Log(unit.gameObject.name);
                 if (unit.gameObject.CompareTag("Player") && (unit.attackable || unit.movable))
                 {
                     owner.curControlUnit = unit;
                     owner.cameraStateController.SwitchToQuaterView(unit.transform);
-                    /*owner.abilityMenuUIController.Display();
-                    owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);*/
+                    //owner.abilityMenuUIController.Display();
+                    //owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
                     break;
                 }
-            }
-        }
-
-        if (owner.curControlUnit == null)
-        {
-            // 이때는 적 턴이니깐 ProcessingState 여기서 처리할 수 있도록 조치를 취해야한다.
-        }
-        else
-        {
-            owner.abilityMenuUIController.Display();
-            owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
+            }*/
+            SelectFirstTarget();
+            return;
         }
 
     }
+
+    void SelectPlayerUnit()
+    {
+        foreach (Unit unit in owner.Units)
+        {
+            Debug.Log(unit.gameObject.name);
+            if (unit.gameObject.CompareTag("Player") && (unit.attackable || unit.movable))
+            {
+                owner.curControlUnit = unit;
+                owner.cameraStateController.SwitchToQuaterView(unit.transform);
+                break;
+            }
+        }
+    }
+
+    void SelectEnemyUnit()
+    {
+        foreach (Unit unit in owner.Units)
+        {
+            Debug.Log(unit.gameObject.name);
+            if (unit.gameObject.CompareTag("Enemy") && (unit.attackable || unit.movable))
+            {
+                owner.curControlUnit = unit;
+                owner.cameraStateController.SwitchToQuaterView(unit.transform);
+                break;
+            }
+        }
+    }
+
+
     // 요구사항 3번, 4번 구현
     private void OnSelectUnit()
     {
@@ -288,6 +338,10 @@ public class UnitSelectBattleState : BattleState
                 case ReturnDecision.DecisionType.Action:
                     owner.curControlUnit.GetComponent<UnitDecisionTree>().returnDecision = returnDecision;
                     owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
+                    break;
+                case ReturnDecision.DecisionType.Pass:
+                    owner.curControlUnit = null;
+                    SelectFirstTarget();
                     break;
                     /*case ReturnDecision.DecisionType.Move:
                         owner.ReturnDecision = return;
