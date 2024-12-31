@@ -25,7 +25,7 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
         List<Vector2Int> movables = movement.GetTilesInRange(owner.tileManager).ToList();
 
         Vector2Int pos = owner.curControlUnit.tile.coordinate;
-        float max = -100;
+        float max = ScorePosition(owner.curControlUnit.tile.coordinate);
         //max°ª Ã£±â
         foreach (Vector2Int temp in movables)
         {
