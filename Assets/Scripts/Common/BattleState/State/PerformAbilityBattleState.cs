@@ -68,40 +68,7 @@ public class PerformAbilityBattleState : BattleState
         owner.curControlUnit.attackable = false; // 공격은 끝났음
         owner.curControlUnit.attack_Re = false; // 임시도 닫아버림
 
-        if (owner.enemyTurn)
-        {
-            owner.stateMachine.ChangeState<UnitSelectBattleState>(); // 바로 상태 넘기기
-            yield break;
-        }
-
-        if (owner.curControlUnit.movable) // 아직 최근에 컨트롤한 유닛이 이동 가능하다면
-        {
-            owner.stateMachine.ChangeState<UnitSelectBattleState>(); // 바로 상태 넘기기
-        }
-        else // 만약 공격,이동을 모두 다 했다면
-        {
-            owner.curControlUnit = null;
-
-            foreach (Unit unit in owner.Units)
-            {
-                if (unit.gameObject.layer == 7 && (unit.attackable || unit.movable))
-                {
-                    owner.curControlUnit = unit;
-                }
-            }
-
-            if (owner.curControlUnit == null)
-            {
-                // 적의 턴으로 넘긴다고 생각해야함.
-                // 처리할 변수를 만든 뒤 Selected나 어디로 넘겨야함
-                Debug.Log("모든 아군이 턴을 다 소모했습니다.");
-                owner.enemyTurn = true;
-            }
-
-            owner.stateMachine.ChangeState<UnitSelectBattleState>();
-        }
-        
-        
+        owner.stateMachine.ChangeState<TurnCheckBattleState>();
     }
     #endregion
 
