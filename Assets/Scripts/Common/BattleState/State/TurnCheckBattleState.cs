@@ -96,11 +96,7 @@ public class TurnCheckBattleState : BattleState
 
         //승리조건 체크함수
 
-        if (owner.curControlUnit.attackable || owner.curControlUnit.movable)
-        {
-            owner.stateMachine.ChangeState<UnitSelectBattleState>();
-        }
-        else
+        if (owner.curControlUnit == null || !(owner.curControlUnit.attackable || owner.curControlUnit.movable))
         {
             owner.curControlUnit = SelectPlayableUnit(owner.enemyTurn);
             if (owner.curControlUnit == null)
@@ -108,8 +104,9 @@ public class TurnCheckBattleState : BattleState
                 owner.enemyTurn = !owner.enemyTurn;
                 ResetTurn(owner.enemyTurn);
             }
-            owner.stateMachine.ChangeState<UnitSelectBattleState>();
         }
+        
+        owner.stateMachine.ChangeState<UnitSelectBattleState>();
     }
     #endregion
 

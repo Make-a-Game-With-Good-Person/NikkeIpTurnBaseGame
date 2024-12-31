@@ -104,60 +104,33 @@ public class UnitSelectBattleState : BattleState
     private void SelectFirstTarget()
     {
         owner.abilityMenuUIController.Hide();
-        if (owner.enemyTurn) // 적 턴일 때
+
+        if (owner.curControlUnit == null) // 선택한 유닛이 아무것도 없을때, 최초이거나 턴이 바꼈거나 둘 중 하나
         {
             SelectPlayableUnit(owner.enemyTurn);
 
-            if (owner.curControlUnit == null)
+            if(owner.curControlUnit == null)
             {
-                ResetPlayableUnit(false);
+                owner.stateMachine.ChangeState<TurnCheckBattleState>();
+                return;
             }
-            else
+
+            if (!owner.enemyTurn)
             {
-                if (processing != null)
-                {
-                    StopCoroutine(processing);
-                }
-                processing = StartCoroutine(ProcessingState());
+                owner.abilityMenuUIController.Display();
+                owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
             }
         }
-        else // 플레이어 턴일 때
+        else // 선택한 유닛이 있을 때
         {
-            SelectPlayableUnit(owner.enemyTurn);
-
-            if (owner.curControlUnit == null)
-            {
-                ResetPlayableUnit(true);
-            }
-            else
+            if (!owner.enemyTurn) // 플레이어 턴일 때
             {
                 owner.abilityMenuUIController.Display();
                 owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
             }
         }
 
-
-        if (owner.curControlUnit != null)
-        {
-            owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
-        }
-        else
-        {
-            /*foreach (Unit unit in owner.Units)
-            {
-                Debug.Log(unit.gameObject.name);
-                if (unit.gameObject.CompareTag("Player") && (unit.attackable || unit.movable))
-                {
-                    owner.curControlUnit = unit;
-                    owner.cameraStateController.SwitchToQuaterView(unit.transform);
-                    //owner.abilityMenuUIController.Display();
-                    //owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
-                    break;
-                }
-            }*/
-            SelectFirstTarget();
-            return;
-        }
+        owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
 
     }
     void SelectPlayableUnit(bool EnemyTurn)
@@ -181,26 +154,6 @@ public class UnitSelectBattleState : BattleState
                 owner.cameraStateController.SwitchToQuaterView(unit.transform);
                 break;
             }
-        }
-    }
-    
-    void ResetPlayableUnit(bool turn)
-    {
-        owner.enemyTurn = turn;
-
-        List<Unit> unitList = null;
-        if (turn)
-        {
-            unitList = owner.EnemyUnits;
-        }
-        else
-        {
-            unitList = owner.Units;
-        }
-
-        foreach (Unit unit in unitList)
-        {
-            unit.ResetAble();
         }
     }
 
@@ -331,7 +284,7 @@ public class UnitSelectBattleState : BattleState
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
             owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
-            
+
             switch (owner.curReturnDecision.type)
             {
                 case ReturnDecision.DecisionType.Action:
