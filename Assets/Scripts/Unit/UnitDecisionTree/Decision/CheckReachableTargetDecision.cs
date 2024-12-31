@@ -49,6 +49,7 @@ public class CheckReachableTargetDecision : Decision
         }
         else
         {
+            Debug.Log("CheckReachableTargetDecision.FindTargetCount(), false");
             return false;
         }
     }

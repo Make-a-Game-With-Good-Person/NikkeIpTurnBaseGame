@@ -67,7 +67,7 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
         { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
         );
 
-        foreach (Unit unit in owner.EnemyUnits)
+        foreach (Unit unit in owner.Units)
         {
             if (skillrange.Contains(unit.tile.coordinate))
             {

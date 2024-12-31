@@ -291,8 +291,10 @@ public class UnitSelectBattleState : BattleState
                     owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
                     break;
                 case ReturnDecision.DecisionType.Pass:
+                    owner.curControlUnit.attackable = false;
+                    owner.curControlUnit.movable = false;
                     owner.curControlUnit = null;
-                    SelectFirstTarget();
+                    owner.stateMachine.ChangeState<TurnCheckBattleState>();
                     break;
                 case ReturnDecision.DecisionType.Move:
                     owner.stateMachine.ChangeState<MoveTargetBattleState>();
