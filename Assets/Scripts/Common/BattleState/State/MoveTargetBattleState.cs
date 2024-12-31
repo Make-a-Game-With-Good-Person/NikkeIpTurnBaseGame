@@ -32,11 +32,13 @@ public class MoveTargetBattleState : BattleState
     protected override void AddListeners()
     {
         base.AddListeners();
+        if (owner.enemyTurn) return;
         owner.inputController.touchEvent.AddListener(OnTileSelect);
     }
     protected override void RemoveListeners()
     {
         base.RemoveListeners();
+        if (owner.enemyTurn) return;
         owner.inputController.touchEvent.RemoveListener(OnTileSelect);
     }
     #endregion
@@ -44,7 +46,10 @@ public class MoveTargetBattleState : BattleState
     public override void Enter()
     {
         base.Enter();
-        //owner.tileIndicator.gameObject.SetActive(true);
+        if (!owner.enemyTurn)
+        {
+            owner.tileIndicator.gameObject.SetActive(true);
+        }
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
@@ -84,6 +89,12 @@ public class MoveTargetBattleState : BattleState
         yield return null;
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
         range = movement.GetTilesInRange(owner.tileManager);
+
+        if (owner.enemyTurn)
+        {
+            owner.tile = owner.tileManager.GetTile(owner.curReturnDecision.pos);
+            owner.stateMachine.ChangeState<MoveSequenceState>();
+        }
     }
     #endregion
 

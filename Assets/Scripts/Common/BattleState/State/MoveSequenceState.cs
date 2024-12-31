@@ -58,8 +58,11 @@ public class MoveSequenceState : BattleState
     private IEnumerator ProcessingState()
     {
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
-
-        yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
+           
+        if(owner.tile != owner.curControlUnit.tile)
+        {
+            yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
+        }
 
         owner.curControlUnit.movable = false;
         owner.curControlUnit.move_Re = false; // 임시도 닫아버림

@@ -34,6 +34,7 @@ public class BattleManager : MonoBehaviour
     public List<Unit> EnemyUnits = new List<Unit>();
     public Tile tile;   //현재 선택한 타일을 저장할 용도, SelectTile함수에서 지정할것
     public UnitSkill curSelectedSkill;
+    public ReturnDecision curReturnDecision;
     public bool enemyTurn = false; //적턴인지 아군턴인지 확인할 용도
 
     public HashSet<Vector2Int> selectedSkillRangeTile;

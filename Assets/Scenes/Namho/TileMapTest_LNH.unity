@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -363,15 +363,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stat:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 100
+  - 100
+  - 10
+  - 10
+  - 1
+  - 5
+  - 50
+  - 2
+  - 4
   animator: {fileID: 0}
   unitState: 0
   unitSkills:
@@ -1833,9 +1833,9 @@ MonoBehaviour:
   curState: 0
   selectedTarget: {fileID: 0}
   curControlUnit: {fileID: 0}
-  Units:
+  Units: []
+  EnemyUnits:
   - {fileID: 44027603}
-  EnemyUnits: []
   curSelectedSkill: {fileID: 0}
   enemyTurn: 0
   tileIndicator: {fileID: 1514588219}

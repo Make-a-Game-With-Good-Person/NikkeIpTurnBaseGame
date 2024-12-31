@@ -22,9 +22,20 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
     {
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
 
-        HashSet<Vector2Int> movables = movement.GetTilesInRange(owner.tileManager);
+        List<Vector2Int> movables = movement.GetTilesInRange(owner.tileManager).ToList();
+
+        Vector2Int pos = owner.curControlUnit.tile.coordinate;
+        float max = -100;
         //max°ª Ã£±â
-        Vector2Int pos = movables.Aggregate((best, current) => ScorePosition(current) > ScorePosition(best) ? current : best);
+        foreach (Vector2Int temp in movables)
+        {
+            float cal = ScorePosition(temp);
+            if (max < cal)
+            {
+                max = cal;
+                pos = temp;
+            }
+        }
 
         returnDecision.type = ReturnDecision.DecisionType.Move;
         returnDecision.pos = pos;

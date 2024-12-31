@@ -273,11 +273,13 @@ public class TileManager : MonoBehaviour
             }
         }
 
+        /*
         //for debug
         foreach(Vector2Int node in movable)
         {
             Debug.Log($"node : {node} prev : {_map[node].prev} cost : {_map[node].distance} center : {_map[node].center}");
         }
+        */
         return movable;
     }
 

@@ -58,7 +58,7 @@ public class InitBattleState : BattleState
         //¸Ê·Îµù
         //À¯´Ö ·Îµù
         //Units.Add(ÀûÀ¯´Ö);
-        foreach (Unit unit in owner.Units)
+        foreach (Unit unit in owner.EnemyUnits)
         {
             if(unit != null)
             {

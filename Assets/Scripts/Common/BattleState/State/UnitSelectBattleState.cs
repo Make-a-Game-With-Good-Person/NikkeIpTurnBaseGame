@@ -76,7 +76,6 @@ public class UnitSelectBattleState : BattleState
     #region Public
     public override void Enter()
     {
-        //if(owner.enemyturn)
         base.Enter();
         // 여기서 owner.curControlUnit을 하나는 결정 해놔야함
         owner.curState = BATTLESTATE.UNITSELLECT;
@@ -107,11 +106,11 @@ public class UnitSelectBattleState : BattleState
         owner.abilityMenuUIController.Hide();
         if (owner.enemyTurn) // 적 턴일 때
         {
-            SelectPlayableUnit("Enemy");
+            SelectPlayableUnit(owner.enemyTurn);
 
             if (owner.curControlUnit == null)
             {
-                ResetPlayableUnit(false, "Player");
+                ResetPlayableUnit(false);
             }
             else
             {
@@ -124,11 +123,11 @@ public class UnitSelectBattleState : BattleState
         }
         else // 플레이어 턴일 때
         {
-            SelectPlayableUnit("Player");
+            SelectPlayableUnit(owner.enemyTurn);
 
             if (owner.curControlUnit == null)
             {
-                ResetPlayableUnit(true, "Enemy");
+                ResetPlayableUnit(true);
             }
             else
             {
@@ -161,12 +160,22 @@ public class UnitSelectBattleState : BattleState
         }
 
     }
-    void SelectPlayableUnit(string tag)
+    void SelectPlayableUnit(bool EnemyTurn)
     {
-        foreach (Unit unit in owner.Units)
+        List<Unit> unitList = null;
+        if (EnemyTurn)
+        {
+            unitList = owner.EnemyUnits;
+        }
+        else
+        {
+            unitList = owner.Units;
+        }
+
+        foreach (Unit unit in unitList)
         {
             Debug.Log(unit.gameObject.name);
-            if (unit.gameObject.CompareTag(tag) && (unit.attackable || unit.movable))
+            if (unit.attackable || unit.movable)
             {
                 owner.curControlUnit = unit;
                 owner.cameraStateController.SwitchToQuaterView(unit.transform);
@@ -175,15 +184,23 @@ public class UnitSelectBattleState : BattleState
         }
     }
     
-    void ResetPlayableUnit(bool turn, string tag)
+    void ResetPlayableUnit(bool turn)
     {
         owner.enemyTurn = turn;
-        foreach (Unit unit in owner.Units)
+
+        List<Unit> unitList = null;
+        if (turn)
         {
-            if (unit.gameObject.CompareTag(tag))
-            {
-                unit.ResetAble();
-            }
+            unitList = owner.EnemyUnits;
+        }
+        else
+        {
+            unitList = owner.Units;
+        }
+
+        foreach (Unit unit in unitList)
+        {
+            unit.ResetAble();
         }
     }
 
@@ -300,7 +317,6 @@ public class UnitSelectBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
-        //
 
         //요구사항 10번 구현
         if (!owner.enemyTurn)
@@ -314,30 +330,20 @@ public class UnitSelectBattleState : BattleState
         else
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
-            ReturnDecision returnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
-            switch (returnDecision.type)
+            owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
+            
+            switch (owner.curReturnDecision.type)
             {
                 case ReturnDecision.DecisionType.Action:
-                    owner.curControlUnit.GetComponent<UnitDecisionTree>().returnDecision = returnDecision;
                     owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
                     break;
                 case ReturnDecision.DecisionType.Pass:
                     owner.curControlUnit = null;
                     SelectFirstTarget();
                     break;
-                    /*case ReturnDecision.DecisionType.Move:
-                        owner.ReturnDecision = return;
-                        owner.stateMachine.ChangeState<MoveTargetBattleState>();
-                        break;
-                    case ReturnDecision.DecisionType.Pass:
-                        owner.curcontrollunit.movable = false;
-                        owner.curcontrollunit.attackable = false;
-                        owner.CheckTurn();
-                        if (!onwer.enemyturn)
-                        {
-                            Enter();
-                        }
-                        break;*/
+                case ReturnDecision.DecisionType.Move:
+                    owner.stateMachine.ChangeState<MoveTargetBattleState>();
+                    break;
             }
             //ChangeState를 여기서 호출
         }

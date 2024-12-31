@@ -91,7 +91,7 @@ public class SelectSkillTargetBattleState : BattleState
         {
             // 씬에 존재하는 적들에게 클릭 했을 시 위치를 판별해 owner의 selectedSkillRangeTile 안에 그 위치가 포함 되는지 확인 후 포함 한다면 타겟팅 설정하는 함수를 addListener한다.
             owner.selectSkillTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
-            foreach (Unit unit in owner.Units)
+            foreach (Unit unit in owner.EnemyUnits)
             {
                 if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
                 {
@@ -109,7 +109,7 @@ public class SelectSkillTargetBattleState : BattleState
         if (!owner.enemyTurn)
         {
             owner.selectSkillTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
-            foreach (Unit unit in owner.Units)
+            foreach (Unit unit in owner.EnemyUnits)
             {
                 if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
                 {

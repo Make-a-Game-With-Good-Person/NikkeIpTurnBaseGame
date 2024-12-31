@@ -21,6 +21,7 @@ public class CheckChasingStateDecision : Decision
     {
         if(owner.curControlUnit.unitState == EUnitState.CHASING)
         {
+            owner.curControlUnit.unitState = EUnitState.NONE;
             return _trueNode;
         }
         else
