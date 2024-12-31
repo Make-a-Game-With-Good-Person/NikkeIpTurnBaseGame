@@ -46,7 +46,7 @@ public class UnitDecisionTree : MonoBehaviour
 
         checkChasingStateDecision = new CheckChasingStateDecision(owner, findBestAttackPositionFinalDecision, findBestCoverPositionFinalDecision);
         checkMoveTurnDecision = new CheckMoveTurnDecision(owner, checkChasingStateDecision, turnPassFinalDecision);
-        checkReachableTargetDecision = new CheckReachableTargetDecision(owner, targetFinder,selectAbilityTargetFinalDecision, checkChasingStateDecision);
+        checkReachableTargetDecision = new CheckReachableTargetDecision(owner, targetFinder,selectAbilityTargetFinalDecision, checkMoveTurnDecision);
         checkAttackTurnDecision = new CheckAttackTurnDecision(owner, checkReachableTargetDecision, checkMoveTurnDecision);
         checkTurnDecision = new CheckTurnDecision(owner, checkAttackTurnDecision, turnPassFinalDecision);
 
