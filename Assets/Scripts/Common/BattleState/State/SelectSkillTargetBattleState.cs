@@ -35,6 +35,7 @@ public class SelectSkillTargetBattleState : BattleState
     //요구사항 1
     void SetAbilityTarget()
     {
+#if UNITY_EDITOR
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -67,6 +68,45 @@ public class SelectSkillTargetBattleState : BattleState
                 }
             }
         }
+#elif UNITY_ANDROID
+        Touch touch = Input.GetTouch(0); // 첫 번째 터치만 사용 (멀티터치가 필요 없다면)
+
+        // 터치가 Ended 상태인지 확인 (터치가 끝났을 때 동작)
+        if (touch.phase == TouchPhase.Ended)
+        {
+            Ray ray = Camera.main.ScreenPointToRay(touch.position); // 터치 위치를 이용해 Ray 생성
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (((1 << hit.collider.gameObject.layer) & owner.abilityTargetMask) != 0) // 클릭한 대상이 공격 가능한 대상일 때
+                {
+                    Debug.Log("스킬 타겟 지정 <<");
+                    //Vector2Int coord = new Vector2Int(Mathf.FloorToInt(worldpos.x / tileSize.x), Mathf.FloorToInt(worldpos.z / tileSize.z));
+                    /*targetPos.x = Mathf.FloorToInt(hit.collider.gameObject.transform.position.x);
+                    targetPos.y = Mathf.FloorToInt(hit.collider.gameObject.transform.position.z);*/
+                    targetPos = owner.tileManager.GetTile(hit.collider.gameObject.transform.position).coordinate;
+
+                    //Debug.Log(targetPos.x + ", " + targetPos.y);
+
+                    if (owner.selectedSkillRangeTile.Contains(targetPos))
+                    {
+                        Debug.Log("스킬 타격 가능 <<");
+                        owner.selectedTarget = hit.collider.gameObject;
+                        Unit selectedUnit = owner.selectedTarget.GetComponent<Unit>();
+                        CDF.SetFinder(owner.curControlUnit.gameObject, owner.selectedTarget, selectedUnit.tile.covers);
+
+                        GameObject nearestCover = CDF.FindCover();
+                        if (nearestCover != null)
+                        {
+                            owner.selectedTarget = nearestCover;
+                        }
+
+                        owner.stateMachine.ChangeState<ConfirmAbilityTargetBattleState>();
+                    }
+                }
+            }
+        }
+#endif
     }
 
     void EnemySetTargetPlayer()
@@ -99,7 +139,7 @@ public class SelectSkillTargetBattleState : BattleState
                 }
             }
         }
-        
+
 
     }
     protected override void RemoveListeners()
@@ -131,7 +171,7 @@ public class SelectSkillTargetBattleState : BattleState
 
         owner.curState = BATTLESTATE.SELECTSKILLTARGET;
 
-        if(!owner.enemyTurn) owner.selectSkillTargetUIController.Display();
+        if (!owner.enemyTurn) owner.selectSkillTargetUIController.Display();
         else
         {
             owner.selectSkillTargetUIController.Hide();
@@ -190,6 +230,6 @@ public class SelectSkillTargetBattleState : BattleState
     #endregion
 
     #region MonoBehaviour
-    
+
     #endregion
 }

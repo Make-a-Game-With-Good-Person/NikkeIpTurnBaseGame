@@ -109,7 +109,7 @@ public class UnitSelectBattleState : BattleState
         {
             SelectPlayableUnit(owner.enemyTurn);
 
-            if(owner.curControlUnit == null)
+            if (owner.curControlUnit == null)
             {
                 owner.stateMachine.ChangeState<TurnCheckBattleState>();
                 return;
@@ -208,31 +208,32 @@ public class UnitSelectBattleState : BattleState
         {
             Ray ray = Camera.main.ScreenPointToRay(touch.position); // 터치 위치를 이용해 Ray 생성
             RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (((1 << hit.collider.gameObject.layer) & owner.cameraStateController.layerMask) != 0) // 클릭한 대상이 유닛일 때
-                    {
-                    // 이 안에서 다시 분류, 플레이어를 선택하면 아래 코드, 아니면 적을 클릭했을 때 코드를 다시 작성
-                    owner.cameraStateController.isDragging = false;
-                    owner.cameraStateController.SetCamTarget(hit.collider.transform); // 적을 클릭했을 때도 카메라가 쿼터뷰로 해당 적을 잡을 수 있는데 뒤로가기 버튼을 누르면 다시 curControlUnit을 타겟으로 잡으면 됨
-                    owner.cameraStateController.SwitchToQuaterView();
+            if (((1 << hit.collider.gameObject.layer) & owner.cameraStateController.layerMask) != 0) // 클릭한 대상이 유닛일 때
+            {
+                // 이 안에서 다시 분류, 플레이어를 선택하면 아래 코드, 아니면 적을 클릭했을 때 코드를 다시 작성
+                owner.cameraStateController.isDragging = false;
+                //owner.cameraStateController.SetCamTarget(hit.collider.transform); // 적을 클릭했을 때도 카메라가 쿼터뷰로 해당 적을 잡을 수 있는데 뒤로가기 버튼을 누르면 다시 curControlUnit을 타겟으로 잡으면 됨
+                owner.cameraStateController.SwitchToQuaterView(hit.collider.transform);
 
-                    Unit hitUnit = hit.collider.transform.GetComponent<Unit>();
-                    // 이 아래로 분류, 태그로 한다고 치면?
-                    if (hit.collider.gameObject.CompareTag("Enemy"))
-                    {
-                        owner.selectedTarget = hitUnit;
-                        //owner.stateMachine.ChangeState<ShowUnitDetailBattleState>();
-                    }
-                    else if (hit.collider.gameObject.CompareTag("Player"))
-                    {
-                        owner.curControlUnit = hitUnit; // 이 curControlUnit은 최초에 이 상태에 들어올 때 누구 하나는 결정 되어있어야함
-                    }
-                }
-                else // 클릭한 대상이 유닛이 아닌 맵일 때? UI를 클릭했을 때도 고려 해봐야할듯.. < 그때는 또 LayerMask로 하던가 뭐 어떻게 조절해봄
+                Unit hitUnit = hit.collider.transform.GetComponent<Unit>();
+                owner.selectedTarget = hitUnit.gameObject;
+
+                // 이 아래로 분류, 태그로 한다고 치면?
+                if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    owner.cameraStateController.SwitchToMapView();
+                    owner.stateMachine.ChangeState<ShowUnitDetailBattleState>();
                 }
+                else if (hit.collider.gameObject.CompareTag("Player"))
+                {
+                    owner.curControlUnit = hitUnit; // 이 curControlUnit은 최초에 이 상태에 들어올 때 누구 하나는 결정 되어있어야함
+                    owner.abilityMenuUIController.Display();
+                    owner.abilityMenuUIController.ActivateButtons(hitUnit.attackable, hitUnit.movable);
+                }
+            }
+            else // 클릭한 대상이 유닛이 아닌 맵일 때? UI를 클릭했을 때도 고려 해봐야할듯.. < 그때는 또 LayerMask로 하던가 뭐 어떻게 조절해봄
+            {
+                owner.abilityMenuUIController.Hide();
+                owner.cameraStateController.SwitchToMapView();
             }
         }
 #endif
