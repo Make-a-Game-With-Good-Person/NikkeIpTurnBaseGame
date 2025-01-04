@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,6 +135,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Peacock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975533579599767343, guid: 2a4715143c58f1046a08c9122692a116,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8264894243887326746, guid: 2a4715143c58f1046a08c9122692a116,
         type: 3}
@@ -372,6 +377,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barbell
       objectReference: {fileID: 0}
+    - target: {fileID: 4656716495911783706, guid: 612ef20d28c642d46973a81375e03603,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -389,6 +399,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Wand
+      objectReference: {fileID: 0}
+    - target: {fileID: 196526257600423265, guid: 3f7d487ab5d7f5744b048c5093de482a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3842738767065847826, guid: 3f7d487ab5d7f5744b048c5093de482a,
         type: 3}
