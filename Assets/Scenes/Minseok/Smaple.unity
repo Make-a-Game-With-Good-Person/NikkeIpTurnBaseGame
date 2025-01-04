@@ -497,6 +497,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wand
       objectReference: {fileID: 0}
+    - target: {fileID: 196526257600423265, guid: 3f7d487ab5d7f5744b048c5093de482a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3842738767065847826, guid: 3f7d487ab5d7f5744b048c5093de482a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -564,6 +569,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Peacock
+      objectReference: {fileID: 0}
+    - target: {fileID: 7975533579599767343, guid: 2a4715143c58f1046a08c9122692a116,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8264894243887326746, guid: 2a4715143c58f1046a08c9122692a116,
         type: 3}

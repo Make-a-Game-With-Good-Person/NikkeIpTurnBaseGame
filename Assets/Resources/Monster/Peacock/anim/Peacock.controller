@@ -107,7 +107,7 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -230823595446929323}
-    m_Position: {x: 290, y: 510, z: 0}
+    m_Position: {x: 290, y: 490, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -273,7 +273,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Stand Up
-  m_Speed: -1
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4809314080909696289}
@@ -286,7 +286,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 893b431afac292444a97145884fe6a1f, type: 2}
+  m_Motion: {fileID: 7400000, guid: af41b75c6f9c5484bb259cc672294587, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
