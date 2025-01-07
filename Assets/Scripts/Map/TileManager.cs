@@ -28,7 +28,7 @@ public class TileManager : MonoBehaviour
     private Dictionary<Vector2Int, Tile> _map = new Dictionary<Vector2Int, Tile>();
     #region ForPathFinding
     private HashSet<Vector2Int> movable = new HashSet<Vector2Int>();
-    //up, down, right, left
+    //Front, Back, Right, Left
     private readonly int[] dx = new int[4] { 0, 0, 1, -1 };
     private readonly int[] dy = new int[4] { 1, -1, 0, 0 };
     private bool didInit = false;
@@ -195,6 +195,24 @@ public class TileManager : MonoBehaviour
         else return -1;
     }
 
+    public EDirection GetDirection_B_to_A(Vector2Int A, Vector2Int B)
+    {
+        EDirection direction = EDirection.Front;
+
+        Vector2Int AtoB = B - A;
+        int min = 100;
+        for(int i = 0; i < 4; i++)
+        {
+            int dot = dx[i] * AtoB.x + dy[i] * AtoB.y;
+
+            if(dot < min)
+            {
+                direction = (EDirection)i;
+            }
+        }
+
+        return direction;
+    }
 
     public void ShowTiles(HashSet<Vector2Int> tiles)
     {

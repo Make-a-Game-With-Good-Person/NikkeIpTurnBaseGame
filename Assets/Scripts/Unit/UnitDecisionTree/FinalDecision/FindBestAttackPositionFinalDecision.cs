@@ -72,12 +72,26 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
             if (skillrange.Contains(unit.tile.coordinate))
             {
                 //일단 적을 공격할수 있는 위치이기 때문에 높은 점수
-                score *= 2.0f;
+                score *= 1.5f;
 
                 float distance = owner.tileManager.GetDistanceBetweenTiles(tilePos, unit.tile.coordinate);
 
                 //거리와 반비례
                 score *= 10.0f / (distance + 10.0f);
+
+                //타겟의 엄폐물이 있는지에 따라 반비례
+                EDirection direction = owner.tileManager.GetDirection_B_to_A(tilePos, unit.tile.coordinate);
+
+                if (owner.tileManager.map[unit.tile.coordinate].halfCovers[(int)direction])
+                {
+                    score *= 0.5f;
+                    break;
+                }
+                if (owner.tileManager.map[tilePos].fullCovers[(int)direction])
+                {
+                    score *= 0.1f;
+                    break;
+                }
             }
         }
 
