@@ -67,62 +67,16 @@ public class AbilityTargetBattleState : BattleState
     private void ShowTargetableTiles() // 스킬 아이콘 버튼을 클릭하면 호출할 함수
     {
         owner.skillIdx = EventSystem.current.currentSelectedGameObject.GetComponent<UnitSkillButton>().skillIndexNumber; // 바로 직전에 클릭한 버튼을 불러옴
-        owner.curSelectedSkill = owner.unitSkillManager.skillList[owner.skillIdx];
-        owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
+        owner.curSelectedSkill = owner.curControlUnit.unitSkills[owner.skillIdx];
+        /*owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) => 
         { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
         );
-        // selectedSkillRangeTile << hash set 
-        // 이 해쉬셋을 키로 tile value를 dictionary에서 찾아 해당 타일에 있는 오브젝트 중 적들만 찾음.
-        // 그 적들에게 레이를 다 쏴서
-        // 레이에 히트한게 내가 찾고자한 적이면 타격 가능, 아니라면 불가능하다고 판단해 해쉬셋에서 인덱스 삭제
-
+        
         HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();
-        RaycastHit hit;
 
-        /*foreach (Unit unit in owner.Units)
-        {
-            targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
-            if (!temp.Contains(targetPos)) continue;
-            if(unit.gameObject.layer == 8)
-            {
-                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
-                dir.Normalize();
-                if (Physics.Raycast(owner.curControlUnit.rayPointer.position, dir, out hit, Mathf.Infinity))
-                {
-                    if(hit.transform.gameObject != unit.gameObject)
-                    {
-                        Debug.Log("맞은게 유닛이 아님");
-                        temp.Remove(targetPos);
-                        continue;
-                    }
-                }
-            }
-        }*/
 
-        /*foreach (Unit unit in owner.Units)
-        {
-            targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
-            if (!temp.Contains(targetPos)) continue;
-
-            if (unit.gameObject.layer == 8)
-            {
-                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
-                dir.Normalize();
-
-                if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
-                {
-                    Debug.Log("타겟 유닛을 성공적으로 맞춤");
-                }
-                else
-                {
-                    Debug.Log("타겟팅 실패, 리스트에서 제거");
-                    temp.Remove(targetPos);
-                }
-            }
-        }*/
-
-        TF.FindTarget(temp);
-        owner.selectedSkillRangeTile = temp;
+        TF.FindTarget(temp);*/
+        owner.selectedSkillRangeTile = owner.curSelectedSkill.GetSkillRange();
         owner.tileManager.ShowTiles(owner.selectedSkillRangeTile);
     }
     #endregion
@@ -131,10 +85,10 @@ public class AbilityTargetBattleState : BattleState
     protected override void Start()
     {
         base.Start();
-        if(TF == null)
+        /*if(TF == null)
         {
             TF = new TargetFinder(owner);
-        }
+        }*/
     }
     protected override void AddListeners()
     {

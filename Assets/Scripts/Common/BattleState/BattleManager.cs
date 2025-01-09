@@ -24,7 +24,6 @@ public class BattleManager : MonoBehaviour
     public ConfirmAbilityTargetUIController confirmAbilityTargetUIController;
     #endregion
 
-    public UnitSkillManager unitSkillManager;
 
     public BATTLESTATE curState = BATTLESTATE.NONE; // 각 battleState를 알기 위해 만든 enum타입 변수
 

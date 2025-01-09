@@ -28,13 +28,14 @@ public class SelectAbilityTargetFinalDecision : FinalDecision
     void SelectTarget()
     {
         owner.curSelectedSkill = owner.curControlUnit.unitSkills[0];
-        owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) =>
+        /*owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) =>
         { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
         );
 
-        HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();
+        HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();*/
+        owner.selectedSkillRangeTile = owner.curSelectedSkill.GetSkillRange();
 
-        targets = targetFinder.FindTargets(temp);
+        targets = targetFinder.FindTargets(owner.selectedSkillRangeTile);
         if (targets.Count == 0) Debug.Log("아무것도 못받아옴");
         float dist = float.MaxValue;
 

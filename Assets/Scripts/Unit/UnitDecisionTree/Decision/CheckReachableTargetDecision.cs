@@ -36,13 +36,14 @@ public class CheckReachableTargetDecision : Decision
     bool FindTargetCount()
     {
         owner.curSelectedSkill = owner.curControlUnit.unitSkills[0];
-        owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) =>
+        /*owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) =>
         { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
         );
         
-        HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();
+        HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();*/
+        owner.selectedSkillRangeTile = owner.curSelectedSkill.GetSkillRange();
 
-        if(targetFinder.FindTargetCount(temp) > 0)
+        if (targetFinder.FindTargetCount(owner.selectedSkillRangeTile) > 0)
         {
             Debug.Log("갯수가 많아요");
             return true;

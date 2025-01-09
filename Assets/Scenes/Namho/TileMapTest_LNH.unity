@@ -282,62 +282,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33310588}
   m_CullTransparentMesh: 1
---- !u!1 &83371137
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 83371138}
-  - component: {fileID: 83371139}
-  m_Layer: 0
-  m_Name: NormalSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &83371138
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83371137}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 860913968}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &83371139
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83371137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
-  skillName: 
-  skillDamage: 0
-  skillVFX: {fileID: 0}
-  skillRange: 10
-  skillHeight: 1
-  skillLevel: 0
-  skillCost: 0
-  owner: {fileID: 0}
-  changeStateWhenActEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &127540948
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,62 +720,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298899461}
   m_CullTransparentMesh: 1
---- !u!1 &299772758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 299772759}
-  - component: {fileID: 299772760}
-  m_Layer: 0
-  m_Name: SpecialSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &299772759
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299772758}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 860913968}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &299772760
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299772758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
-  skillName: 
-  skillDamage: 0
-  skillVFX: {fileID: 0}
-  skillRange: 10
-  skillHeight: 2
-  skillLevel: 0
-  skillCost: 0
-  owner: {fileID: 0}
-  changeStateWhenActEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &306793232
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1049,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &402034468
+--- !u!1 &420741787
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1169,31 +1057,54 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 402034469}
-  m_Layer: 0
-  m_Name: Eunhwa
+  - component: {fileID: 420741788}
+  - component: {fileID: 420741789}
+  m_Layer: 7
+  m_Name: Special
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &402034469
+--- !u!4 &420741788
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 402034468}
+  m_GameObject: {fileID: 420741787}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1112808766}
-  - {fileID: 1466516983}
-  m_Father: {fileID: 1214724740}
+  m_Children: []
+  m_Father: {fileID: 1078041945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &420741789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 420741787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillIcon: {fileID: 0}
+  skillName: 
+  skillDamage: 0
+  skillVFX: {fileID: 0}
+  skillRange: 7
+  skillHeight: 2
+  skillLevel: 0
+  skillCost: 0
+  owner: {fileID: 0}
+  changeStateWhenActEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &429665820
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1539,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1782659389}
-  - {fileID: 1214724740}
   - {fileID: 1280459157}
   - {fileID: 1514588219}
   m_Father: {fileID: 0}
@@ -1655,7 +1565,6 @@ MonoBehaviour:
   cameraStateController: {fileID: 2091874470}
   selectSkillTargetUIController: {fileID: 1418085220}
   confirmAbilityTargetUIController: {fileID: 990071343}
-  unitSkillManager: {fileID: 1214724741}
   curState: 0
   selectedTarget: {fileID: 0}
   curControlUnit: {fileID: 0}
@@ -1921,7 +1830,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &631115054
+--- !u!1 &635765497
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1929,37 +1838,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 631115055}
-  - component: {fileID: 631115056}
-  m_Layer: 0
-  m_Name: NormalSkill
+  - component: {fileID: 635765498}
+  - component: {fileID: 635765499}
+  m_Layer: 7
+  m_Name: Normal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &631115055
+--- !u!4 &635765498
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631115054}
+  m_GameObject: {fileID: 635765497}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1619519793}
+  m_Father: {fileID: 1078041945}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &631115056
+--- !u!114 &635765499
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631115054}
+  m_GameObject: {fileID: 635765497}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
@@ -1969,7 +1878,7 @@ MonoBehaviour:
   skillName: 
   skillDamage: 0
   skillVFX: {fileID: 0}
-  skillRange: 10
+  skillRange: 5
   skillHeight: 1
   skillLevel: 0
   skillCost: 0
@@ -2890,39 +2799,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845748348}
   m_CullTransparentMesh: 1
---- !u!1 &860913967
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 860913968}
-  m_Layer: 0
-  m_Name: Besti
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &860913968
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860913967}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 83371138}
-  - {fileID: 299772759}
-  m_Father: {fileID: 1214724740}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &865181581
 GameObject:
   m_ObjectHideFlags: 0
@@ -3331,7 +3207,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033270626}
   m_CullTransparentMesh: 1
---- !u!1 &1112808765
+--- !u!1 &1078041944
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3339,54 +3215,31 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1112808766}
-  - component: {fileID: 1112808767}
-  m_Layer: 0
-  m_Name: NormalSkill
+  - component: {fileID: 1078041945}
+  m_Layer: 7
+  m_Name: Skill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1112808766
+--- !u!4 &1078041945
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112808765}
+  m_GameObject: {fileID: 1078041944}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 402034469}
+  m_Children:
+  - {fileID: 635765498}
+  - {fileID: 420741788}
+  m_Father: {fileID: 208153888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1112808767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1112808765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94b043383fda7741aa6b70f6e338673, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
-  skillName: 
-  skillDamage: 0
-  skillVFX: {fileID: 0}
-  skillRange: 10
-  skillHeight: 1
-  skillLevel: 0
-  skillCost: 0
-  owner: {fileID: 0}
-  changeStateWhenActEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1120669734
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,62 +3319,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120669734}
   m_CullTransparentMesh: 1
---- !u!1 &1165625932
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1165625933}
-  - component: {fileID: 1165625934}
-  m_Layer: 0
-  m_Name: SpecialSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1165625933
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165625932}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1619519793}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1165625934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1165625932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
-  skillName: 
-  skillDamage: 0
-  skillVFX: {fileID: 0}
-  skillRange: 10
-  skillHeight: 2
-  skillLevel: 0
-  skillCost: 0
-  owner: {fileID: 0}
-  changeStateWhenActEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1173013384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3780,60 +3577,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204170526}
   m_CullTransparentMesh: 1
---- !u!1 &1214724739
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1214724740}
-  - component: {fileID: 1214724741}
-  m_Layer: 0
-  m_Name: SkillManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1214724740
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214724739}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 402034469}
-  - {fileID: 1619519793}
-  - {fileID: 860913968}
-  m_Father: {fileID: 584188847}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1214724741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1214724739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d5df6ee50c12ff49af902c6f2566ebd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillList:
-  - {fileID: 1112808767}
-  - {fileID: 1466516984}
-  - {fileID: 631115056}
-  - {fileID: 1165625934}
-  - {fileID: 83371139}
-  - {fileID: 299772760}
 --- !u!1 &1251909119
 GameObject:
   m_ObjectHideFlags: 0
@@ -4783,62 +4526,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458744976}
   m_CullTransparentMesh: 1
---- !u!1 &1466516982
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1466516983}
-  - component: {fileID: 1466516984}
-  m_Layer: 0
-  m_Name: SpecialSkill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1466516983
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466516982}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 402034469}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1466516984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1466516982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb878863f42d1c64fb06f71fbbe0f85e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillIcon: {fileID: 0}
-  skillName: 
-  skillDamage: 0
-  skillVFX: {fileID: 0}
-  skillRange: 10
-  skillHeight: 2
-  skillLevel: 0
-  skillCost: 0
-  owner: {fileID: 0}
-  changeStateWhenActEnd:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1476640114
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,39 +5201,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1616794586}
   m_CullTransparentMesh: 1
---- !u!1 &1619519792
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1619519793}
-  m_Layer: 0
-  m_Name: Emma
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1619519793
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1619519792}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 631115055}
-  - {fileID: 1165625933}
-  m_Father: {fileID: 1214724740}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1650628134
 GameObject:
   m_ObjectHideFlags: 0
@@ -7474,6 +7128,21 @@ PrefabInstance:
       propertyPath: rayPointer
       value: 
       objectReference: {fileID: 865181582}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: unitSkills.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: unitSkills.Array.data[0]
+      value: 
+      objectReference: {fileID: 635765499}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: unitSkills.Array.data[1]
+      value: 
+      objectReference: {fileID: 420741789}
     - target: {fileID: 6697651328977590504, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: m_Layer
@@ -7549,6 +7218,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1761877034}
+    - targetCorrespondingSourceObject: {fileID: 8236129583300538703, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1078041945}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2239219367257166617, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
