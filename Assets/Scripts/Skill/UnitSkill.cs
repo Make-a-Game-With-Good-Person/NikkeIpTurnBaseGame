@@ -11,6 +11,9 @@ using System;
 /// </summary>
 public class UnitSkill : MonoBehaviour, IAction
 {
+    [SerializeField] Transform skillTargetRangeVFX;
+    [SerializeField] protected float skillTargetRange;
+
     public Image skillIcon;
     public string skillName;
     public float skillDamage; // 이건 나중에 유닛의 공격력과 따로 처리해서 계산해야함
@@ -26,10 +29,13 @@ public class UnitSkill : MonoBehaviour, IAction
     protected BattleManager battleManager;
 
     private TargetFinder targetFinder;
-    private void Start()
+    protected virtual void Start()
     {
         battleManager = FindObjectOfType<BattleManager>();
         targetFinder = new TargetFinder(battleManager);
+
+        skillTargetRangeVFX.transform.localScale = new Vector3(skillTargetRange, 1, skillTargetRange);
+        skillTargetRangeVFX.gameObject.SetActive(false);
     }
 
     public virtual void Action() {
@@ -46,5 +52,20 @@ public class UnitSkill : MonoBehaviour, IAction
 
         return skillRange;
     }
+
+    public void TurnOnTargetRange()
+    {
+        Vector3 pos = battleManager.selectedTarget.transform.position;
+
+        skillTargetRangeVFX.gameObject.SetActive(true);
+        skillTargetRangeVFX.position = pos;
+    }
+
+    public void TurnOffTargetRange()
+    {
+        skillTargetRangeVFX.gameObject.SetActive(false);
+    }
+
+
 
 }

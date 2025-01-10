@@ -63,6 +63,7 @@ public class Unit : Stat , IDamage
 
     public void TakeDamage(float dmg)
     {
+        Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
         this[EStatType.HP] -= dmg;
         if (this[EStatType.HP] <= 0f) Destroy(this);
     }

@@ -61,14 +61,14 @@ public class MoveSequenceState : BattleState
            
         if(owner.tile != owner.curControlUnit.tile)
         {
-            owner.curControlUnit.animator.SetBool("Move", true);
+            //owner.curControlUnit.animator.SetBool("Move", true);
             yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
         }
         else
         {
             yield return null;
         }
-        owner.curControlUnit.animator.SetBool("Move", false);
+        //owner.curControlUnit.animator.SetBool("Move", false);
         owner.curControlUnit.movable = false;
         owner.curControlUnit.move_Re = false; // 임시도 닫아버림
 

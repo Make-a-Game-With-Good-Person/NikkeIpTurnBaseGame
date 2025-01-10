@@ -74,7 +74,9 @@ public class ConfirmAbilityTargetBattleState : BattleState
         {
             base.Enter();
             owner.confirmAbilityTargetUIController.Display();
-            owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
+            //owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
+            owner.cameraStateController.SwitchToQuaterView(owner.selectedTarget.transform);
+            owner.curSelectedSkill.TurnOnTargetRange();
         }
         else
         {
@@ -85,7 +87,11 @@ public class ConfirmAbilityTargetBattleState : BattleState
     }
     public override void Exit()
     {
-        if (!owner.enemyTurn) base.Exit();
+        if (!owner.enemyTurn)
+        {
+            base.Exit();
+            owner.curSelectedSkill.TurnOffTargetRange();
+        }
         else
         {
             EnemyRemoveListeners();

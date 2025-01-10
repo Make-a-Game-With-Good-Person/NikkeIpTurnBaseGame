@@ -7,7 +7,7 @@ public class Cover : MonoBehaviour, IDamage
     [SerializeField] Transform destroyVFX;
     bool isComplete;
     int index;
-    float hp;
+    [SerializeField] float hp;
     int maxHp;
     int def;
     int dmg;
@@ -30,7 +30,7 @@ public class Cover : MonoBehaviour, IDamage
     public void TakeDamage(float dmg)
     {
         if (isComplete) return;
-
+        Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
         hp -= dmg;
         if(hp <= 0)
         {
