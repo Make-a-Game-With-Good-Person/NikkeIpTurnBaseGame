@@ -38,6 +38,8 @@ public class UnitMovement : MonoBehaviour
         //오른쪽 아래 꼭짓점
         tiles.AddRange(GetBresenhamLine(start + Vector2Int.up, end + Vector2Int.up, map));
 
+        tiles.Add(start);
+
         //중복 제거
         return tiles.Distinct().ToList();
     }
@@ -58,22 +60,24 @@ public class UnitMovement : MonoBehaviour
 
         while (true)
         {
-            //끝부분이면 추가하지말고 아웃 -> 어차피 다른 네 꼭짓점을 전부 하기때문에 튀어나갈수 있음
-            if (x == end.x && y == end.y) break;
             line.Add(new Vector2Int(x, y));
 
+            if (x == end.x && y == end.y) break;
+
             int e2 = 2 * err;
-            if (e2 > -dy)
+            if (e2 >= -dy)
             {
                 err -= dy;
                 x += sx;
             }
-            if (e2 < dx)
+            if (e2 <= dx)
             {
                 err += dx;
                 y += sy;
             }
         }
+
+        line.Remove(start);
 
         return line;
     }
@@ -281,15 +285,27 @@ public class UnitMovement : MonoBehaviour
                             List<Vector2Int> tiles = GetExpandedLine(path[calIndex], path[i],map);
 
                             bool check = true;
-                            foreach(Vector2Int node in tiles)
+
+                            //x,y를 길이로 가지는 직사각형
+                            for(int x = Math.Min(path[calIndex].x, path[i].x); x <= Math.Max(path[calIndex].x, path[i].x); x++)
                             {
-                                //높이가 같지 않거나 갈 수 없는 위치라면
-                                if (map.map[node].height != map.map[path[calIndex]].height || (!range.Contains(node) && node != path[0]))
+                                for(int y = Math.Min(path[calIndex].y, path[i].y); y <= Math.Max(path[calIndex].y, path[i].y); y++)
                                 {
-                                    check = false;
-                                    break;
+                                    Vector2Int node = new Vector2Int(x, y);
+                                    //그 직사각형이 직선그린것에 겹칠때만 계산
+                                    if (tiles.Contains(node))
+                                    {
+                                        //높이가 같지 않거나 갈 수 없는 위치라면
+                                        if (map.map[node].height != map.map[path[calIndex]].height || (!range.Contains(node) && node != path[0]))
+                                        {
+                                            check = false;
+                                            break;
+                                        }
+                                    }
                                 }
                             }
+
+                            
 
                             //갈수 있는 경우
                             if (check)
@@ -316,6 +332,7 @@ public class UnitMovement : MonoBehaviour
         }
 
         #endregion
+        //엄폐하는 애니메이션 재생 함수
 
         map.map[path[path.Count - 1]].Place(unit);
     }
