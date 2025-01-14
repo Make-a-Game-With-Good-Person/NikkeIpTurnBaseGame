@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-
+/// <summary>
+/// Jumping의 속도부분을 나중에 바꿀것
+/// </summary>
 public class UnitMovement : MonoBehaviour
 {
     #region Properties
@@ -379,12 +382,18 @@ public class UnitMovement : MonoBehaviour
     {
         //수평 이동용
         Vector3 dir = to.center - unit.gameObject.transform.position;
+        dir.y = 0;
         float dist = dir.magnitude;
         float delta = 0;
         dir.Normalize();
 
         //수직 이동용
-        //Vector3
+
+        //1.0을 나중에 이동속도로 바꿀것
+        float t2 = dist / 1.0f;
+        float t1 = t2 / 2;
+        float A = (-2 * from.size.y) / (t1 * t1);
+        float yVal = 2 * from.size.y / t1;
 
         while (dist > 0)
         {
@@ -400,12 +409,12 @@ public class UnitMovement : MonoBehaviour
             dist -= delta;
 
             //수직 이동
+            yVal += A * Time.deltaTime;
+            unit.gameObject.transform.Translate(Vector3.up * yVal * Time.deltaTime, Space.World);
 
             yield return null;
         }
-
-
-        yield return null;
+        unit.transform.position = to.center;
     }
 
     //위로 기어 올라감
