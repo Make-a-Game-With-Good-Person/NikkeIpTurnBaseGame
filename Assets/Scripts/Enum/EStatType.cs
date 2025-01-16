@@ -4,9 +4,10 @@ public enum EStatType
     HP,
     ATK,
     DEF,
+    Accuracy,
     Avoid,
-    CRIChance,
-    CRIDamage,
+    CRIMul,
+    Visual,
     Jump,
     Move,
     Count

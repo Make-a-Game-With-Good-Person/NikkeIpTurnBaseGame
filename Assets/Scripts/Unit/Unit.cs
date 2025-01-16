@@ -61,6 +61,11 @@ public class Unit : Stat , IDamage
         
     }
 
+    void StatInit()
+    {
+
+    }
+
     public void TakeDamage(float dmg)
     {
         Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");

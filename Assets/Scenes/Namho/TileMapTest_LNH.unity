@@ -6490,7 +6490,7 @@ PrefabInstance:
     - target: {fileID: 1173942345672280616, guid: f1b2ebe44270b9b459014f8665a4a48e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1173942345672280616, guid: f1b2ebe44270b9b459014f8665a4a48e,
         type: 3}
@@ -6500,7 +6500,7 @@ PrefabInstance:
     - target: {fileID: 1173942345672280616, guid: f1b2ebe44270b9b459014f8665a4a48e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1173942345672280616, guid: f1b2ebe44270b9b459014f8665a4a48e,
         type: 3}
@@ -6541,6 +6541,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Peacock_Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777386059564880053, guid: f1b2ebe44270b9b459014f8665a4a48e,
+        type: 3}
+      propertyPath: _stat.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777386059564880053, guid: f1b2ebe44270b9b459014f8665a4a48e,
+        type: 3}
+      propertyPath: _stat.Array.data[9]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777386059564880053, guid: f1b2ebe44270b9b459014f8665a4a48e,
+        type: 3}
+      propertyPath: _stat.Array.data[10]
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7507,7 +7522,7 @@ PrefabInstance:
         type: 3}
       propertyPath: unitSkills.Array.data[0]
       value: 
-      objectReference: {fileID: 673454024}
+      objectReference: {fileID: 635765499}
     - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: unitSkills.Array.data[1]
