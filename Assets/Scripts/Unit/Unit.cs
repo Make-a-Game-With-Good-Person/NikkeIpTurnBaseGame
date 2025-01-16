@@ -6,6 +6,9 @@ public class Unit : Stat , IDamage
 {
     [HideInInspector] public Tile tile;
     [SerializeField] Animator _animator;
+    [Header("유닛의 고유 인덱스"), Space(.5f)]
+    [SerializeField] int unit_index;
+
     public EUnitState unitState; // 적 유닛이 사용할 enum, 나중에 Enemy클래스를 분리할 일이 있으면 그쪽으로 넘기면 됨
     public List<UnitSkill> unitSkills;
     public int index;
@@ -50,9 +53,11 @@ public class Unit : Stat , IDamage
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         ResetAble();
+        StatInit(unit_index);
     }
 
     // Update is called once per frame
@@ -60,10 +65,27 @@ public class Unit : Stat , IDamage
     {
         
     }
-
-    void StatInit()
+    /// <summary>
+    /// 유닛의 스텟을 게임을 시작할 때 초기화하는 함수
+    /// 현재(25.01.16)까진 기본 Json데이터를 읽어와 적용하지만
+    /// 추후 장비나 레벨이 추가될 경우 이 데이터에 추가로 값이 더해져서 반영돼야함
+    /// </summary>
+    /// <param name="index"></param>
+    void StatInit(int index)
     {
-
+        StatStructure unitStat = _unitStatManager.LoadStat(index);
+        this[EStatType.MaxHP] = unitStat.unit_hp;
+        this[EStatType.HP] = this[EStatType.MaxHP];
+        this[EStatType.ATK] = unitStat.unit_attackValue;
+        this[EStatType.DEF] = unitStat.unit_defenceValue;
+        this[EStatType.Accuracy] = unitStat.unit_accuracyValue;
+        this[EStatType.Avoid] = unitStat.unit_avoidValue;
+        this[EStatType.CRIMul] = unitStat.unit_criticalMultiplier;
+        this[EStatType.Visual] = unitStat.unit_visualRange;
+        this[EStatType.Jump] = 1; // 당장 값이 없음
+        this[EStatType.Move] = unitStat.unit_moveRange;
+        
+        Debug.Log("스텟 초기화 완료");
     }
 
     public void TakeDamage(float dmg)

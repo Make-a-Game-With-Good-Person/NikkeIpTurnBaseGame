@@ -6544,6 +6544,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7777386059564880053, guid: f1b2ebe44270b9b459014f8665a4a48e,
         type: 3}
+      propertyPath: unit_index
+      value: 1000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 7777386059564880053, guid: f1b2ebe44270b9b459014f8665a4a48e,
+        type: 3}
       propertyPath: _stat.Array.size
       value: 11
       objectReference: {fileID: 0}
@@ -7513,6 +7518,26 @@ PrefabInstance:
       propertyPath: rayPointer
       value: 
       objectReference: {fileID: 865181582}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: unit_index
+      value: 1000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: _stat.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: _stat.Array.data[9]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
+        type: 3}
+      propertyPath: _stat.Array.data[10]
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3080250778888224992, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: unitSkills.Array.size

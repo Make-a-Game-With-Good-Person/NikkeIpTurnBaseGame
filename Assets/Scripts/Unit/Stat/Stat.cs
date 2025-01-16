@@ -11,6 +11,7 @@ public class Stat : MonoBehaviour
     [SerializeField]private float[] _stat = new float[(int)EStatType.Count];
     #endregion
     #region Protected
+    protected UnitStatManager _unitStatManager;
     #endregion
     #region public
     public float this[EStatType i]
@@ -30,6 +31,10 @@ public class Stat : MonoBehaviour
     #region Private
     #endregion
     #region Protected
+    protected virtual void Start()
+    {
+        _unitStatManager = new UnitStatManager();
+    }
     #endregion
     #region Public
     #endregion

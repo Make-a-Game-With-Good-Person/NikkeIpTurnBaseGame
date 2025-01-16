@@ -20,7 +20,7 @@ public class SingleTargetSkill : UnitSkill
         yield return new WaitForSeconds(2f);
 
         battleManager.cameraStateController.SwitchToQuaterView(battleManager.selectedTarget.transform);
-        battleManager.selectedTarget.GetComponent<IDamage>().TakeDamage(skillDamage);
+        battleManager.selectedTarget.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK]);
         yield return new WaitForSeconds(2f);
 
         //battleManager.cameraStateController.SwitchToQuaterView(owner.transform); // 이건 스킬마다 바인딩해놓은 유닛을 타겟으로 잡는거
