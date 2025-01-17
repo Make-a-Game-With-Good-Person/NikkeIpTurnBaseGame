@@ -1,5 +1,6 @@
 public enum EStatType
 {
+    LV,
     MaxHP,
     HP,
     ATK,

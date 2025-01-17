@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEngine.GraphicsBuffer;
 
 /// <summary>
@@ -74,6 +75,7 @@ public class ConfirmAbilityTargetBattleState : BattleState
         {
             base.Enter();
             owner.confirmAbilityTargetUIController.Display();
+            owner.confirmAbilityTargetUIController.SetExpectedText(owner.curControlUnit, owner.selectedTarget.GetComponent<Unit>());
             //owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
             owner.cameraStateController.SwitchToQuaterView(owner.selectedTarget.transform);
             owner.curSelectedSkill.TurnOnTargetRange();

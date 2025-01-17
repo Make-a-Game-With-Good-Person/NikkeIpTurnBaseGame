@@ -29,13 +29,25 @@ public class UnitSkill : MonoBehaviour, IAction
     protected BattleManager battleManager;
 
     private TargetFinder targetFinder;
+    private BattleCalculator battleCalculator;
     protected virtual void Start()
     {
         battleManager = FindObjectOfType<BattleManager>();
         targetFinder = new TargetFinder(battleManager);
+        battleCalculator = new BattleCalculator();
 
         skillTargetRangeVFX.transform.localScale = new Vector3(skillTargetRange, 1, skillTargetRange);
         skillTargetRangeVFX.gameObject.SetActive(false);
+    }
+
+    protected bool IsActionAccuracy()
+    {
+        return battleCalculator.CheckAccuracy(battleManager.curControlUnit, battleManager.selectedTarget.GetComponent<Unit>());
+    }
+
+    protected bool IsActionCritical()
+    {
+        return battleCalculator.CheckCritical(battleManager.curControlUnit, battleManager.selectedTarget.GetComponent<Unit>());
     }
 
     public virtual void Action() {

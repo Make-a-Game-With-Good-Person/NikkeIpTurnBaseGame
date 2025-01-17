@@ -74,6 +74,7 @@ public class Unit : Stat , IDamage
     void StatInit(int index)
     {
         StatStructure unitStat = _unitStatManager.LoadStat(index);
+        this[EStatType.LV] = unitStat.unit_level;
         this[EStatType.MaxHP] = unitStat.unit_hp;
         this[EStatType.HP] = this[EStatType.MaxHP];
         this[EStatType.ATK] = unitStat.unit_attackValue;
