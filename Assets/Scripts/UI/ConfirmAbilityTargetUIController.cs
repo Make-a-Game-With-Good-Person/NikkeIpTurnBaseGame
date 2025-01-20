@@ -32,7 +32,7 @@ public class ConfirmAbilityTargetUIController : MonoBehaviour
 
     private void Start()
     {
-        battleCalculator = new BattleCalculator();
+        battleCalculator = FindObjectOfType<BattleCalculator>();
         Hide();
     }
 }

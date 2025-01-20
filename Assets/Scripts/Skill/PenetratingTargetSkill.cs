@@ -56,7 +56,19 @@ public class PenetratingTargetSkill : UnitSkill
 
         foreach (Collider target in targets)
         {
-            target.GetComponent<IDamage>().TakeDamage(skillDamage);
+            if (IsActionAccuracy())
+            {
+                Debug.Log("명중");
+                if (IsActionCritical())
+                {
+                    Debug.Log("크리티컬!");
+                    target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK] * battleManager.curControlUnit[EStatType.CRIMul]);
+                }
+                else
+                {
+                    target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK]);
+                }
+            }
         }
 
         DebugDrawBox(boxCenter, boxSize, boxRotation, Color.red, 2f);

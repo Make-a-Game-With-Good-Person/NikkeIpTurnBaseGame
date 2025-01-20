@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleCalculator
+public class BattleCalculator : MonoBehaviour
 {
     public double CalculAccuracy(Unit attacker, Unit target)
     {

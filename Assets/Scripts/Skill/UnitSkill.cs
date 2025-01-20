@@ -34,7 +34,7 @@ public class UnitSkill : MonoBehaviour, IAction
     {
         battleManager = FindObjectOfType<BattleManager>();
         targetFinder = new TargetFinder(battleManager);
-        battleCalculator = new BattleCalculator();
+        battleCalculator = FindObjectOfType<BattleCalculator>();
 
         skillTargetRangeVFX.transform.localScale = new Vector3(skillTargetRange, 1, skillTargetRange);
         skillTargetRangeVFX.gameObject.SetActive(false);

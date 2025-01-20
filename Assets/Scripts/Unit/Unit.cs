@@ -93,7 +93,16 @@ public class Unit : Stat , IDamage
     {
         Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
         this[EStatType.HP] -= dmg;
-        if (this[EStatType.HP] <= 0f) Destroy(this);
+        
+        if (this[EStatType.HP] <= 0f)
+        {
+            //if(animator != null) animator.SetTrigger("Dead");
+            Destroy(this, 3f);
+        }
+        else
+        {
+            //if(animator != null) animator.SetTrigger("TakeDamage");
+        }
     }
 
     public void ResetAble()
