@@ -388,15 +388,15 @@ public class UnitMovement : MonoBehaviour
         dir.Normalize();
 
         //수직 이동용
-
         //1.0을 나중에 이동속도로 바꿀것
         float t2 = dist / 1.0f;
-        float t1 = t2 / 2;
-        float A = (-2 * from.size.y) / (t1 * t1);
-        float yVal = 2 * from.size.y / t1;
+        float t1 = 0;
+        float maxHeight = Mathf.Max(from.height, to.height) + map.tileSize.y;
 
         while (dist > 0)
         {
+            t1 += Time.deltaTime;
+            float val = t1 / t2;
             //수평 이동
             delta = 1.0f * Time.deltaTime;
 
@@ -409,8 +409,21 @@ public class UnitMovement : MonoBehaviour
             dist -= delta;
 
             //수직 이동
-            yVal += A * Time.deltaTime;
-            unit.gameObject.transform.Translate(Vector3.up * yVal * Time.deltaTime, Space.World);
+            float height = 0;
+            if (val <= 0.5f)
+            {
+                // 위로 이동
+                val *= 2;
+                height = -1 * (maxHeight - from.height) * val * (val - 2) + from.height;
+            }
+            else
+            {
+                // 아래로 이동
+                val = 2 * (1.0f - val);
+                height = -1 * (maxHeight - to.height) * val * (val - 2) + to.height;
+            }
+
+            unit.transform.position = new Vector3(unit.transform.position.x, height, unit.transform.position.z);
 
             yield return null;
         }
@@ -420,12 +433,13 @@ public class UnitMovement : MonoBehaviour
     //위로 기어 올라감
     protected IEnumerator Climbing(Tile from ,Tile to, TileManager map)
     {
-        yield return null;
+        yield return StartCoroutine(Jumping(from,to,map));
     }
 
     protected IEnumerator Turning(Tile to)
     {
         Vector3 dir = to.center - unit.transform.position;
+        dir.y = 0;
         
 
         float angle = Vector3.Angle(unit.transform.forward, dir);
