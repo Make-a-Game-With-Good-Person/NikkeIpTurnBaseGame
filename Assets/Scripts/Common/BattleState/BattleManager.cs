@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BattleManager : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class BattleManager : MonoBehaviour
     public int skillIdx;
     #endregion
     #region Events
+    public UnityEvent RoundEndEvent = new UnityEvent();
     #endregion
     #endregion
 

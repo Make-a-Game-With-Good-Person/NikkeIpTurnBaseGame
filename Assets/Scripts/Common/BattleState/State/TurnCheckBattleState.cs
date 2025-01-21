@@ -101,6 +101,10 @@ public class TurnCheckBattleState : BattleState
             owner.curControlUnit = SelectPlayableUnit(owner.enemyTurn);
             if (owner.curControlUnit == null)
             {
+                if (owner.enemyTurn)
+                {
+                    owner.RoundEndEvent?.Invoke();
+                }
                 owner.enemyTurn = !owner.enemyTurn;
                 ResetTurn(owner.enemyTurn);
             }
