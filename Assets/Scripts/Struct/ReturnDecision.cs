@@ -8,7 +8,11 @@ public struct ReturnDecision
     {
         Action,
         Move,
-        Pass
+        Pass,
+        FarTargetAttack,
+        NearTargetAttack,
+        Summon,
+        AttackPass
     }
 
     public DecisionType type;

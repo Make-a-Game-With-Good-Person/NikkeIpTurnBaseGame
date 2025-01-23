@@ -284,23 +284,55 @@ public class UnitSelectBattleState : BattleState
         else
         {
             //컴퓨터의 AI를 호출해서 결과를 냄
-            owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
-
-            switch (owner.curReturnDecision.type)
+            if (owner.curControlUnit.unitType == UnitType.Enemy)
             {
-                case ReturnDecision.DecisionType.Action:
-                    owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
-                    break;
-                case ReturnDecision.DecisionType.Pass:
-                    owner.curControlUnit.attackable = false;
-                    owner.curControlUnit.movable = false;
-                    owner.curControlUnit = null;
-                    owner.stateMachine.ChangeState<TurnCheckBattleState>();
-                    break;
-                case ReturnDecision.DecisionType.Move:
-                    owner.stateMachine.ChangeState<MoveTargetBattleState>();
-                    break;
+                owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
+
+                switch (owner.curReturnDecision.type)
+                {
+                    case ReturnDecision.DecisionType.Action:
+                        owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();
+                        break;
+                    case ReturnDecision.DecisionType.Pass:
+                        owner.curControlUnit.attackable = false;
+                        owner.curControlUnit.movable = false;
+                        owner.curControlUnit = null;
+                        owner.stateMachine.ChangeState<TurnCheckBattleState>();
+                        break;
+                    case ReturnDecision.DecisionType.Move:
+                        owner.stateMachine.ChangeState<MoveTargetBattleState>();
+                        break;
+                }
             }
+            else if(owner.curControlUnit.unitType == UnitType.Boss)
+            {
+                owner.curReturnDecision = owner.curControlUnit.GetComponent<BossDecisionTree>().Run();
+
+                switch (owner.curReturnDecision.type)
+                {
+                    case ReturnDecision.DecisionType.FarTargetAttack: // attackable을 false로 turnTwice는 변동 없음
+                    case ReturnDecision.DecisionType.NearTargetAttack:
+                        owner.stateMachine.ChangeState<SelectSkillTargetBattleState>();// attackable을 false로 turnTwice는 변동 없음
+                        break;
+                    case ReturnDecision.DecisionType.Summon:
+                        owner.curControlUnit.GetComponent<Boss>().turnTwice = false;
+                        owner.stateMachine.ChangeState<BossSummonState>(); // turnTwice를 false로 바꿈
+                        break;
+                    case ReturnDecision.DecisionType.AttackPass:// turnTwice를 false로 바꿈
+                        owner.curControlUnit.attackable = false;
+                        owner.stateMachine.ChangeState<TurnCheckBattleState>();
+                        break;
+                    case ReturnDecision.DecisionType.Pass:// turnTwice를 false로 바꿈
+                        owner.curControlUnit.attackable = false;
+                        owner.curControlUnit.GetComponent<Boss>().turnTwice = false;
+                        owner.curControlUnit = null;
+                        owner.stateMachine.ChangeState<TurnCheckBattleState>();
+                        break;
+
+                }
+            }
+            
+            
             //ChangeState를 여기서 호출
         }
     }

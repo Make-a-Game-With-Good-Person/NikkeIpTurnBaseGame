@@ -2,16 +2,14 @@ using DecisionTree;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Linq;
 
-public class SelectAbilityTargetFinalDecision : FinalDecision
+public class BossAttackFartherTargetFinalDecision : FinalDecision
 {
     ReturnDecision returnDecision;
     BattleManager owner;
     List<Unit> targets;
 
-    public SelectAbilityTargetFinalDecision(ReturnDecision returnDecision, BattleManager owner)
+    public BossAttackFartherTargetFinalDecision(ReturnDecision returnDecision, BattleManager owner)
     {
         this.returnDecision = returnDecision;
         this.owner = owner;
@@ -22,38 +20,32 @@ public class SelectAbilityTargetFinalDecision : FinalDecision
         SelectTarget();
         return returnDecision;
     }
-
     void SelectTarget()
     {
         owner.curSelectedSkill = owner.curControlUnit.unitSkills[0];
-        /*owner.selectedSkillRangeTile = owner.tileManager.SearchTile(owner.curControlUnit.tile.coordinate, (from, to) =>
-        { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
-        );
-
-        HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();*/
         owner.selectedSkillRangeTile = owner.curSelectedSkill.GetSkillRange();
 
         targets = owner.curSelectedSkill.targetFinder.FindTargets(owner.selectedSkillRangeTile);
         if (targets.Count == 0) Debug.Log("아무것도 못받아옴");
-        float dist = float.MaxValue;
+        float dist = float.MinValue;
 
-        // 현재는 가장 가까운 적을 타겟하도록 설정
-        for(int i = 0; i < targets.Count; i++)
+        // 가장 먼 적을 타겟하도록 설정
+        for (int i = 0; i < targets.Count; i++)
         {
             float targetDist = Vector3.Distance(owner.curControlUnit.transform.position, targets[i].transform.position);
 
-            if(dist > targetDist)
+            if (dist < targetDist)
             {
                 dist = targetDist;
                 returnDecision.target = targets[i];
             }
         }
 
-        if(returnDecision.target != null)
+        if (returnDecision.target != null)
         {
             Debug.Log("적이 " + returnDecision.target.gameObject + "를 타겟으로 지정");
             owner.selectedTarget = returnDecision.target.gameObject;
-            returnDecision.type = ReturnDecision.DecisionType.Action;
+            returnDecision.type = ReturnDecision.DecisionType.FarTargetAttack;
         }
         else
         {

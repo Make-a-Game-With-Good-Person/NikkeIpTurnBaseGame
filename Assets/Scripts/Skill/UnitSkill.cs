@@ -28,7 +28,7 @@ public class UnitSkill : MonoBehaviour, IAction
 
     protected BattleManager battleManager;
 
-    private TargetFinder targetFinder;
+    public TargetFinder targetFinder;
     private BattleCalculator battleCalculator;
     protected virtual void Start()
     {

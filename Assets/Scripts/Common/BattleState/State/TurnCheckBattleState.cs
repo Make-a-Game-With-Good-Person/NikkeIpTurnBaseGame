@@ -95,6 +95,32 @@ public class TurnCheckBattleState : BattleState
         yield return null;
 
         //승리조건 체크함수
+        if(owner.curControlUnit.unitType == UnitType.Boss)
+        {
+            if (owner.enemyTurn)
+            {
+                owner.RoundEndEvent?.Invoke();
+            }
+
+            if (owner.curControlUnit.GetComponent<Boss>().turnTwice) // 턴 재진입할때
+            {
+                owner.stateMachine.ChangeState<UnitSelectBattleState>(); // 현재 컨트롤하고 있는 보스를 null로 안바꾸고 다시 유닛셀렉트로 재진입
+            }
+            else
+            {
+                owner.curControlUnit.GetComponent<Boss>().turnTwice = true;
+                owner.curControlUnit = SelectPlayableUnit(owner.enemyTurn);
+                if (owner.curControlUnit == null)
+                {
+                    if (owner.enemyTurn)
+                    {
+                        owner.RoundEndEvent?.Invoke();
+                    }
+                    owner.enemyTurn = !owner.enemyTurn;
+                    ResetTurn(owner.enemyTurn);
+                }
+            }
+        }
 
         if (owner.curControlUnit == null || !(owner.curControlUnit.attackable || owner.curControlUnit.movable))
         {

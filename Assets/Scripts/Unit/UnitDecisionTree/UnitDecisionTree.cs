@@ -24,7 +24,6 @@ public class UnitDecisionTree : MonoBehaviour
 
     #region BattleManager, ReturnDecision, TargetFinder
     BattleManager owner;
-    TargetFinder targetFinder;
     public ReturnDecision returnDecision;
     #endregion
 
@@ -33,20 +32,19 @@ public class UnitDecisionTree : MonoBehaviour
     private void Awake()
     {
         owner = FindObjectOfType<BattleManager>();
-        targetFinder = new TargetFinder(owner);
         returnDecision = new ReturnDecision();
     }
 
     private void Start()
     {
         turnPassFinalDecision = new TurnPassFinalDecision(returnDecision, owner);
-        selectAbilityTargetFinalDecision = new SelectAbilityTargetFinalDecision(returnDecision, owner, targetFinder);
+        selectAbilityTargetFinalDecision = new SelectAbilityTargetFinalDecision(returnDecision, owner);
         findBestAttackPositionFinalDecision = new FindBestAttackPositionFinalDecision(returnDecision, owner);
         findBestCoverPositionFinalDecision = new FindBestCoverPositionFinalDecision(returnDecision, owner);
 
         checkChasingStateDecision = new CheckChasingStateDecision(owner, findBestAttackPositionFinalDecision, findBestCoverPositionFinalDecision);
         checkMoveTurnDecision = new CheckMoveTurnDecision(owner, checkChasingStateDecision, turnPassFinalDecision);
-        checkReachableTargetDecision = new CheckReachableTargetDecision(owner, targetFinder,selectAbilityTargetFinalDecision, checkMoveTurnDecision);
+        checkReachableTargetDecision = new CheckReachableTargetDecision(owner,selectAbilityTargetFinalDecision, checkMoveTurnDecision);
         checkAttackTurnDecision = new CheckAttackTurnDecision(owner, checkReachableTargetDecision, checkMoveTurnDecision);
         checkTurnDecision = new CheckTurnDecision(owner, checkAttackTurnDecision, turnPassFinalDecision);
 

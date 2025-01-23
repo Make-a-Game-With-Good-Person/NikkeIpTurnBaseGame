@@ -12,13 +12,11 @@ using System.Linq;
 public class CheckReachableTargetDecision : Decision
 {
     BattleManager owner;
-    TargetFinder targetFinder;
 
-    public CheckReachableTargetDecision(BattleManager owner, TargetFinder targetFinder, DecisionTreeNode trueNode, DecisionTreeNode falseNode) :
+    public CheckReachableTargetDecision(BattleManager owner, DecisionTreeNode trueNode, DecisionTreeNode falseNode) :
         base(trueNode, falseNode)
     {
         this.owner = owner;
-        this.targetFinder = targetFinder;
     }
 
     public override DecisionTreeNode GetBranch()
@@ -43,7 +41,7 @@ public class CheckReachableTargetDecision : Decision
         HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();*/
         owner.selectedSkillRangeTile = owner.curSelectedSkill.GetSkillRange();
 
-        if (targetFinder.FindTargetCount(owner.selectedSkillRangeTile) > 0)
+        if (owner.curSelectedSkill.targetFinder.FindTargetCount(owner.selectedSkillRangeTile) > 0)
         {
             Debug.Log("갯수가 많아요");
             return true;
