@@ -38,6 +38,9 @@ public class UnitSkill : MonoBehaviour, IAction
 
         skillTargetRangeVFX.transform.localScale = new Vector3(skillTargetRange, 1, skillTargetRange);
         skillTargetRangeVFX.gameObject.SetActive(false);
+
+        Debug.Log($"{this.transform.parent.parent.gameObject.name}의 스킬 Start 호출");
+        Debug.Log($"battleManager : {battleManager}, targetFinder {targetFinder}, battleCalculator {battleCalculator}");
     }
 
     protected bool IsActionAccuracy()

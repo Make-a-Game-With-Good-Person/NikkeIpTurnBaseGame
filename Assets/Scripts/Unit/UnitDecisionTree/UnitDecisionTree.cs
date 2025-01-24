@@ -54,7 +54,6 @@ public class UnitDecisionTree : MonoBehaviour
         SetDecisionTree(defaultDecisionTree);
     }
 
-
     public ReturnDecision Run()
     {
         return ((FinalDecision)decisionTree.MakeDecision()).Execute();
