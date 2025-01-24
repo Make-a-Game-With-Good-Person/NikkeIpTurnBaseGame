@@ -18,10 +18,12 @@ public class BossCheckAttackTurnDecision : Decision
     {
         if (boss.attackable)
         {
+            Debug.Log($"보스가 공격이 가능해 {_trueNode}로 보냄");
             return _trueNode;
         }
         else
         {
+            Debug.Log($"보스가 공격이 불가능해 {_falseNode}로 보냄");
             return _falseNode;
         }
     }

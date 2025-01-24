@@ -11,7 +11,6 @@ public class Unit : Stat , IDamage
 
     public EUnitState unitState; // 적 유닛이 사용할 enum, 나중에 Enemy클래스를 분리할 일이 있으면 그쪽으로 넘기면 됨
     public List<UnitSkill> unitSkills;
-    public int index;
     public Transform shoulder;
     public Transform rayPointer; // 레이 발사 지점
     public Transform rayEnter; // 레이가 들어오는 지점
@@ -50,6 +49,14 @@ public class Unit : Stat , IDamage
         set
         {
             _movable = value;
+        }
+    }
+
+    public int index
+    {
+        get
+        {
+            return unit_index;
         }
     }
 

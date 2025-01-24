@@ -43,7 +43,7 @@ public class BossAttackFartherTargetFinalDecision : FinalDecision
 
         if (returnDecision.target != null)
         {
-            Debug.Log("적이 " + returnDecision.target.gameObject + "를 타겟으로 지정");
+            Debug.Log("적이 " + returnDecision.target.gameObject + "를 가장 먼 타겟으로 지정");
             owner.selectedTarget = returnDecision.target.gameObject;
             returnDecision.type = ReturnDecision.DecisionType.FarTargetAttack;
         }

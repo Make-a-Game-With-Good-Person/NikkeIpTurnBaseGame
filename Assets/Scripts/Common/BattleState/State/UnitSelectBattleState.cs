@@ -131,7 +131,7 @@ public class UnitSelectBattleState : BattleState
         }
 
         owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
-
+        Debug.Log($"현재 컨트롤 중인 유닛은 {owner.curControlUnit}");
     }
     void SelectPlayableUnit(bool EnemyTurn)
     {
@@ -271,7 +271,7 @@ public class UnitSelectBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
-
+        Debug.Log($"{owner.curControlUnit}의 processingState..");
         //요구사항 10번 구현
         if (!owner.enemyTurn)
         {

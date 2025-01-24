@@ -7,14 +7,20 @@ using static UnityEngine.UI.CanvasScaler;
 
 public class BossSummonSkill : UnitSkill
 {
-    public List<Vector3> summonPoints;
+    public List<Transform> summonPoints;
     public List<Unit> monsters;
     [SerializeField] int coolTime;
     public int curCoolTime = 0;
+    bool coolCheck = false;
     void CoolTimeCheck()
     {
+        if (!coolCheck) return;
         curCoolTime++;
-        if (curCoolTime >= coolTime) curCoolTime = 0;
+        if (curCoolTime >= coolTime)
+        {
+            coolCheck = false;
+            curCoolTime = 0;
+        }
     }
 
     protected override void Start()
@@ -31,6 +37,7 @@ public class BossSummonSkill : UnitSkill
     }
     IEnumerator SkillAction()
     {
+        coolCheck = true;
         battleManager.cameraStateController.SwitchToQuaterView(battleManager.curControlUnit.transform); // 이건 배틀 매니저가 제어중인 유닛을 타겟으로 잡는거 둘이 똑같긴 함
         Debug.Log(battleManager.curControlUnit.gameObject.name + "의 몬스터 소환 스킬 발동!");
         //battleManager.curControlUnit.animator.SetTrigger("Summon");
@@ -50,15 +57,15 @@ public class BossSummonSkill : UnitSkill
 
         for(int i = 0; i < summonPoints.Count; i++)
         {
-            Tile tile = battleManager.tileManager.GetTile(summonPoints[i]);
+            Tile tile = battleManager.tileManager.GetTile(summonPoints[i].position);
             int rnd = Random.Range(0, 3);
             if((tile.tileState & TileState.Placeable) > 0) // 해당 위치에 놓을 수 있다면
             {
-                obj = SummonMonster(monsters[rnd], summonPoints[i], tile);
+                obj = SummonMonster(monsters[rnd], summonPoints[i].position, tile);
             }
             else // 해당 위치에 놓을수 없다면
             {
-                Vector3 placablePos = FindPlacableCoordinate(summonPoints[i]); // 주변 타일에서 놓을 수 있는 위치를 찾아
+                Vector3 placablePos = FindPlacableCoordinate(summonPoints[i].position); // 주변 타일에서 놓을 수 있는 위치를 찾아
                 if (placablePos == Vector3.zero) continue; // 만약 주변 8방향이 다 막혀있으면 그냥 소환하지마
 
                 tile = battleManager.tileManager.GetTile(placablePos);

@@ -22,7 +22,7 @@ public class UnitDecisionTree : MonoBehaviour
     CheckChasingStateDecision checkChasingStateDecision;
     #endregion
 
-    #region BattleManager, ReturnDecision, TargetFinder
+    #region BattleManager, ReturnDecision
     BattleManager owner;
     public ReturnDecision returnDecision;
     #endregion
@@ -32,7 +32,8 @@ public class UnitDecisionTree : MonoBehaviour
     private void Awake()
     {
         owner = FindObjectOfType<BattleManager>();
-        returnDecision = new ReturnDecision();
+        //returnDecision = new ReturnDecision();
+
     }
 
     private void Start()
@@ -44,7 +45,7 @@ public class UnitDecisionTree : MonoBehaviour
 
         checkChasingStateDecision = new CheckChasingStateDecision(owner, findBestAttackPositionFinalDecision, findBestCoverPositionFinalDecision);
         checkMoveTurnDecision = new CheckMoveTurnDecision(owner, checkChasingStateDecision, turnPassFinalDecision);
-        checkReachableTargetDecision = new CheckReachableTargetDecision(owner,selectAbilityTargetFinalDecision, checkMoveTurnDecision);
+        checkReachableTargetDecision = new CheckReachableTargetDecision(owner, selectAbilityTargetFinalDecision, checkMoveTurnDecision);
         checkAttackTurnDecision = new CheckAttackTurnDecision(owner, checkReachableTargetDecision, checkMoveTurnDecision);
         checkTurnDecision = new CheckTurnDecision(owner, checkAttackTurnDecision, turnPassFinalDecision);
 
@@ -52,6 +53,7 @@ public class UnitDecisionTree : MonoBehaviour
         defaultDecisionTree = checkTurnDecision;
         SetDecisionTree(defaultDecisionTree);
     }
+
 
     public ReturnDecision Run()
     {
