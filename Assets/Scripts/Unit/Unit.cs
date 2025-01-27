@@ -8,6 +8,7 @@ public class Unit : Stat , IDamage
     [SerializeField] Animator _animator;
     [Header("유닛의 고유 인덱스"), Space(.5f)]
     [SerializeField] int unit_index;
+    BattleManager owner;
 
     public EUnitState unitState; // 적 유닛이 사용할 enum, 나중에 Enemy클래스를 분리할 일이 있으면 그쪽으로 넘기면 됨
     public List<UnitSkill> unitSkills;
@@ -66,6 +67,7 @@ public class Unit : Stat , IDamage
         base.Start();
         ResetAble();
         StatInit(unit_index);
+        owner = FindObjectOfType<BattleManager>();
     }
 
     // Update is called once per frame
@@ -105,7 +107,7 @@ public class Unit : Stat , IDamage
         if (this[EStatType.HP] <= 0f)
         {
             //if(animator != null) animator.SetTrigger("Dead");
-            Destroy(this, 3f);
+            OnDead();
         }
         else
         {
@@ -119,6 +121,11 @@ public class Unit : Stat , IDamage
         attack_Re = true;
         _movable = true;
         move_Re = true;
+    }
+
+    private void OnDead()
+    {
+        owner.OnUnitDead(this);
     }
 
     private void OnDestroy()

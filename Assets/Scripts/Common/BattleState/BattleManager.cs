@@ -83,6 +83,11 @@ public class BattleManager : MonoBehaviour
     #endregion
 
     #region EventHandlers
+    public void OnUnitDead(Unit unit)
+    {
+        Units.Remove(unit);
+        EnemyUnits.Remove(unit);
+    }
     #endregion
 
     #region Coroutines

@@ -79,10 +79,10 @@ public class BossSummonSkill : UnitSkill
     {
         GameObject obj = Instantiate(monster.gameObject, pos, Quaternion.identity, null);
 
-        monster.transform.position = tile.center;
+        obj.transform.position = tile.center;
         //여기에 owner에 유닛을 등록하는 코드 넣어야함
-        tile.Place(monster);
-        battleManager.EnemyUnits.Add(monster);
+        tile.Place(obj.GetComponent<Unit>());
+        battleManager.EnemyUnits.Add(obj.GetComponent<Unit>());
         return obj;
     }
 

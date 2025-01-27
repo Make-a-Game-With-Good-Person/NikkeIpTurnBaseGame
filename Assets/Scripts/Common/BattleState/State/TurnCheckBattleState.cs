@@ -20,6 +20,23 @@ public class TurnCheckBattleState : BattleState
 
     #region Methods
     #region Private
+    private int CheckWin()
+    {
+        //계속 진행 0, 이겼을때 1, 졌을때 2 return
+        //졌을때
+        if (owner.Units.Count == 0)
+        {
+            return 2;
+        }
+        //이겼을때
+        if(owner.EnemyUnits.Count == 0)
+        {
+            return 1;
+        }
+        //아직 승리도 패배도 안함
+        return 0;
+    }
+
     private Unit SelectPlayableUnit(bool EnemyTurn)
     {
         Unit ret = null;
@@ -93,6 +110,21 @@ public class TurnCheckBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
+
+        switch (CheckWin())
+        {
+            //계속 진행 0, 이겼을때 1, 졌을때 2 return
+            case 0:
+                break;
+            case 1:
+                Debug.Log("승리");
+                yield break;
+                break;
+            case 2:
+                Debug.Log("패배");
+                yield break;
+                break;
+        }
 
         //승리조건 체크함수
         if(owner.curControlUnit != null && owner.curControlUnit.unitType == UnitType.Boss)
