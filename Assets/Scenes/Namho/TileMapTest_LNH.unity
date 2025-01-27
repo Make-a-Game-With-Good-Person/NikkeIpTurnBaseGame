@@ -1707,6 +1707,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f20b25f3845dc48ab0e80dca01ab51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GroundMask:
+    serializedVersion: 2
+    m_Bits: 1552
   mouseOverEvent:
     m_PersistentCalls:
       m_Calls: []
