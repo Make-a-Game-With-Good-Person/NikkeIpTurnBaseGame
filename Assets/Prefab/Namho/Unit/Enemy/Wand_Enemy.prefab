@@ -170,7 +170,6 @@ GameObject:
   - component: {fileID: 2051329804006143454}
   - component: {fileID: 3222439223698904369}
   - component: {fileID: 3765718494976155030}
-  - component: {fileID: 7944571305657563942}
   m_Layer: 8
   m_Name: Wand_Enemy
   m_TagString: Enemy
@@ -297,18 +296,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &7944571305657563942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3391279788261570924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed612f05f970c234fa6ffb12dfab2f4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3914297032876114041
 GameObject:
   m_ObjectHideFlags: 0

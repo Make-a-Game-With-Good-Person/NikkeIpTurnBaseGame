@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.UI.CanvasScaler;
 
 public class BossSummonSkill : UnitSkill
 {
@@ -111,6 +109,7 @@ public class BossSummonSkill : UnitSkill
             if ((battleManager.tileManager.GetTile(placablePos).tileState & TileState.Placeable) > 0) // 해당 위치에 놓을 수 있다면
             {
                 placable = true;
+                Debug.Log($"놓을수 있는 자리를 {dir}번째만에 찾아냄");
                 break;
             }
         }

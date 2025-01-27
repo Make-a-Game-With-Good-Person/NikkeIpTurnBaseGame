@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour
     public CameraStateController cameraStateController; // 임시로 public으로 함
     public SelectSkillTargetUIController selectSkillTargetUIController;
     public ConfirmAbilityTargetUIController confirmAbilityTargetUIController;
+    public DecisionTreeManager decisionTreeManager;
     #endregion
 
 

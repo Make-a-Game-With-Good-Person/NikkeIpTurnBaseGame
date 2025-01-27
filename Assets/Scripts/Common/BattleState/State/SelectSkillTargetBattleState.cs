@@ -151,6 +151,8 @@ public class SelectSkillTargetBattleState : BattleState
             owner.selectSkillTargetUIController.cancelButton.onClick.RemoveListener(OnCancelButton);
             foreach (Unit unit in owner.EnemyUnits)
             {
+                if (unit == null) continue;
+
                 if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
                 {
                     if (unit != null) unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);

@@ -120,6 +120,11 @@ public class Unit : Stat , IDamage
         _movable = true;
         move_Re = true;
     }
+
+    private void OnDestroy()
+    {
+        Debug.Log($"{this.gameObject.name}¿Ã ªË¡¶µ ");
+    }
     #region Anim Events
     #endregion
 }

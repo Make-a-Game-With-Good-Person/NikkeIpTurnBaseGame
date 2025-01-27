@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// 게임 시작하고 유닛 선택하는 상태
@@ -283,10 +284,12 @@ public class UnitSelectBattleState : BattleState
         }
         else
         {
+            owner.curReturnDecision = owner.decisionTreeManager.RunAI(owner.curControlUnit.unitType);
+
             //컴퓨터의 AI를 호출해서 결과를 냄
             if (owner.curControlUnit.unitType == UnitType.Enemy)
             {
-                owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
+                //owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
 
                 switch (owner.curReturnDecision.type)
                 {
@@ -306,7 +309,7 @@ public class UnitSelectBattleState : BattleState
             }
             else if(owner.curControlUnit.unitType == UnitType.Boss)
             {
-                owner.curReturnDecision = owner.curControlUnit.GetComponent<BossDecisionTree>().Run();
+                //owner.curReturnDecision = owner.curControlUnit.GetComponent<BossDecisionTree>().Run();
 
                 switch (owner.curReturnDecision.type)
                 {

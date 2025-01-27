@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -531,6 +531,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1409018336117693389}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &247190451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 247190452}
+  - component: {fileID: 247190453}
+  m_Layer: 0
+  m_Name: Unit_Boss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &247190452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247190451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1546028814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &247190453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247190451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11bfe7cd9e99ff439717100dd7adae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &274401052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,6 +1971,7 @@ Transform:
   - {fileID: 1280459157}
   - {fileID: 1514588219}
   - {fileID: 193627917}
+  - {fileID: 1546028814}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &584188848
@@ -1951,6 +1996,7 @@ MonoBehaviour:
   cameraStateController: {fileID: 2091874470}
   selectSkillTargetUIController: {fileID: 1418085220}
   confirmAbilityTargetUIController: {fileID: 990071343}
+  decisionTreeManager: {fileID: 1546028815}
   curState: 0
   selectedTarget: {fileID: 0}
   curControlUnit: {fileID: 0}
@@ -5935,6 +5981,54 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5388523424984147924}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1546028813
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1546028814}
+  - component: {fileID: 1546028815}
+  m_Layer: 0
+  m_Name: DecisionTreeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1546028814
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546028813}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1820276319}
+  - {fileID: 247190452}
+  m_Father: {fileID: 584188847}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1546028815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546028813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45ec52087a8adb147b4be9d1ef2d712c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyDecisionTree: {fileID: 1820276320}
+  bossDecisionTree: {fileID: 247190453}
 --- !u!1 &1551646776
 GameObject:
   m_ObjectHideFlags: 0
@@ -6838,6 +6932,50 @@ MonoBehaviour:
   tileObjectMask:
     serializedVersion: 2
     m_Bits: 1536
+--- !u!1 &1820276318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1820276319}
+  - component: {fileID: 1820276320}
+  m_Layer: 0
+  m_Name: Unit_Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1820276319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820276318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1546028814}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1820276320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1820276318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed612f05f970c234fa6ffb12dfab2f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1824596077
 GameObject:
   m_ObjectHideFlags: 0
@@ -7224,18 +7362,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 4418554958783731500}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1934395962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2756259817336496961}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11bfe7cd9e99ff439717100dd7adae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1934395963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10032,7 +10158,6 @@ GameObject:
   - component: {fileID: 3722605555083447241}
   - component: {fileID: 4252761096573897670}
   - component: {fileID: 1934395963}
-  - component: {fileID: 1934395962}
   m_Layer: 8
   m_Name: Peacock_Enemy
   m_TagString: Enemy
