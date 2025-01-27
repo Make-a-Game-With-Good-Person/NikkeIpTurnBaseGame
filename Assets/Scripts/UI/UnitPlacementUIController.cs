@@ -50,7 +50,7 @@ public class UnitPlacementUIController : MonoBehaviour
     }
     public void OnFailToPlace(Unit unit)
     {
-        failToPlaceEvent.Invoke(unit);
+        failToPlaceEvent?.Invoke(unit);
     }
     #endregion
 

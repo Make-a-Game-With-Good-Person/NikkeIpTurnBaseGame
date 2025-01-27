@@ -23,7 +23,7 @@ public class DragPortrait : MonoBehaviour
     public void OnDrag()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, 1 << 4);
+        Physics.Raycast(ray, out RaycastHit hit, float.MaxValue, 1 << 4 | 1 <<9 | 1 << 10);
 
         instanciatedUnit.transform.position = hit.point;
     }

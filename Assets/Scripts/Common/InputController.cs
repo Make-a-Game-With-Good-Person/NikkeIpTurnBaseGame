@@ -11,6 +11,7 @@ public class InputController : MonoBehaviour
     #region Protected
     #endregion
     #region public
+    public LayerMask GroundMask;
     #endregion
     #region Events
     public UnityEvent<Vector3> mouseOverEvent = new UnityEvent<Vector3>();
@@ -52,10 +53,10 @@ public class InputController : MonoBehaviour
     private void Update()
     {
         //임시로 레이어는 4번 레이어
-        mouseOverEvent?.Invoke(GetWorldPositionFromMouse(1 << 4));
+        mouseOverEvent?.Invoke(GetWorldPositionFromMouse(GroundMask));
         if (Input.GetMouseButtonDown(0))
         {
-            touchEvent?.Invoke(GetWorldPositionFromMouse(1 << 4));
+            touchEvent?.Invoke(GetWorldPositionFromMouse(GroundMask));
         }
     }
     #endregion
