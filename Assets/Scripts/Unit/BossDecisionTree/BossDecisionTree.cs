@@ -40,8 +40,8 @@ public class BossDecisionTree : MonoBehaviour
         attackFartherTargetFinalDecision = new BossAttackFartherTargetFinalDecision(returnDecision, owner);
         attackNearestTargetFinalDecision = new BossAttackNearestTargetFinalDecision(returnDecision, owner);
         passAttackFinalDecision = new BossPassAttackFinalDecision(returnDecision);
-        summonMonsterFinalDecision = new BossSummonMonsterFinalDecision(returnDecision, owner);
-        passTurnFinalDecision = new BossPassTurnFinalDecision(returnDecision);
+        summonMonsterFinalDecision = new BossSummonMonsterFinalDecision(returnDecision, owner, boss);
+        passTurnFinalDecision = new BossPassTurnFinalDecision(returnDecision, boss);
 
         checkSummonDecision = new BossCheckSummonDecision(boss, summonMonsterFinalDecision, passTurnFinalDecision);
         checkNearAttackDecision = new BossCheckNearAttackDecision(boss, attackNearestTargetFinalDecision, passAttackFinalDecision);

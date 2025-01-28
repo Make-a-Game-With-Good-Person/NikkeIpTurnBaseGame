@@ -609,7 +609,7 @@ MonoBehaviour:
   skillName: 
   skillDamage: 0
   skillVFX: {fileID: 0}
-  skillRange: 10
+  skillRange: 20
   skillHeight: 1
   skillLevel: 0
   skillCost: 0

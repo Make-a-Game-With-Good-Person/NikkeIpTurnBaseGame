@@ -1044,8 +1044,9 @@ MonoBehaviour:
   changeStateWhenActEnd:
     m_PersistentCalls:
       m_Calls: []
-  coolTime: 3
+  coolTime: 2
   curCoolTime: 0
+  coolCheck: 0
 --- !u!1 &347501883
 GameObject:
   m_ObjectHideFlags: 0
@@ -4957,6 +4958,9 @@ MonoBehaviour:
   changeStateWhenActEnd:
     m_PersistentCalls:
       m_Calls: []
+  coolTime: 3
+  curCoolTime: 0
+  coolCheck: 0
   summonPoints:
   - {fileID: 844755545}
   - {fileID: 792249627}
@@ -4966,8 +4970,6 @@ MonoBehaviour:
   - {fileID: 8805120029021223421, guid: 2dda32ecc245e444a82aa405a4722934, type: 3}
   - {fileID: 8906269150442954414, guid: 2c4cbaee3db94c64f8950a3eca45b007, type: 3}
   - {fileID: 7777386059564880053, guid: f1b2ebe44270b9b459014f8665a4a48e, type: 3}
-  coolTime: 2
-  curCoolTime: 0
 --- !u!1 &1378974093
 GameObject:
   m_ObjectHideFlags: 0
@@ -5448,8 +5450,9 @@ MonoBehaviour:
   changeStateWhenActEnd:
     m_PersistentCalls:
       m_Calls: []
-  coolTime: 3
+  coolTime: 2
   curCoolTime: 0
+  coolCheck: 0
 --- !u!1 &1458744976
 GameObject:
   m_ObjectHideFlags: 0

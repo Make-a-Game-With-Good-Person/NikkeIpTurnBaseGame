@@ -44,6 +44,7 @@ public class Boss : Unit
     public override void ResetAble()
     {
         base.ResetAble();
+        turnTwice = true;
         movable = false;
         move_Re = false;
     }

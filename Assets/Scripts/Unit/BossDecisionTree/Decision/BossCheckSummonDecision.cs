@@ -14,12 +14,14 @@ public class BossCheckSummonDecision : Decision
 
     public override DecisionTreeNode GetBranch()
     {
-        if (boss.unitSkills[2].GetComponent<BossSummonSkill>().curCoolTime == 0)
+        if (!boss.unitSkills[2].GetComponent<BossSkill>().coolCheck)
         {
+            Debug.Log("소환 가능!");
             return _trueNode;
         }
         else
         {
+            Debug.Log("소환 불가능!");
             return _falseNode;
         }
     }

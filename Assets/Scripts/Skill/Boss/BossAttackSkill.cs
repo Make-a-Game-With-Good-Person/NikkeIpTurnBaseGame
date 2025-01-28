@@ -2,29 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossAttackSkill : UnitSkill
+public class BossAttackSkill : BossSkill
 {
-    [SerializeField] int coolTime;
-    public int curCoolTime = 0;
-    bool coolCheck = false;
     LayerMask skillLayerMask;
-
-    void CoolTimeCheck()
-    {
-        if (!coolCheck) return;
-        curCoolTime++;
-        if (curCoolTime >= coolTime)
-        {
-            coolCheck = false;
-            curCoolTime = 0;
-        }
-    }
 
     protected override void Start()
     {
         base.Start();
         skillLayerMask = (1 << 7) | (1 << 9);
-        battleManager.RoundEndEvent.AddListener(CoolTimeCheck);
     }
 
     public override void Action()

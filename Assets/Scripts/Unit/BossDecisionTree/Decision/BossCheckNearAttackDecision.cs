@@ -15,7 +15,7 @@ public class BossCheckNearAttackDecision : Decision
 
     public override DecisionTreeNode GetBranch()
     {
-        if (boss.unitSkills[1].GetComponent<BossAttackSkill>().curCoolTime == 0)
+        if (!boss.unitSkills[1].GetComponent<BossSkill>().coolCheck)
         {
             return _trueNode;
         }

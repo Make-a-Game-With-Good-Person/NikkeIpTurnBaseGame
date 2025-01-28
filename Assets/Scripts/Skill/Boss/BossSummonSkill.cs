@@ -3,29 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class BossSummonSkill : UnitSkill
+public class BossSummonSkill : BossSkill
 {
     public List<Transform> summonPoints;
     public List<Unit> monsters;
-    [SerializeField] int coolTime;
-    public int curCoolTime = 0;
-    bool coolCheck = false;
-    void CoolTimeCheck()
-    {
-        if (!coolCheck) return;
-        curCoolTime++;
-        if (curCoolTime >= coolTime)
-        {
-            coolCheck = false;
-            curCoolTime = 0;
-        }
-    }
-
+    
     protected override void Start()
     {
         base.Start();
-
-        battleManager.RoundEndEvent.AddListener(CoolTimeCheck);
     }
 
     public override void Action()
