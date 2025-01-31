@@ -70,7 +70,6 @@ public class MoveSequenceState : BattleState
         }
         //owner.curControlUnit.animator.SetBool("Move", false);
         owner.curControlUnit.movable = false;
-        owner.curControlUnit.move_Re = false; // 임시도 닫아버림
 
         owner.stateMachine.ChangeState<TurnCheckBattleState>();
     }

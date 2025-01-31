@@ -19,9 +19,6 @@ public class Unit : Stat , IDamage
     bool _movable; // 이동 가능 여부
     public UnitType unitType;
 
-    public bool attack_Re; // 턴 대기(종료) 버튼을 누르고 만약 다시 턴을 돌아와 이어가고 싶다면 이 변수에 있는 값을 이용해 여부를 결정함
-    public bool move_Re; // 이것도 마찬가지
-
     public Animator animator
     {
         get
@@ -118,9 +115,7 @@ public class Unit : Stat , IDamage
     public virtual void ResetAble()
     {
         _attackable = true;
-        attack_Re = true;
         _movable = true;
-        move_Re = true;
     }
 
     private void OnDead()

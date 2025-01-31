@@ -46,6 +46,5 @@ public class Boss : Unit
         base.ResetAble();
         turnTwice = true;
         movable = false;
-        move_Re = false;
     }
 }

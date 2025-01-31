@@ -16,7 +16,6 @@ public class AbilityMenuUIController : MonoBehaviour
     public Button abilityButton;
     public Button moveButton;
     public Button turnEndButton;
-    public Button turnReButton;
     #endregion
     #region Events
     #endregion

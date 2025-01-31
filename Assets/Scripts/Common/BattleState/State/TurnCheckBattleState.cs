@@ -119,10 +119,10 @@ public class TurnCheckBattleState : BattleState
             case 1:
                 Debug.Log("½Â¸®");
                 yield break;
-                break;
             case 2:
                 Debug.Log("ÆÐ¹è");
                 yield break;
+            default:
                 break;
         }
 

@@ -52,7 +52,6 @@ public class UnitSelectBattleState : BattleState
         owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.AddListener(OnAbilityButton);
         owner.abilityMenuUIController.turnEndButton.onClick.AddListener(OnTurnEndButton);
-        owner.abilityMenuUIController.turnReButton.onClick.AddListener(OnTurnReAgainButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -66,7 +65,6 @@ public class UnitSelectBattleState : BattleState
         owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.RemoveListener(OnAbilityButton);
         owner.abilityMenuUIController.turnEndButton.onClick.RemoveListener(OnTurnEndButton);
-        owner.abilityMenuUIController.turnReButton.onClick.RemoveListener(OnTurnReAgainButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -259,13 +257,6 @@ public class UnitSelectBattleState : BattleState
         SelectFirstTarget();
     }
 
-    void OnTurnReAgainButton()
-    {
-        owner.curControlUnit.attackable = owner.curControlUnit.attack_Re;
-        owner.curControlUnit.movable = owner.curControlUnit.move_Re;
-
-        SelectFirstTarget();
-    }
     #endregion
 
     #region Coroutines
