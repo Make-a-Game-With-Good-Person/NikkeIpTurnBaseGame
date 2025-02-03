@@ -3,48 +3,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Auth;
+using System.Threading.Tasks;
+using System;
 
-public class AuthManager : MonoBehaviour
+public class AuthManager
 {
-    [SerializeField] InputField emailField;
-    [SerializeField] InputField passField;
+    public FirebaseAuth auth;
 
-    // 인증을 관리할 객체
-    FirebaseAuth auth;
-
-    void Awake()
+    public AuthManager()
     {
         // 객체 초기화
         auth = FirebaseAuth.DefaultInstance;
     }
-    public void login()
+
+    public string GetCurrenUserID()
     {
-        // 제공되는 함수 : 이메일과 비밀번호로 로그인 시켜 줌
-        auth.SignInWithEmailAndPasswordAsync(emailField.text, passField.text).ContinueWith(
-            task => {
-                if (task.IsCompleted && !task.IsFaulted && !task.IsCanceled)
-                {
-                    Debug.Log(emailField.text + " 로 로그인 하셨습니다.");
-                }
-                else
-                {
-                    Debug.Log("로그인에 실패하셨습니다.");
-                }
-            }
-        );
+        return auth.CurrentUser.UserId;
     }
-    public void register()
+
+    public async Task<bool> Login(string emailField, string passField)
     {
-        // 제공되는 함수 : 이메일과 비밀번호로 회원가입 시켜 줌
-        auth.CreateUserWithEmailAndPasswordAsync(emailField.text, passField.text).ContinueWith(
-            task => {
-                if (!task.IsCanceled && !task.IsFaulted)
-                {
-                    Debug.Log(emailField.text + "로 회원가입\n");
-                }
-                else
-                    Debug.Log("회원가입 실패\n");
-            }
-            );
+        try
+        {
+            var result = await auth.SignInWithEmailAndPasswordAsync(emailField, passField);
+            Debug.Log(emailField + "로 로그인 성공");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("회원가입 실패: " + e.Message);
+            return false;
+        }
+    }
+    
+    public async Task<bool> Register(string emailField, string passField, string passCheckField)
+    {
+        if (!passField.Equals(passCheckField))
+        {
+            Debug.Log("입력한 비밀번호와 재확인하는 비밀번호가 달라서 회원가입 불가");
+            return false;
+        }
+
+        try
+        {
+            var result = await auth.CreateUserWithEmailAndPasswordAsync(emailField, passField);
+            Debug.Log(emailField + "로 회원가입 성공");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("회원가입 실패: " + e.Message);
+            return false;
+        }
     }
 }
