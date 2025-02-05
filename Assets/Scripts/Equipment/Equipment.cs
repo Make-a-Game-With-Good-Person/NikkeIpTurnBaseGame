@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,11 +9,10 @@ public class Equipment : MonoBehaviour
     #region Properties
     #region Private
     private Stat _target;
-    private int _upgradeLevel;
+    private EquipmentData _equipmentData;
     /// <summary>
-    /// 1업당 올라갈 스텟의 수치, 현재는 Serialize로 하도록 하고 나중에 Init함수로 바꿀것
+    /// 장비 수치
     /// </summary>
-    [SerializeField]private float[] _statPerUpgrade = new float[(int)EStatType.Count];
     [SerializeField]private float[] _statApply = new float[(int)EStatType.Count];
     /// <summary>
     /// 착용시에 필요한 스텟
@@ -22,6 +22,15 @@ public class Equipment : MonoBehaviour
     #region Protected
     #endregion
     #region Public
+    public EquipmentData equipmentData
+    {
+        get { return _equipmentData; }
+        set 
+        { 
+            _equipmentData = value;
+            Initialize();
+        }
+    }
     #endregion
     #region Events
     #endregion
@@ -37,7 +46,25 @@ public class Equipment : MonoBehaviour
     /// </summary>
     private void Initialize()
     {
+        for (int i = 0; i < _statApply.Length; i++) 
+        {
+            _statApply[i] = 0.0f;
+        }
 
+        //기초
+        for (int i = 0; i < _equipmentData.Item_Stat_Value.Length; i++)
+        {
+            _statApply[(int)_equipmentData.Item_Stat_Value[i].Type] += _equipmentData.Item_Stat_Value[i].Value;
+        }
+        
+        //강화 적용
+        for(int i = 0; i < _equipmentData.Item_Level_Status; i++)
+        {
+            for (int j = 0; j < _equipmentData.Item_Valueup_Resource[i].Value.Length; j++)
+            {
+                _statApply[(int)_equipmentData.Item_Valueup_Resource[i].Value[j].Type] += _equipmentData.Item_Valueup_Resource[i].Value[j].Value;
+            }
+        }
     }
     #endregion
     #region Protected
@@ -57,14 +84,14 @@ public class Equipment : MonoBehaviour
     {
         for (int i = 0; i < (int)EStatType.Count; i++)
         {
-            _target[(EStatType)i] += _statApply[i] + _statPerUpgrade[i] * _upgradeLevel;
+            _target[(EStatType)i] += _statApply[i];
         }
     }
     protected virtual void UnApplyEquipment()
     {
         for (int i = 0; i < (int)EStatType.Count; i++)
         {
-            _target[(EStatType)i] -= _statApply[i] + _statPerUpgrade[i] * _upgradeLevel;
+            _target[(EStatType)i] -= _statApply[i];
         }
     }
     #endregion

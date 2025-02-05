@@ -1,0 +1,65 @@
+[
+  {
+    "Item_Index": 20000,
+    "Item_Level_Status": 0,
+    "Item_Level_Status_Require": 0,
+    "Item_Valueup_Resource": [
+      {
+        "Name": "armorMatter",
+        "Value": [
+          {
+            "Type": 1,
+            "Value": 5
+          }
+        ],
+        "Count": "1"
+      },
+      {
+        "Name": "armorMatter",
+        "Value": [
+          {
+            "Type": 1,
+            "Value": 5
+          }
+        ],
+        "Count": "2"
+      },
+      {
+        "Name": "armorMatter",
+        "Value": [
+          {
+            "Type": 1,
+            "Value": 5
+          }
+        ],
+        "Count": "3"
+      },
+      {
+        "Name": "armorMatter",
+        "Value": [
+          {
+            "Type": 1,
+            "Value": 5
+          }
+        ],
+        "Count": "4"
+      },
+      {
+        "Name": "armorMatter",
+        "Value": [
+          {
+            "Type": 1,
+            "Value": 5
+          }
+        ],
+        "Count": "5"
+      }
+    ],
+    "Item_Stat_Value": [
+      {
+        "Type": 1,
+        "Value": 50
+      }
+    ]
+  }
+]

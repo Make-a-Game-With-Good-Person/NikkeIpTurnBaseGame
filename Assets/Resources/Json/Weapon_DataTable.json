@@ -1,0 +1,65 @@
+[
+  {
+    "Item_Index": 10000,
+    "Item_Level_Status": 1,
+    "Item_Level_Status_Require": 0,
+    "Item_Valueup_Resource": [
+      {
+        "Name": "weaponArmor",
+        "Value": [
+          {
+            "Type": 3,
+            "Value": 5
+          }
+        ],
+        "Count": "1"
+      },
+      {
+        "Name": "weaponArmor",
+        "Value": [
+          {
+            "Type": 3,
+            "Value": 5
+          }
+        ],
+        "Count": "2"
+      },
+      {
+        "Name": "weaponArmor",
+        "Value": [
+          {
+            "Type": 3,
+            "Value": 5
+          }
+        ],
+        "Count": "3"
+      },
+      {
+        "Name": "weaponArmor",
+        "Value": [
+          {
+            "Type": 3,
+            "Value": 5
+          }
+        ],
+        "Count": "4"
+      },
+      {
+        "Name": "weaponArmor",
+        "Value": [
+          {
+            "Type": 3,
+            "Value": 5
+          }
+        ],
+        "Count": "5"
+      }
+    ],
+    "Item_Stat_Value": [
+      {
+        "Type": 3,
+        "Value": 5
+      }
+    ]
+  }
+]
