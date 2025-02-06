@@ -52,9 +52,9 @@ public class TurnCheckBattleState : BattleState
 
         foreach (Unit unit in unitList)
         {
-            Debug.Log(unit.gameObject.name);
             if (unit.attackable || unit.movable)
             {
+                Debug.Log(unit.gameObject.name + "가 선택 됨" + unit.attackable +", " +unit.movable);
                 ret = unit;
                 break;
             }
@@ -136,6 +136,7 @@ public class TurnCheckBattleState : BattleState
             }
             else
             {
+                Debug.Log("보스턴이 재진입 후 끝났음");
                 owner.curControlUnit = SelectPlayableUnit(owner.enemyTurn);
                 if (owner.curControlUnit == null)
                 {

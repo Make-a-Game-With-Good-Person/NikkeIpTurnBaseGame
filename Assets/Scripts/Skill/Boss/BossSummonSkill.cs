@@ -7,15 +7,18 @@ public class BossSummonSkill : BossSkill
 {
     public List<Transform> summonPoints;
     public List<Unit> monsters;
+    List<Unit> summonedMonsters;
     
     protected override void Start()
     {
         base.Start();
+        summonedMonsters = new List<Unit>();
     }
 
     public override void Action()
     {
         base.Action();
+        summonedMonsters.Clear();
         StartCoroutine(SkillAction());
     }
     IEnumerator SkillAction()
@@ -29,6 +32,7 @@ public class BossSummonSkill : BossSkill
         yield return StartCoroutine(SummonMonsters()); // 소환이 끝나는걸 기다린다.
 
         yield return new WaitForSeconds(1f);
+        BlockEnemysAct();
         Debug.Log(battleManager.curControlUnit.gameObject.name + "의 소환 끝");
         changeStateWhenActEnd?.Invoke();
     }
@@ -65,9 +69,11 @@ public class BossSummonSkill : BossSkill
         GameObject obj = Instantiate(monster.gameObject, pos, Quaternion.identity, null);
 
         obj.transform.position = tile.center;
+        Unit enemy = obj.GetComponent<Unit>();
         //여기에 owner에 유닛을 등록하는 코드 넣어야함
-        tile.Place(obj.GetComponent<Unit>());
-        battleManager.EnemyUnits.Add(obj.GetComponent<Unit>());
+        tile.Place(enemy);
+        battleManager.EnemyUnits.Add(enemy);
+        summonedMonsters.Add(enemy);
         return obj;
     }
 
@@ -101,5 +107,14 @@ public class BossSummonSkill : BossSkill
 
         if (!placable) return Vector3.zero;
         else return placablePos;
+    }
+
+    void BlockEnemysAct()
+    {
+        foreach(Unit unit in summonedMonsters)
+        {
+            unit.attackable = false;
+            unit.movable = false;
+        }
     }
 }
