@@ -61,17 +61,25 @@ public class TurnCheckBattleState : BattleState
         }
         return ret;
     }
-
+    /// <summary>
+    /// 현재 본인 진영 유닛들의 턴을 모두 소모해 상대에게 턴을 넘겨주는 함수
+    /// 만약에 이 함수에서 버프/디버프 지속 턴을 줄어들게 한다면? 
+    /// 적의 턴이 돌아오면 적에게 적용됐던 버프/디버프를 소모하게 하고
+    /// 아군의 턴이 돌아오면 아군에게 적용됐던 버프/디버프를 소모하게 한다?
+    /// </summary>
+    /// <param name="EnemyTurn"></param>
     private void ResetTurn(bool EnemyTurn)
     {
         List<Unit> unitList = null;
         if (EnemyTurn)
         {
             unitList = owner.EnemyUnits;
+            owner.PlayerRoundEndEvent?.Invoke();
         }
         else
         {
             unitList = owner.Units;
+            owner.EnemyRoundEndEvent?.Invoke();
         }
 
         foreach (Unit unit in unitList)

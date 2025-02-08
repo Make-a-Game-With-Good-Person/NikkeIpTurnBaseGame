@@ -57,7 +57,8 @@ public class UnitSkill : MonoBehaviour, IAction
     public HashSet<Vector2Int> GetSkillRange()
     {
         HashSet<Vector2Int> skillRange = battleManager.tileManager.SearchTile(battleManager.curControlUnit.tile.coordinate, (from, to) =>
-        { return from.distance + 1 <= battleManager.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= battleManager.curSelectedSkill.skillHeight; }
+        { return from.distance + 1 <= battleManager.curSelectedSkill.skillRange * battleManager.curControlUnit[EStatType.Visual] && 
+            Math.Abs(from.height - to.height) <= battleManager.curSelectedSkill.skillHeight * battleManager.curControlUnit[EStatType.Visual]; }
         );
 
         targetFinder.FindTarget(skillRange);

@@ -46,7 +46,8 @@ public class BattleManager : MonoBehaviour
     public int skillIdx;
     #endregion
     #region Events
-    public UnityEvent RoundEndEvent = new UnityEvent();
+    public UnityEvent EnemyRoundEndEvent = new UnityEvent();
+    public UnityEvent PlayerRoundEndEvent = new UnityEvent();
     #endregion
     #endregion
 
