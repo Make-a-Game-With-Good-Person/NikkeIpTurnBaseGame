@@ -52,7 +52,7 @@ public class SpecialSkillBesti : UnitSkill
             if (IsActionAccuracy())
             {
                 Debug.Log("명중");
-                if (target.gameObject.layer == 9) // 벽에 맞을 때
+                if (target.gameObject.layer == LayerMask.NameToLayer("Cover")) // 벽에 맞을 때
                 {
                     if (IsActionCritical())
                     {
