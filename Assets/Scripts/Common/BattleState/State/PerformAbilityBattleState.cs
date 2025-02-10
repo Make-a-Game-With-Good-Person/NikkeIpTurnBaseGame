@@ -65,7 +65,7 @@ public class PerformAbilityBattleState : BattleState
 
         // 여기서 필드 위에 적들이 모두 죽었는지 체크 후 죽었다면 스테이지를 종료하면 됨
 
-        owner.curControlUnit.attackable = false; // 공격은 끝났음
+        if(!owner.curSelectedSkill.isBuffSkill) owner.curControlUnit.attackable = false; // 공격은 끝났음
 
         owner.stateMachine.ChangeState<TurnCheckBattleState>();
     }

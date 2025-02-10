@@ -34,7 +34,7 @@ public class Cover : MonoBehaviour, IDamage
         hp -= dmg;
         if(hp <= 0)
         {
-            Instantiate(destroyVFX, this.transform.position, Quaternion.identity, null);
+            //Instantiate(destroyVFX, this.transform.position, Quaternion.identity, null);
             Destroy(this.gameObject);
         }
     }

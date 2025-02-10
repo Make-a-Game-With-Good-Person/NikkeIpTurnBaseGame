@@ -45,7 +45,7 @@ public class SpecialSkillBesti : UnitSkill
     {
         yield return null;
 
-        Collider[] targets = Physics.OverlapSphere(this.transform.position, skillTargetRange, skillLayerMask);
+        Collider[] targets = Physics.OverlapSphere(battleManager.selectedTarget.transform.position, skillTargetRange, skillLayerMask);
 
         foreach (Collider target in targets)
         {

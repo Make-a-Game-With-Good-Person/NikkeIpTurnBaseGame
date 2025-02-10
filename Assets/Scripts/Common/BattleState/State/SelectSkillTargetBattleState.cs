@@ -41,7 +41,7 @@ public class SelectSkillTargetBattleState : BattleState
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (((1 << hit.collider.gameObject.layer) & owner.abilityTargetMask) != 0) // 클릭한 대상이 공격 가능한 대상일 때
+            //if (((1 << hit.collider.gameObject.layer) & owner.abilityTargetMask) != 0) // 클릭한 대상이 공격 가능한 대상일 때
             {
                 Debug.Log("스킬 타겟 지정 <<");
                 //Vector2Int coord = new Vector2Int(Mathf.FloorToInt(worldpos.x / tileSize.x), Mathf.FloorToInt(worldpos.z / tileSize.z));
@@ -133,7 +133,15 @@ public class SelectSkillTargetBattleState : BattleState
             owner.selectSkillTargetUIController.cancelButton.onClick.AddListener(OnCancelButton);
             foreach (Unit unit in owner.EnemyUnits)
             {
-                if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+                if (((1 << unit.gameObject.layer) & owner.curSelectedSkill.skillTargetLayerMask) != 0)
+                {
+                    unit.GetComponent<AbilityTargetting>().abilityTargetAct.AddListener(SetAbilityTarget);
+                }
+            }
+
+            foreach (Unit unit in owner.Units)
+            {
+                if (((1 << unit.gameObject.layer) & owner.curSelectedSkill.skillTargetLayerMask) != 0)
                 {
                     unit.GetComponent<AbilityTargetting>().abilityTargetAct.AddListener(SetAbilityTarget);
                 }
@@ -153,7 +161,17 @@ public class SelectSkillTargetBattleState : BattleState
             {
                 if (unit == null) continue;
 
-                if (((1 << unit.gameObject.layer) & owner.abilityTargetMask) != 0)
+                if (((1 << unit.gameObject.layer) & owner.curSelectedSkill.skillTargetLayerMask) != 0)
+                {
+                    if (unit != null) unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
+                }
+            }
+
+            foreach (Unit unit in owner.Units)
+            {
+                if (unit == null) continue;
+
+                if (((1 << unit.gameObject.layer) & owner.curSelectedSkill.skillTargetLayerMask) != 0)
                 {
                     if (unit != null) unit.GetComponent<AbilityTargetting>().abilityTargetAct.RemoveListener(SetAbilityTarget);
                 }

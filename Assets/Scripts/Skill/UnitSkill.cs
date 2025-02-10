@@ -23,6 +23,8 @@ public class UnitSkill : MonoBehaviour, IAction
     public int skillLevel;
     public int skillCost;
     public Unit owner;
+    public LayerMask skillTargetLayerMask;
+    public bool isBuffSkill = false;
 
     public UnityEvent changeStateWhenActEnd;
 
