@@ -5717,7 +5717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTargetRangeVFX: {fileID: 1804377275}
-  skillTargetRange: 0
+  skillTargetRange: 5
   skillIcon: {fileID: 0}
   skillName: 
   skillDamage: 0
@@ -9693,7 +9693,7 @@ PrefabInstance:
         type: 3}
       propertyPath: unitSkills.Array.data[1]
       value: 
-      objectReference: {fileID: 1397768299}
+      objectReference: {fileID: 1466655245}
     - target: {fileID: 6697651328977590504, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: m_Layer
