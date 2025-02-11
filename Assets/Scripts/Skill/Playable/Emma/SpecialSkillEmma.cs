@@ -29,7 +29,7 @@ public class SpecialSkillEmma : UnitSkill
     IEnumerator SkillAction()
     {
         deBuffOn = true;
-        target[EStatType.Visual] = minusRange;
+        target[EStatType.Visual] -= minusRange;
         Debug.Log($"{target.name}의 사정거리가 {target[EStatType.Visual]}로 감소");
         yield return new WaitForSeconds(1f);
         changeStateWhenActEnd?.Invoke();
@@ -43,7 +43,7 @@ public class SpecialSkillEmma : UnitSkill
         if (deBuffDur <= 0)
         {
             deBuffDur = 1;
-            target[EStatType.Visual] = DefaultRange;
+            target[EStatType.Visual] += minusRange;
             Debug.Log($"{target.name}의 사정거리가 {target[EStatType.Visual]}로 롤백");
             deBuffOn = false;
         }

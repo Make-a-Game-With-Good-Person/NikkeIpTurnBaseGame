@@ -1906,7 +1906,7 @@ MonoBehaviour:
   curControlUnit: {fileID: 0}
   Units: []
   EnemyUnits:
-  - {fileID: 774795679}
+  - {fileID: 1934395963}
   curSelectedSkill: {fileID: 0}
   enemyTurn: 0
   tileIndicator: {fileID: 1514588219}
@@ -3056,23 +3056,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Barbell_Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7779586896229674335, guid: 2dda32ecc245e444a82aa405a4722934,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dda32ecc245e444a82aa405a4722934, type: 3}
---- !u!114 &774795679 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8805120029021223421, guid: 2dda32ecc245e444a82aa405a4722934,
-    type: 3}
-  m_PrefabInstance: {fileID: 774795678}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab93f2f5116f20145b18a8c9c9eb1e5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &792249626
 GameObject:
   m_ObjectHideFlags: 0
@@ -6650,6 +6643,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1657995158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1657995159}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1657995159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1657995158}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.5, y: 2, z: 10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1671701789
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7398,6 +7422,8 @@ GameObject:
   - component: {fileID: 1873206895}
   - component: {fileID: 1873206894}
   - component: {fileID: 1873206893}
+  - component: {fileID: 1873206898}
+  - component: {fileID: 1873206897}
   m_Layer: 10
   m_Name: CompleteCover
   m_TagString: Untagged
@@ -7424,7 +7450,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1873206894
 MeshRenderer:
@@ -7485,12 +7511,40 @@ Transform:
   m_GameObject: {fileID: 1873206892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.25, y: 1.25, z: 4.5}
-  m_LocalScale: {x: 2, y: 3, z: 1}
+  m_LocalPosition: {x: 11, y: 1, z: 5}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1873206897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873206892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aef1eceb9014e92448a2b63d9b5f57e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isWalkable: 0
+  isLadder: 0
+--- !u!114 &1873206898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873206892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96dc6fd25e476f240bd8680146bc29ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyVFX: {fileID: 0}
+  hp: 1
 --- !u!1 &1898560258
 GameObject:
   m_ObjectHideFlags: 0
@@ -9558,7 +9612,7 @@ Transform:
   m_GameObject: {fileID: 2756259817336496961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 7, y: 0, z: 9}
+  m_LocalPosition: {x: 7, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9693,7 +9747,7 @@ PrefabInstance:
         type: 3}
       propertyPath: unitSkills.Array.data[1]
       value: 
-      objectReference: {fileID: 1466655245}
+      objectReference: {fileID: 1397768299}
     - target: {fileID: 6697651328977590504, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: m_Layer
@@ -10529,12 +10583,12 @@ GameObject:
   - component: {fileID: 4252761096573897670}
   - component: {fileID: 1934395963}
   m_Layer: 8
-  m_Name: Peacock_Enemy
+  m_Name: Boss_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &2796276432664094459
 GameObject:
   m_ObjectHideFlags: 0
@@ -14315,3 +14369,4 @@ SceneRoots:
   - {fileID: 1173942343847985182}
   - {fileID: 1095468796}
   - {fileID: 774795678}
+  - {fileID: 1657995159}

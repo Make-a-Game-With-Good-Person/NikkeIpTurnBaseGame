@@ -28,7 +28,7 @@ public class SpecialSkillEunhwa : UnitSkill
     IEnumerator SkillAction()
     {
         buffOn = true;
-        battleManager.curControlUnit[EStatType.ATK] = DefaultATK + plusATK;
+        battleManager.curControlUnit[EStatType.ATK] += plusATK;
         Debug.Log($"은화의 공격력이 {DefaultATK}에서 {battleManager.curControlUnit[EStatType.ATK]}만큼 증가");
         yield return new WaitForSeconds(1f);
         changeStateWhenActEnd?.Invoke();
@@ -42,7 +42,7 @@ public class SpecialSkillEunhwa : UnitSkill
         if(buffDur <= 0)
         {
             buffDur = 1;
-            eunhwa[EStatType.ATK] = DefaultATK;
+            eunhwa[EStatType.ATK] -= plusATK;
             Debug.Log($"은화의 공격력이 {eunhwa[EStatType.ATK]}로 롤백");
             buffOn = false;
         }

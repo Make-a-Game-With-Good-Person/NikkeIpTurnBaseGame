@@ -16,7 +16,7 @@ public class BossPassTurnFinalDecision : FinalDecision
     public override ReturnDecision Execute()
     {
         returnDecision.type = ReturnDecision.DecisionType.Pass;
-        CheckCoolTime();
+        //CheckCoolTime();
         return returnDecision;
     }
 

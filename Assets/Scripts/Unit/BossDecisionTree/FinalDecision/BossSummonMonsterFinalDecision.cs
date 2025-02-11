@@ -19,7 +19,7 @@ public class BossSummonMonsterFinalDecision : FinalDecision
     {
         owner.curSelectedSkill = owner.curControlUnit.unitSkills[2];
         returnDecision.type = ReturnDecision.DecisionType.Summon;
-        CheckCoolTime();
+        //CheckCoolTime();
         return returnDecision;
     }
 

@@ -12,6 +12,7 @@ public class BossSkill : UnitSkill
     protected override void Start()
     {
         base.Start();
+        battleManager.EnemyRoundEndEvent.AddListener(CoolTimeCheck);
     }
     public void CoolTimeCheck()
     {
