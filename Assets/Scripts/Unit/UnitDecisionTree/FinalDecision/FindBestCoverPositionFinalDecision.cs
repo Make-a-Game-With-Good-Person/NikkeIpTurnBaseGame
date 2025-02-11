@@ -17,6 +17,8 @@ public class FindBestCoverPositionFinalDecision : FinalDecision
 
     public override ReturnDecision Execute()
     {
+        Debug.Log("FindBestCover");
+
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
 
         HashSet<Vector2Int> movables = movement.GetTilesInRange(owner.tileManager);
@@ -27,6 +29,9 @@ public class FindBestCoverPositionFinalDecision : FinalDecision
         foreach (Vector2Int temp in movables)
         {
             float cal = ScorePosition(temp);
+
+            Debug.Log($"FindBestCover, coordi : {temp}, score : {cal}");
+
             if (max < cal)
             {
                 max = cal;

@@ -67,6 +67,9 @@ public class TileManager : MonoBehaviour
         InitCover();
         didInit = true;
 
+
+        Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].halfCovers[(int)EDirection.Front]}");
+        Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].fullCovers[(int)EDirection.Front]}");
         /*
         //debug
         foreach(Tile node in _map.Values)
@@ -117,33 +120,46 @@ public class TileManager : MonoBehaviour
         {
             //앞, 뒤, 우, 좌 순서로
             Vector3[] rayStart = new Vector3[4];
-            rayStart[(int)EDirection.Front] = tile.worldPos + new Vector3(tileSize.x * 0.5f, tileSize.y * 2, tileSize.z);
-            rayStart[(int)EDirection.Back] = tile.worldPos + new Vector3(tileSize.x * 0.5f, tileSize.y * 2, 0);
-            rayStart[(int)EDirection.Right] = tile.worldPos + new Vector3(tileSize.x, tileSize.y * 2, tileSize.z * 0.5f);
-            rayStart[(int)EDirection.Left] = tile.worldPos + new Vector3(0, tileSize.y * 2, tileSize.z * 0.5f);
+            rayStart[(int)EDirection.Front] = tile.worldPos + new Vector3(tileSize.x * 0.5f, 100, tileSize.z);
+            rayStart[(int)EDirection.Back] = tile.worldPos + new Vector3(tileSize.x * 0.5f, 100, 0);
+            rayStart[(int)EDirection.Right] = tile.worldPos + new Vector3(tileSize.x, 100, tileSize.z * 0.5f);
+            rayStart[(int)EDirection.Left] = tile.worldPos + new Vector3(0, 100, tileSize.z * 0.5f);
 
             for(int i = 0; i < 4; i++)
             {
                 //물체 면의 뒷면에도 레이가 맞을수 있게 하는 옵션
-                Physics.queriesHitBackfaces = true;
-                Physics.Raycast(rayStart[i], Vector3.down, out RaycastHit hit, tileSize.y * 1.9f, tileObjectMask);
-                Physics.queriesHitBackfaces = false;
+                RaycastHit[] hits = Physics.RaycastAll(rayStart[i], Vector3.down, 100, tileObjectMask);
+                RaycastHit hit = default;
 
                 Cover cover = null;
+                TileObject tileObject = null;
+
                 //아무 물질도 검출 안되었으면 그냥 continue 해서 hit.distance가 0이라 그대로 진행되는것 방지
                 //커버가 검출이 안되면 그냥 지형지물
-                if(hit.collider != null)
+                foreach(RaycastHit hitinfo in hits)
                 {
-                    cover = hit.collider.GetComponentInChildren<Cover>();
+                    if (hitinfo.collider != null)
+                    {
+                        cover = hitinfo.collider.GetComponentInParent<Cover>();
+                        tileObject = hitinfo.collider.GetComponentInParent<TileObject>();
+                        Debug.Log($"{tile.coordinate}, {(EDirection)i}, {hitinfo.collider.gameObject.name}");
+
+                        if(tileObject != null)
+                        {
+                            hit = hitinfo;
+                            break;
+                        }
+                    }
                 }
-                else
+
+                if(tileObject == null)
                 {
                     continue;
                 }
 
                 //완전히 가려지기위한 높이가 tileSize.y의 2배 라고 정함
                 //벽을 완전히 덮을정도로 있음 -> fullCover, 0이라고 하면 좀 그렇고 약간의 여유를 둠
-                if (hit.distance < 0.1f * tileSize.y)
+                if (hit.point.y > tile.worldPos.y + 1.9f * tileSize.y)
                 {
                     tile.fullCovers[i] = true;
 
@@ -153,7 +169,7 @@ public class TileManager : MonoBehaviour
                     }
                 }
                 //HalfCover, 0.5f * (tileSize.y * 2) = 1.0f * tileSize.y 이지만 약간의 여유를 둠 
-                else if( hit.distance > 0.95f * tileSize.y)
+                else if(hit.point.y > tile.worldPos.y + 0.95f * tileSize.y)
                 {
                     tile.halfCovers[i] = true;
 

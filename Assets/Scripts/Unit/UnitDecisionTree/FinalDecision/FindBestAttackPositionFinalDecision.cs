@@ -20,6 +20,8 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
 
     public override ReturnDecision Execute()
     {
+        Debug.Log("FindBestAttack");
+
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
 
         List<Vector2Int> movables = movement.GetTilesInRange(owner.tileManager).ToList();
@@ -30,6 +32,9 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
         foreach (Vector2Int temp in movables)
         {
             float cal = ScorePosition(temp);
+
+            Debug.Log($"FindBestAttack, coordi : {temp}, score : {cal}");
+
             if (max < cal)
             {
                 max = cal;
@@ -50,22 +55,25 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
         {
             if (owner.tileManager.map[tilePos].halfCovers[i])
             {
+                Debug.Log("FindBestAttack, halfcover");
                 score *= 1.2f;
                 break;
             }
             if (owner.tileManager.map[tilePos].fullCovers[i])
             {
+                Debug.Log("FindBestAttack, fullcover");
                 score *= 1.5f;
                 break;
             }
         }
 
+
+        /*
         //첫번째 스킬
         UnitSkill skill = owner.curControlUnit.unitSkills[0];
         //스킬 레인지
-        HashSet<Vector2Int> skillrange = owner.tileManager.SearchTile(tilePos, (from, to) =>
-        { return from.distance + 1 <= owner.curSelectedSkill.skillRange && Math.Abs(from.height - to.height) <= owner.curSelectedSkill.skillHeight; }
-        );
+        HashSet<Vector2Int> skillrange = skill.GetSkillRange();
+
 
         foreach (Unit unit in owner.Units)
         {
@@ -94,7 +102,7 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
                 }
             }
         }
-
+        */
         return score;
     }
 }
