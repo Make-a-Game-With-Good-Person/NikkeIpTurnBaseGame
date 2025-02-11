@@ -6,7 +6,7 @@ using System.Linq;
 
 public class DialogueManager : MonoBehaviour
 {
-    private string googleSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ-7AJkm-U8HSL58odTd349sc_qm0acaqva8HqZkNOBB2fZ-ZY2KZMR5ShIuPE2sQ/pub?gid=1391226435&single=true&output=csv";
+    private string googleSheetUrl = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ307AZ3pmvtNxhW2uoHO7GKEEAfZOLbnG3F9fb50YV6d3dRimODD87DSthYMiG1g/pub?gid=1391226435&single=true&output=csv";
     public List<DialogueData> dialogueData = new List<DialogueData>();
     public static DialogueManager instance;
     private void Awake() 
