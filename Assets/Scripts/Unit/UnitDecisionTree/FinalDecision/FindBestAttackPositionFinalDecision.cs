@@ -68,7 +68,7 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
         }
 
 
-        /*
+        
         //첫번째 스킬
         UnitSkill skill = owner.curControlUnit.unitSkills[0];
         //스킬 레인지
@@ -102,7 +102,7 @@ public class FindBestAttackPositionFinalDecision : FinalDecision
                 }
             }
         }
-        */
+        
         return score;
     }
 }

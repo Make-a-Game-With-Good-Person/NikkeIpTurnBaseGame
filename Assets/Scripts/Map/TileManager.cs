@@ -68,8 +68,8 @@ public class TileManager : MonoBehaviour
         didInit = true;
 
 
-        Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].halfCovers[(int)EDirection.Front]}");
-        Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].fullCovers[(int)EDirection.Front]}");
+        //Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].halfCovers[(int)EDirection.Front]}");
+        //Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].fullCovers[(int)EDirection.Front]}");
         /*
         //debug
         foreach(Tile node in _map.Values)
@@ -142,7 +142,7 @@ public class TileManager : MonoBehaviour
                     {
                         cover = hitinfo.collider.GetComponentInParent<Cover>();
                         tileObject = hitinfo.collider.GetComponentInParent<TileObject>();
-                        Debug.Log($"{tile.coordinate}, {(EDirection)i}, {hitinfo.collider.gameObject.name}");
+                        //Debug.Log($"{tile.coordinate}, {(EDirection)i}, {hitinfo.collider.gameObject.name}");
 
                         if(tileObject != null)
                         {
