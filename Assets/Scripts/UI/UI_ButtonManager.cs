@@ -40,6 +40,17 @@ public class UI_ButtonManager : MonoBehaviour
     public GameObject CH_Status;
     public Button Status_Itembtn;
     public Button Status_Skillbtn;
+    public Sprite Skill_Unselected;
+    public Sprite Skill_Selected;
+    public Sprite Weapon_Unselected;
+    public Sprite Weapon_Selected;
+
+    private Image Weapon_Image;
+    
+    private Image Skill_Image;
+
+
+
     //아이템 필드
     public GameObject Item_Field;
     //스킬 필드
@@ -80,6 +91,9 @@ public class UI_ButtonManager : MonoBehaviour
 
         Status_Itembtn = GameObject.Find("Status_Items").GetComponent<Button>();
         Status_Skillbtn = GameObject.Find("Status_Skills").GetComponent<Button>();
+
+        Weapon_Unselected = Status_Itembtn.GetComponent<Sprite>();
+        Skill_Selected = Status_Skillbtn.GetComponent<Sprite>();
 
         Item_Weapon = GameObject.Find("Weapons").GetComponent<Button>();
         Item_Armor1 = GameObject.Find("Armor1").GetComponent<Button>();
@@ -122,7 +136,10 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH2.SetActive(false);
         Sub_CH3.SetActive(false);
         Sub_CH1.SetActive(true);
-
+        Item_Field.SetActive(true);
+        Skill_Field.SetActive(false);
+        GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
+        GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         XBtn.gameObject.SetActive(false);
     }
 
@@ -135,7 +152,10 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH3.SetActive(false);
         Sub_CH1.SetActive(false);
         Sub_CH2.SetActive(true);
-
+        Item_Field.SetActive(true);
+        Skill_Field.SetActive(false);
+        GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
+        GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         XBtn.gameObject.SetActive(false);
     }
 
@@ -148,7 +168,10 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH1.SetActive(false);
         Sub_CH2.SetActive(false);
         Sub_CH3.SetActive(true);
-
+        Item_Field.SetActive(true);
+        Skill_Field.SetActive(false);
+        GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
+        GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         XBtn.gameObject.SetActive(false);
     }
     //자세한 캐릭터 창에서 뒤로가기
@@ -160,6 +183,7 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH2.SetActive(false);
         Sub_CH3.SetActive(false);
         XBtn.gameObject .SetActive(true);
+ 
     }
     #endregion
 
@@ -169,15 +193,42 @@ public class UI_ButtonManager : MonoBehaviour
     void ClickStatus_Items()
     {
         Item_Field.SetActive(true);
+        GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
+        GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         Skill_Field.SetActive(false);
+        
     }
 
     void ClickStatus_Skills()
     {
         Item_Field.SetActive(false);
+        GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Unselected;
+        GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Selected;
         Skill_Field.SetActive(true);
+   
+
+
+
     }
     #endregion
+
+    void ChangeButtonImage_Do_Skill()
+    {
+        Skill_Image.sprite = Skill_Selected;
+    }
+    void ChangeButtonImage_UnDo_Skill()
+    {
+        Skill_Image.sprite = Skill_Unselected;
+    }
+
+    void ChangeButtonImage_Do_Weapons()
+    {
+        Weapon_Image.sprite = Weapon_Selected;
+    }
+    void ChangeButtonImage_UnDo_Weapons()
+    {
+        Weapon_Image.sprite = Weapon_Unselected;
+    }
 
     #region 아이템 강화
     //아이템 클릭
