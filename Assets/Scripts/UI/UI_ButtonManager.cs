@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class UI_ButtonManager : MonoBehaviour
 {
     #region 메인UI
@@ -49,6 +49,11 @@ public class UI_ButtonManager : MonoBehaviour
     
     private Image Skill_Image;
 
+    public TMP_Text NameTag;
+    public string CH1_Name = "Enwha";
+    public string CH2_Name = "Emma";
+    public string CH3_Name = "Besti";
+
 
 
     //아이템 필드
@@ -70,6 +75,7 @@ public class UI_ButtonManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         ItemUI.SetActive(false);   
         MainStoryUI.SetActive(false);
         Sub_Parents.SetActive(false); 
@@ -101,7 +107,7 @@ public class UI_ButtonManager : MonoBehaviour
         Item_Armor3 = GameObject.Find("Armor3").GetComponent<Button>();
 
         Items_Reinforce_X = GameObject.Find("Items_Explain_x").GetComponent<Button>();
-
+        NameTag = GameObject.Find("Status_CH_Name").GetComponent<TMP_Text>();
     }
 
     void ClickXButton()
@@ -138,6 +144,10 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH1.SetActive(true);
         Item_Field.SetActive(true);
         Skill_Field.SetActive(false);
+
+
+        NameTag.text = CH1_Name;
+
         GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
         GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         XBtn.gameObject.SetActive(false);
@@ -154,6 +164,9 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH2.SetActive(true);
         Item_Field.SetActive(true);
         Skill_Field.SetActive(false);
+
+        NameTag.text = CH2_Name;
+
         GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
         GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         XBtn.gameObject.SetActive(false);
@@ -170,6 +183,9 @@ public class UI_ButtonManager : MonoBehaviour
         Sub_CH3.SetActive(true);
         Item_Field.SetActive(true);
         Skill_Field.SetActive(false);
+
+        NameTag.text = CH3_Name;
+
         GameObject.Find("Status_Items").GetComponent<Image>().sprite = Weapon_Selected;
         GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Unselected;
         XBtn.gameObject.SetActive(false);
@@ -210,7 +226,7 @@ public class UI_ButtonManager : MonoBehaviour
 
 
     }
-    #endregion
+   
 
     void ChangeButtonImage_Do_Skill()
     {
@@ -229,7 +245,7 @@ public class UI_ButtonManager : MonoBehaviour
     {
         Weapon_Image.sprite = Weapon_Unselected;
     }
-
+    #endregion
     #region 아이템 강화
     //아이템 클릭
     void ClickWeapon()
