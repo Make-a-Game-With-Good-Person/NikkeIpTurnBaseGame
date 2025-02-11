@@ -70,6 +70,10 @@ public class UI_ButtonManager : MonoBehaviour
     public GameObject Items_Explain;
 
     public Button Items_Reinforce_X;
+    public Button LevelUP_X;
+
+    public Button Status_LevelUP_Btn;
+    public GameObject Status_LevelUP_BG;
 
     #endregion
     // Start is called before the first frame update
@@ -83,6 +87,9 @@ public class UI_ButtonManager : MonoBehaviour
         Item_Field.SetActive(false);
         Skill_Field.SetActive(false);
         Items_Explain.SetActive(false);
+        Status_LevelUP_BG.SetActive(false);
+
+        Status_LevelUP_Btn = GameObject.Find("Status_LevelUp_Btn").GetComponent<Button>();
                
         XBtn = GameObject.Find("X_Button").GetComponent<Button>();
         StageSelectXBtn = GameObject.Find("StageSelect_X").GetComponent<Button>();
@@ -107,6 +114,7 @@ public class UI_ButtonManager : MonoBehaviour
         Item_Armor3 = GameObject.Find("Armor3").GetComponent<Button>();
 
         Items_Reinforce_X = GameObject.Find("Items_Explain_x").GetComponent<Button>();
+        LevelUP_X = GameObject.Find("LevelUP_X").GetComponent<Button>();
         NameTag = GameObject.Find("Status_CH_Name").GetComponent<TMP_Text>();
     }
 
@@ -222,11 +230,16 @@ public class UI_ButtonManager : MonoBehaviour
         GameObject.Find("Status_Skills").GetComponent<Image>().sprite = Skill_Selected;
         Skill_Field.SetActive(true);
    
-
-
-
     }
-   
+
+    void ClickStatus_LevelUP_Btn()
+    {
+        Status_LevelUP_BG.SetActive(true);
+    }
+    void ClickLevelUP_x()
+    {
+        Status_LevelUP_BG.SetActive(false);
+    }
 
     void ChangeButtonImage_Do_Skill()
     {
@@ -245,6 +258,9 @@ public class UI_ButtonManager : MonoBehaviour
     {
         Weapon_Image.sprite = Weapon_Unselected;
     }
+
+
+     
     #endregion
     #region 아이템 강화
     //아이템 클릭
@@ -295,6 +311,8 @@ public class UI_ButtonManager : MonoBehaviour
         Item_Armor3.onClick.AddListener(ClickArmor3);
 
         Items_Reinforce_X.onClick.AddListener(Click_Items_Explain_x);
+        Status_LevelUP_Btn.onClick.AddListener(ClickStatus_LevelUP_Btn);
+        LevelUP_X.onClick.AddListener(ClickLevelUP_x);
     }
 
     
