@@ -223,6 +223,7 @@ public class TileManager : MonoBehaviour
 
             if(dot < min)
             {
+                min = dot;
                 direction = (EDirection)i;
             }
         }
