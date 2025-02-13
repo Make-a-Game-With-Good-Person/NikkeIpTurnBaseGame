@@ -75,9 +75,9 @@ public class ConfirmAbilityTargetBattleState : BattleState
         {
             base.Enter();
             owner.confirmAbilityTargetUIController.Display();
-            owner.confirmAbilityTargetUIController.SetExpectedText(owner.curControlUnit, owner.selectedTarget.GetComponent<Unit>());
+            owner.confirmAbilityTargetUIController.SetExpectedText(owner.curControlUnit, owner.touchedUnit.GetComponent<Unit>());
             //owner.cameraStateController.SwitchToShoulderView(owner.curControlUnit.shoulder, owner.selectedTarget.transform);
-            owner.cameraStateController.SwitchToQuaterView(owner.selectedTarget.transform);
+            owner.cameraStateController.SwitchToQuaterView(owner.touchedUnit.transform);
             owner.curSelectedSkill.TurnOnTargetRange();
         }
         else

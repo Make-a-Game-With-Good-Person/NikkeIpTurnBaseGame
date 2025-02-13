@@ -29,7 +29,8 @@ public class BattleManager : MonoBehaviour
 
     public BATTLESTATE curState = BATTLESTATE.NONE; // 각 battleState를 알기 위해 만든 enum타입 변수
 
-    public GameObject selectedTarget; // 선택한 대상(적 유닛)
+    public GameObject selectedTarget; // 선택한 공격 대상(적 유닛)
+    public Unit touchedUnit; // 플레이어가 터치를 통해 선택한 유닛
     public Unit curControlUnit; // 현재 플레이어가 선택한 아군 유닛
     public List<Unit> Units = new List<Unit>(); //아군과 적군 유닛 전부를 여기에 저장할 용도
     public List<Unit> EnemyUnits = new List<Unit>();

@@ -55,8 +55,8 @@ public class SelectSkillTargetBattleState : BattleState
                 {
                     Debug.Log("스킬 타격 가능 <<");
                     owner.selectedTarget = hit.collider.gameObject;
-                    Unit selectedUnit = owner.selectedTarget.GetComponent<Unit>();
-                    CDF.SetFinder(owner.curControlUnit.gameObject, owner.selectedTarget, selectedUnit.tile.covers);
+                    owner.touchedUnit = owner.selectedTarget.GetComponent<Unit>();
+                    CDF.SetFinder(owner.curControlUnit.gameObject, owner.selectedTarget, owner.touchedUnit.tile.covers);
 
                     GameObject nearestCover = CDF.FindCover();
                     if (nearestCover != null)

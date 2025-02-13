@@ -1903,10 +1903,11 @@ MonoBehaviour:
   decisionTreeManager: {fileID: 1546028815}
   curState: 0
   selectedTarget: {fileID: 0}
+  touchedUnit: {fileID: 0}
   curControlUnit: {fileID: 0}
   Units: []
   EnemyUnits:
-  - {fileID: 1934395963}
+  - {fileID: 1486556469}
   curSelectedSkill: {fileID: 0}
   enemyTurn: 0
   tileIndicator: {fileID: 1514588219}
@@ -2999,7 +3000,7 @@ PrefabInstance:
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
@@ -3009,7 +3010,7 @@ PrefabInstance:
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
@@ -3059,7 +3060,7 @@ PrefabInstance:
     - target: {fileID: 7779586896229674335, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5675,7 +5676,7 @@ GameObject:
   - component: {fileID: 1466655244}
   - component: {fileID: 1466655245}
   m_Layer: 0
-  m_Name: BestiSPSK
+  m_Name: VestiSPSK
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5843,6 +5844,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1477278562}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1486556469 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8805120029021223421, guid: 2dda32ecc245e444a82aa405a4722934,
+    type: 3}
+  m_PrefabInstance: {fileID: 774795678}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab93f2f5116f20145b18a8c9c9eb1e5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1490767201
 GameObject:
   m_ObjectHideFlags: 0
@@ -9612,7 +9625,7 @@ Transform:
   m_GameObject: {fileID: 2756259817336496961}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 7, y: 0, z: 7}
+  m_LocalPosition: {x: 13, y: 0, z: 13.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9747,7 +9760,7 @@ PrefabInstance:
         type: 3}
       propertyPath: unitSkills.Array.data[1]
       value: 
-      objectReference: {fileID: 1397768299}
+      objectReference: {fileID: 1466655245}
     - target: {fileID: 6697651328977590504, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: m_Layer
@@ -10588,7 +10601,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &2796276432664094459
 GameObject:
   m_ObjectHideFlags: 0

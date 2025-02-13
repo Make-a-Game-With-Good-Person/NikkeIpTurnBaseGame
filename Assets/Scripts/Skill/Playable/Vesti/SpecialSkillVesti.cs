@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpecialSkillBesti : UnitSkill
+public class SpecialSkillVesti : UnitSkill
 {
     LayerMask skillLayerMask;
     protected override void Start()

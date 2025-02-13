@@ -79,6 +79,7 @@ public class TurnCheckBattleState : BattleState
         else
         {
             unitList = owner.Units;
+            owner.touchedUnit = null;
             owner.EnemyRoundEndEvent?.Invoke();
         }
 
