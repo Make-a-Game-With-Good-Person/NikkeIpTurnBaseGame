@@ -110,6 +110,7 @@ public class UnitSelectBattleState : BattleState
 
             if (owner.curControlUnit == null)
             {
+                Debug.Log("선택된 유닛이 없음");
                 owner.stateMachine.ChangeState<TurnCheckBattleState>();
                 return;
             }
@@ -146,10 +147,10 @@ public class UnitSelectBattleState : BattleState
 
         foreach (Unit unit in unitList)
         {
-            Debug.Log(unit.gameObject.name);
             if (unit.attackable || unit.movable)
             {
                 owner.curControlUnit = unit;
+                Debug.Log(unit.gameObject.name);
                 owner.cameraStateController.SwitchToQuaterView(unit.transform);
                 break;
             }
@@ -263,7 +264,13 @@ public class UnitSelectBattleState : BattleState
     private IEnumerator ProcessingState()
     {
         yield return null;
-        Debug.Log($"{owner.curControlUnit}의 processingState..");
+        // 임시, 현재 유닛 리스트를 둘러봤을 때 행동이 가능한 유닛이 없어 선택된 유닛이 한개도 없다면 턴체크로 보내서 리스트를 재검사해보도록
+        if (owner.curControlUnit == null)
+        {
+            owner.stateMachine.ChangeState<TurnCheckBattleState>();
+            yield break;
+        }
+
         //요구사항 10번 구현
         if (!owner.enemyTurn)
         {

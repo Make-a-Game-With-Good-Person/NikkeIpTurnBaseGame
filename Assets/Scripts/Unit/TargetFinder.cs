@@ -18,6 +18,7 @@ public class TargetFinder
 
     bool RayRecursive(Vector3 origin, Vector3 dir, int count, Unit target)
     {
+        Debug.Log("RayRecursive Call");
         if (count > MAX_COUNT)
             return false; // 최대 깊이에 도달했으므로 실패 처리
 

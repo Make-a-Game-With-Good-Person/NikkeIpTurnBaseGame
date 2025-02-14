@@ -24,7 +24,6 @@ public class CheckReachableTargetDecision : Decision
         owner.curControlUnit.unitState = EUnitState.CHASING;
         if (FindTargetCount())
         {
-            Debug.Log("트루 노드로 가세요라");
             return _trueNode;
         }
         else
@@ -43,7 +42,7 @@ public class CheckReachableTargetDecision : Decision
 
         if (owner.curSelectedSkill.targetFinder.FindTargetCount(owner.selectedSkillRangeTile) > 0)
         {
-            Debug.Log("갯수가 많아요");
+            Debug.Log("CheckReachableTargetDecision.FindTargetCount(), true");
             return true;
         }
         else

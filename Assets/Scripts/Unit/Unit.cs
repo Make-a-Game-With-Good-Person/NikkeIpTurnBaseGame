@@ -19,6 +19,8 @@ public class Unit : Stat , IDamage
     bool _movable; // 이동 가능 여부
     public UnitType unitType;
 
+    public bool isStunned = false;
+
     public Animator animator
     {
         get
@@ -96,7 +98,7 @@ public class Unit : Stat , IDamage
         Debug.Log("스텟 초기화 완료");
     }
 
-    public void TakeDamage(float dmg)
+    public virtual void TakeDamage(float dmg)
     {
         Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
         this[EStatType.HP] -= dmg;
@@ -114,11 +116,18 @@ public class Unit : Stat , IDamage
 
     public virtual void ResetAble()
     {
+        if (isStunned) return;
         _attackable = true;
         _movable = true;
     }
 
-    private void OnDead()
+    public void TurnEnd()
+    {
+        _attackable = false;
+        _movable = false;
+    }
+
+    protected void OnDead()
     {
         owner.OnUnitDead(this);
     }

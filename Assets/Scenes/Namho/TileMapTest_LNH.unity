@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3000,7 +3000,7 @@ PrefabInstance:
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
@@ -3010,7 +3010,7 @@ PrefabInstance:
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 13
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 958806759152905958, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
@@ -3047,10 +3047,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2256737117061277091, guid: 2dda32ecc245e444a82aa405a4722934,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2256737117061277091, guid: 2dda32ecc245e444a82aa405a4722934,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4595809038962328364, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
       propertyPath: skillRange
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4625426667961809364, guid: 2dda32ecc245e444a82aa405a4722934,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7779586896229674335, guid: 2dda32ecc245e444a82aa405a4722934,
         type: 3}
@@ -3507,7 +3522,7 @@ Transform:
   m_GameObject: {fileID: 865181581}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0.5}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3773,7 +3788,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillTargetRangeVFX: {fileID: 1477278563}
-  skillTargetRange: 0
+  skillTargetRange: 5
   skillIcon: {fileID: 0}
   skillName: 
   skillDamage: 0
@@ -3785,14 +3800,14 @@ MonoBehaviour:
   owner: {fileID: 0}
   skillTargetLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   isBuffSkill: 0
   changeStateWhenActEnd:
     m_PersistentCalls:
       m_Calls: []
-  eunhwa: {fileID: 208153883}
-  plusATK: 10
-  DefaultATK: 0
+  skillOwner: {fileID: 208153883}
+  damageValue: 2
+  stunTurn: 2
 --- !u!1 &990071341
 GameObject:
   m_ObjectHideFlags: 0
@@ -7118,7 +7133,7 @@ Transform:
   m_GameObject: {fileID: 1761877033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7753,6 +7768,7 @@ MonoBehaviour:
   rayPointer: {fileID: 2587407470788791206}
   rayEnter: {fileID: 4568949929834883402}
   unitType: 3
+  isStunned: 0
 --- !u!1 &1934690747
 GameObject:
   m_ObjectHideFlags: 0
@@ -9760,7 +9776,7 @@ PrefabInstance:
         type: 3}
       propertyPath: unitSkills.Array.data[1]
       value: 
-      objectReference: {fileID: 1466655245}
+      objectReference: {fileID: 955896127}
     - target: {fileID: 6697651328977590504, guid: 591b15fe523443a4387f623b0f8c8644,
         type: 3}
       propertyPath: m_Layer
