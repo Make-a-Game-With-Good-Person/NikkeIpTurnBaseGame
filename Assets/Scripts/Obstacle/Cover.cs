@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Cover : MonoBehaviour, IDamage
 {
+    public Transform normalCover;
+    public Transform ruinedCover;
     [SerializeField] Transform destroyVFX;
     bool isComplete;
     int index;
@@ -35,7 +37,9 @@ public class Cover : MonoBehaviour, IDamage
         if(hp <= 0)
         {
             //Instantiate(destroyVFX, this.transform.position, Quaternion.identity, null);
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            /*normalCover.gameObject.SetActive(false);
+            ruinedCover.gameObject.SetActive(true);*/
         }
     }
     

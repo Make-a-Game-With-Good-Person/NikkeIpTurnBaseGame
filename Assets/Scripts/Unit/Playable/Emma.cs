@@ -15,7 +15,7 @@ public class Emma : Unit
 
     public override void TakeDamage(float dmg)
     {
-        Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
+        Debug.Log($"Emma인 {this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
         if (shield - dmg >= 0f)
         {
             shield -= dmg;
@@ -25,6 +25,7 @@ public class Emma : Unit
             float remainDmg = Mathf.Abs(shield - dmg);
             shield = 0;
             this[EStatType.HP] -= remainDmg;
+            Debug.Log($"남은 쉴드 : {shield}, 남은 체력 : {this[EStatType.HP]}");
         }
 
         if (this[EStatType.HP] <= 0f)
