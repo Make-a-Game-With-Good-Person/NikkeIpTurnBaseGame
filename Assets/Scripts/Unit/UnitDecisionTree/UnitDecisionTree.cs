@@ -8,6 +8,7 @@ public class UnitDecisionTree : MonoBehaviour
     private DecisionTreeNode decisionTree;
 
     #region FinalDecision
+    AlertFinalDecision alertFinalDecision;
     TurnPassFinalDecision turnPassFinalDecision;
     SelectAbilityTargetFinalDecision selectAbilityTargetFinalDecision;
     FindBestAttackPositionFinalDecision findBestAttackPositionFinalDecision;
@@ -15,6 +16,7 @@ public class UnitDecisionTree : MonoBehaviour
     #endregion
 
     #region Decision
+    CheckContactDecision checkContactDecision;
     CheckTurnDecision checkTurnDecision;
     CheckAttackTurnDecision checkAttackTurnDecision;
     CheckMoveTurnDecision checkMoveTurnDecision;
@@ -38,6 +40,7 @@ public class UnitDecisionTree : MonoBehaviour
 
     private void Start()
     {
+        alertFinalDecision = new AlertFinalDecision(returnDecision,owner);
         turnPassFinalDecision = new TurnPassFinalDecision(returnDecision, owner);
         selectAbilityTargetFinalDecision = new SelectAbilityTargetFinalDecision(returnDecision, owner);
         findBestAttackPositionFinalDecision = new FindBestAttackPositionFinalDecision(returnDecision, owner);
@@ -48,9 +51,9 @@ public class UnitDecisionTree : MonoBehaviour
         checkReachableTargetDecision = new CheckReachableTargetDecision(owner, selectAbilityTargetFinalDecision, checkMoveTurnDecision);
         checkAttackTurnDecision = new CheckAttackTurnDecision(owner, checkReachableTargetDecision, checkMoveTurnDecision);
         checkTurnDecision = new CheckTurnDecision(owner, checkAttackTurnDecision, turnPassFinalDecision);
+        checkContactDecision = new CheckContactDecision(owner, checkTurnDecision, alertFinalDecision);
 
-
-        defaultDecisionTree = checkTurnDecision;
+        defaultDecisionTree = checkContactDecision;
         SetDecisionTree(defaultDecisionTree);
     }
 

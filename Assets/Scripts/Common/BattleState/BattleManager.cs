@@ -49,6 +49,7 @@ public class BattleManager : MonoBehaviour
     #region Events
     public UnityEvent EnemyRoundEndEvent = new UnityEvent();
     public UnityEvent PlayerRoundEndEvent = new UnityEvent();
+    public UnityEvent EndBuffEvent = new UnityEvent();
     #endregion
     #endregion
 
