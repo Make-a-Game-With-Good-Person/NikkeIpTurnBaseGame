@@ -52,6 +52,7 @@ public class UnitSelectBattleState : BattleState
         owner.abilityMenuUIController.moveButton.onClick.AddListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.AddListener(OnAbilityButton);
         owner.abilityMenuUIController.turnEndButton.onClick.AddListener(OnTurnEndButton);
+        owner.abilityMenuUIController.vestiPassiveButton.onClick.AddListener(OnPassiveButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -65,6 +66,7 @@ public class UnitSelectBattleState : BattleState
         owner.abilityMenuUIController.moveButton.onClick.RemoveListener(OnMoveButton);
         owner.abilityMenuUIController.abilityButton.onClick.RemoveListener(OnAbilityButton);
         owner.abilityMenuUIController.turnEndButton.onClick.RemoveListener(OnTurnEndButton);
+        owner.abilityMenuUIController.vestiPassiveButton.onClick.RemoveListener(OnPassiveButton);
 
         foreach (Unit unit in owner.Units)
         {
@@ -258,11 +260,32 @@ public class UnitSelectBattleState : BattleState
         SelectFirstTarget();
     }
 
+    void OnPassiveButton()
+    {
+        if (!owner.curControlUnit.attackable || owner.curControlUnit.movable) return;
+
+        owner.curControlUnit.attackable = false;
+        owner.curControlUnit.movable = true;
+
+        owner.abilityMenuUIController.ActivateButtons(owner.curControlUnit.attackable, owner.curControlUnit.movable);
+    }
+
     #endregion
 
     #region Coroutines
     private IEnumerator ProcessingState()
     {
+        if (!owner.enemyTurn)
+        {
+            if (owner.curControlUnit.gameObject.GetComponent<Vesti>() == null)
+            {
+                owner.abilityMenuUIController.TurnOffPassiveBT();
+            }
+            else
+            {
+                owner.abilityMenuUIController.TurnOnPassiveBT();
+            }
+        }
         yield return null;
         // 임시, 현재 유닛 리스트를 둘러봤을 때 행동이 가능한 유닛이 없어 선택된 유닛이 한개도 없다면 턴체크로 보내서 리스트를 재검사해보도록
         if (owner.curControlUnit == null)
@@ -274,11 +297,7 @@ public class UnitSelectBattleState : BattleState
         //요구사항 10번 구현
         if (!owner.enemyTurn)
         {
-            //요구사항 2번 여기에 구현
-            //요구사항 5번 여기에 구현
-            // 유닛을 클릭하면 카메라 이벤트를 실행해 선택했다고 처리하기 때문에 여기선 필요한 UI들을 켜주면 될거 같음
-
-
+            
         }
         else
         {
