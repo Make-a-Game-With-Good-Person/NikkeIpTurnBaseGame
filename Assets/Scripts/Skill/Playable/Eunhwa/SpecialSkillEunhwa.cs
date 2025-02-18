@@ -21,6 +21,20 @@ public class SpecialSkillEunhwa : UnitSkill
         battleManager.PlayerRoundEndEvent.AddListener(ResetState);
     }
 
+    public override void TurnOnTargetRange()
+    {
+        Vector3 attackDirection = (battleManager.selectedTarget.transform.position - battleManager.curControlUnit.transform.position).normalized;
+        Vector3 boxCenter = battleManager.selectedTarget.transform.position + attackDirection * (skillTargetRange / 2);
+        Vector3 boxSize = new Vector3(1, skillHeight, skillTargetRange);
+        Quaternion boxRotation = Quaternion.LookRotation(attackDirection, Vector3.up);
+
+        this.skillTargetRangeVFX.transform.position = boxCenter;
+        this.skillTargetRangeVFX.transform.localScale = boxSize;
+        this.skillTargetRangeVFX.transform.rotation = boxRotation;
+
+        skillTargetRangeVFX.gameObject.SetActive(true);
+    }
+
     public override void Action()
     {
         base.Action();

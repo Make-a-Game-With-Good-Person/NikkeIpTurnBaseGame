@@ -13,7 +13,7 @@ public class BattleManager : MonoBehaviour
     #region Public
     [HideInInspector] public StateMachine stateMachine;
     public TileManager tileManager;
-
+    public TileVFXManager tileVFXManager;
     #region Controllers
     public UnitPlacementUIController unitPlacementUIController;
     public AbilityMenuUIController abilityMenuUIController;

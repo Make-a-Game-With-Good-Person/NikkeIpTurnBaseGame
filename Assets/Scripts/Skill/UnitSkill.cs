@@ -11,7 +11,7 @@ using System;
 /// </summary>
 public class UnitSkill : MonoBehaviour, IAction
 {
-    [SerializeField] Transform skillTargetRangeVFX;
+    [SerializeField] protected Transform skillTargetRangeVFX;
     [SerializeField] protected float skillTargetRange;
 
     public Image skillIcon;
@@ -38,8 +38,7 @@ public class UnitSkill : MonoBehaviour, IAction
         targetFinder = new TargetFinder(battleManager);
         battleCalculator = FindObjectOfType<BattleCalculator>();
 
-        skillTargetRangeVFX.transform.localScale = new Vector3(skillTargetRange, 1, skillTargetRange);
-        skillTargetRangeVFX.gameObject.SetActive(false);
+        SetSkillRangeVFX();
     }
 
     protected bool IsActionAccuracy()
@@ -54,6 +53,7 @@ public class UnitSkill : MonoBehaviour, IAction
 
     public virtual void Action() {
         Debug.Log("스킬 실행!");
+        TurnOffTargetRange();
     }
 
     public HashSet<Vector2Int> GetSkillRange()
@@ -68,7 +68,7 @@ public class UnitSkill : MonoBehaviour, IAction
         return skillRange;
     }
 
-    public void TurnOnTargetRange()
+    public virtual void TurnOnTargetRange()
     {
         Vector3 pos = battleManager.selectedTarget.transform.position;
 
@@ -81,6 +81,11 @@ public class UnitSkill : MonoBehaviour, IAction
         skillTargetRangeVFX.gameObject.SetActive(false);
     }
 
+    protected virtual void SetSkillRangeVFX()
+    {
+        this.skillTargetRangeVFX.transform.localScale = new Vector3(skillTargetRange, 1, skillTargetRange);
+        skillTargetRangeVFX.gameObject.SetActive(false);
+    }
 
 
 }

@@ -58,9 +58,10 @@ public class MoveSequenceState : BattleState
     private IEnumerator ProcessingState()
     {
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
-           
-        if(owner.tile != owner.curControlUnit.tile)
+        
+        if (owner.tile != owner.curControlUnit.tile)
         {
+            owner.tileVFXManager.TurnOnTileTouch(owner.tile.center);
             //owner.curControlUnit.animator.SetBool("Move", true);
             yield return StartCoroutine(movement.Traverse(owner.tile.coordinate, owner.tileManager));
         }
@@ -70,7 +71,7 @@ public class MoveSequenceState : BattleState
         }
         //owner.curControlUnit.animator.SetBool("Move", false);
         owner.curControlUnit.movable = false;
-
+        owner.tileVFXManager.TurnOffTileTouch();
         owner.stateMachine.ChangeState<TurnCheckBattleState>();
     }
     #endregion
