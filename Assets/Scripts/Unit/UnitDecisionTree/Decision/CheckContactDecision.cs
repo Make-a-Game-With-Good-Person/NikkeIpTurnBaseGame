@@ -9,7 +9,7 @@ public class CheckContactDecision : Decision
 {
     BattleManager owner;
     ConeTileCalculator conTileCalculator;
-    
+
     public CheckContactDecision(BattleManager owner, DecisionTreeNode trueNode, DecisionTreeNode falseNode) : base(trueNode, falseNode)
     {
         this.owner = owner;
@@ -30,7 +30,7 @@ public class CheckContactDecision : Decision
 
     bool CheckAlreadyContacted()
     {
-        foreach(Unit enemy in owner.EnemyUnits)
+        foreach (Unit enemy in owner.EnemyUnits)
         {
             if (enemy.isContacted) return true;
         }
@@ -44,14 +44,16 @@ public class CheckContactDecision : Decision
 
         foreach (Tile item in tiles)
         {
-            Debug.Log(item.coordinate + "<<<<<");
+            if (owner.tileManager.tilesForShow.ContainsKey(item.coordinate))
+                owner.tileManager.tilesForShow[item.coordinate].SetActive(true);
+
         }
 
         foreach (Unit player in owner.Units)
         {
             if (tiles.Contains(player.tile))
             {
-                foreach(Unit enemy in owner.EnemyUnits)
+                foreach (Unit enemy in owner.EnemyUnits)
                 {
                     enemy.isContacted = true;
                 }

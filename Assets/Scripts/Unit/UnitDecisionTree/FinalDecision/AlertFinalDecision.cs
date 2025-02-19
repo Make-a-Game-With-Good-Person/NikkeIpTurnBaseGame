@@ -17,8 +17,7 @@ public class AlertFinalDecision : FinalDecision
 
     public override ReturnDecision Execute()
     {
-        owner.curControlUnit.transform.rotation = Quaternion.Euler(0, owner.curControlUnit.transform.eulerAngles.y + 90, 0);
-        returnDecision.type = ReturnDecision.DecisionType.Pass;
+        returnDecision.type = ReturnDecision.DecisionType.Alert;
         return returnDecision;
     }
 }

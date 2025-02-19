@@ -12,7 +12,8 @@ public struct ReturnDecision
         FarTargetAttack,
         NearTargetAttack,
         Summon,
-        AttackPass
+        AttackPass,
+        Alert
     }
 
     public DecisionType type;

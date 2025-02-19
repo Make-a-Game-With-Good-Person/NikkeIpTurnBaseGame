@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 게임 시작하고 유닛 선택하는 상태
@@ -303,11 +304,11 @@ public class UnitSelectBattleState : BattleState
         {
             owner.curReturnDecision = owner.decisionTreeManager.RunAI(owner.curControlUnit.unitType);
 
+            yield return new WaitForSeconds(1.5f);
             //컴퓨터의 AI를 호출해서 결과를 냄
             if (owner.curControlUnit.unitType == UnitType.Enemy)
             {
                 //owner.curReturnDecision = owner.curControlUnit.GetComponent<UnitDecisionTree>().Run();
-
                 switch (owner.curReturnDecision.type)
                 {
                     case ReturnDecision.DecisionType.Action:
@@ -321,6 +322,13 @@ public class UnitSelectBattleState : BattleState
                         break;
                     case ReturnDecision.DecisionType.Move:
                         owner.stateMachine.ChangeState<MoveTargetBattleState>();
+                        break;
+                    case ReturnDecision.DecisionType.Alert:
+                        owner.curControlUnit.transform.rotation = Quaternion.Euler(0, owner.curControlUnit.transform.eulerAngles.y + 90, 0);
+                        owner.curControlUnit.attackable = false;
+                        owner.curControlUnit.movable = false;
+                        owner.curControlUnit = null;
+                        owner.stateMachine.ChangeState<TurnCheckBattleState>();
                         break;
                 }
             }

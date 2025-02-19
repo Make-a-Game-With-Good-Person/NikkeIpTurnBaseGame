@@ -103,6 +103,7 @@ public class TurnCheckBattleState : BattleState
     public override void Enter()
     {
         base.Enter();
+        owner.tileManager.TurnOffShowTiles();
         StartCoroutine(ProcessingState());
     }
     public override void Exit()
