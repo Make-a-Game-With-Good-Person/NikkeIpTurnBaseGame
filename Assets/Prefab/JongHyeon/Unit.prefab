@@ -235,6 +235,7 @@ MonoBehaviour:
   rayPointer: {fileID: 2590594886457737868}
   rayEnter: {fileID: 7552155526579703623}
   unitType: 1
+  unitName: 0
   isStunned: 0
   isContacted: 0
 --- !u!114 &845194545583012823
@@ -822,7 +823,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   skillTargetLayerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   isBuffSkill: 0
   changeStateWhenActEnd:
     m_PersistentCalls:

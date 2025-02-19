@@ -18,6 +18,7 @@ public class Unit : Stat , IDamage
     bool _attackable; // 공격 가능 여부
     bool _movable; // 이동 가능 여부
     public UnitType unitType;
+    public UnitName unitName;
 
     public bool isStunned = false;
     public bool isContacted = false;

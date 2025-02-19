@@ -278,13 +278,16 @@ public class UnitSelectBattleState : BattleState
     {
         if (!owner.enemyTurn)
         {
-            if (owner.curControlUnit.gameObject.GetComponent<Vesti>() == null)
+            if(owner.curControlUnit != null)
             {
-                owner.abilityMenuUIController.TurnOffPassiveBT();
-            }
-            else
-            {
-                owner.abilityMenuUIController.TurnOnPassiveBT();
+                if (owner.curControlUnit.unitName != UnitName.Vesti)
+                {
+                    owner.abilityMenuUIController.TurnOffPassiveBT();
+                }
+                else
+                {
+                    owner.abilityMenuUIController.TurnOnPassiveBT();
+                }
             }
         }
         yield return null;
