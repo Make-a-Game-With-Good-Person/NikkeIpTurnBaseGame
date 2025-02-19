@@ -171,7 +171,6 @@ GameObject:
   - component: {fileID: 7017709546390658817}
   - component: {fileID: 8871002773064012483}
   - component: {fileID: 408139805285318532}
-  - component: {fileID: 769107958052510272}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Player
@@ -301,21 +300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityTargetAct:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &769107958052510272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2239219367257166617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61fdbb0c1cdc35e4588d4d4be845c3c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AnimEndEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2709391847811275474
@@ -1388,6 +1372,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1761369491232577624}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7f9b20cacc6c75f45b7d271e3adf7121,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6797963630642917651}
   m_SourcePrefab: {fileID: 100100000, guid: 7f9b20cacc6c75f45b7d271e3adf7121, type: 3}
 --- !u!4 &5149542403780417607 stripped
 Transform:
@@ -1422,6 +1410,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6797963630642917651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5493557174973285117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fdbb0c1cdc35e4588d4d4be845c3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &5554562526827568165
 PrefabInstance:
   m_ObjectHideFlags: 0
