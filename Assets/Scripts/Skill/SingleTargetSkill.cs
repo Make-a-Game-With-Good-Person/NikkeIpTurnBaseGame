@@ -15,8 +15,8 @@ public class SingleTargetSkill : UnitSkill
         //battleManager.cameraStateController.SwitchToQuaterView(owner.transform); // 이건 스킬마다 바인딩해놓은 유닛을 타겟으로 잡는거
         battleManager.cameraStateController.SwitchToQuaterView(battleManager.curControlUnit.transform); // 이건 배틀 매니저가 제어중인 유닛을 타겟으로 잡는거 둘이 똑같긴 함
         // 애니메이터 설정 anim.SetTrigger(블라블라);
-        UnitAnimationController animController = GetComponentInParent<UnitAnimationController>();
-        animController?.Attack(0, true);
+        /*UnitAnimationController animController = GetComponentInParent<UnitAnimationController>();
+        animController?.Attack(0, true);*/
 
         Debug.Log(battleManager.curControlUnit.gameObject.name + "의 " + battleManager.selectedTarget.gameObject.name + "를 향한 공격");
         //battleManager.curControlUnit.animator.SetTrigger("Attack");

@@ -42,6 +42,8 @@ public class MoveSequenceState : BattleState
     public override void Enter()
     {
         base.Enter();
+        owner.curState = BATTLESTATE.MOVESEQUENCE;
+        owner.cameraStateController.SwitchToQuaterView(owner.curControlUnit.transform);
         StartCoroutine(ProcessingState());
     }
     public override void Exit()

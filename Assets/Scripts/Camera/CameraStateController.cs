@@ -86,7 +86,7 @@ public class CameraStateController : MonoBehaviour
                 }
                 else
                 {
-                    SwitchToMapView();
+                    if(owner.curState == BATTLESTATE.UNITPLACE || owner.curState == BATTLESTATE.UNITSELLECT) SwitchToMapView();
                 }
             }
         }
