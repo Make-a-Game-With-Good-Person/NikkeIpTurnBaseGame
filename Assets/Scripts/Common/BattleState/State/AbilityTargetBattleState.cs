@@ -132,6 +132,7 @@ public class AbilityTargetBattleState : BattleState
         base.Exit();
         owner.abilityTargetUIController.ResetSkillUI(owner.curControlUnit);
         owner.abilityTargetUIController.Hide();
+        owner.tileManager.TurnOffShowTiles();
     }
     #endregion
     #endregion

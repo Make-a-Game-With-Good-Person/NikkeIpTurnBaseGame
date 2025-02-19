@@ -40,6 +40,8 @@ public class CheckReachableTargetDecision : Decision
         HashSet<Vector2Int> temp = owner.selectedSkillRangeTile.ToHashSet();*/
         owner.selectedSkillRangeTile = owner.curSelectedSkill.GetSkillRange();
 
+
+
         if (owner.curSelectedSkill.targetFinder.FindTargetCount(owner.selectedSkillRangeTile) > 0)
         {
             Debug.Log("CheckReachableTargetDecision.FindTargetCount(), true");

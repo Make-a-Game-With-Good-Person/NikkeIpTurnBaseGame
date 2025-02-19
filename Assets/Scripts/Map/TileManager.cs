@@ -26,6 +26,7 @@ public class TileManager : MonoBehaviour
     #region Properties
     #region Private
     private Dictionary<Vector2Int, Tile> _map = new Dictionary<Vector2Int, Tile>();
+    private Dictionary<Vector2Int, GameObject> _tilesForShow = new Dictionary<Vector2Int, GameObject>();
     #region ForPathFinding
     private HashSet<Vector2Int> movable = new HashSet<Vector2Int>();
     //Front, Back, Right, Left
@@ -40,11 +41,17 @@ public class TileManager : MonoBehaviour
     public Vector3 tileSize = new Vector3(2,1,2);
     public int rows = 1;
     public int cols = 1;
-
+    public GameObject showedTile;
+    public Transform showedTileParent;
     public LayerMask tileObjectMask;
     public Dictionary<Vector2Int, Tile> map
     {
         get { return _map; }
+    }
+
+    public Dictionary<Vector2Int, GameObject> tilesForShow
+    {
+        get { return _tilesForShow; }
     }
     #endregion
     #region Events
@@ -65,6 +72,7 @@ public class TileManager : MonoBehaviour
         InitGrid();
         InitHeight();
         InitCover();
+        InitShowTiles();
         didInit = true;
 
 
@@ -181,6 +189,16 @@ public class TileManager : MonoBehaviour
             }
         }
     }
+
+    private void InitShowTiles()
+    {
+        foreach (Tile node in _map.Values)
+        {
+            GameObject obj = Instantiate(showedTile, node.center, Quaternion.identity,showedTileParent);
+            _tilesForShow.Add(node.coordinate, obj);
+            obj.SetActive(false);
+        }
+    }
     #endregion
     #region Protected
     #endregion
@@ -233,7 +251,28 @@ public class TileManager : MonoBehaviour
 
     public void ShowTiles(HashSet<Vector2Int> tiles)
     {
+        /*
+         TileMaanger에 GameObject를 value로 받고 Vector2Int를 Key로 받는 map을 만들어놓고
+        전달받은 tiles의 요소들이 키에 해당하는 values을 Turn On 시키는 함수?
+        그 전에 모든 map에 있는 value들에 접근해서 끄는것도 추가해야함 ㅇㅋ?
+         */
+
         //여기에 저 타일들로 이동 가능 영역 보여주기
+        TurnOffShowTiles();
+
+        foreach (Vector2Int pos in tiles)
+        {
+            tilesForShow[pos].SetActive(true);
+        }
+        
+    }
+
+    public void TurnOffShowTiles()
+    {
+        foreach (GameObject obj in tilesForShow.Values)
+        {
+            obj.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -383,11 +422,23 @@ public class TileManager : MonoBehaviour
         //Debug.Log("TileManager.Start() End");
     }
 
+    private void OnDestroy()
+    {
+        Debug.Log($"{this.gameObject.name}이 삭제됨");
+
+        foreach(GameObject obj in _tilesForShow.Values)
+        {
+            Destroy(obj);
+        }
+
+        _tilesForShow.Clear();
+
+    }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
         if(!didInit)
-            Initialize();
+            //Initialize();
 
         if (_map == null || _map.Count == 0) return;
 

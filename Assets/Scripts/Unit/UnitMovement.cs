@@ -362,7 +362,7 @@ public class UnitMovement : MonoBehaviour
                 passedTile.Add(tile);
             }
 
-            delta = 1.0f * Time.deltaTime;
+            delta = 10.0f * Time.deltaTime;
 
             if(delta > dist)
             {
@@ -398,7 +398,7 @@ public class UnitMovement : MonoBehaviour
             t1 += Time.deltaTime;
             float val = t1 / t2;
             //수평 이동
-            delta = 1.0f * Time.deltaTime;
+            delta = 10.0f * Time.deltaTime;
 
             if (delta > dist)
             {
@@ -448,7 +448,7 @@ public class UnitMovement : MonoBehaviour
 
         while(angle > 0)
         {
-            delta = 60.0f * Time.deltaTime;
+            delta = 160.0f * Time.deltaTime;
 
             if(delta > angle)
             {

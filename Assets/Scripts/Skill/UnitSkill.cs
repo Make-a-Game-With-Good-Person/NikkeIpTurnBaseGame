@@ -63,7 +63,7 @@ public class UnitSkill : MonoBehaviour, IAction
             Math.Abs(from.height - to.height) <= battleManager.curSelectedSkill.skillHeight * battleManager.curControlUnit[EStatType.Visual]; }
         );
 
-        targetFinder.FindTarget(skillRange);
+        //targetFinder.FindTarget(skillRange);
 
         return skillRange;
     }

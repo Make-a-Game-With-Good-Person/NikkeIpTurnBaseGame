@@ -55,6 +55,7 @@ public class MoveTargetBattleState : BattleState
     public override void Exit()
     {
         owner.tileIndicator.gameObject.SetActive(false);
+        owner.tileManager.TurnOffShowTiles();
         base.Exit();
     }
     #endregion
@@ -90,6 +91,7 @@ public class MoveTargetBattleState : BattleState
         UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
         range = movement.GetTilesInRange(owner.tileManager);
 
+        owner.tileManager.ShowTiles(range);
         if (owner.enemyTurn)
         {
             owner.tile = owner.tileManager.GetTile(owner.curReturnDecision.pos);

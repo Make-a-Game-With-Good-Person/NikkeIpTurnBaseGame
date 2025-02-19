@@ -48,7 +48,7 @@ public class TargetFinder
                     return RayRecursive(newOrigin, dir, count + 1, target);
                 }
             }
-            
+
         }
 
         // 타겟을 맞추지 못한 경우
@@ -96,19 +96,18 @@ public class TargetFinder
             targetPos = owner.tileManager.GetTile(unit.transform.position).coordinate;
             if (!set.Contains(targetPos)) continue;
 
-            if (unit.gameObject.layer == 7)
+
+            Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
+            dir.Normalize();
+            if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
             {
-                Vector3 dir = unit.rayEnter.transform.position - owner.curControlUnit.rayPointer.transform.position;
-                dir.Normalize();
-                if (RayRecursive(owner.curControlUnit.rayPointer.position, dir, 0, unit))
-                {
-                    cnt++;
-                }
-                else
-                {
-                    Debug.Log("적이 쏜 레이에 플레이어가 안맞음..");
-                }
+                cnt++;
             }
+            else
+            {
+                Debug.Log("적이 쏜 레이에 플레이어가 안맞음..");
+            }
+
         }
 
         return cnt;
@@ -117,7 +116,7 @@ public class TargetFinder
     public List<Unit> FindTargets(HashSet<Vector2Int> set)
     {
         units.Clear();
-        
+
         foreach (Unit unit in owner.Units)
         {
             Debug.Log(unit.gameObject.name);
@@ -139,5 +138,5 @@ public class TargetFinder
         return units;
     }
 
-    
+
 }

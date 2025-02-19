@@ -197,6 +197,7 @@ public class SelectSkillTargetBattleState : BattleState
             owner.selectSkillTargetUIController.Hide();
         }
         // 내가 이전에 선택한 스킬의 범위를 보여줘야함
+        owner.tileManager.ShowTiles(owner.selectedSkillRangeTile);
         // 스킬 범위 안에 적이 있는걸 판별해 적이 있다면 적도 반짝이게? 바꿔줘야함..
         // 그리고 UI도 켜야함, 뒤로가는 버튼은 보여줘야하니깐
         // 버튼 뿐만 아니라 텍스트로 대상을 선택하세요 이런것도 보여줘야함
