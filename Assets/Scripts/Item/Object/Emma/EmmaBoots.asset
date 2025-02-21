@@ -10,10 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f994b34aba959349b29a255c2afe7c5, type: 3}
-  m_Name: Boots
+  m_Name: EmmaBoots
   m_EditorClassIdentifier: 
   ItemIcon: {fileID: 0}
   ItemName: 
   ItemExplainText: 
-  EquipType: 0
-  ItemLv: 0
+  EquipType: 4
+  ItemLv: 1
+  baseStat:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0

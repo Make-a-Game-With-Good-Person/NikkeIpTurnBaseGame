@@ -11,4 +11,6 @@ public class BaseItem : ScriptableObject
 
     public EquipType EquipType;
     public int ItemLv;
+    public float[] baseStat = new float[(int)EStatType.Count];
+
 }

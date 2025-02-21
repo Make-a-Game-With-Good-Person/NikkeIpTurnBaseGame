@@ -18,7 +18,7 @@ public class AuthManager
 
     public string GetCurrenUserID()
     {
-        return auth.CurrentUser.UserId;
+        return auth.CurrentUser?.UserId;
     }
 
     public async Task<bool> Login(string emailField, string passField)

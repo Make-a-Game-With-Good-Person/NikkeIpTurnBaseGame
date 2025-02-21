@@ -22,11 +22,10 @@ public class LoginSystem : MonoBehaviour
 
     AuthManager authManager;
     UserDataManager userDataManager;
-    string uid;
     private void Start()
     {
         authManager = new AuthManager();
-        userDataManager = new UserDataManager();
+        userDataManager = UserDataManager.Instance;
     }
 
     #region TryFunc
@@ -49,15 +48,16 @@ public class LoginSystem : MonoBehaviour
     async Task UserLogin()
     {
         bool success = await authManager.Login(idInput.text, pwInput.text);
-        if (success) // 회원가입성공
+        if (success) // 로그인 성공
         {
-            uid = authManager.GetCurrenUserID();
+            userDataManager.uid = authManager.GetCurrenUserID();
 
-            bool hasNickName = await userDataManager.CheckIfNicknameExists(uid);
+            bool dataLoad = await userDataManager.LoadUserData(userDataManager.uid);
 
-            if (hasNickName)
+            if (dataLoad)
             {
                 Debug.Log(" 이미 닉네임이 존재하니 처음 온 사람이 아니니깐 바로 게임을 시작하도록 해요 ");
+                TurnOffLoginScreen();
             }
             else
             {
@@ -88,11 +88,19 @@ public class LoginSystem : MonoBehaviour
 
     async Task UserNickName()
     {
-        await userDataManager.SetNickname(uid, nicknameIdInput.text);
+        await userDataManager.InitializeUserData(userDataManager.uid, nicknameIdInput.text);
+
+        Debug.Log("닉네임 생성 성공!");
+        TurnOffNickNameMakeScreen();
+        TurnOffLoginFailScreen();
     }
     #endregion
 
     #region ToggleScreen
+    public void TurnOffLoginScreen()
+    {
+        loginScreen.gameObject.SetActive(false);
+    }
     public void TurnOnNickNameMakeScreen()
     {
         loginScreen.gameObject.SetActive(false);

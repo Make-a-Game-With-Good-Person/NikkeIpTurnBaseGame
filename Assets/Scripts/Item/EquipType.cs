@@ -1,8 +1,7 @@
 public enum EquipType
 {
-    None,
     Helmet,
     Armor,
-    Gloove,
+    Gloves,
     Boots
 }
