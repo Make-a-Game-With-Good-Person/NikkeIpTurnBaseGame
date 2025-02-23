@@ -454,6 +454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SMG_Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7f9b20cacc6c75f45b7d271e3adf7121,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2785049695860566539, guid: 7f9b20cacc6c75f45b7d271e3adf7121,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -700,6 +705,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5215826104074655746, guid: 3f7d487ab5d7f5744b048c5093de482a,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -713,6 +723,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2275909981257704353, guid: 2a4715143c58f1046a08c9122692a116,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7975533579599767343, guid: 2a4715143c58f1046a08c9122692a116,
         type: 3}
       propertyPath: m_Name
@@ -721,12 +736,12 @@ PrefabInstance:
     - target: {fileID: 7975533579599767343, guid: 2a4715143c58f1046a08c9122692a116,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8264894243887326746, guid: 2a4715143c58f1046a08c9122692a116,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 8264894243887326746, guid: 2a4715143c58f1046a08c9122692a116,
         type: 3}
@@ -786,6 +801,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 483659994595246239, guid: 612ef20d28c642d46973a81375e03603,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2920030039595543431, guid: 612ef20d28c642d46973a81375e03603,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -840,6 +860,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Barbell
+      objectReference: {fileID: 0}
+    - target: {fileID: 4656716495911783706, guid: 612ef20d28c642d46973a81375e03603,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6810926864873992921, guid: 612ef20d28c642d46973a81375e03603,
         type: 3}
