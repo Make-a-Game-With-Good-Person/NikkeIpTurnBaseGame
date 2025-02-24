@@ -45,10 +45,10 @@ public class UserDataManager : MonoBehaviour
                 Convert.ToInt32(goods["battleData"]),
                 new Dictionary<string, int>
                 {
-                    { "helmetLv", Convert.ToInt32(equip["helmetLv"]) },
-                    { "armorLv", Convert.ToInt32(equip["armorLv"]) },
-                    { "glovesLv", Convert.ToInt32(equip["glovesLv"]) },
-                    { "bootsLv", Convert.ToInt32(equip["bootsLv"]) }
+                    { "helmetLevel", Convert.ToInt32(equip["helmetLevel"]) },
+                    { "armorLevel", Convert.ToInt32(equip["armorLevel"]) },
+                    { "glovesLevel", Convert.ToInt32(equip["glovesLevel"]) },
+                    { "bootsLevel", Convert.ToInt32(equip["bootsLevel"]) }
                 });
 
             return true;
@@ -70,7 +70,7 @@ public class UserDataManager : MonoBehaviour
             { "goods", new Dictionary<string, object>
                 {
                     { "credits", UserData.Credits },
-                    { "battleData", UserData.BattleDatas }
+                    { "battleData", UserData.BattleData }
                 }
             }
         };
@@ -90,10 +90,10 @@ public class UserDataManager : MonoBehaviour
     {
         UserData.SetData(nickname, 1, 0, 0, new Dictionary<string, int>
         {
-            { "helmetLv", 1 },
-            { "armorLv", 1 },
-            { "glovesLv", 1 },
-            { "bootsLv", 1 }
+            { "helmetLevel", 1 },
+            { "armorLevel", 1 },
+            { "glovesLevel", 1 },
+            { "bootsLevel", 1 }
         });
         await SaveUserData(userId);
     }

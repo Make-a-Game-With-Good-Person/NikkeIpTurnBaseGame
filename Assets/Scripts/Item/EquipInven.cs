@@ -9,10 +9,10 @@ public class EquipInven : MonoBehaviour
 
     public void InitItemValue()
     {
-        baseItems[(int)EquipType.Helmet].ItemLv = userDataManager.UserData.Equip["helmetLv"];
-        baseItems[(int)EquipType.Armor].ItemLv = userDataManager.UserData.Equip["armorLv"];
-        baseItems[(int)EquipType.Gloves].ItemLv = userDataManager.UserData.Equip["glovesLv"];
-        baseItems[(int)EquipType.Boots].ItemLv = userDataManager.UserData.Equip["bootsLv"];
+        baseItems[(int)EquipType.Helmet].ItemLv = userDataManager.UserData.Equip["helmetLevel"];
+        baseItems[(int)EquipType.Armor].ItemLv = userDataManager.UserData.Equip["armorLevel"];
+        baseItems[(int)EquipType.Gloves].ItemLv = userDataManager.UserData.Equip["glovesLevel"];
+        baseItems[(int)EquipType.Boots].ItemLv = userDataManager.UserData.Equip["bootsLevel"];
 
         SetItemValue();
     }
