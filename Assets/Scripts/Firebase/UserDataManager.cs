@@ -38,17 +38,17 @@ public class UserDataManager : MonoBehaviour
             var nickname = snapshot.GetValue<string>("nickname");
             var stage = snapshot.GetValue<int>("stage");
             var goods = snapshot.GetValue<Dictionary<string, object>>("goods");
-            var equip = snapshot.GetValue<Dictionary<string, object>>("equip");
+            var equipLevel = snapshot.GetValue<Dictionary<string, object>>("equipLevel");
 
             UserData.SetData(nickname, stage,
                 Convert.ToInt32(goods["credits"]),
                 Convert.ToInt32(goods["battleData"]),
                 new Dictionary<string, int>
                 {
-                    { "helmetLevel", Convert.ToInt32(equip["helmetLevel"]) },
-                    { "armorLevel", Convert.ToInt32(equip["armorLevel"]) },
-                    { "glovesLevel", Convert.ToInt32(equip["glovesLevel"]) },
-                    { "bootsLevel", Convert.ToInt32(equip["bootsLevel"]) }
+                    { "helmet", Convert.ToInt32(equipLevel["helmet"]) },
+                    { "armor", Convert.ToInt32(equipLevel["armor"]) },
+                    { "gloves", Convert.ToInt32(equipLevel["gloves"]) },
+                    { "boots", Convert.ToInt32(equipLevel["boots"]) }
                 });
 
             return true;
@@ -66,7 +66,7 @@ public class UserDataManager : MonoBehaviour
         {
             { "nickname", UserData.Nickname },
             { "stage", UserData.Stage },
-            { "equip", UserData.Equip },
+            { "equipLevel", UserData.EquipLevel },
             { "goods", new Dictionary<string, object>
                 {
                     { "credits", UserData.Credits },
@@ -90,10 +90,10 @@ public class UserDataManager : MonoBehaviour
     {
         UserData.SetData(nickname, 1, 0, 0, new Dictionary<string, int>
         {
-            { "helmetLevel", 1 },
-            { "armorLevel", 1 },
-            { "glovesLevel", 1 },
-            { "bootsLevel", 1 }
+            { "helmet", 1 },
+            { "armor", 1 },
+            { "gloves", 1 },
+            { "boots", 1 }
         });
         await SaveUserData(userId);
     }

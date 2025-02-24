@@ -15,7 +15,7 @@ public class UserDataCache
     public int Stage { get; private set; }
     public int Credits { get; private set; }
     public int BattleData { get; private set; }
-    public Dictionary<string, int> Equip { get; private set; } = new Dictionary<string, int>();
+    public Dictionary<string, int> EquipLevel { get; private set; } = new Dictionary<string, int>();
 
     public void SetData(string nickname, int stage, int credits, int battleData, Dictionary<string, int> equip)
     {
@@ -23,7 +23,7 @@ public class UserDataCache
         Stage = stage;
         Credits = credits;
         BattleData = battleData;
-        Equip = new Dictionary<string, int>(equip);
+        EquipLevel = new Dictionary<string, int>(equip);
     }
 
     public void UpdateStageClear(int stageLv, int rewardCredits, int rewardBattleData)
@@ -37,24 +37,7 @@ public class UserDataCache
     {
         Credits -= cost;
         BattleData -= battleData;
-
-        switch (equipType)
-        {
-            case EquipType.Helmet:
-                Equip["helmetLevel"]++;
-                break;
-            case EquipType.Armor:
-                Equip["armorLevel"]++;
-                break;
-            case EquipType.Gloves:
-                Equip["glovesLevel"]++;
-                break;
-            case EquipType.Boots:
-                Equip["bootsLevel"]++;
-                break;
-            default:
-                break;
-        }
+        EquipLevel[equipType.ToString()]++;
     }
 
 

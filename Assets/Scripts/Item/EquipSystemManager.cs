@@ -60,7 +60,13 @@ public class EquipSystemManager : MonoBehaviour
                 //현재 서버에 있는 최신 데이터 가져오기
                 credits = snapshot.GetValue<int>("goods.credits");
                 battleDatas = snapshot.GetValue<int>("goods.battleData");
-                var equip = snapshot.GetValue<Dictionary<string, int>>("equip"); // <장비 레벨 이름, int값의 레벨>
+                var equip = snapshot.GetValue<Dictionary<string, int>>("equipLevel"); // <장비 레벨 이름, int값의 레벨>
+
+                // 업그레이드할 장비의 현재 레벨 가져오기
+                if (!equip.ContainsKey(equipType.ToString()))
+                {
+                    throw new Exception("존재하지 않는 장비");
+                }
 
                 // 비용 체크
                 if (credits < creditsCost || battleDatas < battleDataCost)
@@ -68,33 +74,15 @@ public class EquipSystemManager : MonoBehaviour
                     throw new Exception("강화에 필요한 재화 부족");
                 }
 
-                switch (equipType)
-                {
-                    case EquipType.Helmet:
-                        CalculUpgrade(creditsCost, battleDataCost);
-                        equip["helmetLevel"]++;
-                        break;
-                    case EquipType.Armor:
-                        CalculUpgrade(creditsCost, battleDataCost);
-                        equip["armorLevel"]++;
-                        break;
-                    case EquipType.Gloves:
-                        CalculUpgrade(creditsCost, battleDataCost);
-                        equip["glovesLevel"]++;
-                        break;
-                    case EquipType.Boots:
-                        CalculUpgrade(creditsCost, battleDataCost);
-                        equip["bootsLevel"]++;
-                        break;
-                    default:
-                        throw new Exception("존재하지 않는 장비");
-                }
+                credits -= creditsCost;
+                battleDatas -= battleDataCost;
+                equip[equipType.ToString()]++;
 
                 transaction.Update(userRef, new Dictionary<string, object>
             {
                 { "goods.credits", credits },
                 { "goods.battleData", battleDatas },
-                { "equip", equip }
+                { "equipLevel", equip }
             });
 
                 userDataManager.UserData.UpdateEquipmentUpgrade(creditsCost, battleDataCost, equipType);

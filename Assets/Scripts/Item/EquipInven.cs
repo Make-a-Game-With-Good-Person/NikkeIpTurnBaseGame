@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,10 +10,13 @@ public class EquipInven : MonoBehaviour
 
     public void InitItemValue()
     {
-        baseItems[(int)EquipType.Helmet].ItemLv = userDataManager.UserData.Equip["helmetLevel"];
-        baseItems[(int)EquipType.Armor].ItemLv = userDataManager.UserData.Equip["armorLevel"];
-        baseItems[(int)EquipType.Gloves].ItemLv = userDataManager.UserData.Equip["glovesLevel"];
-        baseItems[(int)EquipType.Boots].ItemLv = userDataManager.UserData.Equip["bootsLevel"];
+        int index = 0;
+        foreach (EquipType Etype in Enum.GetValues(typeof(EquipType)))
+        {
+            string key = Etype.ToString();
+            baseItems[index].ItemLv = userDataManager.UserData.EquipLevel[key];
+            index++;
+        }
 
         SetItemValue();
     }
