@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.UI.GridLayoutGroup;
@@ -17,6 +18,16 @@ public class UnitAnimationController : MonoBehaviour
     //Front, Back, Right, Left
     private readonly int[] dx = new int[4] { 0, 0, 1, -1 };
     private readonly int[] dy = new int[4] { 1, -1, 0, 0 };
+
+    #region Animation Parameter
+    private int B_Run = Animator.StringToHash("B_Run");
+    private int B_Cover = Animator.StringToHash("B_Cover");
+    private int B_isFullCover = Animator.StringToHash("B_isFullCover");
+    private int I_Peeking = Animator.StringToHash("I_Peeking");
+    private int I_AttackType = Animator.StringToHash("I_AttackType");
+    private int T_Attack = Animator.StringToHash("T_Attack");
+    #endregion
+
     /// <summary>
     /// 0: fornt, 1: Back. 2: Right, 3: Left, etc : none cover
     /// </summary>
@@ -81,8 +92,6 @@ public class UnitAnimationController : MonoBehaviour
                                     Debug.Log("UnitAnimationController.CheckPeeking 왼쪽");
                                     return 1;
                                 }
-                                //for문 강제 종료
-                                i = 2;
                                 break;
                             case EDirection.Right:
                             case EDirection.Left:
@@ -98,8 +107,6 @@ public class UnitAnimationController : MonoBehaviour
                                     Debug.Log("UnitAnimationController.CheckPeeking 오른쪽");
                                     return 2;
                                 }
-                                //for문 강제 종료
-                                i = 2;
                                 break;
                         }
                     }
@@ -122,7 +129,11 @@ public class UnitAnimationController : MonoBehaviour
     #region Public
     public void Cover()
     {
-
+        _anim.SetBool(B_Cover, true);
+    }
+    public void UnCover()
+    {
+        _anim.SetBool(B_Cover, false);
     }
 
     /// <summary>
@@ -157,6 +168,16 @@ public class UnitAnimationController : MonoBehaviour
 
         //대충 두개 합쳐서 어떻게든 다른 애니메이션 출력
         //_anim.SetTrigger(Attack + attackAnimType);
+    }
+
+    public void StartRunning()
+    {
+        _anim.SetBool(B_Run, true);
+    }
+    public void EndRunning()
+    {
+        _anim.SetBool(B_Run, false);
+        Cover();
     }
     #endregion
     #endregion
