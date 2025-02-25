@@ -18,10 +18,6 @@ public class EquipSystemManager : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
         userDataManager = UserDataManager.Instance;
     }
-    async Task upgrade(EquipType equipType, int creditsCost, int battleDataCost)
-    {
-        bool ask = await UpgradeEquipment(equipType, creditsCost, battleDataCost);
-    }
 
     public async Task<bool> UpgradeEquipment(EquipType equipType, int creditsCost, int battleDataCost)
     {
@@ -79,12 +75,4 @@ public class EquipSystemManager : MonoBehaviour
         }
     }
 
-    void CalculUpgrade(int upgradeCost, int battleDataCost)
-    {
-        credits -= upgradeCost;
-        battleDatas -= battleDataCost;
-    }
-
-
-    
 }
