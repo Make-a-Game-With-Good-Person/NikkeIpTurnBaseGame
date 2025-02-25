@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 0}
   ItemName: 
   ItemExplainText: 
-  EquipType: 1
+  EquipType: 0
   ItemLv: 1
   baseStat:
   - 0

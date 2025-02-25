@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Emma : Unit
+public class Emma : Player
 {
     [SerializeField] float shieldLv;
     public float shield;

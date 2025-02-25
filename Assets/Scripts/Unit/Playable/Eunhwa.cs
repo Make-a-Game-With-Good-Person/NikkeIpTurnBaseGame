@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI;
 
-public class Eunhwa : Unit
+public class Eunhwa : Player
 {
     bool buffed;
     [SerializeField] float plusPower;
