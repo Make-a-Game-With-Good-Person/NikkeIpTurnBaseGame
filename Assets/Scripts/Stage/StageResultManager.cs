@@ -5,6 +5,7 @@ using UnityEngine;
 public class StageResultManager : MonoBehaviour
 {
     UserDataManager userDataManager;
+    EquipCanvasManager equipCanvasManager;
     public int stageLv;
     public int rewardCredits;
     public int rewardBattleDatas;
@@ -18,6 +19,8 @@ public class StageResultManager : MonoBehaviour
     {
         userDataManager.UserData.UpdateStageClear(stageLv, rewardCredits, rewardBattleDatas);
         await userDataManager.SaveUserData(userDataManager.uid);
+
+        equipCanvasManager?.UpdateEquipCanvas();
     }
 
     private void Update()

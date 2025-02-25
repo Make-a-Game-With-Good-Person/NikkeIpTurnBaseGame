@@ -8,9 +8,6 @@ using Unity.VisualScripting;
 
 public class EquipSystemManager : MonoBehaviour
 {
-    public EquipType testType;
-    public int testCredit;
-    public int testBattleData;
     private FirebaseFirestore db;
     UserDataManager userDataManager;
     int credits;
@@ -21,28 +18,12 @@ public class EquipSystemManager : MonoBehaviour
         db = FirebaseFirestore.DefaultInstance;
         userDataManager = UserDataManager.Instance;
     }
-    private void Update()
+    async Task upgrade(EquipType equipType, int creditsCost, int battleDataCost)
     {
-        if (Input.GetKeyDown(KeyCode.F5))
-        {
-            Upgrade();
-        }
+        bool ask = await UpgradeEquipment(equipType, creditsCost, battleDataCost);
     }
 
-    public async void Upgrade()
-    {
-        bool success = await UpgradeEquipment(testType, testCredit, testBattleData);
-        if (success)
-        {
-            Debug.Log("성공적으로 강화 완료");
-        }
-        else
-        {
-            Debug.Log("강화 실패");
-        }
-    }
-
-    async Task<bool> UpgradeEquipment(EquipType equipType, int creditsCost, int battleDataCost)
+    public async Task<bool> UpgradeEquipment(EquipType equipType, int creditsCost, int battleDataCost)
     {
         var userRef = db.Collection("users").Document(userDataManager.uid);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using UnityEngine.Events;
 
 public class LoginSystem : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class LoginSystem : MonoBehaviour
 
     AuthManager authManager;
     UserDataManager userDataManager;
+
+    //임시
+    public Transform EquipScreen;
+    public UnityEvent updateEquipCanvasAct;
     private void Start()
     {
         authManager = new AuthManager();
@@ -93,6 +98,7 @@ public class LoginSystem : MonoBehaviour
         Debug.Log("닉네임 생성 성공!");
         TurnOffNickNameMakeScreen();
         TurnOffLoginFailScreen();
+        TurnOnEquipCanvas();
     }
     #endregion
 
@@ -100,6 +106,7 @@ public class LoginSystem : MonoBehaviour
     public void TurnOffLoginScreen()
     {
         loginScreen.gameObject.SetActive(false);
+        TurnOnEquipCanvas();
     }
     public void TurnOnNickNameMakeScreen()
     {
@@ -149,6 +156,12 @@ public class LoginSystem : MonoBehaviour
         registerPwCheckInput.text = string.Empty;
     }
 
+
+    public void TurnOnEquipCanvas()
+    {
+        EquipScreen.gameObject.SetActive(true);
+        updateEquipCanvasAct?.Invoke();
+    }
     #endregion
 
 }
