@@ -199,8 +199,33 @@ public class UnitMovement : MonoBehaviour
     protected virtual void Cover()
     {
         //엄폐물 방향으로 돌림, Cover 애니메이션 출력
+        int checkDirection = -1; //엄폐할 방향
+        int peekingDirection = -1;  //피킹 방향
+        //앞, 뒤, 우, 좌 순서로 체크
+        for(int i = 0; i < 4; i++)
+        {
+            peekingDirection = CheckPeeking(i);
+            if(peekingDirection != -1)
+            {
+                checkDirection = i;
+                break;
+            }
+        }
 
-        unit.myAnim?.Cover();
+        //엄폐가 가능할때
+        if(checkDirection != -1)
+        {
+            //돌려
+            StartCoroutine(Turning(
+                _battleManager.tileManager.map
+                [unit.tile.coordinate + new Vector2Int(dx[checkDirection], dy[checkDirection])]
+                ));
+
+            unit.myAnim?.SetFullCover(unit.tile.fullCovers[checkDirection]);
+            unit.myAnim?.SetPeekingType(peekingDirection);
+
+            unit.myAnim?.Cover();
+        }
     }
     protected virtual void UnCover()
     {
