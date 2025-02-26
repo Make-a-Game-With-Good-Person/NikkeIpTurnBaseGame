@@ -5,7 +5,7 @@ using UnityEngine;
 public class Unit : Stat , IDamage
 {
     [HideInInspector] public Tile tile;
-    [SerializeField] Animator _animator;
+    [SerializeField] UnitAnimationController _myAnim;
     [Header("¿Ø¥÷¿« ∞Ì¿Ø ¿Œµ¶Ω∫"), Space(.5f)]
     [SerializeField] int unit_index;
     protected BattleManager battleManager;
@@ -23,11 +23,11 @@ public class Unit : Stat , IDamage
     public bool isStunned = false;
     public bool isContacted = false;
 
-    public Animator animator
+    public UnitAnimationController myAnim
     {
         get
         {
-            return _animator;
+            return _myAnim;
         }
     }
     public bool attackable
@@ -69,6 +69,7 @@ public class Unit : Stat , IDamage
         ResetAble();
         StatInit(unit_index);
         battleManager = FindObjectOfType<BattleManager>();
+        _myAnim = GetComponentInChildren<UnitAnimationController>();
     }
 
     // Update is called once per frame

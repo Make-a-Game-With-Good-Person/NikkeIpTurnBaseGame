@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 /// <summary>
 /// Jumping의 속도부분을 나중에 바꿀것
 /// </summary>
@@ -11,8 +12,12 @@ public class UnitMovement : MonoBehaviour
 {
     #region Properties
     #region Private
+    //Front, Back, Right, Left
+    private readonly int[] dx = new int[4] { 0, 0, 1, -1 };
+    private readonly int[] dy = new int[4] { 1, -1, 0, 0 };
     #endregion
     #region Protected
+    protected BattleManager _battleManager;
     protected Unit unit;
     protected HashSet<Vector2Int> range = new HashSet<Vector2Int>();
     #endregion
@@ -84,6 +89,84 @@ public class UnitMovement : MonoBehaviour
 
         return line;
     }
+
+    /// <param name="direction">피킹할 방향</param>
+    /// <returns>-1 : 엄페물 없음, 0 : 엄폐물 위로, 1: 엄페물 왼쪽, 2: 엄페물 오른쪽</returns>
+    private int CheckPeeking(EDirection direction)
+    {
+        if (!unit.tile.halfCovers[(int)direction] && !unit.tile.fullCovers[(int)direction])
+        {
+            return -1;
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            int dir = ((int)direction + 2 + i) % 4;
+
+            Debug.Log($"for문 시작 i는 {i}, direction : {direction}, dir : {(EDirection)dir}");
+
+            //1. 엄폐물 검사, 바로옆 타일로 가는 방향에 엄폐물이 없어서 지나갈 수 있을것
+            if (!unit.tile.halfCovers[dir] && !unit.tile.fullCovers[dir])
+            {
+                Vector2Int closeTile = unit.tile.coordinate + new Vector2Int(dx[dir], dy[dir]);
+
+                Debug.Log($"1번 if문 통과, owner.tile = {unit.tile.coordinate}, closeTile = {closeTile}");
+
+                //2. 높이 검사, 바로 옆 타일의 높이가 같을것
+                if (unit.tile.height == _battleManager.tileManager.map[closeTile].height)
+                {
+                    //3. 대각선 검사, 높이와 엄폐물 검사를 둘다 해야할것 -> 높이는 엄폐물이 없으면 자동으로 해결
+                    //옆타일에서 대각선 방향 타일으로 가는 엄폐물이 없을것
+                    if (!_battleManager.tileManager.map[closeTile].halfCovers[(int)direction] && !_battleManager.tileManager.map[closeTile].fullCovers[(int)direction])
+                    {
+                        switch (direction)
+                        {
+                            case EDirection.Front:
+                            case EDirection.Back:
+                                //오른쪽
+                                if (i == 0)
+                                {
+                                    Debug.Log("UnitMovement.CheckPeeking 오른쪽");
+                                    return 2;
+                                }
+                                //왼쪽
+                                else if (i == 1)
+                                {
+                                    Debug.Log("UnitMovement.CheckPeeking 왼쪽");
+                                    return 1;
+                                }
+                                break;
+                            case EDirection.Right:
+                            case EDirection.Left:
+                                //왼쪽
+                                if (i == 0)
+                                {
+                                    Debug.Log("UnitMovement.CheckPeeking 왼쪽");
+                                    return 1;
+                                }
+                                //오른쪽
+                                else if (i == 1)
+                                {
+                                    Debug.Log("UnitMovement.CheckPeeking 오른쪽");
+                                    return 2;
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+        }
+
+        //둘다 안됐으면 기본적으로 오른쪽에 엄폐하는 걸로 디폴트
+        //엄폐물이 있다는건 여기까지 온것으로 가늠할수 있음
+        Debug.Log("UnitMovement.CheckPeeking 가운데");
+        return 2;
+    }
+    /// <returns>-1 : 엄페물 없음, 0 : 엄폐물 위로, 1: 엄페물 왼쪽, 2: 엄페물 오른쪽</returns>
+    private int CheckPeeking(int direction)
+    {
+        return CheckPeeking((EDirection)direction);
+    }
     #endregion
     #region Protected
     /// <summary>
@@ -111,6 +194,17 @@ public class UnitMovement : MonoBehaviour
         {
             range.Remove(node);
         }
+    }
+
+    protected virtual void Cover()
+    {
+        //엄폐물 방향으로 돌림, Cover 애니메이션 출력
+
+        unit.myAnim?.Cover();
+    }
+    protected virtual void UnCover()
+    {
+        unit.myAnim?.UnCover();
     }
     #endregion
     #region Public
@@ -152,6 +246,8 @@ public class UnitMovement : MonoBehaviour
         //start 지점 추가
         path.Insert(0, tile);
 
+        //엄폐물에서 벗어나는 애니메이션
+        UnCover();
 
         #region 순차접근 길찾기 방식
         /*
@@ -308,8 +404,6 @@ public class UnitMovement : MonoBehaviour
                                 }
                             }
 
-                            
-
                             //갈수 있는 경우
                             if (check)
                             {
@@ -335,9 +429,11 @@ public class UnitMovement : MonoBehaviour
         }
 
         #endregion
-        //엄폐하는 애니메이션 재생 함수
 
         map.map[path[path.Count - 1]].Place(unit);
+
+        //엄폐하는 애니메이션 재생 함수
+        Cover();
     }
 
     protected IEnumerator Running(Tile to, TileManager map)
@@ -346,8 +442,9 @@ public class UnitMovement : MonoBehaviour
         float dist = dir.magnitude;
         float delta = 0;
         dir.Normalize();
-        //여기에 애니메이션 파라미터 수정
 
+        //여기에 애니메이션 파라미터 수정
+        unit.myAnim?.StartRunning();
 
         //일단 한칸한칸이니까
         HashSet<Tile> passedTile = new HashSet<Tile>();
@@ -374,6 +471,10 @@ public class UnitMovement : MonoBehaviour
 
             yield return null;
         }
+
+        //달리기 애니메이션 중지
+        unit.myAnim?.EndRunning();
+
         passedTile.Clear();
     }
 
@@ -466,6 +567,7 @@ public class UnitMovement : MonoBehaviour
     private void Start()
     {
         unit = GetComponent<Unit>();
+        _battleManager = FindObjectOfType<BattleManager>();
     }
     #endregion
 }

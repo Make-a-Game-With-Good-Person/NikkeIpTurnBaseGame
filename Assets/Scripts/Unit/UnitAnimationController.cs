@@ -7,6 +7,7 @@ using static UnityEngine.UI.GridLayoutGroup;
 
 /// <summary>
 /// Unit 게임 오브젝트에 붙어있다고 가정
+/// 애니메이션만 건드리고 Unit을 움직이거나 하는건 UnitMovement에서
 /// </summary>
 public class UnitAnimationController : MonoBehaviour
 {
@@ -177,7 +178,6 @@ public class UnitAnimationController : MonoBehaviour
     public void EndRunning()
     {
         _anim.SetBool(B_Run, false);
-        Cover();
     }
     #endregion
     #endregion
