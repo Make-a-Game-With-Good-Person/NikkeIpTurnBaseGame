@@ -19,9 +19,9 @@ MonoBehaviour:
   ItemLv: 1
   baseStat:
   - 0
+  - 100
   - 0
-  - 0
-  - 0
+  - 10
   - 0
   - 0
   - 0
