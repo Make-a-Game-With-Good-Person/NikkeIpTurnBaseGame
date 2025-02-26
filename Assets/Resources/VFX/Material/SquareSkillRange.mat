@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FloorRing_Red
+  m_Name: SquareSkillRange
   m_Shader: {fileID: -6465566751694194690, guid: c47701adfb7fb074a8883ef218bae507,
     type: 3}
   m_Parent: {fileID: 0}
@@ -18,7 +18,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2999
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -59,7 +59,7 @@ Material:
     - _DstBlend: 10
     - _Float: 0
     - _QueueControl: 0
-    - _QueueOffset: -1
+    - _QueueOffset: 0
     - _Range: 3.4
     - _ReceiveShadows: 1
     - _SrcBlend: 5
@@ -71,8 +71,8 @@ Material:
     - _ZWriteControl: 0
     - _power: 0.51
     m_Colors:
-    - _Color: {r: 8.000001, g: 0.17420824, b: 0, a: 1}
-    - _Flow: {r: 0.1, g: 0.3, b: 0, a: 0}
+    - _Color: {r: 6.3541455, g: 0.058622252, b: 0, a: 1}
+    - _Flow: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1859445504857148800
 MonoBehaviour:
