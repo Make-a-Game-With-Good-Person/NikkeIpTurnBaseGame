@@ -15,6 +15,7 @@ public class UnitMovement : MonoBehaviour
     //Front, Back, Right, Left
     private readonly int[] dx = new int[4] { 0, 0, 1, -1 };
     private readonly int[] dy = new int[4] { 1, -1, 0, 0 };
+    private Coroutine _turning;
     #endregion
     #region Protected
     protected BattleManager _battleManager;
@@ -216,7 +217,11 @@ public class UnitMovement : MonoBehaviour
         if(checkDirection != -1)
         {
             //돌려
-            StartCoroutine(Turning(
+            if (_turning != null)
+            {
+                StopCoroutine(_turning);
+            }
+            _turning = StartCoroutine(Turning(
                 _battleManager.tileManager.map
                 [unit.tile.coordinate + new Vector2Int(dx[checkDirection], dy[checkDirection])]
                 ));
@@ -389,7 +394,11 @@ public class UnitMovement : MonoBehaviour
                             if(i == calIndex + 1)
                             {
                                 calIndex = i;
-                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                if(_turning != null)
+                                {
+                                    StopCoroutine(_turning);
+                                }
+                                _turning = StartCoroutine(Turning(map.map[path[calIndex]]));
                                 yield return StartCoroutine(Climbing(map.map[path[calIndex - 1]], map.map[path[calIndex]], map));
                             }
                         }
@@ -401,7 +410,11 @@ public class UnitMovement : MonoBehaviour
                             if (i == calIndex + 1)
                             {
                                 calIndex = i;
-                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                if (_turning != null)
+                                {
+                                    StopCoroutine(_turning);
+                                }
+                                _turning = StartCoroutine(Turning(map.map[path[calIndex]]));
                                 yield return StartCoroutine(Running(map.map[path[calIndex]], map));
                                 break;
                             }
@@ -433,7 +446,11 @@ public class UnitMovement : MonoBehaviour
                             if (check)
                             {
                                 calIndex = i;
-                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                if (_turning != null)
+                                {
+                                    StopCoroutine(_turning);
+                                }
+                                _turning = StartCoroutine(Turning(map.map[path[calIndex]]));
                                 yield return StartCoroutine(Running(map.map[path[calIndex]], map));
                             }
                         }
@@ -444,7 +461,11 @@ public class UnitMovement : MonoBehaviour
                             if (i == calIndex + 1)
                             {
                                 calIndex = i;
-                                yield return StartCoroutine(Turning(map.map[path[calIndex]]));
+                                if (_turning != null)
+                                {
+                                    StopCoroutine(_turning);
+                                }
+                                _turning = StartCoroutine(Turning(map.map[path[calIndex]]));
                                 yield return StartCoroutine(Jumping(map.map[path[calIndex - 1]], map.map[path[calIndex]], map));
                             }
                         }
@@ -574,7 +595,7 @@ public class UnitMovement : MonoBehaviour
 
         while(angle > 0)
         {
-            delta = 160.0f * Time.deltaTime;
+            delta = 360.0f * Time.deltaTime;
 
             if(delta > angle)
             {
