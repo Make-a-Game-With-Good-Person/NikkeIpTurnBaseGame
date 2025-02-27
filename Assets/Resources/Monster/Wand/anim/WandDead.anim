@@ -162,7 +162,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Root/DroneBody
+    path: DroneBody
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -313,7 +313,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Root/DroneBody/Stick
+    path: DroneBody/Stick
   - curve:
       serializedVersion: 2
       m_Curve:
@@ -428,7 +428,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Root/DroneBody/Back
+    path: DroneBody/Back
   m_CompressedRotationCurves: []
   m_EulerCurves: []
   m_PositionCurves:
@@ -573,7 +573,7 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    path: Root/DroneBody
+    path: DroneBody
   m_ScaleCurves: []
   m_FloatCurves: []
   m_PPtrCurves: []
