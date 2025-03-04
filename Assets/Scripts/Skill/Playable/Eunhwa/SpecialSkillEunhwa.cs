@@ -86,12 +86,12 @@ public class SpecialSkillEunhwa : UnitSkill
         Quaternion boxRotation = Quaternion.LookRotation(attackDirection, Vector3.up);
 
         Collider[] targets = Physics.OverlapBox(boxCenter, boxSize / 2, boxRotation, skillLayerMask);
-
-        float dmg = CalculAttackDamage();
+        
         foreach (Collider target in targets)
         {
             if (IsActionAccuracy())
             {
+                float dmg = CalculAttackDamage();
                 Debug.Log("ИэСп");
                 if (IsActionCritical())
                 {

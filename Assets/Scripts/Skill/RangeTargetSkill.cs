@@ -47,11 +47,10 @@ public class RangeTargetSkill : UnitSkill
 
         Collider[] targets = Physics.OverlapSphere(this.transform.position, skillTargetRange, skillLayerMask);
 
-        float dmg = CalculAttackDamage();
-
         foreach(Collider target in targets){
             if (IsActionAccuracy())
             {
+                float dmg = CalculAttackDamage();
                 Debug.Log("ИэСп");
                 if (IsActionCritical())
                 {

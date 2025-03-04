@@ -47,11 +47,11 @@ public class SpecialSkillVesti : UnitSkill
 
         Collider[] targets = Physics.OverlapSphere(battleManager.selectedTarget.transform.position, skillTargetRange, skillLayerMask);
 
-        float dmg = CalculAttackDamage();
         foreach (Collider target in targets)
         {
             if (IsActionAccuracy())
             {
+                float dmg = CalculAttackDamage();
                 Debug.Log("명중");
                 if (target.gameObject.layer == LayerMask.NameToLayer("Cover")) // 벽에 맞을 때
                 {
