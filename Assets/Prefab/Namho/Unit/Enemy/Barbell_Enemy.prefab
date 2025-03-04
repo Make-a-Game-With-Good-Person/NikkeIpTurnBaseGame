@@ -3619,6 +3619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 226186438993474481}
   - component: {fileID: 7446670240121856778}
+  - component: {fileID: 1342091719365056689}
   m_Layer: 0
   m_Name: BarbellOriginal
   m_TagString: Untagged
@@ -3661,7 +3662,7 @@ Animator:
   m_GameObject: {fileID: 6418323299884642007}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f24cd6008d5a0e1478642cc620dcf5bf, type: 2}
+  m_Controller: {fileID: 9100000, guid: b56d0d5ab21295043bb4ad8becd41618, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3672,6 +3673,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1342091719365056689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6418323299884642007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fdbb0c1cdc35e4588d4d4be845c3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AnimEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6533446675182088481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4481,7 +4497,7 @@ MonoBehaviour:
   - 4
   - 4
   - 4
-  _animator: {fileID: 7446670240121856778}
+  _myAnim: {fileID: 0}
   unit_index: 1000001
   unitState: 1
   unitSkills:
