@@ -28,7 +28,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _SampleTexture2D_2ae0f05205354827959981c14b3c9f40_Texture_1_Texture2D:
-        m_Texture: {fileID: 2800000, guid: 987770f2ce456774482746d53d65aec5, type: 3}
+        m_Texture: {fileID: 2800000, guid: 763c84bf8c511a341bc2b4eb961cf292, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture:
@@ -56,11 +56,13 @@ Material:
     - _Boolean: 1
     - _CastShadows: 1
     - _Cull: 0
+    - _Depth: 4.23
+    - _Depth_Power: 1
     - _DstBlend: 10
     - _Float: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range: 3.4
+    - _Range: 1.7
     - _ReceiveShadows: 1
     - _SrcBlend: 5
     - _Surface: 1
@@ -69,10 +71,12 @@ Material:
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
-    - _power: 0.51
+    - _power: 0.33
     m_Colors:
     - _Color: {r: 6.3541455, g: 0.058622252, b: 0, a: 1}
-    - _Flow: {r: 0, g: 0, b: 0, a: 0}
+    - _Flow: {r: 0.01, g: 0.12, b: 0, a: 0}
+    - _TextureTilling: {r: 1, g: 1, b: 0, a: 0}
+    - _VoronioiTilling: {r: 2, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1859445504857148800
 MonoBehaviour:
