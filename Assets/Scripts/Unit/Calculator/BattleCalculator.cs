@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BattleCalculator : MonoBehaviour
 {
+    float defaultConstant = 200.0f;
+
     public double CalculAccuracy(Unit attacker, Unit target)
     {
         return 888.888 /
@@ -48,5 +50,14 @@ public class BattleCalculator : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public float CalculDamage(Unit attacker, Unit target)
+    {
+        float calDmg = 0f;
+
+        calDmg = attacker[EStatType.ATK] * (defaultConstant + (attacker[EStatType.LV] * 10) / defaultConstant + target[EStatType.DEF] + (target[EStatType.LV] * 10));
+
+        return calDmg;
     }
 }

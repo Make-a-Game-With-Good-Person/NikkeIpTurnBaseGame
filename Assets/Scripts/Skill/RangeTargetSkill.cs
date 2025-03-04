@@ -47,6 +47,8 @@ public class RangeTargetSkill : UnitSkill
 
         Collider[] targets = Physics.OverlapSphere(this.transform.position, skillTargetRange, skillLayerMask);
 
+        float dmg = CalculAttackDamage();
+
         foreach(Collider target in targets){
             if (IsActionAccuracy())
             {
@@ -54,11 +56,11 @@ public class RangeTargetSkill : UnitSkill
                 if (IsActionCritical())
                 {
                     Debug.Log("크리티컬!");
-                    target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK] * battleManager.curControlUnit[EStatType.CRIMul]);
+                    target.GetComponent<IDamage>().TakeDamage(dmg * battleManager.curControlUnit[EStatType.CRIMul]);
                 }
                 else
                 {
-                    target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK]);
+                    target.GetComponent<IDamage>().TakeDamage(dmg);
                 }
             }
         }

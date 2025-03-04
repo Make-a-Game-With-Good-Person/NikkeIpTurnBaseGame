@@ -25,16 +25,17 @@ public class SingleTargetSkill : UnitSkill
         battleManager.cameraStateController.SwitchToQuaterView(battleManager.selectedTarget.transform);
         if (IsActionAccuracy())
         {
+            float dmg = CalculAttackDamage();
             Debug.Log("명중");
             if (IsActionCritical())
             {
                 Debug.Log("크리티컬!");
                 battleManager.selectedTarget.GetComponent<IDamage>().TakeDamage(
-                    battleManager.curControlUnit[EStatType.ATK] * battleManager.curControlUnit[EStatType.CRIMul]);
+                    dmg * battleManager.curControlUnit[EStatType.CRIMul]);
             }
             else
             {
-                battleManager.selectedTarget.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK]);
+                battleManager.selectedTarget.GetComponent<IDamage>().TakeDamage(dmg);
             }
         }
         yield return new WaitForSeconds(2f);

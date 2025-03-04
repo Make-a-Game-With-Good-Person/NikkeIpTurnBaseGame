@@ -47,6 +47,7 @@ public class SpecialSkillVesti : UnitSkill
 
         Collider[] targets = Physics.OverlapSphere(battleManager.selectedTarget.transform.position, skillTargetRange, skillLayerMask);
 
+        float dmg = CalculAttackDamage();
         foreach (Collider target in targets)
         {
             if (IsActionAccuracy())
@@ -57,11 +58,11 @@ public class SpecialSkillVesti : UnitSkill
                     if (IsActionCritical())
                     {
                         Debug.Log("크리티컬!");
-                        target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK] * battleManager.curControlUnit[EStatType.CRIMul]*1.2f);
+                        target.GetComponent<IDamage>().TakeDamage(dmg * battleManager.curControlUnit[EStatType.CRIMul]*1.2f);
                     }
                     else
                     {
-                        target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK]*1.2f);
+                        target.GetComponent<IDamage>().TakeDamage(dmg * 1.2f);
                     }
                 }
                 else // 적이 맞을 때
@@ -69,11 +70,11 @@ public class SpecialSkillVesti : UnitSkill
                     if (IsActionCritical())
                     {
                         Debug.Log("크리티컬!");
-                        target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK] * battleManager.curControlUnit[EStatType.CRIMul] * 0.8f);
+                        target.GetComponent<IDamage>().TakeDamage(dmg * battleManager.curControlUnit[EStatType.CRIMul] * 0.8f);
                     }
                     else
                     {
-                        target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK]*0.8f);
+                        target.GetComponent<IDamage>().TakeDamage(dmg * 0.8f);
                     }
                 }
                 

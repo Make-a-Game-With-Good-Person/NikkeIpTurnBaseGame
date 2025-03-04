@@ -51,6 +51,11 @@ public class UnitSkill : MonoBehaviour, IAction
         return battleCalculator.CheckCritical(battleManager.curControlUnit, battleManager.selectedTarget.GetComponent<Unit>());
     }
 
+    protected float CalculAttackDamage()
+    {
+        return battleCalculator.CalculDamage(battleManager.curControlUnit, battleManager.selectedTarget.GetComponent<Unit>());
+    }
+
     public virtual void Action() {
         Debug.Log("스킬 실행!");
         TurnOffTargetRange();

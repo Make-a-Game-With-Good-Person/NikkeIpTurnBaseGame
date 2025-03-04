@@ -87,6 +87,7 @@ public class SpecialSkillEunhwa : UnitSkill
 
         Collider[] targets = Physics.OverlapBox(boxCenter, boxSize / 2, boxRotation, skillLayerMask);
 
+        float dmg = CalculAttackDamage();
         foreach (Collider target in targets)
         {
             if (IsActionAccuracy())
@@ -95,11 +96,11 @@ public class SpecialSkillEunhwa : UnitSkill
                 if (IsActionCritical())
                 {
                     Debug.Log("크리티컬!");
-                    target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK] * battleManager.curControlUnit[EStatType.CRIMul] * damageValue);
+                    target.GetComponent<IDamage>().TakeDamage(dmg * battleManager.curControlUnit[EStatType.CRIMul] * damageValue);
                 }
                 else
                 {
-                    target.GetComponent<IDamage>().TakeDamage(battleManager.curControlUnit[EStatType.ATK] * damageValue);
+                    target.GetComponent<IDamage>().TakeDamage(dmg * damageValue);
                 }
             }
         }
