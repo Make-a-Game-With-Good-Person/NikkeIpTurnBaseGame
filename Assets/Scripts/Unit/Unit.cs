@@ -114,6 +114,7 @@ public class Unit : Stat , IDamage
         else
         {
             //if(animator != null) animator.SetTrigger("TakeDamage");
+            myAnim?.Hit();
         }
     }
 
@@ -132,6 +133,7 @@ public class Unit : Stat , IDamage
 
     protected void OnDead()
     {
+        myAnim?.Death();
         battleManager.OnUnitDead(this);
     }
 

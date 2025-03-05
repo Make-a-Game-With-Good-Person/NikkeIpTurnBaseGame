@@ -27,6 +27,8 @@ public class UnitAnimationController : MonoBehaviour
     private int I_Peeking = Animator.StringToHash("I_Peeking");
     private int I_AttackType = Animator.StringToHash("I_AttackType");
     private int T_Attack = Animator.StringToHash("T_Attack");
+    private int T_Death = Animator.StringToHash("T_Death");
+    private int T_Hit = Animator.StringToHash("T_Hit");
     #endregion
 
     /// <summary>
@@ -78,6 +80,15 @@ public class UnitAnimationController : MonoBehaviour
     public void Attack(int attackAnimType, bool isPeeking)
     {
         _anim.SetTrigger(T_Attack);
+    }
+
+    public void Death()
+    {
+        _anim.SetTrigger(T_Death);
+    }
+    public void Hit()
+    {
+        _anim.SetTrigger(T_Hit);
     }
 
     public void StartRunning()
