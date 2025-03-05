@@ -37,6 +37,7 @@ public class UnitSkill : MonoBehaviour, IAction
         battleManager = FindObjectOfType<BattleManager>();
         targetFinder = new TargetFinder(battleManager);
         battleCalculator = FindObjectOfType<BattleCalculator>();
+        owner = GetComponentInParent<Unit>();
 
         SetSkillRangeVFX();
     }
@@ -58,6 +59,7 @@ public class UnitSkill : MonoBehaviour, IAction
 
     public virtual void Action() {
         Debug.Log("스킬 실행!");
+        owner.myAnim.Attack(0,true);
         TurnOffTargetRange();
     }
 
