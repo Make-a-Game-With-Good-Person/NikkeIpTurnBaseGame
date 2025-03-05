@@ -26,7 +26,6 @@ public class SingleTargetSkill : UnitSkill
         if (IsActionAccuracy())
         {
             float dmg = CalculAttackDamage();
-            Debug.Log("명중");
             if (IsActionCritical())
             {
                 Debug.Log("크리티컬!");

@@ -7654,7 +7654,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  _animator: {fileID: 1477729673}
+  _myAnim: {fileID: 0}
   unit_index: 1000000
   unitState: 0
   unitSkills:
@@ -58063,12 +58063,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8179873023929390757}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1477729673 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1761369491232577624, guid: 591b15fe523443a4387f623b0f8c8644,
-    type: 3}
-  m_PrefabInstance: {fileID: 1409018336117693389}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1480628569
 GameObject:
   m_ObjectHideFlags: 0
@@ -74777,7 +74771,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  _animator: {fileID: 4723254855211357912}
+  _myAnim: {fileID: 0}
   unit_index: 1000001
   unitState: 0
   unitSkills:
@@ -90638,6 +90632,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3438420848099645352, guid: 3fc398a709c644b48b287ca93298ccc1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59bf75c243a133749b3f4ab85dd04972, type: 2}
     - target: {fileID: 6337229025967384995, guid: 3fc398a709c644b48b287ca93298ccc1,
         type: 3}
       propertyPath: m_Name

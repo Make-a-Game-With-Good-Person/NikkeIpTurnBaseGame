@@ -56,7 +56,7 @@ public class BattleCalculator : MonoBehaviour
     {
         float calDmg = 0f;
 
-        calDmg = attacker[EStatType.ATK] * (defaultConstant + (attacker[EStatType.LV] * 10) / defaultConstant + target[EStatType.DEF] + (target[EStatType.LV] * 10));
+        calDmg = attacker[EStatType.ATK] * (((defaultConstant + (attacker[EStatType.LV] * 10)) / (defaultConstant + target[EStatType.DEF] + (target[EStatType.LV] * 10))));
 
         return calDmg;
     }
