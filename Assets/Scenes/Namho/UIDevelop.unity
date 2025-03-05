@@ -8732,7 +8732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7dbab09f8f09cb4bb01bdc74308367e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEquipOpen: 0
   squadPanel: {fileID: 1031222520}
   characters:
   - {fileID: 6576352903179090574}
@@ -12999,7 +12998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd50426aec8c2a48b3f11819202c860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stagePanel: {fileID: 1728751918}
+  stagePanel: {fileID: 1728751917}
   stages:
   - {fileID: 37298392}
   - {fileID: 1902474433}
