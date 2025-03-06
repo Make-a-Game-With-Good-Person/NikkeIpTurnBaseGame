@@ -24,6 +24,13 @@ public class SquadUIManager : MonoBehaviour
         originalPositions = new Vector3[characters.Length];
         originalScale = new Vector3[characters.Length];
 
+        // 각 캐릭터의 원래 위치와 크기를 저장
+        for (int i = 0; i < characters.Length; i++)
+        {
+            originalPositions[i] = characters[i].transform.position;
+            originalScale[i] = characters[i].transform.localScale;
+        }
+
         equipPanelSize = equipPanel.GetComponent<RectTransform>().rect.width;
         // 스쿼드 창은 처음에 비활성화
         squadPanel.SetActive(false);
@@ -38,43 +45,6 @@ public class SquadUIManager : MonoBehaviour
     {
         squadPanel.SetActive(true);
         equipPanel.SetActive(false); // 상태창은 숨김
-        PositionAndScaleCharacters(); // 캐릭터 배치
-    }
-
-    // 캐릭터 배치 함수
-    private void PositionAndScaleCharacters()
-    {
-        Camera cam = mainCamera;
-        float distance = 10f; // 캐릭터들과 카메라 간 거리
-
-        // 화면 비율 계산 
-        float screenRatio = (float)Screen.width / (float)Screen.height;
-
-        // 카메라의 특정 위치를 기준으로 캐릭터들 배치
-        Vector3 leftPos = cam.ViewportToWorldPoint(new Vector3(0.3f, 0.25f, distance));
-        Vector3 centerPos = cam.ViewportToWorldPoint(new Vector3(0.5f, 0.25f, distance));
-        Vector3 rightPos = cam.ViewportToWorldPoint(new Vector3(0.7f, 0.25f, distance));
-
-        characters[0].transform.position = leftPos;
-        characters[1].transform.position = centerPos;
-        characters[2].transform.position = rightPos;
-
-        float baseScale = 1f; // 기본 크기
-
-        float adjustedScale = baseScale * (screenRatio / 1.7f);
-
-        foreach (var character in characters)
-        {
-            character.transform.localScale = new Vector3(adjustedScale, adjustedScale, adjustedScale);
-        }
-
-        // 각 캐릭터의 원래 위치와 크기를 저장
-        for (int i = 0; i < characters.Length; i++)
-        {
-            originalPositions[i] = characters[i].transform.position;
-            originalScale[i] = characters[i].transform.localScale;
-        }
-
     }
 
     // 캐릭터를 선택했을 때 호출 (선택한 캐릭터만 중앙으로 이동, 상태창 열기)
@@ -109,6 +79,9 @@ public class SquadUIManager : MonoBehaviour
     {
         if (isEquipOpen)
         {
+            // 상태창 슬라이딩으로 오른쪽 화면 밖으로 사라짐
+            equipPanel.transform.DOLocalMoveX(2000f, 0.5f).SetEase(Ease.InExpo);
+
             // 선택된 캐릭터는 원위치로 복귀
             for (int i = 0; i < characters.Length; i++)
             {
@@ -117,9 +90,6 @@ public class SquadUIManager : MonoBehaviour
                 characters[i].transform.DOMove(originalPositions[i], 0.5f).SetEase(Ease.OutExpo);
                 characters[i].animator.SetBool("Selected", false);
             }
-
-            // 상태창 슬라이딩으로 오른쪽 화면 밖으로 사라짐
-            equipPanel.transform.DOLocalMoveX(1000f, 0.5f).SetEase(Ease.InExpo);
 
             // 상태창의 투명도 변경 (선명 -> 투명)
             equipPanel.GetComponent<CanvasGroup>().DOFade(0, 0.5f).OnComplete(() => equipPanel.SetActive(false));
