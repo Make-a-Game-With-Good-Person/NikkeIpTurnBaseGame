@@ -1437,16 +1437,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorRing_Range
       objectReference: {fileID: 0}
-    - target: {fileID: 703920427451502586, guid: 6502d525c5faddf4f84b06f59fdb5998,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2598446773478735797, guid: 6502d525c5faddf4f84b06f59fdb5998,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3572626432422426682, guid: 6502d525c5faddf4f84b06f59fdb5998,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1497,11 +1487,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4543980166629170784, guid: 6502d525c5faddf4f84b06f59fdb5998,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 59bf75c243a133749b3f4ab85dd04972, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1523,7 +1508,7 @@ PrefabInstance:
     - target: {fileID: 8259408999012091499, guid: fe64410ada33c3341a9f74d12a32dbda,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.344
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 8259408999012091499, guid: fe64410ada33c3341a9f74d12a32dbda,
         type: 3}
