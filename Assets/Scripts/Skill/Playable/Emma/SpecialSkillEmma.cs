@@ -10,6 +10,7 @@ public class SpecialSkillEmma : UnitSkill
     int deBuffDur;
     bool deBuffOn;
     public float DefaultRange;
+    public GameObject deBuffVFX;
 
     protected override void Start()
     {
@@ -31,7 +32,10 @@ public class SpecialSkillEmma : UnitSkill
         deBuffOn = true;
         target[EStatType.Visual] -= minusRange;
         Debug.Log($"{target.name}의 사정거리가 {target[EStatType.Visual]}로 감소");
+        battleManager.cameraStateController.SwitchToQuaterView(battleManager.selectedTarget.transform);
+        if(deBuffVFX != null) Instantiate(deBuffVFX, new Vector3(target.transform.position.x, target.transform.position.y + 1f, target.transform.position.z), Quaternion.identity);
         yield return new WaitForSeconds(1f);
+        battleManager.cameraStateController.SwitchToQuaterView(battleManager.curControlUnit.transform);
         changeStateWhenActEnd?.Invoke();
     }
 

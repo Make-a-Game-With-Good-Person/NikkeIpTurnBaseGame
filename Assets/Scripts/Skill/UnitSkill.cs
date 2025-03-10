@@ -32,6 +32,8 @@ public class UnitSkill : MonoBehaviour, IAction
 
     public TargetFinder targetFinder;
     private BattleCalculator battleCalculator;
+
+    public GameObject attackVFX;
     protected virtual void Start()
     {
         battleManager = FindObjectOfType<BattleManager>();

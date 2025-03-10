@@ -47,6 +47,12 @@ public class SpecialSkillVesti : UnitSkill
 
         Collider[] targets = Physics.OverlapSphere(battleManager.selectedTarget.transform.position, skillTargetRange, skillLayerMask);
 
+        if (attackVFX != null) 
+            Instantiate(attackVFX, new Vector3(battleManager.selectedTarget.transform.position.x, 
+                battleManager.selectedTarget.transform.position.y + 1f, 
+                battleManager.selectedTarget.transform.position.z), 
+                Quaternion.identity);
+
         foreach (Collider target in targets)
         {
             if (IsActionAccuracy())

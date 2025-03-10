@@ -31,11 +31,13 @@ public class Emma : Player
         if (this[EStatType.HP] <= 0f)
         {
             //if(animator != null) animator.SetTrigger("Dead");
+            if(deadVFX != null) deadVFX.SetActive(true);
             OnDead();
         }
         else
         {
             //if(animator != null) animator.SetTrigger("TakeDamage");
+            if (takeDmgVFX != null) takeDmgVFX.SetActive(true);
         }
     }
 }

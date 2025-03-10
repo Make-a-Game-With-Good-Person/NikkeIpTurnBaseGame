@@ -23,6 +23,9 @@ public class Unit : Stat , IDamage
     public bool isStunned = false;
     public bool isContacted = false;
 
+    [Header("피격 이펙트")] public GameObject takeDmgVFX;
+    [Header("사망 이펙트")]public GameObject deadVFX;
+
     public UnitAnimationController myAnim
     {
         get
@@ -105,14 +108,16 @@ public class Unit : Stat , IDamage
     {
         Debug.Log($"{this.gameObject.name} 이 {dmg} 만큼의 데미지를 받음");
         this[EStatType.HP] -= dmg;
-        
+
         if (this[EStatType.HP] <= 0f)
         {
             //if(animator != null) animator.SetTrigger("Dead");
+            if(deadVFX != null) deadVFX.SetActive (true);
             OnDead();
         }
         else
         {
+            if (takeDmgVFX != null) takeDmgVFX.SetActive(true);
             //if(animator != null) animator.SetTrigger("TakeDamage");
             myAnim?.Hit();
         }

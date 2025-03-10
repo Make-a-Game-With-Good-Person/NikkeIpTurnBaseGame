@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class SpecialSkillEunhwa : UnitSkill
 {
     [SerializeField] Unit skillOwner;
     [SerializeField] float damageValue;
     [SerializeField] int stunTurn;
+    public Transform attakPos;
     int curStunTurn;
     bool stunned;
-
+    
 
     LayerMask skillLayerMask;
     protected override void Start()
@@ -47,6 +49,9 @@ public class SpecialSkillEunhwa : UnitSkill
         // 애니메이터 설정 anim.SetTrigger(블라블라);
         Debug.Log(battleManager.curControlUnit.gameObject.name + "의 " + battleManager.selectedTarget.gameObject.name + "를 향한 스폐셜 공격");
         yield return new WaitForSeconds(2f); // 애니메이션 클립의 재생시간만큼 딜레이를 주면 됨
+        if (attackVFX != null) 
+            Instantiate(attackVFX, new Vector3(attakPos.position.x, attakPos.position.y, attakPos.position.z), Quaternion.identity);
+
 
         battleManager.cameraStateController.SwitchToQuaterView(battleManager.selectedTarget.transform);
         yield return StartCoroutine(CheckPenetratedTarget());
@@ -91,6 +96,7 @@ public class SpecialSkillEunhwa : UnitSkill
         {
             if (IsActionAccuracy())
             {
+                
                 float dmg = CalculAttackDamage();
                 Debug.Log("명중");
                 if (IsActionCritical())
