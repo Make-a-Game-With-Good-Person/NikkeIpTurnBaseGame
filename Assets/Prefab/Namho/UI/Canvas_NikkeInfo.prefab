@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 2343016441286840551}
   - component: {fileID: 1971099834210236012}
   - component: {fileID: 1901355199555946937}
+  - component: {fileID: 88664045536905059}
   m_Layer: 5
-  m_Name: Button (Legacy) (2)
+  m_Name: bootsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +121,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1971099834210236012}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EquipButtonManager, Assembly-CSharp
+        m_MethodName: SelectItemToUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &88664045536905059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545486536133460316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55670b398ce9c084d97b14b9de08ae99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
 --- !u!1 &659757905325919833
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,13 +156,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3619967195720754104}
+  - component: {fileID: 8990652619276985816}
   m_Layer: 5
   m_Name: SquadPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3619967195720754104
 RectTransform:
   m_ObjectHideFlags: 0
@@ -158,6 +185,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8990652619276985816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 659757905325919833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2788c77d45891b2408b28865802dc8db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipButtonManager: {fileID: 0}
+  creditText: {fileID: 8940549618640410889}
+  battleDataText: {fileID: 87905046568606214}
 --- !u!1 &715900259535482334
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,7 +939,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD5EC\uBA67"
+  m_Text: "\uC2A4\uD0AC1"
 --- !u!1 &2363986083080576882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,8 +1110,9 @@ GameObject:
   - component: {fileID: 4741966571723103415}
   - component: {fileID: 1650845853553657287}
   - component: {fileID: 1174319446882259786}
+  - component: {fileID: 4378125993000774324}
   m_Layer: 5
-  m_Name: Button (Legacy) (1)
+  m_Name: armorButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1176,7 +1219,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1650845853553657287}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EquipButtonManager, Assembly-CSharp
+        m_MethodName: SelectItemToUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4378125993000774324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825951224230425444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55670b398ce9c084d97b14b9de08ae99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
 --- !u!1 &2845345095509889008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1416,13 +1484,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4781406481599202469}
   - component: {fileID: 3291865126333513439}
+  - component: {fileID: 8265308867174898804}
   m_Layer: 5
   m_Name: EquipPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4781406481599202469
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1456,6 +1525,23 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &8265308867174898804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3789489120036632911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a353778462b67b40b04bf45b68efde9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  equipButtons:
+  - {fileID: 6881405217021237703}
+  - {fileID: 4378125993000774324}
+  - {fileID: 5775310676772188564}
+  - {fileID: 88664045536905059}
 --- !u!1 &4004743845526675539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1660,8 +1746,9 @@ GameObject:
   - component: {fileID: 6471169503248138599}
   - component: {fileID: 8066736138303539631}
   - component: {fileID: 7797642410250455021}
+  - component: {fileID: 6881405217021237703}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: helmetButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1768,7 +1855,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8066736138303539631}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EquipButtonManager, Assembly-CSharp
+        m_MethodName: SelectItemToUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6881405217021237703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4739935885139579653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55670b398ce9c084d97b14b9de08ae99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
 --- !u!1 &4939716950359809399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2216,7 +2328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6844200299104036466
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2598,7 +2710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC544\uBA38"
+  m_Text: "\uC2A4\uD0AC2"
 --- !u!1 &7623770844884136260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,7 +3063,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4887233131633373948}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4939716950359809399}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6552905661001352248}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7965908758528287696
 GameObject:
   m_ObjectHideFlags: 0
@@ -2964,8 +3100,9 @@ GameObject:
   - component: {fileID: 1811089133116258799}
   - component: {fileID: 6890350234476967296}
   - component: {fileID: 1374139942209083123}
+  - component: {fileID: 5775310676772188564}
   m_Layer: 5
-  m_Name: Button (Legacy) (3)
+  m_Name: glovesButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3072,7 +3209,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6890350234476967296}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: EquipButtonManager, Assembly-CSharp
+        m_MethodName: SelectItemToUpgrade
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5775310676772188564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7965908758528287696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55670b398ce9c084d97b14b9de08ae99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item: {fileID: 0}
 --- !u!1 &8084170475139627241
 GameObject:
   m_ObjectHideFlags: 0
@@ -3230,7 +3392,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6034052487469189620}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4939716950359809399}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6552905661001352248}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &8241303845818860767
 GameObject:
   m_ObjectHideFlags: 0

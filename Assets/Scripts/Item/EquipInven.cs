@@ -6,10 +6,12 @@ using UnityEngine;
 public class EquipInven : MonoBehaviour
 {
     public BaseItem[] baseItems = new BaseItem[4];
-    UserDataManager userDataManager = UserDataManager.Instance;
+    UserDataManager userDataManager;
 
     public void InitItemValue()
     {
+        userDataManager = UserDataManager.Instance;
+
         baseItems[0].ItemLv = userDataManager.UserData.EquipLevel[EquipType.helmet.ToString()];
         baseItems[1].ItemLv = userDataManager.UserData.EquipLevel[EquipType.armor.ToString()];
         baseItems[2].ItemLv = userDataManager.UserData.EquipLevel[EquipType.gloves.ToString()];

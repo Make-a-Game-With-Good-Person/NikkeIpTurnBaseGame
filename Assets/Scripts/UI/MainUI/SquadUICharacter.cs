@@ -7,11 +7,14 @@ public class SquadUICharacter : MonoBehaviour
     public int index;
     public SquadUIManager uiManager;
     public Animator animator;
+    public EquipPanel equipPanel;
+    public EquipInven inven;
 
     public void SelectCharacter()
     {
         uiManager.SelectCharacter(index);
         animator.SetBool("Selected", true);
+        equipPanel.SetEquipPanel(inven);
     }
     
     

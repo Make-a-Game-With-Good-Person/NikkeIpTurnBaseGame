@@ -30,6 +30,8 @@ public class EquipButtonManager : MonoBehaviour
     {
         equipCanvasManager.TurnOnUpgradeCanvas();
         selectedItem = EventSystem.current.currentSelectedGameObject.GetComponent<EquipButton>().item;
+        if (selectedItem == null) return;
+        
         switch (selectedItem.EquipType)
         {
             case EquipType.helmet:

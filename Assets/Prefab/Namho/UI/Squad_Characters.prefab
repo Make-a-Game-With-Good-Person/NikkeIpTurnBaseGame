@@ -4486,6 +4486,8 @@ MonoBehaviour:
   index: 2
   uiManager: {fileID: 0}
   animator: {fileID: 1770833584808580972}
+  equipPanel: {fileID: 0}
+  inven: {fileID: 3174367274289846614}
 --- !u!1 &5125504200524397998
 GameObject:
   m_ObjectHideFlags: 0
@@ -8596,6 +8598,8 @@ MonoBehaviour:
   index: 1
   uiManager: {fileID: 0}
   animator: {fileID: 3279756158007120978}
+  equipPanel: {fileID: 0}
+  inven: {fileID: 4730769188733680719}
 --- !u!1 &8995685524797301371
 GameObject:
   m_ObjectHideFlags: 0
@@ -8828,6 +8832,8 @@ MonoBehaviour:
   index: 0
   uiManager: {fileID: 0}
   animator: {fileID: 880481979005953245}
+  equipPanel: {fileID: 0}
+  inven: {fileID: 2553691117752703919}
 --- !u!1 &9177770945508996356
 GameObject:
   m_ObjectHideFlags: 0

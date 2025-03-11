@@ -7,9 +7,6 @@ public class EquipCanvasManager : MonoBehaviour
 {
     UserDataManager userDataManager;
     EquipButtonManager equipButtonManager;
-    LoginSystem loginSystem;
-    public Text curCredit;
-    public Text curBattleData;
 
     public Text selectedEquipType;
     public Text upgradeCreditCostText;
@@ -24,17 +21,11 @@ public class EquipCanvasManager : MonoBehaviour
     {
         userDataManager = UserDataManager.Instance;
         equipButtonManager = FindObjectOfType<EquipButtonManager>();
-        loginSystem = FindObjectOfType<LoginSystem>();
         if (equipButtonManager != null)
         {
-            equipButtonManager.updateEquipCanvas.AddListener(UpdateEquipCanvas);
             equipButtonManager.updateUpgradeCanvas.AddListener(UpdateUpgradeCanvas);
         }
 
-        if(loginSystem != null)
-        {
-            loginSystem.updateEquipCanvasAct.AddListener(UpdateEquipCanvas);
-        }
     }
     #region TurnOn,Off
     public void TurnOnUpgradeCanvas()
@@ -70,11 +61,6 @@ public class EquipCanvasManager : MonoBehaviour
     #endregion
 
     #region Update
-    public void UpdateEquipCanvas()
-    {
-        curCredit.text = userDataManager.UserData.Credits.ToString();
-        curBattleData.text = userDataManager.UserData.BattleData.ToString();
-    }
 
     void UpdateUpgradeCanvas(BaseItem selectedItem, int creditCost, int battleDataCost)
     {

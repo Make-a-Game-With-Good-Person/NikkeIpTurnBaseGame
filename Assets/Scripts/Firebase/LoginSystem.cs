@@ -7,6 +7,8 @@ using UnityEngine.Events;
 
 public class LoginSystem : MonoBehaviour
 {
+    public Transform loginCanvas;
+
     public Transform loginScreen;
     public Transform nicknameScreen;
     public Transform registerScreen;
@@ -24,9 +26,7 @@ public class LoginSystem : MonoBehaviour
     AuthManager authManager;
     UserDataManager userDataManager;
 
-    //임시
-    public Transform EquipScreen;
-    public UnityEvent updateEquipCanvasAct;
+    public Transform mainScreen;
     private void Start()
     {
         authManager = new AuthManager();
@@ -98,15 +98,14 @@ public class LoginSystem : MonoBehaviour
         Debug.Log("닉네임 생성 성공!");
         TurnOffNickNameMakeScreen();
         TurnOffLoginFailScreen();
-        TurnOnEquipCanvas();
     }
     #endregion
 
     #region ToggleScreen
     public void TurnOffLoginScreen()
     {
-        loginScreen.gameObject.SetActive(false);
-        TurnOnEquipCanvas();
+        loginCanvas.gameObject.SetActive(false);
+        TurnOnMainCanvas();
     }
     public void TurnOnNickNameMakeScreen()
     {
@@ -157,10 +156,9 @@ public class LoginSystem : MonoBehaviour
     }
 
 
-    public void TurnOnEquipCanvas()
+    public void TurnOnMainCanvas()
     {
-        EquipScreen.gameObject.SetActive(true);
-        updateEquipCanvasAct?.Invoke();
+        mainScreen.gameObject.SetActive(true);
     }
     #endregion
 

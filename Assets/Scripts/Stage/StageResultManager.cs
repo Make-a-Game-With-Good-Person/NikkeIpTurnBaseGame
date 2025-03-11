@@ -20,7 +20,6 @@ public class StageResultManager : MonoBehaviour
         userDataManager.UserData.UpdateStageClear(stageLv, rewardCredits, rewardBattleDatas);
         await userDataManager.SaveUserData(userDataManager.uid);
 
-        equipCanvasManager?.UpdateEquipCanvas();
     }
 
     private void Update()
