@@ -1780,6 +1780,11 @@ PrefabInstance:
       propertyPath: characters.Array.data[2]
       value: 
       objectReference: {fileID: 1043847855}
+    - target: {fileID: 8990652619276985816, guid: f7112fcaa72136841a3ac990841ce89a,
+        type: 3}
+      propertyPath: equipButtonManager
+      value: 
+      objectReference: {fileID: 3401296611361416211}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
