@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,6 +19,7 @@ public class EquipButtonManager : MonoBehaviour
 
     public int creditCost;
     public int battleDataCost;
+
 
     private void Start()
     {

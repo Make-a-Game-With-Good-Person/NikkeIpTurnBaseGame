@@ -4425,7 +4425,7 @@ GameObject:
   - component: {fileID: 8729316563125298804}
   - component: {fileID: 1294967055170392772}
   m_Layer: 7
-  m_Name: Vesti
+  m_Name: Besti
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4488,6 +4488,11 @@ MonoBehaviour:
   animator: {fileID: 1770833584808580972}
   equipPanel: {fileID: 0}
   inven: {fileID: 3174367274289846614}
+  skillPanel: {fileID: 0}
+  skills:
+  - {fileID: 11400000, guid: e5f851b93da6c0d4991d85a181a97b0b, type: 2}
+  - {fileID: 11400000, guid: bca3c3557791ebd44afe0b9d98bb797f, type: 2}
+  charDescription: "\uBCA0\uC2A4\uD2F0 \uC124\uBA85"
 --- !u!1 &5125504200524397998
 GameObject:
   m_ObjectHideFlags: 0
@@ -8600,6 +8605,11 @@ MonoBehaviour:
   animator: {fileID: 3279756158007120978}
   equipPanel: {fileID: 0}
   inven: {fileID: 4730769188733680719}
+  skillPanel: {fileID: 0}
+  skills:
+  - {fileID: 11400000, guid: 458958419c55fdd47b3b494519d4fea9, type: 2}
+  - {fileID: 11400000, guid: 7d76e2e857182dd44a37bdcb6b7e2aa4, type: 2}
+  charDescription: "\uC5E0\uB9C8 \uC124\uBA85"
 --- !u!1 &8995685524797301371
 GameObject:
   m_ObjectHideFlags: 0
@@ -8834,6 +8844,11 @@ MonoBehaviour:
   animator: {fileID: 880481979005953245}
   equipPanel: {fileID: 0}
   inven: {fileID: 2553691117752703919}
+  skillPanel: {fileID: 0}
+  skills:
+  - {fileID: 11400000, guid: 20761b42e33c9d043b4a60fdd05700e9, type: 2}
+  - {fileID: 11400000, guid: 4ee308c0983870f43bb228822ca443a0, type: 2}
+  charDescription: "\uC740\uD654 \uC124\uBA85"
 --- !u!1 &9177770945508996356
 GameObject:
   m_ObjectHideFlags: 0

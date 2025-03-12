@@ -7,7 +7,7 @@ public class BaseItem : ScriptableObject
 {
     public Sprite ItemIcon;
     public string ItemName;
-    public string ItemExplainText;
+    public string ItemDescription;
 
     public EquipType EquipType;
     public int ItemLv;

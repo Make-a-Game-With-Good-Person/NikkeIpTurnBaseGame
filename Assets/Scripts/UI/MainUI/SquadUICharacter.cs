@@ -9,12 +9,17 @@ public class SquadUICharacter : MonoBehaviour
     public Animator animator;
     public EquipPanel equipPanel;
     public EquipInven inven;
+    public SkillPanel skillPanel;
+    public BaseSkillStatus[] skills;
+    public string charDescription;
 
     public void SelectCharacter()
     {
         uiManager.SelectCharacter(index);
         animator.SetBool("Selected", true);
         equipPanel.SetEquipPanel(inven);
+        equipPanel.SetDescription(charDescription);
+        skillPanel.SetSkillPanel(skills);
     }
     
     
