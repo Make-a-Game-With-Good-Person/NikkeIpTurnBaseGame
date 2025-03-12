@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 4033287822461114141}
   - component: {fileID: 4657519583580483318}
   m_Layer: 0
-  m_Name: Electro hit
+  m_Name: BossAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
