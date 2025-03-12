@@ -20,16 +20,7 @@ public class UnitAnimationController : MonoBehaviour
     private readonly int[] dx = new int[4] { 0, 0, 1, -1 };
     private readonly int[] dy = new int[4] { 1, -1, 0, 0 };
 
-    #region Animation Parameter
-    private int B_Run = Animator.StringToHash("B_Run");
-    private int B_Cover = Animator.StringToHash("B_Cover");
-    private int B_isFullCover = Animator.StringToHash("B_isFullCover");
-    private int I_Peeking = Animator.StringToHash("I_Peeking");
-    private int I_AttackType = Animator.StringToHash("I_AttackType");
-    private int T_Attack = Animator.StringToHash("T_Attack");
-    private int T_Death = Animator.StringToHash("T_Death");
-    private int T_Hit = Animator.StringToHash("T_Hit");
-    #endregion
+
 
     /// <summary>
     /// 0: fornt, 1: Back. 2: Right, 3: Left, etc : none cover
@@ -39,9 +30,20 @@ public class UnitAnimationController : MonoBehaviour
     #region Protected
     #endregion
     #region public
+    #region Animation Parameter
+    public readonly int B_Run = Animator.StringToHash("B_Run");
+    public readonly int B_Cover = Animator.StringToHash("B_Cover");
+    public readonly int B_isFullCover = Animator.StringToHash("B_isFullCover");
+    public readonly int B_Attack = Animator.StringToHash("B_Attack");
+    public readonly int I_Peeking = Animator.StringToHash("I_Peeking");
+    public readonly int I_AttackType = Animator.StringToHash("I_AttackType");
+    public readonly int T_Attack = Animator.StringToHash("T_Attack");
+    public readonly int T_Death = Animator.StringToHash("T_Death");
+    public readonly int T_Hit = Animator.StringToHash("T_Hit");
+    #endregion
     #endregion
     #region Events
-    public UnityEvent AnimEndEvent = new UnityEvent();
+    public UnityEvent animEndEvent = new UnityEvent();
     #endregion
     #endregion
 
@@ -77,9 +79,15 @@ public class UnitAnimationController : MonoBehaviour
     /// </summary>
     /// <param name="attackAnimType"></param>
     /// <param name="isPeeking"></param>
-    public void Attack(int attackAnimType, bool isPeeking)
+    public void StartAttack(int attackAnimType, bool isPeeking)
     {
+        _anim.SetInteger(I_AttackType, attackAnimType);
         _anim.SetTrigger(T_Attack);
+        _anim.SetBool(B_Attack, true);
+    }
+    public void EndAttack()
+    {
+        _anim.SetBool(B_Attack, false);
     }
 
     public void Death()

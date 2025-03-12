@@ -236,6 +236,12 @@ public class UnitMovement : MonoBehaviour
     {
         unit.myAnim?.UnCover();
     }
+
+    protected virtual void EndAttack()
+    {
+        unit.myAnim.EndAttack();
+        Cover();
+    }
     #endregion
     #region Public
     public virtual HashSet<Vector2Int> GetTilesInRange(TileManager map)
@@ -614,6 +620,10 @@ public class UnitMovement : MonoBehaviour
     {
         unit = GetComponent<Unit>();
         _battleManager = FindObjectOfType<BattleManager>();
+        foreach(UnitSkill skill in unit.unitSkills)
+        {
+            skill.changeStateWhenActEnd.AddListener(EndAttack);
+        }
     }
     #endregion
 }
