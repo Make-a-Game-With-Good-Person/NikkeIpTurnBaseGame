@@ -98,6 +98,7 @@ public class LoginSystem : MonoBehaviour
         Debug.Log("닉네임 생성 성공!");
         TurnOffNickNameMakeScreen();
         TurnOffLoginFailScreen();
+        TurnOnMainCanvas();
     }
     #endregion
 
