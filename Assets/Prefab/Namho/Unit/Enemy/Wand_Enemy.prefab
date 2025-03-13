@@ -391,6 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390795007370364929}
   - component: {fileID: 5705603643087878769}
+  - component: {fileID: 6278215557116861413}
   m_Layer: 0
   m_Name: WandIdle
   m_TagString: Untagged
@@ -425,7 +426,7 @@ Animator:
   m_GameObject: {fileID: 4487285751039957092}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0aac620c7938acc469d4109f6e115500, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1d20aed021ed1c041a447d6ae2678174, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -436,6 +437,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6278215557116861413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4487285751039957092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fdbb0c1cdc35e4588d4d4be845c3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6241824769224364892
 GameObject:
   m_ObjectHideFlags: 0
