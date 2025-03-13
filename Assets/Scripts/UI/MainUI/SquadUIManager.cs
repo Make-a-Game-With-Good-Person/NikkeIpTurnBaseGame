@@ -13,6 +13,7 @@ public class SquadUIManager : MonoBehaviour
     public GameObject equipPanel;       // 상태창 UI
     public Button backButton;            // 뒤로가기 버튼
     public Camera mainCamera;            // 메인 카메라
+    public SquadUICamController camController;
 
     Vector3[] originalPositions; // 각 캐릭터 원위치 저장
     Vector3[] originalScale; // 각 캐릭터 원크기 저장
@@ -93,6 +94,7 @@ public class SquadUIManager : MonoBehaviour
 
             // 상태창의 투명도 변경 (선명 -> 투명)
             equipPanel.GetComponent<CanvasGroup>().DOFade(0, 0.5f).OnComplete(() => equipPanel.SetActive(false));
+            camController.SwitchToDefaultView();
             isEquipOpen = false;
         }
         else

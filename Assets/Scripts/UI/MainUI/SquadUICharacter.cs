@@ -12,7 +12,7 @@ public class SquadUICharacter : MonoBehaviour
     public SkillPanel skillPanel;
     public BaseSkillStatus[] skills;
     public string charDescription;
-
+    public SquadUICamController camController;
     public void SelectCharacter()
     {
         uiManager.SelectCharacter(index);
@@ -20,6 +20,7 @@ public class SquadUICharacter : MonoBehaviour
         equipPanel.SetEquipPanel(inven);
         equipPanel.SetDescription(charDescription);
         skillPanel.SetSkillPanel(skills);
+        camController.SwitchToSelectedView(this.transform);
     }
     
     
