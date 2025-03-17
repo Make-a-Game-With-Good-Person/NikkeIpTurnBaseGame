@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemIcon: {fileID: 0}
   ItemName: 
-  ItemExplainText: 
-  EquipType: 1
+  ItemDescription: 
+  EquipType: 0
   ItemLv: 0
   baseStat:
   - 0
