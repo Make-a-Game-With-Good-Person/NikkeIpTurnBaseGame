@@ -178,9 +178,17 @@ public class UnitMovement : MonoBehaviour
     /// <returns></returns>
     protected virtual bool ExpandSearch(Tile from, Tile to)
     {
-        return (from.distance + to.cost <= unit[EStatType.Move]) && 
-            (Math.Abs(from.height - to.height) <= unit[EStatType.Jump]) && 
-            ((to.tileState & TileState.Walkable) > 0);
+        bool isOpponent = false;
+        if(to.content != null)
+        {
+            //유닛 타입이 같으면 0보다 크다
+            isOpponent = ((unit.unitType & to.content.unitType) <= 0);
+        }
+
+        return (from.distance + to.cost <= unit[EStatType.Move]) &&
+            (Math.Abs(from.height - to.height) <= unit[EStatType.Jump]) &&
+            ((to.tileState & TileState.Walkable) > 0) &&
+            !isOpponent;
     }
 
     protected virtual void Filter(HashSet<Vector2Int> range, TileManager map)
