@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f994b34aba959349b29a255c2afe7c5, type: 3}
   m_Name: EunhwaArmor
   m_EditorClassIdentifier: 
-  ItemIcon: {fileID: 0}
+  ItemIcon: {fileID: 21300000, guid: 0d73c77de372fe04981dad66c150a331, type: 3}
   ItemName: 
-  ItemExplainText: 
+  ItemDescription: 
   EquipType: 1
   ItemLv: 1
   baseStat:
