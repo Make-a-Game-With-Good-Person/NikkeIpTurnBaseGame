@@ -274,12 +274,14 @@ MonoBehaviour:
   selectSkillTargetUIController: {fileID: 8705471248453151663}
   confirmAbilityTargetUIController: {fileID: 2017109378312201641}
   decisionTreeManager: {fileID: 7997657498522648440}
+  gameOverUIController: {fileID: 701101384798176364}
   curState: 0
   selectedTarget: {fileID: 0}
   touchedUnit: {fileID: 0}
   curControlUnit: {fileID: 0}
   Units: []
   EnemyUnits:
+  - {fileID: 0}
   - {fileID: 0}
   curSelectedSkill: {fileID: 0}
   enemyTurn: 0
@@ -522,8 +524,11 @@ MonoBehaviour:
   heightLimit: 0
   fordebugPath: []
   tileSize: {x: 2, y: 1, z: 2}
-  rows: 10
-  cols: 10
+  rows: 34
+  cols: 45
+  showedTile: {fileID: 496657095653784612, guid: 3a6d5c75c06f3224f869f76558fb876a,
+    type: 3}
+  showedTileParent: {fileID: 0}
   tileObjectMask:
     serializedVersion: 2
     m_Bits: 1536
@@ -729,6 +734,7 @@ Transform:
   - {fileID: 8109971405799384223}
   - {fileID: 1664904773014989242}
   - {fileID: 842657772095855181}
+  - {fileID: 7596028041053180596}
   m_Father: {fileID: 4193279913620646410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5439199222202524851
@@ -777,6 +783,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SelectSkillTargetUI: {fileID: 0}
   cancelButton: {fileID: 0}
+--- !u!1 &5618474847435077378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7596028041053180596}
+  - component: {fileID: 701101384798176364}
+  m_Layer: 0
+  m_Name: GameOverUIController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7596028041053180596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5618474847435077378}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5503062636456084053}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &701101384798176364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5618474847435077378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b513f2ffa8d6a414ca7d9ce453dcae17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameOverUI: {fileID: 0}
+  text: {fileID: 0}
+  backToMainButton: {fileID: 0}
 --- !u!1 &6209895011628291356
 GameObject:
   m_ObjectHideFlags: 0

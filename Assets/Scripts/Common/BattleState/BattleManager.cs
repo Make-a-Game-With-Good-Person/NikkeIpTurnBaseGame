@@ -24,6 +24,7 @@ public class BattleManager : MonoBehaviour
     public SelectSkillTargetUIController selectSkillTargetUIController;
     public ConfirmAbilityTargetUIController confirmAbilityTargetUIController;
     public DecisionTreeManager decisionTreeManager;
+    public GameOverUIController gameOverUIController;
     #endregion
 
 

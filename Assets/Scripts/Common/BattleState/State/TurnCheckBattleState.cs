@@ -121,15 +121,19 @@ public class TurnCheckBattleState : BattleState
     {
         yield return null;
 
-        switch (CheckWin())
+        int check = CheckWin();
+
+        switch (check)
         {
             //계속 진행 0, 이겼을때 1, 졌을때 2 return
             case 0:
                 break;
             case 1:
+                owner.gameOverUIController.GameEnd(check);
                 Debug.Log("승리");
                 yield break;
             case 2:
+                owner.gameOverUIController.GameEnd(check);
                 Debug.Log("패배");
                 yield break;
             default:

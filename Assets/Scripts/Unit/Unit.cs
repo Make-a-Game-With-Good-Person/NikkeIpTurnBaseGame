@@ -90,7 +90,7 @@ public class Unit : Stat , IDamage
     {
         StatStructure unitStat = _unitStatManager.LoadStat(index);
         this[EStatType.LV] = unitStat.unit_level;
-        this[EStatType.MaxHP] = unitStat.unit_hp * 10000; // 임시로 뒤에 곱함 안죽게
+        this[EStatType.MaxHP] = unitStat.unit_hp; // 임시로 뒤에 곱함 안죽게
         this[EStatType.HP] = this[EStatType.MaxHP];
         this[EStatType.ATK] = unitStat.unit_attackValue;
         this[EStatType.DEF] = unitStat.unit_defenceValue;
