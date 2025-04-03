@@ -1375,7 +1375,8 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8928556992553027456, guid: 7a8b59d8497a2884183bfd3c07ea3831, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7a8b59d8497a2884183bfd3c07ea3831, type: 3}
@@ -2415,6 +2416,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1013881306}
+    - target: {fileID: 1614326611160059089, guid: a7fe4b954a0f23743b234e31a800ecca,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -411.59998
+      objectReference: {fileID: 0}
+    - target: {fileID: 2632617596269514652, guid: a7fe4b954a0f23743b234e31a800ecca,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4813472948207844932, guid: a7fe4b954a0f23743b234e31a800ecca,
         type: 3}
       propertyPath: m_Name
