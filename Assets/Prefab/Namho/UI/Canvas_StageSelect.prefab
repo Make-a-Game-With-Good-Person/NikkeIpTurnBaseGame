@@ -829,6 +829,7 @@ MonoBehaviour:
   - {fileID: 448083490998918237}
   backButton: {fileID: 6585105303733285395}
   stageEnterPanel: {fileID: 6776093966322980061}
+  stageSelectBtn: {fileID: 8419298092336341434}
 --- !u!1 &5291355079904569528
 GameObject:
   m_ObjectHideFlags: 0

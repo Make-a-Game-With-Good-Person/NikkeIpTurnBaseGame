@@ -2,16 +2,19 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class StageSelectUIManager : MonoBehaviour
 {
     bool isStageEnterOpen;
+    private int selectedStageIndex;
     public GameObject stagePanel;
     public Transform[] stages;      // 스테이지 배열
     public Button backButton;            // 뒤로가기 버튼
     public GameObject stageEnterPanel;        // 스테이지 입장창 UI
+    public Button stageSelectBtn;
     Vector3[] originalPositions; 
     Vector3[] originalScale; 
 
@@ -29,6 +32,12 @@ public class StageSelectUIManager : MonoBehaviour
 
         // 뒤로가기 버튼에 이벤트 연결
         backButton.onClick.AddListener(TurnOffScreen);
+        stageSelectBtn.onClick.AddListener(OnStageEnterBtn);
+    }
+
+    public void OnStageEnterBtn()
+    {
+        SceneManager.LoadScene(selectedStageIndex);
     }
 
     // 스테이지를 선택했을 때 호출 (선택한 스테이지 버튼을 중앙으로 이동, 입장창 열기)
@@ -37,6 +46,8 @@ public class StageSelectUIManager : MonoBehaviour
         if (index < 0 || index >= stages.Length) return;
 
         isStageEnterOpen = true;
+
+        selectedStageIndex = index + 1;
 
         // 선택된 캐릭터만 중앙으로 이동
         stages[index].transform.DOMove(new Vector3(-1, stages[index].transform.position.y, stages[index].transform.position.z), 0.5f).SetEase(Ease.OutExpo);
