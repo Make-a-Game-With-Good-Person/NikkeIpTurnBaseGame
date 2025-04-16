@@ -106,18 +106,16 @@ public class TileManager : MonoBehaviour
         foreach(Tile tile in map.Values)
         {
             //100 높이에서 아래로 레이 쏨, 100 높이니까 길이도 100
-            RaycastHit[] hits = Physics.RaycastAll(tile.center + (Vector3.up * 100), Vector3.down, 100.0f, tileObjectMask);
+            //RaycastHit[] hits = Physics.RaycastAll(tile.center + (Vector3.up * 100), Vector3.down, 100.0f, tileObjectMask);
+            Physics.Raycast(tile.center + (Vector3.up * 100), Vector3.down, out RaycastHit hit, 100.0f, tileObjectMask);
 
-            foreach(RaycastHit hit in hits)
+            TileObject tileObject = hit.collider.GetComponentInParent<TileObject>();
+            if (tileObject != null) 
             {
-                TileObject tileObject = hit.collider.GetComponentInParent<TileObject>();
-                if (tileObject != null) 
+                tile.height = (int)(hit.point.y / tileSize.y);
+                if (!tileObject.isWalkable)
                 {
-                    tile.height = (int)(hit.point.y / tileSize.y);
-                    if (!tileObject.isWalkable)
-                    {
-                        tile.SetObstacle();
-                    }
+                    tile.SetObstacle();
                 }
             }
         }
