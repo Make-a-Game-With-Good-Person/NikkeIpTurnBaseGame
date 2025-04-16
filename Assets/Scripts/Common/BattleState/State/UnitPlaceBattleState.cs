@@ -77,6 +77,8 @@ public class UnitPlaceBattleState : BattleState
     
     public void OnUnitPlace(Unit unit, Vector3 worldPos)
     {
+        Debug.Log("UnitPlaceBattleState.OnUnitPlace");
+
         Tile tile = owner.tileManager.GetTile(worldPos);
 
         //그 타일에 유닛을 놓을수 있는지 검사

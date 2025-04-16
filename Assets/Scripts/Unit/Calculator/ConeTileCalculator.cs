@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,10 +48,12 @@ public class ConeTileCalculator
                 lateral += 2;
             }
         }
+        Debug.Log($"ConeTileCalculator.GetTilesInRange count : {retValue.Count}");
+
         return retValue;
     }
     bool ValidTile(BattleManager owner, Tile t)
     {
-        return t != null && t.height <= owner.curControlUnit[EStatType.Jump];
+        return t != null && Math.Abs( t.height - owner.curControlUnit.tile.height) <= owner.curControlUnit[EStatType.Jump];
     }
 }
