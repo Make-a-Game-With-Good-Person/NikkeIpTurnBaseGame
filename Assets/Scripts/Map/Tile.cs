@@ -69,11 +69,9 @@ public class Tile
         set 
         {
             _height = value;
-            Vector3 plusHeight = new Vector3(0, _size.y * _height, 0);
-            _worldPos.y = 0;
-            _center.y = 0;
-            _worldPos = _worldPos + plusHeight;
-            _center = _center + plusHeight;
+            Vector3 plusHeight = new Vector3(0, size.y * _height, 0);
+            worldPos = worldPos + plusHeight;
+            center = center + plusHeight;
         }
     }
     /// <summary>
