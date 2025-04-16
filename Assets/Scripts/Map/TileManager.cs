@@ -70,13 +70,17 @@ public class TileManager : MonoBehaviour
         _map.Clear();
 
         InitGrid();
+        Debug.Log($"coordi 2,5, height : {map[new Vector2Int(2, 5)].height}, worldpos.y : {map[new Vector2Int(2, 5)].worldPos.y}, size : {map[new Vector2Int(2, 5)].size.y}");
         InitHeight();
+        Debug.Log($"coordi 2,5, height : {map[new Vector2Int(2, 5)].height}, worldpos.y : {map[new Vector2Int(2, 5)].worldPos.y}, size : {map[new Vector2Int(2, 5)].size.y}");
         InitCover();
         InitShowTiles();
         didInit = true;
 
 
-        //Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].halfCovers[(int)EDirection.Front]}");
+        Debug.Log($"coordi 2,5, height : {map[new Vector2Int(2, 5)].height}, worldpos.y : {map[new Vector2Int(2, 5)].worldPos.y}, size : {map[new Vector2Int(2, 5)].size.y}");
+        Debug.Log($"coordi 1,5, height : {map[new Vector2Int(1, 5)].height}, worldpos.y : {map[new Vector2Int(1, 5)].worldPos.y}, size : {map[new Vector2Int(1, 5)].size.y}");
+        
         //Debug.Log($"coordi 3,4 {map[new Vector2Int(3, 4)].fullCovers[(int)EDirection.Front]}");
         /*
         //debug
@@ -106,18 +110,17 @@ public class TileManager : MonoBehaviour
         foreach(Tile tile in map.Values)
         {
             //100 높이에서 아래로 레이 쏨, 100 높이니까 길이도 100
-            RaycastHit[] hits = Physics.RaycastAll(tile.center + (Vector3.up * 100), Vector3.down, 100.0f, tileObjectMask);
+            //RaycastHit[] hits = Physics.RaycastAll(tile.center + (Vector3.up * 100), Vector3.down, 100.0f, tileObjectMask);
 
-            foreach(RaycastHit hit in hits)
+            Physics.Raycast(tile.center + (Vector3.up * 100), Vector3.down, out RaycastHit hit, 100.0f, tileObjectMask);
+
+            TileObject tileObject = hit.collider.GetComponentInParent<TileObject>();
+            if (tileObject != null) 
             {
-                TileObject tileObject = hit.collider.GetComponentInParent<TileObject>();
-                if (tileObject != null) 
+                tile.height = (int)(hit.point.y / tileSize.y);
+                if (!tileObject.isWalkable)
                 {
-                    tile.height = (int)(hit.point.y / tileSize.y);
-                    if (!tileObject.isWalkable)
-                    {
-                        tile.SetObstacle();
-                    }
+                    tile.SetObstacle();
                 }
             }
         }
