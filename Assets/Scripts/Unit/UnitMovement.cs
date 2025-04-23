@@ -258,6 +258,15 @@ public class UnitMovement : MonoBehaviour
         Filter(range, map);
         return range;
     }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="to">WorldPos which head to</param>
+    public virtual void Turn(Vector3 to)
+    {
+        StartCoroutine(Turning(to));
+    }
     #endregion
     #endregion
 
@@ -597,16 +606,42 @@ public class UnitMovement : MonoBehaviour
         yield return StartCoroutine(Jumping(from,to,map));
     }
 
-    protected IEnumerator Turning(Tile to)
+    protected IEnumerator Turning(Vector3 worldPos)
     {
-        Vector3 dir = to.center - unit.transform.position;
+        Vector3 dir = worldPos - unit.transform.position;
         dir.y = 0;
-        
 
         float angle = Vector3.Angle(unit.transform.forward, dir);
         float right = Vector3.Dot(unit.transform.right, dir) < 0 ? -1f : 1f;
         float delta = 0;
 
+        unit.myAnim.StartTurning(right > 0 ? 1 : 0);
+        while (angle > 0)
+        {
+            delta = 360.0f * Time.deltaTime;
+
+            if (delta > angle)
+            {
+                delta = angle;
+            }
+
+            unit.transform.Rotate(delta * right * Vector3.up, Space.World);
+            angle -= delta;
+            yield return null;
+        }
+        unit.myAnim.EndTurning();
+    }
+
+    protected IEnumerator Turning(Tile to)
+    {
+        Vector3 dir = to.center - unit.transform.position;
+        dir.y = 0;
+
+        float angle = Vector3.Angle(unit.transform.forward, dir);
+        float right = Vector3.Dot(unit.transform.right, dir) < 0 ? -1f : 1f;
+        float delta = 0;
+
+        unit.myAnim.StartTurning(right > 0 ? 1 : 0);
         while(angle > 0)
         {
             delta = 360.0f * Time.deltaTime;
@@ -620,6 +655,7 @@ public class UnitMovement : MonoBehaviour
             angle -= delta;
             yield return null;
         }
+        unit.myAnim.EndTurning();
     }
     #endregion
 

@@ -35,6 +35,8 @@ public class UnitAnimationController : MonoBehaviour
     public readonly int B_Cover = Animator.StringToHash("B_Cover");
     public readonly int B_isFullCover = Animator.StringToHash("B_isFullCover");
     public readonly int B_Attack = Animator.StringToHash("B_Attack");
+    public readonly int B_Turning = Animator.StringToHash("B_Turning");
+    public readonly int I_TurnDirection = Animator.StringToHash("I_TurnDirection");
     public readonly int I_Peeking = Animator.StringToHash("I_Peeking");
     public readonly int I_AttackType = Animator.StringToHash("I_AttackType");
     public readonly int T_Attack = Animator.StringToHash("T_Attack");
@@ -97,6 +99,20 @@ public class UnitAnimationController : MonoBehaviour
     public void Hit()
     {
         _anim.SetTrigger(T_Hit);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="turnDirection">0 : Left, 1 : Right, else: error</param>
+    public void StartTurning(int turnDirection)
+    {
+        _anim.SetInteger(I_TurnDirection, turnDirection);
+        _anim.SetBool(B_Turning, true);
+    }
+    public void EndTurning()
+    {
+        _anim.SetBool(B_Turning, false);
     }
 
     public void StartRunning()

@@ -327,8 +327,8 @@ public class UnitSelectBattleState : BattleState
                         owner.stateMachine.ChangeState<MoveTargetBattleState>();
                         break;
                     case ReturnDecision.DecisionType.Alert:
-                        // 오른쪽으로 도는걸 기다리도록 yield return StartCoroutine(owner,curControlUnit.애니메이션 코루틴 함수)를 추가해야함
-                        owner.curControlUnit.transform.rotation = Quaternion.Euler(0, owner.curControlUnit.transform.eulerAngles.y + 90, 0);
+                        UnitMovement movement = owner.curControlUnit.GetComponent<UnitMovement>();
+                        movement.Turn(owner.curControlUnit.transform.position + owner.curControlUnit.transform.right);
                         owner.curControlUnit.attackable = false;
                         owner.curControlUnit.movable = false;
                         owner.curControlUnit = null;
