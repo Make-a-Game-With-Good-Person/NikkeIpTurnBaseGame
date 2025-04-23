@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverUIController : MonoBehaviour
@@ -26,5 +27,15 @@ public class GameOverUIController : MonoBehaviour
                 Debug.LogError("not proper game end type");
                 break;
         }
+    }
+
+    public void OnBackToMainButton()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    private void Start()
+    {
+        backToMainButton.onClick.AddListener(OnBackToMainButton);
     }
 }
