@@ -31,6 +31,11 @@ public class LoginSystem : MonoBehaviour
     {
         authManager = new AuthManager();
         userDataManager = UserDataManager.Instance;
+
+        if (userDataManager.uid != null)
+        {
+            CheckExistLogin();
+        }
     }
 
     #region TryFunc
@@ -50,6 +55,16 @@ public class LoginSystem : MonoBehaviour
     #endregion
 
     #region Task
+    async Task CheckExistLogin()
+    {
+        bool result = await userDataManager.LoadUserData(userDataManager.uid);
+
+        if (result)
+        {
+            Debug.Log(" 이미 로그인을 했었으니 로그인창은 넘어가도록 해요");
+            TurnOffLoginScreen();
+        }
+    }
     async Task UserLogin()
     {
         bool success = await authManager.Login(idInput.text, pwInput.text);
