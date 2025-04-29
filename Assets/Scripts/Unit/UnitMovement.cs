@@ -247,7 +247,7 @@ public class UnitMovement : MonoBehaviour
 
     protected virtual void EndAttack()
     {
-        unit.myAnim.EndAttack();
+        unit.myAnim?.EndAttack();
         Cover();
     }
     #endregion

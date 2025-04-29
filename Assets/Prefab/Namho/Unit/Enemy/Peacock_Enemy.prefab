@@ -745,6 +745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 965432883695817200}
   - component: {fileID: 4723254856608881902}
+  - component: {fileID: 5548579810663472958}
   m_Layer: 0
   m_Name: PeacockOriginal
   m_TagString: Untagged
@@ -787,7 +788,7 @@ Animator:
   m_GameObject: {fileID: 873498047048582709}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 34fb60cd48623b74f98ee40936ad43d1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3e2fa86590637c645834764878c5a6bc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -798,6 +799,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5548579810663472958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873498047048582709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61fdbb0c1cdc35e4588d4d4be845c3c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &901632107696930089
 GameObject:
   m_ObjectHideFlags: 0
