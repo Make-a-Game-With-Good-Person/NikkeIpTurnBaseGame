@@ -13,6 +13,7 @@ public class UserDataManager : MonoBehaviour
     private FirebaseFirestore db;
     public UserDataCache UserData { get; private set; } = new UserDataCache();
     public string uid;
+    public int selectedStageIndex;
     private void Awake()
     {
         if (Instance == null)

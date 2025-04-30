@@ -10,10 +10,12 @@ public class GameOverUIController : MonoBehaviour
     public GameObject gameOverUI;
     public TMPro.TextMeshProUGUI text;
     public Button backToMainButton;
+    private int gameEndType;
 
     //이겼을때 1, 졌을때 2
     public void GameEnd(int type)
     {
+        gameEndType = type;
         gameOverUI.SetActive(true);
         switch (type)
         {
@@ -31,6 +33,11 @@ public class GameOverUIController : MonoBehaviour
 
     public void OnBackToMainButton()
     {
+        if(FindObjectOfType<UserDataManager>().selectedStageIndex == 2 && gameEndType == 1)
+        {
+            SceneManager.LoadScene(3);
+            return;
+        }
         SceneManager.LoadScene(0);
     }
 

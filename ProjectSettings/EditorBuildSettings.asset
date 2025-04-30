@@ -12,11 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Sechan/Stages/PlaneLevel_1.unity
     guid: 856d5168ea2a6ed4aa8cfd95d0bc575c
   - enabled: 1
-    path: Assets/Scenes/Sechan/Stages/PlaneLevel_2.unity
-    guid: 2bd54e6673084e54f92ba34bdb8a73ff
-  - enabled: 1
     path: Assets/Scenes/Sechan/Stages/PlaneLevel_3.unity
-    guid: 88c29d594f5d3424e976507fbbd58bb4
+    guid: c8cbf9d027fbcb04d945468b12adb1f8
   - enabled: 1
     path: Assets/Scenes/Sechan/Stages/PlaneLevel_Boss.unity
     guid: 0c6a7435588242d4284b3f4fe19210f1

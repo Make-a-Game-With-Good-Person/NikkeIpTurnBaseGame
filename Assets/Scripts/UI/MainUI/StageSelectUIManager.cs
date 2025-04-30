@@ -37,6 +37,7 @@ public class StageSelectUIManager : MonoBehaviour
 
     public void OnStageEnterBtn()
     {
+        FindObjectOfType<UserDataManager>().selectedStageIndex = selectedStageIndex;
         SceneManager.LoadScene(selectedStageIndex);
     }
 
