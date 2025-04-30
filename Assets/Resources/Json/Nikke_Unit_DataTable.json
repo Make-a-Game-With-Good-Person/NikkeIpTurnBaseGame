@@ -26,7 +26,7 @@
     "unit_avoidValue": 1050,
     "unit_criticalMultiplier": 2,
     "unit_visualRange": 10,
-    "unit_moveRange": 10,
+    "unit_moveRange": 4,
     "unit_detailAbility": 1000001
   },
   {

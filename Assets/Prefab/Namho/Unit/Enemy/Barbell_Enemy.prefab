@@ -3685,7 +3685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61fdbb0c1cdc35e4588d4d4be845c3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AnimEndEvent:
+  animEndEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &6533446675182088481
@@ -4317,7 +4317,7 @@ MonoBehaviour:
   skillName: 
   skillDamage: 0
   skillVFX: {fileID: 0}
-  skillRange: 20
+  skillRange: 3
   skillHeight: 1
   skillLevel: 0
   skillCost: 0
