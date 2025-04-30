@@ -33,7 +33,7 @@ public class GameOverUIController : MonoBehaviour
 
     public void OnBackToMainButton()
     {
-        if(FindObjectOfType<UserDataManager>().selectedStageIndex == 2 && gameEndType == 1)
+        if(FindObjectOfType<UserDataManager>()?.selectedStageIndex == 2 && gameEndType == 1)
         {
             SceneManager.LoadScene(3);
             return;

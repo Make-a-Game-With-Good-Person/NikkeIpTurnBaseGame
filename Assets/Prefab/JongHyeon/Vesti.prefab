@@ -27262,7 +27262,7 @@ GameObject:
   - component: {fileID: 7848184890814921079}
   - component: {fileID: 3329901609627856643}
   m_Layer: 7
-  m_Name: Eunhwa
+  m_Name: Vesti
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34333,7 +34333,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e60669114f57c640b6c7ecffabafe86, type: 2}
+  - {fileID: 2100000, guid: 5449634714294cb45bc99955cce5fcae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

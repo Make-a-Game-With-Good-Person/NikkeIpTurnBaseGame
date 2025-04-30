@@ -68,10 +68,17 @@ public class InitBattleState : BattleState
         }
         //연출
         //카메라 무브 등등
-        
-        
+        foreach (Unit unit in owner.Units)
+        {
+            if (unit != null)
+            {
+                Tile tile = owner.tileManager.GetTile(unit.transform.position);
+                tile.Place(unit);
+            }
+        }
 
-        owner.stateMachine.ChangeState<UnitPlaceBattleState>();
+
+        owner.stateMachine.ChangeState<UnitSelectBattleState>();
     }
     #endregion
 
