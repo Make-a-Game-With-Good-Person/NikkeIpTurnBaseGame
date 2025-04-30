@@ -10,13 +10,13 @@ public class FadeOutController : MonoBehaviour
 
     public void OnFadeStart()
     {
-
+        StartCoroutine(FadingOut());
     }
 
     protected IEnumerator FadingOut()
     {
         float elapsedTime = 0f; // 누적 경과 시간
-        float fadedTime = 0.5f; // 총 소요 시간
+        float fadedTime = 2f; // 총 소요 시간
 
         Color temp = image.color;
 
@@ -29,8 +29,11 @@ public class FadeOutController : MonoBehaviour
             Debug.Log("Fade Out 중...");
             yield return null;
         }
+        temp.a = 1;
+        image.color = temp;
 
         Debug.Log("Fade Out 끝");
+
         yield break;
     }
 }

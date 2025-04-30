@@ -48486,6 +48486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afff1fab3f526c74e9f30821aa08d4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 592167473}
 --- !u!1001 &942851778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -99665,6 +99666,7 @@ GameObject:
   - component: {fileID: 1700253806}
   - component: {fileID: 1700253809}
   - component: {fileID: 1700253810}
+  - component: {fileID: 1700253811}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -99811,6 +99813,33 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1700253811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1700253805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f40778bbb9f5acd40b52e1aa7f86a192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 940224451}
+        m_TargetAssemblyTypeName: FadeOutController, Assembly-CSharp
+        m_MethodName: OnFadeStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1727184119
 GameObject:
   m_ObjectHideFlags: 0
